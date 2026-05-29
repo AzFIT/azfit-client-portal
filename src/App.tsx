@@ -13,6 +13,7 @@ import ClientsPage from './pages/ClientsPage'
 import NutritionPage from './pages/NutritionPage'
 import SettingsPage from './pages/SettingsPage'
 import PhotosPage from './pages/PhotosPage'
+import ExercisesPage from './pages/ExercisesPage'
 import PlannedFeaturesPage from './pages/PlannedFeaturesPage'
 
 export default function App() {
@@ -31,6 +32,7 @@ export default function App() {
       <Route path="/nutrition" element={<Layout><NutritionPage /></Layout>} />
       <Route path="/settings" element={<Layout><SettingsPage /></Layout>} />
       <Route path="/photos" element={<Layout><PhotosPage /></Layout>} />
+      <Route path="/exercises" element={<Layout><ExercisesPage /></Layout>} />
       <Route path="/roadmap" element={<Layout><PlannedFeaturesPage /></Layout>} />
     </Routes>
   )

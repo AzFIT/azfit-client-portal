@@ -28,6 +28,9 @@ import {
   ChevronDown,
   ChevronLeft,
   ChevronRight,
+  ChevronUp,
+  Eye,
+  EyeOff,
 } from 'lucide-react'
 import { cn } from '../lib/utils'
 
@@ -59,6 +62,7 @@ interface Program {
   frequency: string
   equipment: string
   structure: string
+  progression: string
   timesAssigned: number
   activeClients: number
   lastAssigned: string
@@ -140,15 +144,15 @@ function getDifficultyColor(diff: string) {
   return DIFFICULTY_COLOR[diff] || DIFFICULTY_COLOR['Intermediate']
 }
 
-function getGoalIcon(goal: string) {
+function getGoalIcon(goal: string, size = 32) {
   const g = normalizeGoal(goal)
   switch (g) {
-    case 'fat loss': return <Zap size={32} className="text-white" />
-    case 'muscle': return <Dumbbell size={32} className="text-white" />
-    case 'strength': return <Zap size={32} className="text-white" />
-    case 'endurance': return <Wind size={32} className="text-white" />
-    case 'rehab': return <HeartPulse size={32} className="text-white" />
-    default: return <Activity size={32} className="text-white" />
+    case 'fat loss': return <Zap size={size} className="text-white" />
+    case 'muscle': return <Dumbbell size={size} className="text-white" />
+    case 'strength': return <Zap size={size} className="text-white" />
+    case 'endurance': return <Wind size={size} className="text-white" />
+    case 'rehab': return <HeartPulse size={size} className="text-white" />
+    default: return <Activity size={size} className="text-white" />
   }
 }
 
@@ -197,6 +201,7 @@ function generateSamplePrograms(methods: TrainingMethod[]): Program[] {
       frequency: `${m.Frequency}x/wk`,
       equipment: m.Equipment,
       structure: m.Structure,
+      progression: m.Progression,
       timesAssigned,
       activeClients: Math.floor(timesAssigned * 0.4),
       lastAssigned: daysAgo === 1 ? '1 day ago' : `${daysAgo} days ago`,
@@ -246,62 +251,103 @@ function StatCard({
   )
 }
 
-/** Program Card */
+/** Generate mock program schedule */
+function generateMockSchedule(program: Program) {
+  const freq = parseInt(program.frequency) || 3
+  const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+  const exercises = [
+    ['Squats', 'Bench Press', 'Barbell Rows', 'Overhead Press'],
+    ['Deadlifts', 'Pull-Ups', 'Dumbbell Lunges', 'Face Pulls'],
+    ['Leg Press', 'Incline Dumbbell Press', 'Lat Pulldowns', 'Lateral Raises'],
+    ['Romanian Deadlifts', 'Push-Ups', 'Seated Cable Rows', 'Plank'],
+    ['Box Jumps', 'Dumbbell Bench', 'Bent-Over Rows', 'Tricep Dips'],
+    ['Goblet Squats', 'Chest Flyes', 'Pull-Ups', 'Farmer\'s Carry'],
+  ]
+  const types = ['Strength', 'Hypertrophy', 'Endurance', 'Power', 'Recovery']
+  
+  const schedule = []
+  for (let i = 0; i < freq; i++) {
+    const dayIndex = Math.floor((i / freq) * 7 + (7 / freq) / 2)
+    schedule.push({
+      day: days[Math.min(dayIndex, 6)],
+      type: types[i % types.length],
+      exercises: exercises[i % exercises.length],
+      duration: `${40 + Math.floor(Math.random() * 30)} min`,
+      intensity: ['Low', 'Moderate', 'High', 'Very High'][i % 4],
+    })
+  }
+  return schedule
+}
+
+/** Program Card — Standardized compact with expand interaction */
 function ProgramCard({
   program,
   index,
   onAction,
+  isExpanded,
+  showFullDetail,
+  onToggleExpand,
+  onToggleDetail,
 }: {
   program: Program
   index: number
   onAction: (action: string, program: Program) => void
+  isExpanded: boolean
+  showFullDetail: boolean
+  onToggleExpand: () => void
+  onToggleDetail: () => void
 }) {
-  const [hovered, setHovered] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const diffColor = getDifficultyColor(program.difficulty)
   const goalLabel = GOAL_OPTIONS.find(g => program.goal.toLowerCase().includes(g.value))?.label || program.goal
+  const schedule = useMemo(() => generateMockSchedule(program), [program.id])
 
   return (
     <motion.div
+      layout
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -10 }}
-      transition={{ duration: 0.35, delay: index * 0.06, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
-      layout
-      className="relative bg-[#141414] border border-[#2A2A2A] rounded-xl overflow-hidden min-h-[280px] flex flex-col group cursor-pointer transition-all duration-200 hover:-translate-y-[3px] hover:shadow-[0_8px_24px_rgba(0,174,239,0.1)]"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => { setHovered(false); setMenuOpen(false) }}
+      transition={{
+        layout: { duration: 0.4, ease: [0.16, 1, 0.3, 1] },
+        opacity: { duration: 0.35, delay: index * 0.04 },
+        y: { duration: 0.35, delay: index * 0.04 },
+      }}
+      className={cn(
+        "relative bg-[#141414] border border-[#2A2A2A] rounded-xl overflow-hidden flex flex-col cursor-pointer transition-colors duration-200",
+        isExpanded ? "ring-1 ring-[#00AEEF] shadow-[0_8px_32px_rgba(0,174,239,0.15)]" : "hover:border-[#3A3A3A]"
+      )}
+      onClick={() => {
+        if (!menuOpen) onToggleExpand()
+      }}
+      onMouseLeave={() => setMenuOpen(false)}
     >
-      {/* Color Banner */}
-      <div
-        className="h-20 relative flex-shrink-0 transition-all duration-300"
-        style={{ background: program.colorBanner }}
-      >
-        <div className="absolute bottom-3 left-4">
-          {getGoalIcon(program.goal)}
-        </div>
-        {program.timesAssigned >= 15 && (
-          <div className="absolute top-3 right-3 flex items-center gap-1 bg-[rgba(234,179,8,0.2)] border border-[rgba(234,179,8,0.4)] text-[#EAB308] text-xs font-semibold px-2 py-0.5 rounded-full">
-            <Star size={10} />
-            Most Used
+      {/* Compact Content — standardized size */}
+      <div className={cn("p-3 flex flex-col", !isExpanded && "min-h-[148px]")}>
+        {/* Header: [Program Icon] [Program Title] [Most Used Badge] */}
+        <div className="flex items-center gap-2 mb-2.5">
+          <div
+            className="w-7 h-7 rounded-md flex items-center justify-center flex-shrink-0"
+            style={{ background: program.colorBanner }}
+          >
+            {getGoalIcon(program.goal, 14)}
           </div>
-        )}
-      </div>
-
-      {/* Content */}
-      <div className="p-5 flex flex-col flex-1">
-        {/* Title Row */}
-        <div className="flex items-start justify-between gap-2 mb-3">
-          <h3 className="text-[#F0F0F0] font-semibold text-base leading-snug flex-1 min-w-0">
+          <h3 className="text-[#F0F0F0] font-semibold text-[13px] leading-snug flex-1 min-w-0 truncate">
             {program.name}
           </h3>
-          <div className="relative">
+          {program.timesAssigned >= 15 && (
+            <span className="flex-shrink-0 flex items-center gap-1 bg-[rgba(234,179,8,0.15)] border border-[rgba(234,179,8,0.3)] text-[#EAB308] text-[9px] font-semibold px-1.5 py-0.5 rounded-full">
+              <Star size={8} /> Most Used
+            </span>
+          )}
+          {/* More menu */}
+          <div className="relative flex-shrink-0" onClick={(e) => e.stopPropagation()}>
             <button
               onClick={(e) => { e.stopPropagation(); setMenuOpen(!menuOpen) }}
-              className="text-[#6B6B6B] hover:text-[#F0F0F0] p-1 rounded transition-colors"
+              className="text-[#6B6B6B] hover:text-[#F0F0F0] p-0.5 rounded transition-colors"
               aria-label="More actions"
             >
-              <MoreVertical size={18} />
+              <MoreVertical size={14} />
             </button>
             <AnimatePresence>
               {menuOpen && (
@@ -312,7 +358,7 @@ function ProgramCard({
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.95 }}
                     transition={{ duration: 0.15 }}
-                    className="absolute right-0 top-8 w-48 bg-[#1A1A1A] border border-[#2A2A2A] rounded-lg shadow-[0_8px_24px_rgba(0,0,0,0.4)] z-50 py-1"
+                    className="absolute right-0 top-6 w-44 bg-[#1A1A1A] border border-[#2A2A2A] rounded-lg shadow-[0_8px_24px_rgba(0,0,0,0.4)] z-50 py-1"
                   >
                     {[
                       { label: 'Edit Program', icon: Edit, action: 'edit' },
@@ -323,9 +369,9 @@ function ProgramCard({
                       <button
                         key={item.action}
                         onClick={(e) => { e.stopPropagation(); setMenuOpen(false); onAction(item.action, program) }}
-                        className="w-full flex items-center gap-2.5 px-3 py-2 text-[#A0A0A0] hover:text-[#F0F0F0] hover:bg-[#242424] text-sm transition-colors"
+                        className="w-full flex items-center gap-2 px-3 py-1.5 text-[#A0A0A0] hover:text-[#F0F0F0] hover:bg-[#242424] text-xs transition-colors"
                       >
-                        <item.icon size={14} />
+                        <item.icon size={13} />
                         {item.label}
                       </button>
                     ))}
@@ -336,82 +382,187 @@ function ProgramCard({
           </div>
         </div>
 
-        {/* Meta Row */}
-        <div className="flex flex-wrap gap-2 mb-4">
+        {/* Row 1: (Levels) (Equipment) (Other Tags) (Type of Program) */}
+        <div className="flex flex-wrap gap-1 mb-2">
           <span
-            className="text-xs font-semibold px-2.5 py-0.5 rounded-full"
-            style={{ backgroundColor: getGoalBg(program.goal), color: '#F0F0F0' }}
-          >
-            {goalLabel}
-          </span>
-          <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-[rgba(192,192,192,0.1)] text-[#C0C0C0]">
-            {program.method}
-          </span>
-          <span
-            className="text-xs font-semibold px-2.5 py-0.5 rounded-full"
+            className="text-[9px] font-semibold px-1.5 py-0.5 rounded-full"
             style={{ backgroundColor: diffColor.bg, color: diffColor.text }}
           >
             {program.difficulty}
           </span>
+          <span className="text-[9px] font-semibold px-1.5 py-0.5 rounded-full bg-[rgba(192,192,192,0.1)] text-[#C0C0C0]">
+            {program.equipment}
+          </span>
+          <span
+            className="text-[9px] font-semibold px-1.5 py-0.5 rounded-full"
+            style={{ backgroundColor: getGoalBg(program.goal), color: '#F0F0F0' }}
+          >
+            {goalLabel}
+          </span>
+          <span className="text-[9px] font-semibold px-1.5 py-0.5 rounded-full bg-[rgba(0,174,239,0.1)] text-[#00AEEF]">
+            {program.method}
+          </span>
         </div>
 
-        {/* Stats Row */}
-        <div className="grid grid-cols-3 gap-2 mb-4">
-          <div className="flex items-center gap-1.5 text-[#A0A0A0]">
-            <Clock size={13} className="flex-shrink-0" />
-            <span className="text-xs font-medium">{program.duration}</span>
+        {/* Row 2: (# Weeks) (Last Updated / # Days Ago) (# Active Users) */}
+        <div className="mt-auto flex items-center justify-between text-[9px] text-[#6B6B6B]">
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-1">
+              <Calendar size={10} className="text-[#6B6B6B]" />
+              <span>{program.duration}</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <Clock size={10} className="text-[#6B6B6B]" />
+              <span>{program.lastAssigned}</span>
+            </div>
           </div>
-          <div className="flex items-center gap-1.5 text-[#A0A0A0]">
-            <Calendar size={13} className="flex-shrink-0" />
-            <span className="text-xs font-medium">{program.frequency}</span>
+          <div className="flex items-center gap-1 text-[#A0A0A0]">
+            <Users size={10} className="text-[#6B6B6B]" />
+            <span>{program.activeClients} active</span>
           </div>
-          <div className="flex items-center gap-1.5 text-[#A0A0A0]">
-            <Users size={13} className="flex-shrink-0" />
-            <span className="text-xs font-medium">{program.timesAssigned}x</span>
-          </div>
-        </div>
-
-        {/* Bottom Row */}
-        <div className="mt-auto pt-3 border-t border-[#1F1F1F] flex items-center justify-between text-xs text-[#6B6B6B]">
-          <span>Last: {program.lastAssigned}</span>
-          <span className="text-[#A0A0A0]">{program.activeClients} active</span>
         </div>
       </div>
 
-      {/* Hover Overlay Actions */}
+      {/* Expanded Detail View */}
       <AnimatePresence>
-        {hovered && (
+        {isExpanded && (
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 40 }}
-            transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
-            className="absolute inset-x-0 bottom-0 bg-[rgba(10,10,10,0.88)] backdrop-blur-sm border-t border-[#2A2A2A] p-4 flex items-center justify-center gap-2 z-10"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            className="border-t border-[#2A2A2A] bg-[#0A0A0A] overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
-            {[
-              { icon: Edit, label: 'Edit', action: 'edit', primary: false },
-              { icon: Copy, label: 'Dup', action: 'duplicate', primary: false },
-              { icon: UserPlus, label: 'Assign', action: 'assign', primary: true },
-              { icon: ArchiveIcon, label: 'Archive', action: 'archive', primary: false },
-            ].map((btn, i) => (
-              <motion.button
-                key={btn.action}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: i * 0.05 }}
-                onClick={() => onAction(btn.action, program)}
-                className={cn(
-                  'flex flex-col items-center gap-1 px-3 py-2 rounded-lg text-xs font-medium transition-all duration-200',
-                  btn.primary
-                    ? 'bg-[#00AEEF] text-white hover:bg-[#009BD6]'
-                    : 'text-[#A0A0A0] hover:text-[#F0F0F0] hover:bg-[#242424]'
-                )}
-              >
-                <btn.icon size={16} />
-                {btn.label}
-              </motion.button>
-            ))}
+            <div className="p-4 space-y-4">
+              {/* Header */}
+              <div className="flex items-center justify-between">
+                <h4 className="text-[#F0F0F0] font-semibold text-sm">Program Overview</h4>
+                <button
+                  onClick={onToggleExpand}
+                  className="text-[#A0A0A0] hover:text-[#F0F0F0] text-xs flex items-center gap-1 px-2 py-1 rounded hover:bg-[#242424] transition-colors"
+                >
+                  Hide Program <ChevronUp size={14} />
+                </button>
+              </div>
+
+              {/* Description */}
+              <div className="text-[#A0A0A0] text-xs leading-relaxed space-y-2">
+                <p>
+                  <strong className="text-[#F0F0F0]">Structure:</strong> {program.structure}
+                </p>
+                <p>
+                  <strong className="text-[#F0F0F0]">Equipment:</strong> {program.equipment}
+                </p>
+                <p>
+                  <strong className="text-[#F0F0F0]">Progression:</strong> {program.progression}
+                </p>
+              </div>
+
+              {/* Actions Row */}
+              <div className="flex flex-wrap gap-2">
+                {[
+                  { label: 'Edit', icon: Edit, action: 'edit' },
+                  { label: 'Duplicate', icon: Copy, action: 'duplicate' },
+                  { label: 'Assign', icon: UserPlus, action: 'assign' },
+                  { label: program.archived ? 'Restore' : 'Archive', icon: ArchiveIcon, action: 'archive' },
+                ].map((btn) => (
+                  <button
+                    key={btn.action}
+                    onClick={() => onAction(btn.action, program)}
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-[#1A1A1A] text-[#A0A0A0] hover:text-[#F0F0F0] hover:bg-[#242424] border border-[#2A2A2A] transition-colors"
+                  >
+                    <btn.icon size={12} />
+                    {btn.label}
+                  </button>
+                ))}
+              </div>
+
+              {/* View Full Program Toggle */}
+              <div className="pt-2 border-t border-[#1F1F1F]">
+                <button
+                  onClick={onToggleDetail}
+                  className="w-full flex items-center justify-center gap-2 py-2 text-xs font-medium text-[#00AEEF] hover:text-[#33BEF2] transition-colors"
+                >
+                  {showFullDetail ? (
+                    <><EyeOff size={13} /> Hide Full Schedule</>
+                  ) : (
+                    <><Eye size={13} /> View Full Program</>
+                  )}
+                  <motion.span
+                    animate={{ rotate: showFullDetail ? 180 : 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <ChevronDown size={13} />
+                  </motion.span>
+                </button>
+
+                {/* Full Schedule */}
+                <AnimatePresence>
+                  {showFullDetail && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                      className="overflow-hidden"
+                    >
+                      <div className="pt-3 space-y-3">
+                        <h5 className="text-[#F0F0F0] text-xs font-semibold">Weekly Schedule</h5>
+                        {schedule.map((day, i) => (
+                          <motion.div
+                            key={day.day}
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: i * 0.06, duration: 0.25 }}
+                            className="bg-[#141414] border border-[#1F1F1F] rounded-lg p-3"
+                          >
+                            <div className="flex items-center justify-between mb-2">
+                              <div className="flex items-center gap-2">
+                                <span className="text-[#F0F0F0] text-xs font-semibold">{day.day}</span>
+                                <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-[#00AEEF]/10 text-[#00AEEF] border border-[#00AEEF]/20">
+                                  {day.type}
+                                </span>
+                              </div>
+                              <div className="flex items-center gap-2 text-[9px] text-[#6B6B6B]">
+                                <span>{day.duration}</span>
+                                <span className="text-[#A0A0A0]">{day.intensity}</span>
+                              </div>
+                            </div>
+                            <div className="flex flex-wrap gap-1">
+                              {day.exercises.map((ex, j) => (
+                                <span
+                                  key={j}
+                                  className="text-[9px] text-[#A0A0A0] bg-[#1A1A1A] px-2 py-0.5 rounded"
+                                >
+                                  {ex}
+                                </span>
+                              ))}
+                            </div>
+                          </motion.div>
+                        ))}
+
+                        {/* Summary Footer */}
+                        <div className="grid grid-cols-3 gap-2 pt-2">
+                          <div className="bg-[#141414] border border-[#1F1F1F] rounded-lg p-2 text-center">
+                            <p className="text-[#00AEEF] text-xs font-bold">{program.duration}</p>
+                            <p className="text-[9px] text-[#6B6B6B]">Duration</p>
+                          </div>
+                          <div className="bg-[#141414] border border-[#1F1F1F] rounded-lg p-2 text-center">
+                            <p className="text-[#00AEEF] text-xs font-bold">{program.frequency}</p>
+                            <p className="text-[9px] text-[#6B6B6B]">Frequency</p>
+                          </div>
+                          <div className="bg-[#141414] border border-[#1F1F1F] rounded-lg p-2 text-center">
+                            <p className="text-[#00AEEF] text-xs font-bold">{program.difficulty}</p>
+                            <p className="text-[9px] text-[#6B6B6B]">Level</p>
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -579,6 +730,15 @@ export default function ProgramsPage() {
   // Pagination
   const [currentPage, setCurrentPage] = useState(1)
   const pageSize = 12
+
+  // Expanded card
+  const [expandedId, setExpandedId] = useState<string | null>(null)
+  const [fullDetailId, setFullDetailId] = useState<string | null>(null)
+
+  const toggleExpanded = (id: string) => {
+    setExpandedId(prev => prev === id ? null : id)
+    setFullDetailId(null)
+  }
 
   // Fetch data
   useEffect(() => {
@@ -924,17 +1084,17 @@ export default function ProgramsPage() {
 
       {/* Content */}
       {loading ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-          {Array.from({ length: 8 }).map((_, i) => (
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 items-start">
+          {Array.from({ length: 10 }).map((_, i) => (
             <div key={i} className="bg-[#141414] border border-[#2A2A2A] rounded-xl overflow-hidden animate-pulse">
-              <div className="h-20 bg-[#1A1A1A]" />
-              <div className="p-5 space-y-3">
-                <div className="h-4 bg-[#1A1A1A] rounded w-3/4" />
-                <div className="flex gap-2">
-                  <div className="h-5 bg-[#1A1A1A] rounded w-16" />
-                  <div className="h-5 bg-[#1A1A1A] rounded w-14" />
+              <div className="h-14 bg-[#1A1A1A]" />
+              <div className="p-3 space-y-2">
+                <div className="h-3 bg-[#1A1A1A] rounded w-3/4" />
+                <div className="flex gap-1">
+                  <div className="h-4 bg-[#1A1A1A] rounded w-12" />
+                  <div className="h-4 bg-[#1A1A1A] rounded w-10" />
                 </div>
-                <div className="h-3 bg-[#1A1A1A] rounded w-full" />
+                <div className="h-2 bg-[#1A1A1A] rounded w-full" />
               </div>
             </div>
           ))}
@@ -954,11 +1114,20 @@ export default function ProgramsPage() {
       ) : viewMode === 'grid' ? (
         <motion.div
           layout
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5"
+          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 items-start"
         >
           <AnimatePresence mode="popLayout">
             {paginated.map((program, i) => (
-              <ProgramCard key={program.id} program={program} index={i} onAction={handleAction} />
+              <ProgramCard
+                key={program.id}
+                program={program}
+                index={i}
+                onAction={handleAction}
+                isExpanded={expandedId === program.id}
+                showFullDetail={fullDetailId === program.id}
+                onToggleExpand={() => toggleExpanded(program.id)}
+                onToggleDetail={() => setFullDetailId(prev => prev === program.id ? null : program.id)}
+              />
             ))}
           </AnimatePresence>
         </motion.div>

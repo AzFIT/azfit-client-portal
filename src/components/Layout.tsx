@@ -19,6 +19,7 @@ import {
   LogOut,
   Sun,
   Moon,
+  BookOpen,
 } from 'lucide-react'
 import AiChat from './AiChat'
 
@@ -27,6 +28,7 @@ const navItems = [
   { label: 'Calendar', path: '/calendar', icon: CalendarDays },
   { label: 'Programs', path: '/programs', icon: Dumbbell },
   { label: 'Program Creator', path: '/programs/create', icon: Zap },
+  { label: 'Exercises', path: '/exercises', icon: BookOpen },
   { label: 'Nutrition', path: '/nutrition', icon: Apple },
   { label: 'Clients', path: '/clients', icon: Users },
   { label: 'Photos', path: '/photos', icon: Camera },
