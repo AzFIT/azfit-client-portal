@@ -142,7 +142,7 @@ function WeekView({
   days: Date[]
   sessions: CalendarSession[]
   filterType: SessionType | 'All'
-  onSlotClick: (date: Date, hour: number, minute: number) => void
+  onSlotClick: (e: React.MouseEvent, date: Date, hour: number, minute: number) => void
   onEventClick: (session: CalendarSession) => void
 }) {
   const now = useCurrentTime()
@@ -231,7 +231,7 @@ function WeekView({
                     <div
                       key={hour}
                       className="h-16 border-b border-[#1F1F1F] hover:bg-[rgba(0,174,239,0.06)] transition-colors cursor-pointer"
-                      onClick={() => onSlotClick(day, hour, 0)}
+                      onClick={(e) => onSlotClick(e, day, hour, 0)}
                     />
                   ))}
 
@@ -318,7 +318,7 @@ function DayView({
   date: Date
   sessions: CalendarSession[]
   filterType: SessionType | 'All'
-  onSlotClick: (date: Date, hour: number, minute: number) => void
+  onSlotClick: (e: React.MouseEvent, date: Date, hour: number, minute: number) => void
   onEventClick: (session: CalendarSession) => void
 }) {
   const now = useCurrentTime()
@@ -394,7 +394,7 @@ function DayView({
                   <div
                     key={hour}
                     className="h-16 border-b border-[#1F1F1F] hover:bg-[rgba(0,174,239,0.04)] transition-colors cursor-pointer"
-                    onClick={() => onSlotClick(date, hour, 0)}
+                    onClick={(e) => onSlotClick(e, date, hour, 0)}
                   />
                 ))}
 
@@ -739,21 +739,29 @@ function AgendaView({
   )
 }
 
-/* ─── New Session Modal ─── */
-function NewSessionModal({
+/* ─── Add Event Modal ─── */
+function AddEventModal({
   open,
   onClose,
   initialDate,
+  eventType,
 }: {
   open: boolean
   onClose: () => void
   initialDate?: Date
+  eventType: string
 }) {
+  const [title, setTitle] = useState('')
   const [client, setClient] = useState('')
   const [type, setType] = useState<SessionType>('Personal Training')
   const [duration, setDuration] = useState('60')
   const [dateStr, setDateStr] = useState('')
-  const [timeStr, setTimeStr] = useState('09:00')
+  const [timeStr, setTimeStr] = useState('05:00')
+  const [description, setDescription] = useState('')
+  const [location, setLocation] = useState('')
+  const [priority, setPriority] = useState('Medium')
+  const [clientEmail, setClientEmail] = useState('')
+  const [clientPhone, setClientPhone] = useState('')
 
   useEffect(() => {
     if (initialDate) {
@@ -763,66 +771,147 @@ function NewSessionModal({
       setTimeStr(`${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`)
     } else {
       setDateStr(format(new Date(), 'yyyy-MM-dd'))
+      setTimeStr('05:00')
     }
+    setTitle('')
+    setClient('')
+    setDescription('')
+    setLocation('')
+    setPriority('Medium')
+    setClientEmail('')
+    setClientPhone('')
   }, [initialDate, open])
 
   const handleSubmit = () => {
     onClose()
   }
 
+  const getModalTitle = () => {
+    switch (eventType) {
+      case 'session': return 'Add Session'
+      case 'event': return 'Add Event'
+      case 'task': return 'Add Task'
+      case 'birthday': return 'Add Birthday'
+      case 'appointment': return 'Add Appointment'
+      case 'focus': return 'Add Focus Time'
+      case 'unavailability': return 'Add Unavailability'
+      case 'client': return 'Add Client'
+      default: return 'Add to Calendar'
+    }
+  }
+
+  const getSaveLabel = () => {
+    switch (eventType) {
+      case 'session': return 'Save Session'
+      case 'event': return 'Save Event'
+      case 'task': return 'Save Task'
+      case 'birthday': return 'Save Birthday'
+      case 'appointment': return 'Save Appointment'
+      case 'focus': return 'Save Focus Time'
+      case 'unavailability': return 'Save'
+      case 'client': return 'Add Client'
+      default: return 'Save'
+    }
+  }
+
   return (
     <Dialog open={open} onOpenChange={(o) => !o && onClose()}>
       <DialogContent className="bg-[#141414] border-[#2A2A2A] text-[#F0F0F0] max-w-md">
         <DialogHeader>
-          <DialogTitle className="text-lg font-semibold">Book New Session</DialogTitle>
+          <DialogTitle className="text-lg font-semibold">{getModalTitle()}</DialogTitle>
         </DialogHeader>
 
         <div className="space-y-4 mt-2">
-          <div>
-            <label className="text-xs text-[#A0A0A0] mb-1 block">Client</label>
-            <Select value={client} onValueChange={setClient}>
-              <SelectTrigger className="bg-[#1A1A1A] border-[#2A2A2A] text-[#F0F0F0]">
-                <SelectValue placeholder="Select client" />
-              </SelectTrigger>
-              <SelectContent className="bg-[#1A1A1A] border-[#2A2A2A]">
-                {CLIENT_NAMES.map((c) => (
-                  <SelectItem key={c} value={c} className="text-[#F0F0F0]">
-                    {c}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-
-          <div className="grid grid-cols-2 gap-3">
+          {/* Title / Name / Client field */}
+          {eventType !== 'focus' && eventType !== 'unavailability' && (
             <div>
-              <label className="text-xs text-[#A0A0A0] mb-1 block">Date</label>
-              <input
-                type="date"
-                value={dateStr}
-                onChange={(e) => setDateStr(e.target.value)}
-                className="w-full h-10 bg-[#1A1A1A] border border-[#2A2A2A] rounded-lg px-3 text-[#F0F0F0] text-sm"
-              />
+              <label className="text-xs text-[#A0A0A0] mb-1 block">
+                {eventType === 'session' ? 'Client' : eventType === 'birthday' ? 'Person Name' : eventType === 'client' ? 'Client Name' : 'Title'}
+              </label>
+              {eventType === 'session' ? (
+                <Select value={client} onValueChange={setClient}>
+                  <SelectTrigger className="bg-[#1A1A1A] border-[#2A2A2A] text-[#F0F0F0]">
+                    <SelectValue placeholder="Select client" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-[#1A1A1A] border-[#2A2A2A]">
+                    {CLIENT_NAMES.map((c) => (
+                      <SelectItem key={c} value={c} className="text-[#F0F0F0]">
+                        {c}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              ) : (
+                <input
+                  type="text"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  placeholder={eventType === 'birthday' ? 'Enter name' : eventType === 'client' ? 'Enter client name' : 'Enter title'}
+                  className="w-full h-10 bg-[#1A1A1A] border border-[#2A2A2A] rounded-lg px-3 text-[#F0F0F0] text-sm placeholder:text-[#3A3A3A] focus:outline-none focus:border-[#00AEEF]"
+                />
+              )}
             </div>
-            <div>
-              <label className="text-xs text-[#A0A0A0] mb-1 block">Time</label>
-              <select
-                value={timeStr}
-                onChange={(e) => setTimeStr(e.target.value)}
-                className="w-full h-10 bg-[#1A1A1A] border border-[#2A2A2A] rounded-lg px-3 text-[#F0F0F0] text-sm"
-              >
-                {HK_TIME_SLOTS.map((h) =>
-                  [0, 30].map((m) => (
-                    <option key={`${h}-${m}`} value={`${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`}>
-                      {String(h).padStart(2, '0')}:{String(m).padStart(2, '0')}
-                    </option>
-                  ))
-                )}
-              </select>
-            </div>
-          </div>
+          )}
 
-          <div className="grid grid-cols-2 gap-3">
+          {/* Client contact fields */}
+          {eventType === 'client' && (
+            <>
+              <div>
+                <label className="text-xs text-[#A0A0A0] mb-1 block">Email</label>
+                <input
+                  type="email"
+                  value={clientEmail}
+                  onChange={(e) => setClientEmail(e.target.value)}
+                  placeholder="client@email.com"
+                  className="w-full h-10 bg-[#1A1A1A] border border-[#2A2A2A] rounded-lg px-3 text-[#F0F0F0] text-sm placeholder:text-[#3A3A3A] focus:outline-none focus:border-[#00AEEF]"
+                />
+              </div>
+              <div>
+                <label className="text-xs text-[#A0A0A0] mb-1 block">Phone</label>
+                <input
+                  type="tel"
+                  value={clientPhone}
+                  onChange={(e) => setClientPhone(e.target.value)}
+                  placeholder="+1 234 567 890"
+                  className="w-full h-10 bg-[#1A1A1A] border border-[#2A2A2A] rounded-lg px-3 text-[#F0F0F0] text-sm placeholder:text-[#3A3A3A] focus:outline-none focus:border-[#00AEEF]"
+                />
+              </div>
+            </>
+          )}
+
+          {/* Date & Time */}
+          {eventType !== 'client' && (
+            <div className="grid grid-cols-2 gap-3">
+              <div>
+                <label className="text-xs text-[#A0A0A0] mb-1 block">Date</label>
+                <input
+                  type="date"
+                  value={dateStr}
+                  onChange={(e) => setDateStr(e.target.value)}
+                  className="w-full h-10 bg-[#1A1A1A] border border-[#2A2A2A] rounded-lg px-3 text-[#F0F0F0] text-sm"
+                />
+              </div>
+              <div>
+                <label className="text-xs text-[#A0A0A0] mb-1 block">Time</label>
+                <select
+                  value={timeStr}
+                  onChange={(e) => setTimeStr(e.target.value)}
+                  className="w-full h-10 bg-[#1A1A1A] border border-[#2A2A2A] rounded-lg px-3 text-[#F0F0F0] text-sm"
+                >
+                  {HK_TIME_SLOTS.map((h) =>
+                    [0, 30].map((m) => (
+                      <option key={`${h}-${m}`} value={`${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`}>
+                        {String(h).padStart(2, '0')}:{String(m).padStart(2, '0')}
+                      </option>
+                    ))
+                  )}
+                </select>
+              </div>
+            </div>
+          )}
+
+          {/* Duration */}
+          {(eventType === 'session' || eventType === 'appointment' || eventType === 'focus' || eventType === 'unavailability') && (
             <div>
               <label className="text-xs text-[#A0A0A0] mb-1 block">Duration</label>
               <Select value={duration} onValueChange={setDuration}>
@@ -838,6 +927,10 @@ function NewSessionModal({
                 </SelectContent>
               </Select>
             </div>
+          )}
+
+          {/* Session Type */}
+          {eventType === 'session' && (
             <div>
               <label className="text-xs text-[#A0A0A0] mb-1 block">Session Type</label>
               <Select value={type} onValueChange={(v) => setType(v as SessionType)}>
@@ -853,16 +946,56 @@ function NewSessionModal({
                 </SelectContent>
               </Select>
             </div>
-          </div>
+          )}
 
-          <div>
-            <label className="text-xs text-[#A0A0A0] mb-1 block">Notes (optional)</label>
-            <textarea
-              rows={3}
-              placeholder="Add session notes..."
-              className="w-full bg-[#1A1A1A] border border-[#2A2A2A] rounded-lg px-3 py-2 text-[#F0F0F0] text-sm placeholder:text-[#3A3A3A] resize-none focus:outline-none focus:border-[#00AEEF]"
-            />
-          </div>
+          {/* Priority for tasks */}
+          {eventType === 'task' && (
+            <div>
+              <label className="text-xs text-[#A0A0A0] mb-1 block">Priority</label>
+              <Select value={priority} onValueChange={setPriority}>
+                <SelectTrigger className="bg-[#1A1A1A] border-[#2A2A2A] text-[#F0F0F0]">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent className="bg-[#1A1A1A] border-[#2A2A2A]">
+                  {['Low', 'Medium', 'High'].map((p) => (
+                    <SelectItem key={p} value={p} className="text-[#F0F0F0]">
+                      {p}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          )}
+
+          {/* Location for events and appointments */}
+          {(eventType === 'event' || eventType === 'appointment') && (
+            <div>
+              <label className="text-xs text-[#A0A0A0] mb-1 block">Location</label>
+              <input
+                type="text"
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+                placeholder="Enter location"
+                className="w-full h-10 bg-[#1A1A1A] border border-[#2A2A2A] rounded-lg px-3 text-[#F0F0F0] text-sm placeholder:text-[#3A3A3A] focus:outline-none focus:border-[#00AEEF]"
+              />
+            </div>
+          )}
+
+          {/* Description / Notes / Reason */}
+          {eventType !== 'client' && (
+            <div>
+              <label className="text-xs text-[#A0A0A0] mb-1 block">
+                {eventType === 'unavailability' ? 'Reason' : eventType === 'task' ? 'Notes' : 'Description'}
+              </label>
+              <textarea
+                rows={3}
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                placeholder={eventType === 'unavailability' ? 'Enter reason...' : eventType === 'task' ? 'Add task notes...' : 'Add description...'}
+                className="w-full bg-[#1A1A1A] border border-[#2A2A2A] rounded-lg px-3 py-2 text-[#F0F0F0] text-sm placeholder:text-[#3A3A3A] resize-none focus:outline-none focus:border-[#00AEEF]"
+              />
+            </div>
+          )}
         </div>
 
         <div className="flex justify-end gap-3 mt-6">
@@ -874,7 +1007,7 @@ function NewSessionModal({
             Cancel
           </Button>
           <Button onClick={handleSubmit} className="bg-[#00AEEF] hover:bg-[#009BD6] text-white">
-            Book Session
+            {getSaveLabel()}
           </Button>
         </div>
       </DialogContent>
@@ -931,6 +1064,12 @@ export default function CalendarPage() {
   const [sessions] = useState(() => generateDemoSessions())
   const [showNewSession, setShowNewSession] = useState(false)
   const [newSessionDate, setNewSessionDate] = useState<Date | undefined>()
+  const [eventType, setEventType] = useState('session')
+  const [slotMenu, setSlotMenu] = useState<{
+    x: number
+    y: number
+    date: Date
+  } | null>(null)
   const [selectedSession, setSelectedSession] = useState<CalendarSession | null>(null)
 
   const weekDays = useMemo(() => {
@@ -977,10 +1116,14 @@ export default function CalendarPage() {
   }, [])
 
   const handleSlotClick = useCallback(
-    (date: Date, hour: number, minute: number) => {
+    (e: React.MouseEvent, date: Date, hour: number, minute: number) => {
       const d = setMinutes(setHours(date, hour), minute)
-      setNewSessionDate(d)
-      setShowNewSession(true)
+      const rect = (e.currentTarget as HTMLElement).getBoundingClientRect()
+      setSlotMenu({
+        x: rect.left + rect.width / 2,
+        y: rect.top + rect.height,
+        date: d,
+      })
     },
     []
   )
@@ -988,6 +1131,19 @@ export default function CalendarPage() {
   const handleEventClick = useCallback((session: CalendarSession) => {
     setSelectedSession(session)
   }, [])
+
+  /* Close slot menu on outside click */
+  useEffect(() => {
+    if (!slotMenu) return
+    const handleClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement
+      if (!target.closest('.slot-context-menu')) {
+        setSlotMenu(null)
+      }
+    }
+    document.addEventListener('click', handleClick)
+    return () => document.removeEventListener('click', handleClick)
+  }, [slotMenu])
 
   const handleDayClick = useCallback(
     (date: Date) => {
@@ -1080,35 +1236,85 @@ export default function CalendarPage() {
                 <span className="hidden sm:inline">Add to Calendar</span>
               </button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="bg-[#1A1A1A] border-[#2A2A2A] text-[#F0F0F0]">
+            <DropdownMenuContent className="bg-[#1A1A1A] border-[#2A2A2A]">
               <DropdownMenuItem
-                className="hover:bg-[#242424] focus:bg-[#242424] cursor-pointer"
+                className="text-gray-900 dark:text-[#F0F0F0] hover:text-white focus:text-white hover:bg-[#242424] focus:bg-[#242424] cursor-pointer"
                 onClick={() => {
+                  setEventType('session')
                   setNewSessionDate(undefined)
                   setShowNewSession(true)
                 }}
               >
                 Add Sessions
               </DropdownMenuItem>
-              <DropdownMenuItem className="hover:bg-[#242424] focus:bg-[#242424] cursor-pointer">
+              <DropdownMenuItem
+                className="text-gray-900 dark:text-[#F0F0F0] hover:text-white focus:text-white hover:bg-[#242424] focus:bg-[#242424] cursor-pointer"
+                onClick={() => {
+                  setEventType('client')
+                  setNewSessionDate(undefined)
+                  setShowNewSession(true)
+                }}
+              >
                 Add Client
               </DropdownMenuItem>
-              <DropdownMenuItem className="hover:bg-[#242424] focus:bg-[#242424] cursor-pointer">
+              <DropdownMenuItem
+                className="text-gray-900 dark:text-[#F0F0F0] hover:text-white focus:text-white hover:bg-[#242424] focus:bg-[#242424] cursor-pointer"
+                onClick={() => {
+                  setEventType('event')
+                  setNewSessionDate(undefined)
+                  setShowNewSession(true)
+                }}
+              >
                 Events
               </DropdownMenuItem>
-              <DropdownMenuItem className="hover:bg-[#242424] focus:bg-[#242424] cursor-pointer">
+              <DropdownMenuItem
+                className="text-gray-900 dark:text-[#F0F0F0] hover:text-white focus:text-white hover:bg-[#242424] focus:bg-[#242424] cursor-pointer"
+                onClick={() => {
+                  setEventType('task')
+                  setNewSessionDate(undefined)
+                  setShowNewSession(true)
+                }}
+              >
                 Tasks
               </DropdownMenuItem>
-              <DropdownMenuItem className="hover:bg-[#242424] focus:bg-[#242424] cursor-pointer">
+              <DropdownMenuItem
+                className="text-gray-900 dark:text-[#F0F0F0] hover:text-white focus:text-white hover:bg-[#242424] focus:bg-[#242424] cursor-pointer"
+                onClick={() => {
+                  setEventType('birthday')
+                  setNewSessionDate(undefined)
+                  setShowNewSession(true)
+                }}
+              >
                 Birthdays
               </DropdownMenuItem>
-              <DropdownMenuItem className="hover:bg-[#242424] focus:bg-[#242424] cursor-pointer">
+              <DropdownMenuItem
+                className="text-gray-900 dark:text-[#F0F0F0] hover:text-white focus:text-white hover:bg-[#242424] focus:bg-[#242424] cursor-pointer"
+                onClick={() => {
+                  setEventType('appointment')
+                  setNewSessionDate(undefined)
+                  setShowNewSession(true)
+                }}
+              >
                 Appointments
               </DropdownMenuItem>
-              <DropdownMenuItem className="hover:bg-[#242424] focus:bg-[#242424] cursor-pointer">
+              <DropdownMenuItem
+                className="text-gray-900 dark:text-[#F0F0F0] hover:text-white focus:text-white hover:bg-[#242424] focus:bg-[#242424] cursor-pointer"
+                onClick={() => {
+                  setEventType('focus')
+                  setNewSessionDate(undefined)
+                  setShowNewSession(true)
+                }}
+              >
                 Focus Time
               </DropdownMenuItem>
-              <DropdownMenuItem className="hover:bg-[#242424] focus:bg-[#242424] cursor-pointer">
+              <DropdownMenuItem
+                className="text-gray-900 dark:text-[#F0F0F0] hover:text-white focus:text-white hover:bg-[#242424] focus:bg-[#242424] cursor-pointer"
+                onClick={() => {
+                  setEventType('unavailability')
+                  setNewSessionDate(undefined)
+                  setShowNewSession(true)
+                }}
+              >
                 Unavailability
               </DropdownMenuItem>
             </DropdownMenuContent>
@@ -1164,8 +1370,42 @@ export default function CalendarPage() {
         </AnimatePresence>
       </div>
 
-      {/* New Session Modal */}
-      <NewSessionModal open={showNewSession} onClose={() => setShowNewSession(false)} initialDate={newSessionDate} />
+      {/* Add Event Modal */}
+      <AddEventModal open={showNewSession} onClose={() => setShowNewSession(false)} initialDate={newSessionDate} eventType={eventType} />
+
+      {/* Slot Context Menu */}
+      {slotMenu && (
+        <div
+          className="slot-context-menu fixed z-[400]"
+          style={{ left: slotMenu.x, top: slotMenu.y, transform: 'translateX(-50%)' }}
+        >
+          <div className="bg-[#1A1A1A] border border-[#2A2A2A] rounded-lg shadow-xl py-1 min-w-[180px]">
+            {[
+              { label: 'Add Sessions', type: 'session' },
+              { label: 'Add Client', type: 'client' },
+              { label: 'Events', type: 'event' },
+              { label: 'Tasks', type: 'task' },
+              { label: 'Birthdays', type: 'birthday' },
+              { label: 'Appointments', type: 'appointment' },
+              { label: 'Focus Time', type: 'focus' },
+              { label: 'Unavailability', type: 'unavailability' },
+            ].map((item) => (
+              <button
+                key={item.type}
+                className="w-full text-left px-3 py-2 text-sm text-gray-900 dark:text-[#F0F0F0] hover:text-white hover:bg-[#242424] transition-colors"
+                onClick={() => {
+                  setEventType(item.type)
+                  setNewSessionDate(slotMenu.date)
+                  setShowNewSession(true)
+                  setSlotMenu(null)
+                }}
+              >
+                {item.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Session Detail Modal */}
       <Dialog open={!!selectedSession} onOpenChange={(o) => !o && setSelectedSession(null)}>
