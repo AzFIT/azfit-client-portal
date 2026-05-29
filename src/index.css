@@ -1,0 +1,337 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Space+Mono:wght@400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 220 13% 9%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 13% 9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 13% 9%;
+    --primary: 195 100% 47%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 220 13% 9%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
+    --accent: 220 14% 96%;
+    --accent-foreground: 220 13% 9%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 195 100% 47%;
+    --radius: 0.75rem;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 220 9% 26%;
+    --sidebar-primary: 195 100% 47%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 195 100% 47%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 195 100% 47%;
+
+    /* AzFIT Color Palette */
+    --cyan: #00AEEF;
+    --cyan-light: #33BFF2;
+    --cyan-dark: #008DC4;
+    --cyan-glow: rgba(0, 174, 239, 0.15);
+    --silver: #C0C0C0;
+    --silver-light: #E0E0E0;
+    --silver-dark: #9A9A9A;
+    --white: #FFFFFF;
+    --gray-50: #F9FAFB;
+    --gray-100: #F3F4F6;
+    --gray-200: #E5E7EB;
+    --gray-300: #D1D5DB;
+    --gray-400: #9CA3AF;
+    --gray-500: #6B7280;
+    --gray-600: #4B5563;
+    --gray-700: #374151;
+    --gray-800: #1F2937;
+    --gray-900: #111827;
+    --black: #0A0A0A;
+    --black-card: #141414;
+    --black-elevated: #1A1A1A;
+    --success: #22C55E;
+    --success-light: rgba(34, 197, 94, 0.12);
+    --danger: #EF4444;
+    --danger-light: rgba(239, 68, 68, 0.12);
+    --warning: #EAB308;
+    --warning-light: rgba(234, 179, 8, 0.12);
+    --info: #3B82F6;
+    --info-light: rgba(59, 130, 246, 0.12);
+    --trainer-accent: #EC4899;
+    --trainer-accent-light: #F472B6;
+    --client-accent: #00AEEF;
+    --admin-accent: #A855F7;
+
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, #0A0A0A 0%, #111827 40%, #00AEEF 100%);
+    --gradient-cyan: linear-gradient(135deg, #00AEEF, #33BFF2);
+    --gradient-card-dark: linear-gradient(180deg, rgba(20,20,20,0.95), rgba(10,10,10,0.98));
+    --gradient-silver: linear-gradient(135deg, #C0C0C0, #E0E0E0);
+    --gradient-overlay: linear-gradient(180deg, transparent 0%, rgba(10,10,10,0.8) 100%);
+
+    /* Animation */
+    --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-in: cubic-bezier(0.4, 0, 1, 1);
+    --ease-out: cubic-bezier(0, 0, 0.2, 1);
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --ease-smooth: cubic-bezier(0.25, 0.1, 0.25, 1);
+
+    /* Duration */
+    --duration-fast: 150ms;
+    --duration-normal: 250ms;
+    --duration-slow: 400ms;
+    --duration-slower: 600ms;
+  }
+
+  .dark {
+    --background: 0 0% 4%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 8%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 8%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 195 100% 47%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 64%;
+    --accent: 0 0% 10%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 195 100% 47%;
+    --sidebar-background: 0 0% 8%;
+    --sidebar-foreground: 0 0% 90%;
+    --sidebar-primary: 195 100% 47%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 10%;
+    --sidebar-accent-foreground: 0 0% 90%;
+    --sidebar-border: 0 0% 15%;
+    --sidebar-ring: 195 100% 47%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-inter antialiased;
+  }
+
+  /* Selection colors */
+  ::selection {
+    background: rgba(0, 174, 239, 0.25);
+    color: inherit;
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--gray-300);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--gray-400);
+  }
+
+  .dark ::-webkit-scrollbar-thumb {
+    background: var(--gray-600);
+  }
+
+  .dark ::-webkit-scrollbar-thumb:hover {
+    background: var(--gray-500);
+  }
+}
+
+/* Light mode overrides */
+.light body { background: #F8F9FA !important; color: #111827 !important; }
+.light .bg-\[\#0A0A0A\] { background-color: #F8F9FA !important; }
+.light .bg-\[\#141414\] { background-color: #FFFFFF !important; }
+.light .bg-\[\#1A1A1A\] { background-color: #F1F3F5 !important; }
+.light .bg-\[\#242424\] { background-color: #E5E7EB !important; }
+.light .text-\[\#F0F0F0\] { color: #111827 !important; }
+.light .text-\[\#A0A0A0\] { color: #6B7280 !important; }
+.light .text-\[\#6B6B6B\] { color: #9CA3AF !important; }
+.light .border-\[\#2A2A2A\] { border-color: #E5E7EB !important; }
+.light .border-\[\#1F1F1F\] { border-color: #D1D5DB !important; }
+
+@layer components {
+  /* Noise texture overlay */
+  .noise-overlay {
+    position: absolute;
+    inset: 0;
+    background-image: url('/noise.png');
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    opacity: 0.04;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .noise-overlay-light {
+    opacity: 0.03;
+  }
+
+  .noise-overlay-heavy {
+    opacity: 0.06;
+  }
+
+  /* Gradient hero background */
+  .bg-gradient-hero {
+    background: var(--gradient-hero);
+  }
+
+  /* Gradient cyan */
+  .bg-gradient-cyan {
+    background: var(--gradient-cyan);
+  }
+
+  /* Glassmorphism card */
+  .glass-card {
+    background: rgba(20, 20, 20, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+
+  /* Shimmer loading effect */
+  .shimmer {
+    background: linear-gradient(90deg, var(--gray-200) 25%, var(--gray-100) 50%, var(--gray-200) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s ease-in-out infinite;
+  }
+
+  .dark .shimmer {
+    background: linear-gradient(90deg, var(--gray-700) 25%, var(--gray-600) 50%, var(--gray-700) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s ease-in-out infinite;
+  }
+
+  /* Primary button gradient */
+  .btn-primary {
+    @apply bg-gradient-cyan text-white font-semibold px-6 py-3 rounded-xl;
+    box-shadow: 0 4px 14px rgba(0, 174, 239, 0.3);
+    transition: all 0.2s var(--ease-default);
+  }
+
+  .btn-primary:hover {
+    box-shadow: 0 6px 20px rgba(0, 174, 239, 0.4);
+    transform: scale(1.02);
+  }
+
+  .btn-primary:active {
+    transform: scale(0.98);
+  }
+
+  /* Typography scale */
+  .text-display-xl {
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.0;
+  }
+
+  .text-display-lg {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  .text-display-md {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    line-height: 1.2;
+  }
+
+  .text-heading-lg {
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+  }
+
+  .text-heading-md {
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    line-height: 1.4;
+  }
+
+  .text-heading-sm {
+    font-size: 1.125rem;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  .text-body-lg {
+    font-size: 1.125rem;
+    font-weight: 400;
+    line-height: 1.6;
+  }
+
+  .text-body-md {
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.6;
+  }
+
+  .text-body-sm {
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
+  .text-caption {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    line-height: 1.4;
+  }
+
+  .text-data-lg {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.0;
+  }
+
+  .text-data-md {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.0;
+  }
+
+  .text-data-sm {
+    font-size: 0.875rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+}
