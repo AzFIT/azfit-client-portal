@@ -106,8 +106,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const mobileOverlay     = isDark ? 'bg-black/50' : 'bg-black/30'
 
   /* Logo source switches with theme */
-  const logoFull   = isDark ? '/AzFIT_Logo_BlackBackground_Text.png' : '/AzFIT_Logo_WhiteBackground_Text.png'
-  const logoIcon   = isDark ? '/AzFIT_Logo_BlackBackground.png'       : '/AzFIT_Logo_WhiteBackground.png'
+  const logoFull   = isDark ? './AzFIT_Logo_BlackBackground_Text.png' : './AzFIT_Logo_WhiteBackground_Text.png'
+  const logoIcon   = isDark ? './AzFIT_Logo_BlackBackground.png'       : './AzFIT_Logo_WhiteBackground.png'
 
   return (
     <div className="min-h-[100dvh]" style={{ backgroundColor: pageBg }}>

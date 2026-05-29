@@ -50,7 +50,7 @@ export default function Footer() {
           {/* Brand Column */}
           <motion.div variants={itemVariants}>
             <img
-              src="/AzFIT_Logo_WhiteBackground_Text.png"
+              src="./AzFIT_Logo_WhiteBackground_Text.png"
               alt="AzFIT"
               className="h-8 w-auto brightness-0 invert mb-4"
             />

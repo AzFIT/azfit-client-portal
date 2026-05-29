@@ -46,7 +46,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link to="/" className="flex items-center">
             <img
-              src="/AzFIT_Logo_BlackBackground_Text.png"
+              src="./AzFIT_Logo_BlackBackground_Text.png"
               alt="AzFIT"
               className="h-9 w-auto"
             />
@@ -114,7 +114,7 @@ export default function Navbar() {
             >
               <div className="flex items-center justify-between p-4 border-b border-[#2A2A2A]">
                 <img
-                  src="/AzFIT_Logo_BlackBackground_Text.png"
+                  src="./AzFIT_Logo_BlackBackground_Text.png"
                   alt="AzFIT"
                   className="h-8 w-auto"
                 />

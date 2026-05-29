@@ -1,6 +1,7 @@
 {
   "name": "azfit-client-portal",
   "version": "1.0.0",
+  "homepage": "https://azfit.github.io/azfit-client-portal",
   "type": "module",
   "scripts": {
     "dev": "vite",

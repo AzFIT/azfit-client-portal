@@ -54,7 +54,7 @@ export default function SignupPage() {
         >
           <Link to="/" className="inline-block">
             <img
-              src="/AzFIT_Logo_WhiteBackground_Text.png"
+              src="./AzFIT_Logo_WhiteBackground_Text.png"
               alt="AzFIT"
               className="h-10 w-auto brightness-0 invert mx-auto mb-6"
             />

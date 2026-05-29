@@ -57,7 +57,7 @@ export default function LoginPage() {
         >
           <Link to="/" className="inline-block">
             <img
-              src="/AzFIT_Logo_BlackBackground_Text.png"
+              src="./AzFIT_Logo_BlackBackground_Text.png"
               alt="AzFIT"
               className="h-10 w-auto mx-auto mb-6"
             />
