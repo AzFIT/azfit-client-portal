@@ -60,7 +60,7 @@ export default function AiChat() {
       {/* Floating Button */}
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 z-[350] w-14 h-14 rounded-full flex items-center justify-center text-white shadow-lg"
+        className="fixed bottom-6 left-6 z-[350] w-14 h-14 rounded-full flex items-center justify-center text-white shadow-lg"
         style={{
           background: 'linear-gradient(135deg, #00AEEF 0%, #8B5CF6 100%)',
           boxShadow: '0 4px 20px rgba(0,174,239,0.3)',
@@ -110,7 +110,7 @@ export default function AiChat() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
-            className="fixed bottom-24 right-6 z-[350] w-[380px] max-w-[calc(100vw-48px)] rounded-2xl overflow-hidden flex flex-col"
+            className="fixed bottom-24 left-6 z-[350] w-[380px] max-w-[calc(100vw-48px)] rounded-2xl overflow-hidden flex flex-col"
             style={{
               height: '520px',
               maxHeight: 'calc(100vh - 140px)',

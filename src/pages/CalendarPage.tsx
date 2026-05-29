@@ -35,6 +35,12 @@ import {
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Button } from '@/components/ui/button'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
 
 type ViewMode = 'week' | 'day' | 'month' | 'agenda'
 
@@ -1067,16 +1073,46 @@ export default function CalendarPage() {
             </SelectContent>
           </Select>
 
-          <button
-            onClick={() => {
-              setNewSessionDate(undefined)
-              setShowNewSession(true)
-            }}
-            className="flex items-center gap-1.5 px-3 py-1.5 bg-[#00AEEF] hover:bg-[#009BD6] text-white rounded-lg text-xs font-semibold transition-all duration-200 hover:scale-[1.02]"
-          >
-            <Plus size={14} />
-            <span className="hidden sm:inline">New Session</span>
-          </button>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button className="flex items-center gap-1.5 px-3 py-1.5 bg-[#00AEEF] hover:bg-[#009BD6] text-white rounded-lg text-xs font-semibold transition-all duration-200 hover:scale-[1.02]">
+                <Plus size={14} />
+                <span className="hidden sm:inline">Add to Calendar</span>
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="bg-[#1A1A1A] border-[#2A2A2A] text-[#F0F0F0]">
+              <DropdownMenuItem
+                className="hover:bg-[#242424] focus:bg-[#242424] cursor-pointer"
+                onClick={() => {
+                  setNewSessionDate(undefined)
+                  setShowNewSession(true)
+                }}
+              >
+                Add Sessions
+              </DropdownMenuItem>
+              <DropdownMenuItem className="hover:bg-[#242424] focus:bg-[#242424] cursor-pointer">
+                Add Client
+              </DropdownMenuItem>
+              <DropdownMenuItem className="hover:bg-[#242424] focus:bg-[#242424] cursor-pointer">
+                Events
+              </DropdownMenuItem>
+              <DropdownMenuItem className="hover:bg-[#242424] focus:bg-[#242424] cursor-pointer">
+                Tasks
+              </DropdownMenuItem>
+              <DropdownMenuItem className="hover:bg-[#242424] focus:bg-[#242424] cursor-pointer">
+                Birthdays
+              </DropdownMenuItem>
+              <DropdownMenuItem className="hover:bg-[#242424] focus:bg-[#242424] cursor-pointer">
+                Appointments
+              </DropdownMenuItem>
+              <DropdownMenuItem className="hover:bg-[#242424] focus:bg-[#242424] cursor-pointer">
+                Focus Time
+              </DropdownMenuItem>
+              <DropdownMenuItem className="hover:bg-[#242424] focus:bg-[#242424] cursor-pointer">
+                Unavailability
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </div>
 
