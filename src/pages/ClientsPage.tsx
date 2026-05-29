@@ -16,8 +16,12 @@ interface Client {
   email: string
   phone: string
   avatar: string
+  dob: string
   age: number
-  sex: 'M' | 'F' | 'Other'
+  sex: 'Male' | 'Female' | 'Other'
+  fatLossKilos: string
+  fatLossDeadline: string
+  fatLossWhy: string
   status: 'Active' | 'Inactive' | 'On Hold'
   clientId: string
   weight: number
@@ -45,69 +49,81 @@ interface Client {
 const DEMO_CLIENTS: Client[] = [
   {
     id: '1', name: 'Sarah Johnson', email: 'sarah.j@email.com', phone: '+852 9123 4567',
-    avatar: './avatar-placeholder.png', age: 28, sex: 'F', status: 'Active', clientId: '#CLT-0042',
+    avatar: './avatar-placeholder.png', dob: '1996-03-15', age: 28, sex: 'Female', status: 'Active', clientId: '#CLT-0042',
     weight: 58.5, bodyFat: 18.2, goal: 'Fat Loss', program: 'Strength & Conditioning',
     sessionsCompleted: 47, startDate: '2024-06-15', nextSession: 'Today, 14:00',
     medicalConditions: 'None', injuries: 'Previous ankle sprain (2023)', medications: 'None',
     activityLevel: 'Moderate', sleepHours: '7-8', stressLevel: 'Medium',
     occupation: 'Marketing Manager', trainingExperience: 'Beginner (0-1 year)',
     trainingDaysPerWeek: '4', preferredTime: 'Evening (17:00-20:00)',
-    equipmentAccess: 'Full gym', notes: 'Motivated client, responds well to strength training.',
+    equipmentAccess: 'Full gym',
+    fatLossKilos: '10', fatLossDeadline: '2025-06-15', fatLossWhy: 'Want to feel more confident and improve energy levels for work.',
+    notes: 'Motivated client, responds well to strength training.',
   },
   {
     id: '2', name: 'Michael Chen', email: 'mike.chen@email.com', phone: '+852 9234 5678',
-    avatar: './avatar-placeholder.png', age: 35, sex: 'M', status: 'Active', clientId: '#CLT-0038',
+    avatar: './avatar-placeholder.png', dob: '1989-07-22', age: 35, sex: 'Male', status: 'Active', clientId: '#CLT-0038',
     weight: 82.0, bodyFat: 22.5, goal: 'Muscle Gain', program: 'Hypertrophy Phase 2',
     sessionsCompleted: 32, startDate: '2024-08-01', nextSession: 'Tomorrow, 09:00',
     medicalConditions: 'Mild hypertension', injuries: 'None', medications: 'Lisinopril',
     activityLevel: 'Low', sleepHours: '6-7', stressLevel: 'High',
     occupation: 'Software Engineer', trainingExperience: 'Intermediate (1-3 years)',
     trainingDaysPerWeek: '5', preferredTime: 'Morning (06:00-09:00)',
-    equipmentAccess: 'Full gym', notes: 'Focus on compound lifts. Monitor blood pressure.',
+    equipmentAccess: 'Full gym',
+    fatLossKilos: '', fatLossDeadline: '', fatLossWhy: '',
+    notes: 'Focus on compound lifts. Monitor blood pressure.',
   },
   {
     id: '3', name: 'Emily Wong', email: 'emily.w@email.com', phone: '+852 9345 6789',
-    avatar: './avatar-placeholder.png', age: 24, sex: 'F', status: 'Active', clientId: '#CLT-0051',
+    avatar: './avatar-placeholder.png', dob: '2000-11-08', age: 24, sex: 'Female', status: 'Active', clientId: '#CLT-0051',
     weight: 52.0, bodyFat: 20.1, goal: 'General Fitness', program: 'Functional Fitness',
     sessionsCompleted: 18, startDate: '2024-09-20', nextSession: 'Wed, 16:30',
     medicalConditions: 'Asthma', injuries: 'None', medications: 'Salbutamol inhaler',
     activityLevel: 'Moderate', sleepHours: '8+', stressLevel: 'Low',
     occupation: 'University Student', trainingExperience: 'Beginner (0-1 year)',
     trainingDaysPerWeek: '3', preferredTime: 'Afternoon (14:00-17:00)',
-    equipmentAccess: 'Full gym', notes: 'Prefers variety. Keep workouts engaging.',
+    equipmentAccess: 'Full gym',
+    fatLossKilos: '', fatLossDeadline: '', fatLossWhy: '',
+    notes: 'Prefers variety. Keep workouts engaging.',
   },
   {
     id: '4', name: 'David Park', email: 'david.park@email.com', phone: '+852 9456 7890',
-    avatar: './avatar-placeholder.png', age: 42, sex: 'M', status: 'On Hold', clientId: '#CLT-0029',
+    avatar: './avatar-placeholder.png', dob: '1982-05-30', age: 42, sex: 'Male', status: 'On Hold', clientId: '#CLT-0029',
     weight: 91.5, bodyFat: 28.3, goal: 'Weight Loss', program: 'Fat Loss Accelerator',
     sessionsCompleted: 64, startDate: '2024-01-10', nextSession: '—',
     medicalConditions: 'Type 2 diabetes', injuries: 'Lower back pain', medications: 'Metformin',
     activityLevel: 'Sedentary', sleepHours: '5-6', stressLevel: 'High',
     occupation: 'Investment Banker', trainingExperience: 'Intermediate (1-3 years)',
     trainingDaysPerWeek: '3', preferredTime: 'Early Morning (05:00-07:00)',
-    equipmentAccess: 'Home gym', notes: 'On hold due to work travel. Resume Jan 2025.',
+    equipmentAccess: 'Home gym',
+    fatLossKilos: '15', fatLossDeadline: '2025-09-01', fatLossWhy: 'Doctor recommended weight loss to manage diabetes.',
+    notes: 'On hold due to work travel. Resume Jan 2025.',
   },
   {
     id: '5', name: 'Jessica Lee', email: 'jessica.lee@email.com', phone: '+852 9567 8901',
-    avatar: './avatar-placeholder.png', age: 31, sex: 'F', status: 'Active', clientId: '#CLT-0048',
+    avatar: './avatar-placeholder.png', dob: '1993-09-12', age: 31, sex: 'Female', status: 'Active', clientId: '#CLT-0048',
     weight: 61.0, bodyFat: 21.5, goal: 'Strength', program: 'Powerlifting Intro',
     sessionsCompleted: 28, startDate: '2024-07-22', nextSession: 'Thu, 18:00',
     medicalConditions: 'None', injuries: 'None', medications: 'None',
     activityLevel: 'High', sleepHours: '7-8', stressLevel: 'Medium',
     occupation: 'Physiotherapist', trainingExperience: 'Advanced (3+ years)',
     trainingDaysPerWeek: '4', preferredTime: 'Evening (17:00-20:00)',
-    equipmentAccess: 'Full gym', notes: 'Very knowledgeable. Focus on technique refinement.',
+    equipmentAccess: 'Full gym',
+    fatLossKilos: '', fatLossDeadline: '', fatLossWhy: '',
+    notes: 'Very knowledgeable. Focus on technique refinement.',
   },
   {
     id: '6', name: 'Ryan Thompson', email: 'ryan.t@email.com', phone: '+852 9678 9012',
-    avatar: './avatar-placeholder.png', age: 26, sex: 'M', status: 'Inactive', clientId: '#CLT-0035',
+    avatar: './avatar-placeholder.png', dob: '1998-01-18', age: 26, sex: 'Male', status: 'Inactive', clientId: '#CLT-0035',
     weight: 75.0, bodyFat: 15.8, goal: 'Athletic Performance', program: 'Sports Conditioning',
     sessionsCompleted: 12, startDate: '2024-10-05', nextSession: '—',
     medicalConditions: 'None', injuries: 'ACL reconstruction (2022)', medications: 'None',
     activityLevel: 'High', sleepHours: '8+', stressLevel: 'Low',
     occupation: 'Professional Athlete', trainingExperience: 'Advanced (3+ years)',
     trainingDaysPerWeek: '6', preferredTime: 'Morning (06:00-09:00)',
-    equipmentAccess: 'Full gym + sports facility', notes: 'Inactive - moved overseas.',
+    equipmentAccess: 'Full gym + sports facility',
+    fatLossKilos: '', fatLossDeadline: '', fatLossWhy: '',
+    notes: 'Inactive - moved overseas.',
   },
 ]
 
@@ -256,17 +272,29 @@ function ClientFormModal({
   const [step, setStep] = useState(1)
   const [form, setForm] = useState<Partial<Client>>({
     status: 'Active',
-    sex: 'F',
+    sex: 'Female',
     avatar: './avatar-placeholder.png',
     startDate: new Date().toISOString().split('T')[0],
   })
+
+  const calculateAge = (dob: string): number => {
+    if (!dob) return 0
+    const birth = new Date(dob)
+    const today = new Date()
+    let age = today.getFullYear() - birth.getFullYear()
+    const monthDiff = today.getMonth() - birth.getMonth()
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+      age--
+    }
+    return age
+  }
 
   useEffect(() => {
     if (initialClient) {
       setForm(initialClient)
     } else {
       setForm({
-        status: 'Active', sex: 'F', avatar: './avatar-placeholder.png',
+        status: 'Active', sex: 'Female', avatar: './avatar-placeholder.png',
         startDate: new Date().toISOString().split('T')[0],
       })
     }
@@ -374,17 +402,47 @@ function ClientFormModal({
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <Input label="Phone" field="phone" placeholder="+852 9123 4567" />
-                <Input label="Age" field="age" type="number" placeholder="28" />
+                <div>
+                  <label className="text-xs text-[#A0A0A0] mb-1 block">Date of Birth</label>
+                  <input
+                    type="date"
+                    value={form.dob || ''}
+                    onChange={(e) => {
+                      const dob = e.target.value
+                      setForm(prev => ({ ...prev, dob, age: calculateAge(dob) }))
+                    }}
+                    className="w-full h-10 bg-[#1A1A1A] border border-[#2A2A2A] rounded-lg px-3 text-[#F0F0F0] text-sm focus:outline-none focus:border-[#00AEEF] transition-colors"
+                  />
+                </div>
               </div>
               <div className="grid grid-cols-2 gap-3">
-                <SelectField label="Gender" field="sex" options={['M', 'F', 'Other']} />
-                <Input label="Start Date" field="startDate" type="date" />
+                <div>
+                  <label className="text-xs text-[#A0A0A0] mb-1 block">Age</label>
+                  <div className="w-full h-10 bg-[#1A1A1A] border border-[#2A2A2A] rounded-lg px-3 text-[#F0F0F0] text-sm flex items-center">
+                    {form.dob ? calculateAge(form.dob) : <span className="text-[#3A3A3A]">Auto-calculated from DOB</span>}
+                  </div>
+                </div>
+                <SelectField label="Gender" field="sex" options={['Male', 'Female', 'Other']} />
               </div>
-              <div className="grid grid-cols-2 gap-3">
-                <Input label="Current Weight (kg)" field="weight" type="number" placeholder="70" />
-                <Input label="Body Fat %" field="bodyFat" type="number" placeholder="20" />
-              </div>
+              <Input label="Start Date" field="startDate" type="date" />
               <SelectField label="Primary Goal" field="goal" options={GOAL_OPTIONS} />
+
+              {/* Conditional Fat Loss fields */}
+              {form.goal === 'Fat Loss' && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  transition={{ duration: 0.3 }}
+                  className="space-y-4 pt-2 border-t border-[#2A2A2A]"
+                >
+                  <p className="text-xs text-[#00AEEF] font-medium uppercase tracking-wider">Fat Loss Details</p>
+                  <div className="grid grid-cols-2 gap-3">
+                    <Input label="How many kilos would you like to lose?" field="fatLossKilos" type="number" placeholder="e.g. 10" />
+                    <Input label="By when would you like to achieve this?" field="fatLossDeadline" type="date" />
+                  </div>
+                  <TextArea label="Why did you choose this goal?" field="fatLossWhy" placeholder="Tell us your motivation..." rows={3} />
+                </motion.div>
+              )}
             </>
           )}
 
@@ -419,11 +477,15 @@ function ClientFormModal({
                 ['Name', form.name],
                 ['Email', form.email],
                 ['Phone', form.phone],
+                ['Date of Birth', form.dob],
                 ['Age', form.age],
                 ['Gender', form.sex],
                 ['Goal', form.goal],
-                ['Weight', `${form.weight} kg`],
-                ['Body Fat', `${form.bodyFat}%`],
+                ...(form.goal === 'Fat Loss' ? [
+                  ['Target Loss', `${form.fatLossKilos} kg`],
+                  ['Deadline', form.fatLossDeadline],
+                  ['Motivation', form.fatLossWhy],
+                ] : []),
                 ['Medical', form.medicalConditions],
                 ['Injuries', form.injuries],
                 ['Experience', form.trainingExperience],
