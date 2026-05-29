@@ -1135,14 +1135,20 @@ export default function CalendarPage() {
   /* Close slot menu on outside click */
   useEffect(() => {
     if (!slotMenu) return
-    const handleClick = (e: MouseEvent) => {
-      const target = e.target as HTMLElement
-      if (!target.closest('.slot-context-menu')) {
-        setSlotMenu(null)
+    let handleClick: ((e: MouseEvent) => void) | null = null
+    const timer = setTimeout(() => {
+      handleClick = (e: MouseEvent) => {
+        const target = e.target as HTMLElement
+        if (!target.closest('.slot-context-menu')) {
+          setSlotMenu(null)
+        }
       }
+      document.addEventListener('click', handleClick)
+    }, 50)
+    return () => {
+      clearTimeout(timer)
+      if (handleClick) document.removeEventListener('click', handleClick)
     }
-    document.addEventListener('click', handleClick)
-    return () => document.removeEventListener('click', handleClick)
   }, [slotMenu])
 
   const handleDayClick = useCallback(

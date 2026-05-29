@@ -582,7 +582,7 @@ export default function ProgramsPage() {
 
   // Fetch data
   useEffect(() => {
-    fetch('/training_methods.json')
+    fetch('./training_methods.json')
       .then((r) => r.json())
       .then((data: TrainingMethod[]) => {
         const progs = generateSamplePrograms(data)
