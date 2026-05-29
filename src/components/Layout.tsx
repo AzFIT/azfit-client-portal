@@ -100,7 +100,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const searchBg          = isDark ? '#141414' : '#F1F5F9'
   const searchBorder      = isDark ? '#2A2A2A' : '#E2E8F0'
   const searchText        = isDark ? '#F0F0F0' : '#0F172A'
-  const searchPlaceholder = isDark ? '#6B6B6B' : '#94A3B8'
   const searchIcon        = isDark ? '#6B6B6B' : '#94A3B8'
   const avatarRing        = isDark ? '#2A2A2A' : '#E2E8F0'
   /* Mobile overlay */
