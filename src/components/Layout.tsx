@@ -69,7 +69,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     return location.pathname === path
   }
 
-  /* -- Theme-aware colours -- */
+  /* ── Theme-aware colours ────────────────────────────────── */
   const isDark = theme === 'dark'
 
   /* Page background */
@@ -367,8 +367,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 placeholder="Search..."
                 onFocus={() => setSearchFocused(true)}
                 onBlur={() => setSearchFocused(false)}
-                className="bg-transparent border-none outline-none text-sm px-2 py-2 w-full placeholder:text-[#94A3B8]"
-                style={{ color: searchText }}
+                className="bg-transparent border-none outline-none text-sm px-2 py-2 w-full"
+                style={{
+                  color: searchText,
+                }}
+                /* placeholder styling via inline not possible, use CSS variable approach */
               />
             </div>
 
@@ -412,7 +415,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <button
               onClick={() => navigate('/settings')}
               className="w-9 h-9 rounded-full overflow-hidden transition-all hover:ring-[#00AEEF]"
-              style={{ ring: `2px solid ${avatarRing}` }}
+              style={{ boxShadow: `0 0 0 2px ${avatarRing}` }}
             >
               <img src="/avatar-placeholder.png" alt="User" className="w-full h-full object-cover" />
             </button>
