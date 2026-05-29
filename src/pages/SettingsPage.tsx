@@ -550,7 +550,7 @@ function AccountSection() {
         <div className="flex items-start gap-6 mb-6">
           <div className="relative flex-shrink-0">
             <img
-              src={avatar || '/avatar-placeholder.png'}
+              src={avatar || './avatar-placeholder.png'}
               alt="Profile"
               className="w-20 h-20 rounded-full object-cover border-2 border-[#2A2A2A]"
             />

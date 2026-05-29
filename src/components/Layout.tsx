@@ -211,7 +211,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
           >
             <img
-              src="/avatar-placeholder.png"
+              src="./avatar-placeholder.png"
               alt="User"
               className="w-8 h-8 rounded-full object-cover flex-shrink-0"
             />
@@ -303,7 +303,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               {/* Mobile User */}
               <div className="p-4" style={{ borderTop: `1px solid ${sidebarBorder}` }}>
                 <div className="flex items-center gap-3">
-                  <img src="/avatar-placeholder.png" alt="User" className="w-9 h-9 rounded-full object-cover" />
+                  <img src="./avatar-placeholder.png" alt="User" className="w-9 h-9 rounded-full object-cover" />
                   <div className="flex-1">
                     <p className="text-sm font-medium" style={{ color: sidebarText }}>Trainer</p>
                     <p className="text-xs" style={{ color: sidebarMuted }}>Pro Plan</p>
@@ -416,7 +416,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               className="w-9 h-9 rounded-full overflow-hidden transition-all hover:ring-[#00AEEF]"
               style={{ boxShadow: `0 0 0 2px ${avatarRing}` }}
             >
-              <img src="/avatar-placeholder.png" alt="User" className="w-full h-full object-cover" />
+              <img src="./avatar-placeholder.png" alt="User" className="w-full h-full object-cover" />
             </button>
           </div>
         </div>

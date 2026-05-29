@@ -21,7 +21,7 @@ import type { PhotoCategory, ProgressPhoto } from '@/types';
    ═══════════════════════════════════════════ */
 
 const client = {
-  id: '1', name: 'Sarah Johnson', avatar: '/avatar-placeholder.jpg',
+  id: '1', name: 'Sarah Johnson', avatar: './avatar-placeholder.png',
   status: 'Active' as const, clientId: '#CLT-0042', age: 28, sex: 'F',
   weight: 58.5, bodyFat: 18.2, sessions: 47,
   goalWeight: 55.0, startWeight: 68.0, startDate: '2024-06-15',
@@ -210,12 +210,12 @@ const milestones = [
 ];
 
 const progressPhotos: ProgressPhoto[] = [
-  { id: '1', clientId: '1', url: '/avatar-placeholder.jpg', thumbnailUrl: '/avatar-placeholder.jpg', date: '15/06/2024', category: 'Front', notes: 'Starting point', weight: 68.0, bodyFatPercentage: 24.0, trainerNotes: 'Baseline photo. Good posture.', isMilestone: true, isGoalAchieved: false, createdAt: '2024-06-15', updatedAt: '2024-06-15' },
-  { id: '2', clientId: '1', url: '/avatar-placeholder.jpg', thumbnailUrl: '/avatar-placeholder.jpg', date: '15/07/2024', category: 'Front', notes: '1 month progress', weight: 65.8, bodyFatPercentage: 22.5, trainerNotes: 'Visible waist reduction.', isMilestone: false, isGoalAchieved: false, createdAt: '2024-07-15', updatedAt: '2024-07-15' },
-  { id: '3', clientId: '1', url: '/avatar-placeholder.jpg', thumbnailUrl: '/avatar-placeholder.jpg', date: '15/08/2024', category: 'Side', notes: '2 month check-in', weight: 64.2, bodyFatPercentage: 21.2, trainerNotes: 'Core engagement improved.', isMilestone: false, isGoalAchieved: false, createdAt: '2024-08-15', updatedAt: '2024-08-15' },
-  { id: '4', clientId: '1', url: '/avatar-placeholder.jpg', thumbnailUrl: '/avatar-placeholder.jpg', date: '15/09/2024', category: 'Back', notes: 'Back progress', weight: 62.8, bodyFatPercentage: 20.1, trainerNotes: 'Back definition showing.', isMilestone: false, isGoalAchieved: false, createdAt: '2024-09-15', updatedAt: '2024-09-15' },
-  { id: '5', clientId: '1', url: '/avatar-placeholder.jpg', thumbnailUrl: '/avatar-placeholder.jpg', date: '15/10/2024', category: 'Front', notes: '5kg down milestone!', weight: 62.8, bodyFatPercentage: 19.5, trainerNotes: 'Excellent progress. Keep calories consistent.', isMilestone: true, isGoalAchieved: true, createdAt: '2024-10-15', updatedAt: '2024-10-15' },
-  { id: '6', clientId: '1', url: '/avatar-placeholder.jpg', thumbnailUrl: '/avatar-placeholder.jpg', date: '15/11/2024', category: 'Side', notes: 'Latest check-in', weight: 58.5, bodyFatPercentage: 18.2, trainerNotes: 'Approaching goal body fat. Maintain strength.', isMilestone: false, isGoalAchieved: false, createdAt: '2024-11-15', updatedAt: '2024-11-15' },
+  { id: '1', clientId: '1', url: './avatar-placeholder.png', thumbnailUrl: './avatar-placeholder.png', date: '15/06/2024', category: 'Front', notes: 'Starting point', weight: 68.0, bodyFatPercentage: 24.0, trainerNotes: 'Baseline photo. Good posture.', isMilestone: true, isGoalAchieved: false, createdAt: '2024-06-15', updatedAt: '2024-06-15' },
+  { id: '2', clientId: '1', url: './avatar-placeholder.png', thumbnailUrl: './avatar-placeholder.png', date: '15/07/2024', category: 'Front', notes: '1 month progress', weight: 65.8, bodyFatPercentage: 22.5, trainerNotes: 'Visible waist reduction.', isMilestone: false, isGoalAchieved: false, createdAt: '2024-07-15', updatedAt: '2024-07-15' },
+  { id: '3', clientId: '1', url: './avatar-placeholder.png', thumbnailUrl: './avatar-placeholder.png', date: '15/08/2024', category: 'Side', notes: '2 month check-in', weight: 64.2, bodyFatPercentage: 21.2, trainerNotes: 'Core engagement improved.', isMilestone: false, isGoalAchieved: false, createdAt: '2024-08-15', updatedAt: '2024-08-15' },
+  { id: '4', clientId: '1', url: './avatar-placeholder.png', thumbnailUrl: './avatar-placeholder.png', date: '15/09/2024', category: 'Back', notes: 'Back progress', weight: 62.8, bodyFatPercentage: 20.1, trainerNotes: 'Back definition showing.', isMilestone: false, isGoalAchieved: false, createdAt: '2024-09-15', updatedAt: '2024-09-15' },
+  { id: '5', clientId: '1', url: './avatar-placeholder.png', thumbnailUrl: './avatar-placeholder.png', date: '15/10/2024', category: 'Front', notes: '5kg down milestone!', weight: 62.8, bodyFatPercentage: 19.5, trainerNotes: 'Excellent progress. Keep calories consistent.', isMilestone: true, isGoalAchieved: true, createdAt: '2024-10-15', updatedAt: '2024-10-15' },
+  { id: '6', clientId: '1', url: './avatar-placeholder.png', thumbnailUrl: './avatar-placeholder.png', date: '15/11/2024', category: 'Side', notes: 'Latest check-in', weight: 58.5, bodyFatPercentage: 18.2, trainerNotes: 'Approaching goal body fat. Maintain strength.', isMilestone: false, isGoalAchieved: false, createdAt: '2024-11-15', updatedAt: '2024-11-15' },
 ];
 
 const activityFeed = [

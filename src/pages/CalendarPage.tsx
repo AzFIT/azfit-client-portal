@@ -67,7 +67,7 @@ const SESSION_TYPE_LABELS: SessionType[] = [
 
 const CLIENT_NAMES = ['Sarah', 'Mike', 'Emily', 'David', 'Jessica', 'Ryan', 'Amanda']
 
-const HK_TIME_SLOTS = [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+const HK_TIME_SLOTS = [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22]
 
 function generateDemoSessions(): CalendarSession[] {
   const sessions: CalendarSession[] = []
@@ -156,7 +156,7 @@ function WeekView({
   const timeIndicatorTop = useMemo(() => {
     const h = getHours(now)
     const m = getMinutes(now)
-    return (h + m / 60) * 64
+    return (h - 5 + m / 60) * 64
   }, [now])
 
   const showTimeIndicator = useMemo(() => {
@@ -200,12 +200,12 @@ function WeekView({
           <div className="grid grid-cols-[60px_repeat(7,1fr)]">
             {/* Time labels */}
             <div className="border-r border-[#2A2A2A]">
-              {Array.from({ length: 24 }, (_, i) => (
+              {Array.from({ length: 18 }, (_, i) => i + 5).map((hour) => (
                 <div
-                  key={i}
+                  key={hour}
                   className="h-16 border-b border-[#1F1F1F] flex items-start justify-end pr-2 pt-1"
                 >
-                  <span className="text-[10px] text-[#6B6B6B] font-mono">{String(i).padStart(2, '0')}:00</span>
+                  <span className="text-[10px] text-[#6B6B6B] font-mono">{String(hour).padStart(2, '0')}:00</span>
                 </div>
               ))}
             </div>
@@ -221,11 +221,11 @@ function WeekView({
                   }`}
                   style={today ? { borderLeft: '2px solid #00AEEF' } : {}}
                 >
-                  {Array.from({ length: 24 }, (_, i) => (
+                  {Array.from({ length: 18 }, (_, i) => i + 5).map((hour) => (
                     <div
-                      key={i}
+                      key={hour}
                       className="h-16 border-b border-[#1F1F1F] hover:bg-[rgba(0,174,239,0.06)] transition-colors cursor-pointer"
-                      onClick={() => onSlotClick(day, i, 0)}
+                      onClick={() => onSlotClick(day, hour, 0)}
                     />
                   ))}
 
@@ -235,7 +235,7 @@ function WeekView({
                     .map((session) => {
                       const h = getHours(session.startTime)
                       const m = getMinutes(session.startTime)
-                      const top = h * 64 + (m / 60) * 64
+                      const top = (h - 5) * 64 + (m / 60) * 64
                       const height = Math.max((session.duration / 60) * 64, 32)
                       const colors = SESSION_COLORS[session.type]
 
@@ -258,7 +258,7 @@ function WeekView({
                             onEventClick(session)
                           }}
                         >
-                          <p className="text-white text-[11px] font-semibold truncate leading-tight">
+                          <p className="text-gray-900 dark:text-white text-[11px] font-semibold truncate leading-tight">
                             {session.clientName}
                           </p>
                           <p className="text-[9px] opacity-80 truncate" style={{ color: colors.text }}>
@@ -284,7 +284,7 @@ function WeekView({
           </div>
 
           {/* Current time indicator */}
-          {showTimeIndicator && (
+          {showTimeIndicator && timeIndicatorTop >= 0 && timeIndicatorTop <= 18 * 64 && (
             <div
               className="absolute left-0 right-0 z-30 pointer-events-none"
               style={{ top: `${timeIndicatorTop}px` }}
@@ -320,7 +320,7 @@ function DayView({
 
   useEffect(() => {
     if (scrollRef.current) {
-      scrollRef.current.scrollTop = 7 * 64
+      scrollRef.current.scrollTop = 2 * 64
     }
   }, [date])
 
@@ -371,31 +371,31 @@ function DayView({
           <div className="relative">
             <div className="grid grid-cols-[80px_1fr]">
               <div className="border-r border-[#2A2A2A]">
-                {Array.from({ length: 24 }, (_, i) => (
+                {Array.from({ length: 18 }, (_, i) => i + 5).map((hour) => (
                   <div
-                    key={i}
+                    key={hour}
                     className="h-16 border-b border-[#1F1F1F] flex items-start justify-end pr-3 pt-1"
                   >
                     <span className="text-[11px] text-[#6B6B6B] font-mono">
-                      {String(i).padStart(2, '0')}:00
+                      {String(hour).padStart(2, '0')}:00
                     </span>
                   </div>
                 ))}
               </div>
 
               <div className="relative">
-                {Array.from({ length: 24 }, (_, i) => (
+                {Array.from({ length: 18 }, (_, i) => i + 5).map((hour) => (
                   <div
-                    key={i}
+                    key={hour}
                     className="h-16 border-b border-[#1F1F1F] hover:bg-[rgba(0,174,239,0.04)] transition-colors cursor-pointer"
-                    onClick={() => onSlotClick(date, i, 0)}
+                    onClick={() => onSlotClick(date, hour, 0)}
                   />
                 ))}
 
                 {filtered.map((session) => {
                   const h = getHours(session.startTime)
                   const m = getMinutes(session.startTime)
-                  const top = h * 64 + (m / 60) * 64
+                  const top = (h - 5) * 64 + (m / 60) * 64
                   const height = Math.max((session.duration / 60) * 64, 40)
                   const colors = SESSION_COLORS[session.type]
 
@@ -426,7 +426,7 @@ function DayView({
                           <User size={14} style={{ color: colors.text }} />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="text-white text-sm font-semibold truncate">
+                          <p className="text-gray-900 dark:text-white text-sm font-semibold truncate">
                             {session.clientName}
                           </p>
                           <p className="text-[10px] opacity-80" style={{ color: colors.text }}>
@@ -449,7 +449,7 @@ function DayView({
                 })}
 
                 {/* Current time indicator */}
-                {isToday(date) && (
+                {isToday(date) && timeIndicatorTop >= 0 && timeIndicatorTop <= 18 * 64 && (
                   <div
                     className="absolute left-0 right-0 z-30 pointer-events-none"
                     style={{ top: `${timeIndicatorTop}px` }}
@@ -705,7 +705,7 @@ function AgendaView({
 
                     {/* Details */}
                     <div className="flex-1 min-w-0">
-                      <p className="text-[#F0F0F0] text-sm font-semibold truncate">
+                      <p className="text-gray-900 dark:text-[#F0F0F0] text-sm font-semibold truncate">
                         {session.clientName}
                       </p>
                       <p className="text-[#6B6B6B] text-xs">{session.duration} min</p>
@@ -1147,7 +1147,7 @@ export default function CalendarPage() {
                   <User size={18} style={{ color: SESSION_COLORS[selectedSession.type].text }} />
                 </div>
                 <div>
-                  <p className="text-[#F0F0F0] font-semibold">{selectedSession.clientName}</p>
+                  <p className="text-gray-900 dark:text-[#F0F0F0] font-semibold">{selectedSession.clientName}</p>
                   <p className="text-[#6B6B6B] text-xs">{selectedSession.type}</p>
                 </div>
               </div>

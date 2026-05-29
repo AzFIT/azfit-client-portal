@@ -590,7 +590,7 @@ export default function DashboardPage() {
                 {/* Top Row: Avatar + Name */}
                 <div className="flex items-center gap-3 mb-4">
                   <img
-                    src="/avatar-placeholder.png"
+                    src="./avatar-placeholder.png"
                     alt={client.name}
                     className="w-12 h-12 rounded-full object-cover flex-shrink-0"
                   />
