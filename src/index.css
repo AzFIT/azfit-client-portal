@@ -335,3 +335,90 @@
     line-height: 1.2;
   }
 }
+
+/* ═══════════════════════════════════════════
+   Landing Page Animations (from Home.tsx)
+   ═══════════════════════════════════════════ */
+
+@keyframes orb-breathe {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.03); opacity: 0.95; }
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.8); opacity: 0.6; }
+  100% { transform: scale(1.3); opacity: 0; }
+}
+
+@keyframes rotate-wireframe {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+@layer components {
+  .gradient-azure {
+    background: linear-gradient(135deg, #00AEEF, #3B82F6);
+  }
+
+  .text-gradient-azure {
+    background: linear-gradient(135deg, #00AEEF, #3B82F6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .edge-fade-mask {
+    mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+  }
+
+  .section-pad-x {
+    padding-left: clamp(1rem, 4vw, 4rem);
+    padding-right: clamp(1rem, 4vw, 4rem);
+  }
+
+  .section-pad-y {
+    padding-top: clamp(4rem, 8vh, 8rem);
+    padding-bottom: clamp(4rem, 8vh, 8rem);
+  }
+}
+
+@layer utilities {
+  .animate-orb-breathe {
+    animation: orb-breathe 4s ease-in-out infinite;
+  }
+
+  .animate-pulse-ring {
+    animation: pulse-ring 3s ease-out infinite;
+  }
+
+  .animate-rotate-wireframe {
+    animation: rotate-wireframe 20s linear infinite;
+  }
+
+  .animate-spin-slow {
+    animation: spin-slow 30s linear infinite;
+  }
+
+  .animate-glow-pulse {
+    animation: glow-pulse 4s ease-in-out infinite;
+  }
+
+  .shadow-glow-blue {
+    box-shadow: 0 4px 20px rgba(0, 174, 239, 0.25);
+  }
+
+  .shadow-glow-blue-lg {
+    box-shadow: 0 8px 40px rgba(0, 174, 239, 0.35);
+  }
+}

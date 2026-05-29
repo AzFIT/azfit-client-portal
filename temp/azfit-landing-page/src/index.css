@@ -1,0 +1,149 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 20% 3%;
+    --foreground: 210 20% 98%;
+    --card: 220 15% 8%;
+    --card-foreground: 210 20% 98%;
+    --popover: 220 15% 8%;
+    --popover-foreground: 210 20% 98%;
+    --primary: 196 100% 47%;
+    --primary-foreground: 220 20% 3%;
+    --secondary: 220 10% 15%;
+    --secondary-foreground: 210 20% 98%;
+    --muted: 220 10% 15%;
+    --muted-foreground: 220 5% 46%;
+    --accent: 196 100% 47%;
+    --accent-foreground: 220 20% 3%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 220 10% 18%;
+    --input: 220 10% 18%;
+    --ring: 196 100% 47%;
+    --radius: 0.625rem;
+    --sidebar-background: 220 15% 8%;
+    --sidebar-foreground: 210 20% 98%;
+    --sidebar-primary: 196 100% 47%;
+    --sidebar-primary-foreground: 220 20% 3%;
+    --sidebar-accent: 220 10% 15%;
+    --sidebar-accent-foreground: 210 20% 98%;
+    --sidebar-border: 220 10% 18%;
+    --sidebar-ring: 196 100% 47%;
+
+    --deep-void: #111827;
+    --metallic-silver: #D1D5DB;
+    --electric-blue: #00AEEF;
+    --surface-dark: #1F2937;
+    --soft-white: #F9FAFB;
+    --pure-black: #030712;
+    --steel-gray: #4B5563;
+    --mist-gray: #9CA3AF;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    font-family: "Inter", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  body {
+    @apply bg-[#030712] text-[#F9FAFB] font-inter;
+    background: linear-gradient(to bottom, #030712, #111827);
+    min-height: 100dvh;
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  #root {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: rgba(0, 174, 239, 0.3);
+    color: #F9FAFB;
+  }
+}
+
+@layer components {
+  .gradient-azure {
+    background: linear-gradient(135deg, #00AEEF, #3B82F6);
+  }
+
+  .gradient-dark-depth {
+    background: linear-gradient(to bottom, #030712, #111827);
+  }
+
+  .gradient-glass-sheen {
+    background: linear-gradient(135deg, rgba(17, 24, 39, 0.8), rgba(31, 41, 55, 0.6));
+  }
+
+  .glass-card {
+    background: linear-gradient(135deg, rgba(17, 24, 39, 0.8), rgba(31, 41, 55, 0.6));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+  }
+
+  .noise-overlay {
+    position: relative;
+  }
+
+  .noise-overlay::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("/noise.png");
+    background-repeat: repeat;
+    opacity: 0.03;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .text-gradient-azure {
+    background: linear-gradient(135deg, #00AEEF, #3B82F6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .edge-fade-mask {
+    mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+  }
+}
+
+@layer utilities {
+  .section-pad-x {
+    padding-left: clamp(1rem, 4vw, 4rem);
+    padding-right: clamp(1rem, 4vw, 4rem);
+  }
+
+  .section-pad-y {
+    padding-top: clamp(4rem, 8vh, 8rem);
+    padding-bottom: clamp(4rem, 8vh, 8rem);
+  }
+
+  /* Chat bubble entrance animation */
+  @keyframes chatBubbleIn {
+    from {
+      transform: scale(0);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+}

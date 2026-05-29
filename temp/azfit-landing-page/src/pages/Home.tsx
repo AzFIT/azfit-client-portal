@@ -6,8 +6,6 @@ import {
   MessageCircle, Calendar, BarChart3, Play, Star,
   Check, Scan, Apple, Users,
 } from 'lucide-react'
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
 /* ──────────────────────────────────────────────
    Easing Tokens
    ────────────────────────────────────────────── */
@@ -55,7 +53,7 @@ function HeroSection() {
       <div
         className="absolute inset-0 pointer-events-none z-[2]"
         style={{
-          backgroundImage: 'url(./noise.png)',
+          backgroundImage: 'url(/noise.png)',
           backgroundRepeat: 'repeat',
           opacity: 0.03,
           mixBlendMode: 'overlay',
@@ -66,7 +64,7 @@ function HeroSection() {
       <div
         className="absolute inset-0 z-0 opacity-20"
         style={{
-          backgroundImage: 'url(./hero-bg.jpg)',
+          backgroundImage: 'url(/hero-bg.jpg)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
@@ -145,7 +143,7 @@ function HeroSection() {
               className="flex flex-wrap items-center gap-4 mb-10"
             >
               <Link
-                to="/signup"
+                to="/pricing"
                 className="gradient-azure text-[#F9FAFB] font-semibold text-[16px] px-8 py-4 rounded-lg shadow-glow-blue transition-all duration-200 hover:shadow-glow-blue-lg hover:scale-[1.03] active:scale-[0.97]"
               >
                 Start 14-Day Trial
@@ -281,7 +279,7 @@ function HeroSection() {
                   style={{ width: '85%', height: '85%' }}
                 >
                   <img
-                    src="./AzFIT_LOGO_Transparent.png"
+                    src="/AzFIT_LOGO_Transparent.png"
                     alt="AzFIT"
                     className="w-full h-full object-contain drop-shadow-[0_0_20px_rgba(0,174,239,0.6)]"
                     style={{ filter: 'drop-shadow(0 0 12px rgba(0,174,239,0.5)) drop-shadow(0 0 4px rgba(255,255,255,0.2))' }}
@@ -505,7 +503,7 @@ function AIShowcaseSection() {
             </ul>
 
             <Link
-              to="/roadmap"
+              to="/features"
               className="gradient-azure text-[#F9FAFB] font-semibold text-[16px] px-8 py-4 rounded-lg shadow-glow-blue transition-all duration-200 hover:shadow-glow-blue-lg hover:scale-[1.03] active:scale-[0.97] inline-block"
             >
               Explore AI Features
@@ -981,19 +979,19 @@ function FeatureGridSection() {
    ────────────────────────────────────────────── */
 const testimonials = [
   {
-    avatar: './avatar-placeholder.png',
+    avatar: '/avatar-1.jpg',
     quote: 'AzFIT cut my program design time by 70%. The AI suggestions are scarily good \u2014 it knows my style better than I do.',
     name: 'Marcus Chen',
     role: 'Strength Coach, Hong Kong',
   },
   {
-    avatar: './avatar-placeholder.png',
+    avatar: '/avatar-2.jpg',
     quote: "The wearable sync changed everything. My clients finally see how their recovery data connects to their training.",
     name: 'Sarah Lim',
     role: 'Performance Coach, Singapore',
   },
   {
-    avatar: './avatar-placeholder.png',
+    avatar: '/avatar-3.jpg',
     quote: "I've tried every platform on the market. AzFIT is the only one that actually feels built for coaches, not just adapted from a consumer app.",
     name: 'David Park',
     role: 'Private Trainer, Seoul',
@@ -1167,13 +1165,13 @@ function CTASection() {
           className="flex flex-wrap items-center justify-center gap-4 mb-6"
         >
           <Link
-            to="/signup"
+            to="/pricing"
             className="gradient-azure text-[#F9FAFB] font-semibold text-[18px] px-10 py-5 rounded-lg shadow-glow-blue transition-all duration-200 hover:shadow-glow-blue-lg hover:scale-[1.03] active:scale-[0.97]"
           >
             Start Free Trial
           </Link>
           <Link
-            to="/signup"
+            to="/pricing"
             className="border font-medium text-[16px] px-8 py-4 rounded-lg transition-all duration-200 hover:scale-[1.02]"
             style={{
               borderColor: '#00AEEF',
@@ -1200,22 +1198,18 @@ function CTASection() {
 }
 
 /* ──────────────────────────────────────────────
-   Landing Page Assembly
+   Home Page Assembly
    ────────────────────────────────────────────── */
-export default function LandingPage() {
+export default function Home() {
   return (
-    <div className="bg-[#0A0A0A]">
-      <Navbar />
-      <main>
-        <HeroSection />
-        <TrustedBySection />
-        <AIShowcaseSection />
-        <DashboardExperienceSection />
-        <FeatureGridSection />
-        <TestimonialsSection />
-        <CTASection />
-      </main>
-      <Footer />
+    <div>
+      <HeroSection />
+      <TrustedBySection />
+      <AIShowcaseSection />
+      <DashboardExperienceSection />
+      <FeatureGridSection />
+      <TestimonialsSection />
+      <CTASection />
     </div>
   )
 }
