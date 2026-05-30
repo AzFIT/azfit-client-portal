@@ -413,6 +413,13 @@ export default function AiChat() {
   const [showAutocomplete, setShowAutocomplete] = useState(false)
   const [slashMatch, setSlashMatch] = useState<typeof SLASH_COMMANDS>([])
   const [clientMatch, setClientMatch] = useState<string[]>([])
+  const [dragOffset, setDragOffset] = useState(() => {
+    try {
+      const saved = localStorage.getItem('azfit-chat-pos')
+      if (saved) return JSON.parse(saved)
+    } catch {}
+    return { x: 0, y: 0 }
+  })
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -606,24 +613,35 @@ export default function AiChat() {
 
   return (
     <>
-      {/* Floating Button — bottom-right */}
+      {/* Floating Button — bottom-left, draggable */}
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-[350] w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center text-white shadow-lg"
+        drag
+        dragMomentum={false}
+        dragElastic={0.1}
+        dragConstraints={{
+          left: -window.innerWidth + 72,
+          right: window.innerWidth - 72,
+          top: -window.innerHeight + 72,
+          bottom: window.innerHeight - 72,
+        }}
+        initial={{ x: dragOffset.x, y: dragOffset.y }}
+        animate={{ x: dragOffset.x, y: dragOffset.y }}
+        whileHover={{ scale: 1.08 }}
+        whileTap={{ scale: 0.95 }}
+        whileDrag={{ scale: 1.12, cursor: 'grabbing' }}
+        onDragEnd={(_, info) => {
+          const newOffset = { x: dragOffset.x + info.offset.x, y: dragOffset.y + info.offset.y }
+          setDragOffset(newOffset)
+          localStorage.setItem('azfit-chat-pos', JSON.stringify(newOffset))
+        }}
+        className="fixed bottom-5 left-5 sm:bottom-6 sm:left-6 z-[350] w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center text-white shadow-lg"
         style={{
           background: 'linear-gradient(135deg, #00AEEF 0%, #8B5CF6 100%)',
           boxShadow: '0 4px 20px rgba(0,174,239,0.3)',
+          cursor: 'grab',
         }}
-        whileHover={{ scale: 1.08 }}
-        whileTap={{ scale: 0.95 }}
-        animate={!isOpen ? {
-          boxShadow: [
-            '0 4px 20px rgba(0,174,239,0.3)',
-            '0 4px 32px rgba(0,174,239,0.5)',
-            '0 4px 20px rgba(0,174,239,0.3)',
-          ],
-        } : {}}
-        transition={!isOpen ? { boxShadow: { duration: 2.5, repeat: Infinity } } : {}}
+        title="Drag to move • Click to open"
         aria-label="Toggle AI Chat"
       >
         <AnimatePresence mode="wait">
@@ -664,7 +682,7 @@ export default function AiChat() {
             exit={{ opacity: 0, scale: 0.92, y: 16 }}
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
             className={cn(
-              'fixed bottom-[72px] sm:bottom-24 right-4 sm:right-6 z-[350] w-[calc(100vw-32px)] sm:w-[420px] max-w-[440px] rounded-2xl overflow-hidden flex flex-col',
+              'fixed bottom-[72px] sm:bottom-24 left-4 sm:left-6 z-[350] w-[calc(100vw-32px)] sm:w-[420px] max-w-[440px] rounded-2xl overflow-hidden flex flex-col',
               panelBg,
             )}
             style={{
