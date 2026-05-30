@@ -1,0 +1,6470 @@
+[
+  {
+    "id": "PRG001",
+    "ProgramTitle": "Hypertrophy Upper/Lower Beginner",
+    "FocusTag": "Hypertrophy",
+    "Duration": "4 weeks",
+    "DaysPerWeek": "5",
+    "Level": "Beginner",
+    "Split": "Upper/Lower",
+    "Status": "Active",
+    "TotalSets": 33,
+    "Exercises": [
+      {
+        "Name": "Machine Chest Press",
+        "Sets": "5",
+        "Reps": "8",
+        "Rest": "150s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Landmine Lateral Raise",
+        "Sets": "4",
+        "Reps": "15-20",
+        "Rest": "180s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Resistance Band"
+      },
+      {
+        "Name": "Wide Grip Row",
+        "Sets": "4",
+        "Reps": "12-15",
+        "Rest": "150s",
+        "MuscleGroup": "Back",
+        "Equipment": "Resistance Band"
+      },
+      {
+        "Name": "Decline Curl",
+        "Sets": "5",
+        "Reps": "8-10",
+        "Rest": "180s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Front Squat",
+        "Sets": "3",
+        "Reps": "10-12",
+        "Rest": "60s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Smith Machine"
+      },
+      {
+        "Name": "Safety Bar Good Morning",
+        "Sets": "5",
+        "Reps": "8-10",
+        "Rest": "150s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Prowler Push",
+        "Sets": "4",
+        "Reps": "12",
+        "Rest": "60s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Bench Press Plank",
+        "Sets": "3",
+        "Reps": "8-10",
+        "Rest": "180s",
+        "MuscleGroup": "Core",
+        "Equipment": "Resistance Band"
+      }
+    ]
+  },
+  {
+    "id": "PRG002",
+    "ProgramTitle": "Hypertrophy Upper/Lower Intermediate",
+    "FocusTag": "Hypertrophy",
+    "Duration": "12 weeks",
+    "DaysPerWeek": "5",
+    "Level": "Intermediate",
+    "Split": "Upper/Lower",
+    "Status": "Draft",
+    "TotalSets": 36,
+    "Exercises": [
+      {
+        "Name": "Reverse Grip Bench",
+        "Sets": "4",
+        "Reps": "12",
+        "Rest": "60s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Wall Slide",
+        "Sets": "5",
+        "Reps": "10-12",
+        "Rest": "90s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Single-Arm Row",
+        "Sets": "3",
+        "Reps": "12",
+        "Rest": "45s",
+        "MuscleGroup": "Back",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Hammer Curl",
+        "Sets": "5",
+        "Reps": "15-20",
+        "Rest": "90s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Deficit Reverse Lunge",
+        "Sets": "4",
+        "Reps": "15-20",
+        "Rest": "90s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Zercher Good Morning",
+        "Sets": "5",
+        "Reps": "10",
+        "Rest": "150s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Calf Raise Machine",
+        "Sets": "5",
+        "Reps": "15-20",
+        "Rest": "90s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Stir the Pot",
+        "Sets": "5",
+        "Reps": "12",
+        "Rest": "120s",
+        "MuscleGroup": "Core",
+        "Equipment": "Kettlebell"
+      }
+    ]
+  },
+  {
+    "id": "PRG003",
+    "ProgramTitle": "Hypertrophy Upper/Lower Advanced",
+    "FocusTag": "Hypertrophy",
+    "Duration": "16 weeks",
+    "DaysPerWeek": "5",
+    "Level": "Advanced",
+    "Split": "Upper/Lower",
+    "Status": "Active",
+    "TotalSets": 34,
+    "Exercises": [
+      {
+        "Name": "Weighted Dip",
+        "Sets": "4",
+        "Reps": "10",
+        "Rest": "60s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Cuban Press",
+        "Sets": "4",
+        "Reps": "12-15",
+        "Rest": "60s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Lat Pulldown",
+        "Sets": "5",
+        "Reps": "12",
+        "Rest": "180s",
+        "MuscleGroup": "Back",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Wrist Curl",
+        "Sets": "5",
+        "Reps": "8",
+        "Rest": "150s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Goblet Squat",
+        "Sets": "3",
+        "Reps": "8-10",
+        "Rest": "90s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Donkey Kick",
+        "Sets": "4",
+        "Reps": "10",
+        "Rest": "60s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Triple Under",
+        "Sets": "4",
+        "Reps": "12",
+        "Rest": "90s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Smith Machine"
+      },
+      {
+        "Name": "Overhead Carry",
+        "Sets": "5",
+        "Reps": "12-15",
+        "Rest": "120s",
+        "MuscleGroup": "Core",
+        "Equipment": "Smith Machine"
+      }
+    ]
+  },
+  {
+    "id": "PRG004",
+    "ProgramTitle": "Hypertrophy Push/Pull/Legs Beginner",
+    "FocusTag": "Hypertrophy",
+    "Duration": "16 weeks",
+    "DaysPerWeek": "6",
+    "Level": "Beginner",
+    "Split": "Push/Pull/Legs",
+    "Status": "Draft",
+    "TotalSets": 30,
+    "Exercises": [
+      {
+        "Name": "Bench Press",
+        "Sets": "3",
+        "Reps": "12-15",
+        "Rest": "45s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Pike Push-Up",
+        "Sets": "3",
+        "Reps": "8-10",
+        "Rest": "150s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Cross-Body Hammer",
+        "Sets": "5",
+        "Reps": "10",
+        "Rest": "180s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Seated Cable Row",
+        "Sets": "4",
+        "Reps": "15-20",
+        "Rest": "60s",
+        "MuscleGroup": "Back",
+        "Equipment": "Smith Machine"
+      },
+      {
+        "Name": "Bulgarian Split Squat",
+        "Sets": "3",
+        "Reps": "12-15",
+        "Rest": "120s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Frog Pump",
+        "Sets": "4",
+        "Reps": "12-15",
+        "Rest": "45s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Smith Machine"
+      },
+      {
+        "Name": "Calf Stretch",
+        "Sets": "4",
+        "Reps": "15-20",
+        "Rest": "45s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Smith Machine"
+      },
+      {
+        "Name": "Crunch",
+        "Sets": "4",
+        "Reps": "12-15",
+        "Rest": "120s",
+        "MuscleGroup": "Core",
+        "Equipment": "Barbell"
+      }
+    ]
+  },
+  {
+    "id": "PRG005",
+    "ProgramTitle": "Hypertrophy Push/Pull/Legs Intermediate",
+    "FocusTag": "Hypertrophy",
+    "Duration": "4 weeks",
+    "DaysPerWeek": "3",
+    "Level": "Intermediate",
+    "Split": "Push/Pull/Legs",
+    "Status": "Active",
+    "TotalSets": 32,
+    "Exercises": [
+      {
+        "Name": "Dumbbell Flye",
+        "Sets": "5",
+        "Reps": "8",
+        "Rest": "120s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Bradford Press",
+        "Sets": "3",
+        "Reps": "10-12",
+        "Rest": "60s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Towel Curl",
+        "Sets": "4",
+        "Reps": "10",
+        "Rest": "120s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Deadlift",
+        "Sets": "5",
+        "Reps": "12",
+        "Rest": "45s",
+        "MuscleGroup": "Back",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Goblet Squat",
+        "Sets": "3",
+        "Reps": "8-10",
+        "Rest": "90s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Clamshell",
+        "Sets": "5",
+        "Reps": "8-10",
+        "Rest": "45s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Double Under",
+        "Sets": "4",
+        "Reps": "12",
+        "Rest": "150s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "windshield Wiper",
+        "Sets": "3",
+        "Reps": "6-8",
+        "Rest": "90s",
+        "MuscleGroup": "Core",
+        "Equipment": "Smith Machine"
+      }
+    ]
+  },
+  {
+    "id": "PRG006",
+    "ProgramTitle": "Hypertrophy Push/Pull/Legs Advanced",
+    "FocusTag": "Hypertrophy",
+    "Duration": "8 weeks",
+    "DaysPerWeek": "6",
+    "Level": "Advanced",
+    "Split": "Push/Pull/Legs",
+    "Status": "Active",
+    "TotalSets": 33,
+    "Exercises": [
+      {
+        "Name": "Guillotine Press",
+        "Sets": "4",
+        "Reps": "12-15",
+        "Rest": "180s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Smith Machine"
+      },
+      {
+        "Name": "Lateral Raise",
+        "Sets": "3",
+        "Reps": "15-20",
+        "Rest": "60s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Reverse Curl",
+        "Sets": "5",
+        "Reps": "8",
+        "Rest": "90s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Bent-Over Row",
+        "Sets": "5",
+        "Reps": "15-20",
+        "Rest": "180s",
+        "MuscleGroup": "Back",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "45-Degree Hyper",
+        "Sets": "5",
+        "Reps": "12-15",
+        "Rest": "180s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Snatch Grip RDL",
+        "Sets": "4",
+        "Reps": "12",
+        "Rest": "180s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Seated Calf Raise",
+        "Sets": "4",
+        "Reps": "8-10",
+        "Rest": "90s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Medicine Ball Slam",
+        "Sets": "3",
+        "Reps": "8",
+        "Rest": "120s",
+        "MuscleGroup": "Core",
+        "Equipment": "Barbell"
+      }
+    ]
+  },
+  {
+    "id": "PRG007",
+    "ProgramTitle": "Hypertrophy Bro Split Beginner",
+    "FocusTag": "Hypertrophy",
+    "Duration": "8 weeks",
+    "DaysPerWeek": "5",
+    "Level": "Beginner",
+    "Split": "Bro Split",
+    "Status": "Archived",
+    "TotalSets": 30,
+    "Exercises": [
+      {
+        "Name": "Guillotine Press",
+        "Sets": "4",
+        "Reps": "12-15",
+        "Rest": "180s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Smith Machine"
+      },
+      {
+        "Name": "Chest-Supported Row",
+        "Sets": "3",
+        "Reps": "12-15",
+        "Rest": "150s",
+        "MuscleGroup": "Back",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Upright Row",
+        "Sets": "4",
+        "Reps": "5",
+        "Rest": "90s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Smith Machine"
+      },
+      {
+        "Name": "Waiter Curl",
+        "Sets": "5",
+        "Reps": "15-20",
+        "Rest": "180s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Nordic Curl",
+        "Sets": "3",
+        "Reps": "8",
+        "Rest": "60s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Smith Machine"
+      },
+      {
+        "Name": "Chain Deadlift",
+        "Sets": "3",
+        "Reps": "10",
+        "Rest": "45s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Farmer Walk",
+        "Sets": "5",
+        "Reps": "10",
+        "Rest": "45s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Toes to Bar",
+        "Sets": "3",
+        "Reps": "15-20",
+        "Rest": "45s",
+        "MuscleGroup": "Core",
+        "Equipment": "Kettlebell"
+      }
+    ]
+  },
+  {
+    "id": "PRG008",
+    "ProgramTitle": "Hypertrophy Bro Split Intermediate",
+    "FocusTag": "Hypertrophy",
+    "Duration": "16 weeks",
+    "DaysPerWeek": "5",
+    "Level": "Intermediate",
+    "Split": "Bro Split",
+    "Status": "Draft",
+    "TotalSets": 32,
+    "Exercises": [
+      {
+        "Name": "Push-Up",
+        "Sets": "5",
+        "Reps": "8-10",
+        "Rest": "60s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Helms Row",
+        "Sets": "3",
+        "Reps": "12-15",
+        "Rest": "180s",
+        "MuscleGroup": "Back",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Lateral Raise",
+        "Sets": "3",
+        "Reps": "15-20",
+        "Rest": "60s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Wrist Curl",
+        "Sets": "5",
+        "Reps": "8",
+        "Rest": "150s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Bulgarian Split Squat",
+        "Sets": "3",
+        "Reps": "12-15",
+        "Rest": "120s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Meadows Deficit",
+        "Sets": "4",
+        "Reps": "5",
+        "Rest": "60s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Calf Raise Machine",
+        "Sets": "5",
+        "Reps": "15-20",
+        "Rest": "90s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Side Plank",
+        "Sets": "4",
+        "Reps": "8",
+        "Rest": "60s",
+        "MuscleGroup": "Core",
+        "Equipment": "Bodyweight"
+      }
+    ]
+  },
+  {
+    "id": "PRG009",
+    "ProgramTitle": "Hypertrophy Bro Split Advanced",
+    "FocusTag": "Hypertrophy",
+    "Duration": "16 weeks",
+    "DaysPerWeek": "6",
+    "Level": "Advanced",
+    "Split": "Bro Split",
+    "Status": "Archived",
+    "TotalSets": 34,
+    "Exercises": [
+      {
+        "Name": "Chain Bench",
+        "Sets": "5",
+        "Reps": "10",
+        "Rest": "45s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Renegade Row",
+        "Sets": "3",
+        "Reps": "8-10",
+        "Rest": "45s",
+        "MuscleGroup": "Back",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Machine Lateral Raise",
+        "Sets": "5",
+        "Reps": "6-8",
+        "Rest": "90s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Pinwheel Curl",
+        "Sets": "3",
+        "Reps": "5",
+        "Rest": "180s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Squat",
+        "Sets": "3",
+        "Reps": "12-15",
+        "Rest": "150s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Clamshell",
+        "Sets": "5",
+        "Reps": "8-10",
+        "Rest": "45s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Calf Raise Machine",
+        "Sets": "5",
+        "Reps": "15-20",
+        "Rest": "90s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Russian Twist",
+        "Sets": "5",
+        "Reps": "6-8",
+        "Rest": "90s",
+        "MuscleGroup": "Core",
+        "Equipment": "Kettlebell"
+      }
+    ]
+  },
+  {
+    "id": "PRG010",
+    "ProgramTitle": "Hypertrophy Full Body Beginner",
+    "FocusTag": "Hypertrophy",
+    "Duration": "6 weeks",
+    "DaysPerWeek": "3",
+    "Level": "Beginner",
+    "Split": "Full Body",
+    "Status": "Draft",
+    "TotalSets": 34,
+    "Exercises": [
+      {
+        "Name": "Push-Up",
+        "Sets": "5",
+        "Reps": "8-10",
+        "Rest": "60s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Dynamic Effort Row",
+        "Sets": "4",
+        "Reps": "8",
+        "Rest": "60s",
+        "MuscleGroup": "Back",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Rear Delt Row",
+        "Sets": "4",
+        "Reps": "5",
+        "Rest": "60s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Cable Curl",
+        "Sets": "3",
+        "Reps": "15-20",
+        "Rest": "120s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Lunge",
+        "Sets": "5",
+        "Reps": "12",
+        "Rest": "45s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Donkey Kick",
+        "Sets": "4",
+        "Reps": "10",
+        "Rest": "60s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Triple Under",
+        "Sets": "4",
+        "Reps": "12",
+        "Rest": "90s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Smith Machine"
+      },
+      {
+        "Name": "Cable Crunch",
+        "Sets": "5",
+        "Reps": "12-15",
+        "Rest": "90s",
+        "MuscleGroup": "Core",
+        "Equipment": "Bodyweight"
+      }
+    ]
+  },
+  {
+    "id": "PRG011",
+    "ProgramTitle": "Hypertrophy Full Body Intermediate",
+    "FocusTag": "Hypertrophy",
+    "Duration": "16 weeks",
+    "DaysPerWeek": "6",
+    "Level": "Intermediate",
+    "Split": "Full Body",
+    "Status": "Draft",
+    "TotalSets": 29,
+    "Exercises": [
+      {
+        "Name": "Wide Grip Bench",
+        "Sets": "3",
+        "Reps": "6-8",
+        "Rest": "90s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Pull-Up",
+        "Sets": "3",
+        "Reps": "10",
+        "Rest": "45s",
+        "MuscleGroup": "Back",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Z Press",
+        "Sets": "3",
+        "Reps": "6-8",
+        "Rest": "120s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Skull Crusher",
+        "Sets": "4",
+        "Reps": "8",
+        "Rest": "90s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Pin Squat",
+        "Sets": "4",
+        "Reps": "12-15",
+        "Rest": "150s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "B-Stance RDL",
+        "Sets": "4",
+        "Reps": "10",
+        "Rest": "45s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Resistance Band"
+      },
+      {
+        "Name": "Depth Jump",
+        "Sets": "5",
+        "Reps": "8",
+        "Rest": "90s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Ab Wheel Rollout",
+        "Sets": "3",
+        "Reps": "12-15",
+        "Rest": "45s",
+        "MuscleGroup": "Core",
+        "Equipment": "Resistance Band"
+      }
+    ]
+  },
+  {
+    "id": "PRG012",
+    "ProgramTitle": "Hypertrophy Full Body Advanced",
+    "FocusTag": "Hypertrophy",
+    "Duration": "4 weeks",
+    "DaysPerWeek": "4",
+    "Level": "Advanced",
+    "Split": "Full Body",
+    "Status": "Active",
+    "TotalSets": 32,
+    "Exercises": [
+      {
+        "Name": "Weighted Dip",
+        "Sets": "4",
+        "Reps": "10",
+        "Rest": "60s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Yates Row",
+        "Sets": "5",
+        "Reps": "5",
+        "Rest": "45s",
+        "MuscleGroup": "Back",
+        "Equipment": "Smith Machine"
+      },
+      {
+        "Name": "Cable Lateral Raise",
+        "Sets": "4",
+        "Reps": "10",
+        "Rest": "45s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Cable Curl",
+        "Sets": "3",
+        "Reps": "15-20",
+        "Rest": "120s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Romanian Deadlift",
+        "Sets": "4",
+        "Reps": "12",
+        "Rest": "120s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Hip Thrust",
+        "Sets": "5",
+        "Reps": "10",
+        "Rest": "150s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Resistance Band"
+      },
+      {
+        "Name": "Sprint",
+        "Sets": "4",
+        "Reps": "6-8",
+        "Rest": "180s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Ab Wheel Rollout",
+        "Sets": "3",
+        "Reps": "12-15",
+        "Rest": "45s",
+        "MuscleGroup": "Core",
+        "Equipment": "Resistance Band"
+      }
+    ]
+  },
+  {
+    "id": "PRG013",
+    "ProgramTitle": "Strength Upper/Lower Beginner",
+    "FocusTag": "Strength",
+    "Duration": "12 weeks",
+    "DaysPerWeek": "3",
+    "Level": "Beginner",
+    "Split": "Upper/Lower",
+    "Status": "Active",
+    "TotalSets": 31,
+    "Exercises": [
+      {
+        "Name": "Dumbbell Flye",
+        "Sets": "5",
+        "Reps": "8",
+        "Rest": "120s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Bradford Press",
+        "Sets": "3",
+        "Reps": "10-12",
+        "Rest": "60s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Face Pull",
+        "Sets": "4",
+        "Reps": "12",
+        "Rest": "60s",
+        "MuscleGroup": "Back",
+        "Equipment": "Resistance Band"
+      },
+      {
+        "Name": "Wrist Curl",
+        "Sets": "5",
+        "Reps": "8",
+        "Rest": "150s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Lateral Lunge",
+        "Sets": "3",
+        "Reps": "8",
+        "Rest": "45s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Banded Good Morning",
+        "Sets": "3",
+        "Reps": "15-20",
+        "Rest": "90s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Calf Press on Leg Press",
+        "Sets": "3",
+        "Reps": "8",
+        "Rest": "120s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Overhead Carry",
+        "Sets": "5",
+        "Reps": "12-15",
+        "Rest": "120s",
+        "MuscleGroup": "Core",
+        "Equipment": "Smith Machine"
+      }
+    ]
+  },
+  {
+    "id": "PRG014",
+    "ProgramTitle": "Strength Upper/Lower Intermediate",
+    "FocusTag": "Strength",
+    "Duration": "16 weeks",
+    "DaysPerWeek": "6",
+    "Level": "Intermediate",
+    "Split": "Upper/Lower",
+    "Status": "Draft",
+    "TotalSets": 32,
+    "Exercises": [
+      {
+        "Name": "Bench Press",
+        "Sets": "3",
+        "Reps": "12-15",
+        "Rest": "45s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Trap Raise",
+        "Sets": "4",
+        "Reps": "12",
+        "Rest": "180s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Resistance Band"
+      },
+      {
+        "Name": "Commando Pull-Up",
+        "Sets": "5",
+        "Reps": "10",
+        "Rest": "45s",
+        "MuscleGroup": "Back",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Incline Curl",
+        "Sets": "4",
+        "Reps": "10",
+        "Rest": "60s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Hatfield Squat",
+        "Sets": "3",
+        "Reps": "8",
+        "Rest": "60s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Sumo Deadlift",
+        "Sets": "4",
+        "Reps": "12-15",
+        "Rest": "90s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Box Jump",
+        "Sets": "5",
+        "Reps": "15-20",
+        "Rest": "60s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Dead Bug",
+        "Sets": "4",
+        "Reps": "10-12",
+        "Rest": "180s",
+        "MuscleGroup": "Core",
+        "Equipment": "Machine"
+      }
+    ]
+  },
+  {
+    "id": "PRG015",
+    "ProgramTitle": "Strength Upper/Lower Advanced",
+    "FocusTag": "Strength",
+    "Duration": "12 weeks",
+    "DaysPerWeek": "3",
+    "Level": "Advanced",
+    "Split": "Upper/Lower",
+    "Status": "Active",
+    "TotalSets": 33,
+    "Exercises": [
+      {
+        "Name": "Ring Push-Up",
+        "Sets": "3",
+        "Reps": "8-10",
+        "Rest": "60s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Arnold Press",
+        "Sets": "4",
+        "Reps": "10-12",
+        "Rest": "150s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Resistance Band"
+      },
+      {
+        "Name": "Wide Grip Row",
+        "Sets": "4",
+        "Reps": "12-15",
+        "Rest": "150s",
+        "MuscleGroup": "Back",
+        "Equipment": "Resistance Band"
+      },
+      {
+        "Name": "V-Bar Pushdown",
+        "Sets": "3",
+        "Reps": "5",
+        "Rest": "180s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Sissy Squat",
+        "Sets": "5",
+        "Reps": "5",
+        "Rest": "45s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Banded Walk",
+        "Sets": "4",
+        "Reps": "6-8",
+        "Rest": "180s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Eccentric Calf Raise",
+        "Sets": "5",
+        "Reps": "12",
+        "Rest": "90s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Body Saw",
+        "Sets": "5",
+        "Reps": "10-12",
+        "Rest": "60s",
+        "MuscleGroup": "Core",
+        "Equipment": "Cable"
+      }
+    ]
+  },
+  {
+    "id": "PRG016",
+    "ProgramTitle": "Strength Push/Pull Beginner",
+    "FocusTag": "Strength",
+    "Duration": "8 weeks",
+    "DaysPerWeek": "5",
+    "Level": "Beginner",
+    "Split": "Push/Pull",
+    "Status": "Active",
+    "TotalSets": 30,
+    "Exercises": [
+      {
+        "Name": "Spoto Press",
+        "Sets": "3",
+        "Reps": "10",
+        "Rest": "150s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Viking Press",
+        "Sets": "4",
+        "Reps": "10-12",
+        "Rest": "120s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Resistance Band"
+      },
+      {
+        "Name": "Deficit Reverse Lunge",
+        "Sets": "4",
+        "Reps": "15-20",
+        "Rest": "90s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Clamshell",
+        "Sets": "5",
+        "Reps": "8-10",
+        "Rest": "45s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Double Under",
+        "Sets": "4",
+        "Reps": "12",
+        "Rest": "150s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Kroc Row",
+        "Sets": "3",
+        "Reps": "8",
+        "Rest": "60s",
+        "MuscleGroup": "Back",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Concentration Curl",
+        "Sets": "3",
+        "Reps": "10",
+        "Rest": "180s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Crunch",
+        "Sets": "4",
+        "Reps": "12-15",
+        "Rest": "120s",
+        "MuscleGroup": "Core",
+        "Equipment": "Barbell"
+      }
+    ]
+  },
+  {
+    "id": "PRG017",
+    "ProgramTitle": "Strength Push/Pull Intermediate",
+    "FocusTag": "Strength",
+    "Duration": "4 weeks",
+    "DaysPerWeek": "3",
+    "Level": "Intermediate",
+    "Split": "Push/Pull",
+    "Status": "Active",
+    "TotalSets": 29,
+    "Exercises": [
+      {
+        "Name": "Cable Crossover",
+        "Sets": "3",
+        "Reps": "8",
+        "Rest": "120s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Pike Push-Up",
+        "Sets": "3",
+        "Reps": "8-10",
+        "Rest": "150s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Slider Curl",
+        "Sets": "5",
+        "Reps": "12",
+        "Rest": "120s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Chain Deadlift",
+        "Sets": "3",
+        "Reps": "10",
+        "Rest": "45s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Isometric Calf Hold",
+        "Sets": "5",
+        "Reps": "10-12",
+        "Rest": "45s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Chest-Supported Row",
+        "Sets": "3",
+        "Reps": "12-15",
+        "Rest": "150s",
+        "MuscleGroup": "Back",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Zottman Curl",
+        "Sets": "3",
+        "Reps": "8",
+        "Rest": "120s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Jefferson Curl",
+        "Sets": "4",
+        "Reps": "15-20",
+        "Rest": "150s",
+        "MuscleGroup": "Core",
+        "Equipment": "Kettlebell"
+      }
+    ]
+  },
+  {
+    "id": "PRG018",
+    "ProgramTitle": "Strength Push/Pull Advanced",
+    "FocusTag": "Strength",
+    "Duration": "16 weeks",
+    "DaysPerWeek": "6",
+    "Level": "Advanced",
+    "Split": "Push/Pull",
+    "Status": "Draft",
+    "TotalSets": 30,
+    "Exercises": [
+      {
+        "Name": "Board Press",
+        "Sets": "3",
+        "Reps": "5",
+        "Rest": "45s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Resistance Band"
+      },
+      {
+        "Name": "Rear Delt Flye",
+        "Sets": "3",
+        "Reps": "8",
+        "Rest": "90s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Tempo Squat",
+        "Sets": "5",
+        "Reps": "12-15",
+        "Rest": "120s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Single-Leg RDL",
+        "Sets": "3",
+        "Reps": "6-8",
+        "Rest": "120s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Stair Climb",
+        "Sets": "5",
+        "Reps": "8",
+        "Rest": "90s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Pull-Up",
+        "Sets": "3",
+        "Reps": "10",
+        "Rest": "45s",
+        "MuscleGroup": "Back",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Kickback",
+        "Sets": "5",
+        "Reps": "8",
+        "Rest": "180s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Plank",
+        "Sets": "3",
+        "Reps": "8",
+        "Rest": "150s",
+        "MuscleGroup": "Core",
+        "Equipment": "Barbell"
+      }
+    ]
+  },
+  {
+    "id": "PRG019",
+    "ProgramTitle": "Strength Full Body Beginner",
+    "FocusTag": "Strength",
+    "Duration": "4 weeks",
+    "DaysPerWeek": "5",
+    "Level": "Beginner",
+    "Split": "Full Body",
+    "Status": "Archived",
+    "TotalSets": 35,
+    "Exercises": [
+      {
+        "Name": "Machine Chest Press",
+        "Sets": "5",
+        "Reps": "8",
+        "Rest": "150s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Single-Arm Row",
+        "Sets": "3",
+        "Reps": "12",
+        "Rest": "45s",
+        "MuscleGroup": "Back",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Push Press",
+        "Sets": "4",
+        "Reps": "5",
+        "Rest": "60s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Floor Extension",
+        "Sets": "5",
+        "Reps": "5",
+        "Rest": "120s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Step-Up",
+        "Sets": "5",
+        "Reps": "12",
+        "Rest": "45s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Smith Machine"
+      },
+      {
+        "Name": "Clamshell",
+        "Sets": "5",
+        "Reps": "8-10",
+        "Rest": "45s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Eccentric Calf Raise",
+        "Sets": "5",
+        "Reps": "12",
+        "Rest": "90s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Mountain Climber",
+        "Sets": "3",
+        "Reps": "10-12",
+        "Rest": "45s",
+        "MuscleGroup": "Core",
+        "Equipment": "Barbell"
+      }
+    ]
+  },
+  {
+    "id": "PRG020",
+    "ProgramTitle": "Strength Full Body Intermediate",
+    "FocusTag": "Strength",
+    "Duration": "8 weeks",
+    "DaysPerWeek": "6",
+    "Level": "Intermediate",
+    "Split": "Full Body",
+    "Status": "Active",
+    "TotalSets": 32,
+    "Exercises": [
+      {
+        "Name": "Svend Press",
+        "Sets": "4",
+        "Reps": "15-20",
+        "Rest": "90s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Single-Arm Row",
+        "Sets": "3",
+        "Reps": "12",
+        "Rest": "45s",
+        "MuscleGroup": "Back",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Bent-Arm Lateral",
+        "Sets": "5",
+        "Reps": "10",
+        "Rest": "60s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Tricep Pushdown",
+        "Sets": "5",
+        "Reps": "15-20",
+        "Rest": "150s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Smith Machine"
+      },
+      {
+        "Name": "Safety Bar Squat",
+        "Sets": "3",
+        "Reps": "12",
+        "Rest": "90s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Banded Good Morning",
+        "Sets": "3",
+        "Reps": "15-20",
+        "Rest": "90s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Single-Leg Calf Raise",
+        "Sets": "5",
+        "Reps": "15-20",
+        "Rest": "120s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Smith Machine"
+      },
+      {
+        "Name": "Jefferson Curl",
+        "Sets": "4",
+        "Reps": "15-20",
+        "Rest": "150s",
+        "MuscleGroup": "Core",
+        "Equipment": "Kettlebell"
+      }
+    ]
+  },
+  {
+    "id": "PRG021",
+    "ProgramTitle": "Strength Full Body Advanced",
+    "FocusTag": "Strength",
+    "Duration": "12 weeks",
+    "DaysPerWeek": "3",
+    "Level": "Advanced",
+    "Split": "Full Body",
+    "Status": "Archived",
+    "TotalSets": 34,
+    "Exercises": [
+      {
+        "Name": "Svend Press",
+        "Sets": "4",
+        "Reps": "15-20",
+        "Rest": "90s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "T-Bar Row",
+        "Sets": "3",
+        "Reps": "12",
+        "Rest": "90s",
+        "MuscleGroup": "Back",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Wall Slide",
+        "Sets": "5",
+        "Reps": "10-12",
+        "Rest": "90s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Tate Press",
+        "Sets": "5",
+        "Reps": "5",
+        "Rest": "45s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Box Jump",
+        "Sets": "4",
+        "Reps": "10-12",
+        "Rest": "150s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Snatch Grip Deadlift",
+        "Sets": "5",
+        "Reps": "10",
+        "Rest": "90s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Pogo Jump",
+        "Sets": "3",
+        "Reps": "6-8",
+        "Rest": "90s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Stir the Pot",
+        "Sets": "5",
+        "Reps": "12",
+        "Rest": "120s",
+        "MuscleGroup": "Core",
+        "Equipment": "Kettlebell"
+      }
+    ]
+  },
+  {
+    "id": "PRG022",
+    "ProgramTitle": "Strength Conjugate Beginner",
+    "FocusTag": "Strength",
+    "Duration": "4 weeks",
+    "DaysPerWeek": "3",
+    "Level": "Beginner",
+    "Split": "Conjugate",
+    "Status": "Archived",
+    "TotalSets": 32,
+    "Exercises": [
+      {
+        "Name": "Isometric Hold Press",
+        "Sets": "3",
+        "Reps": "6-8",
+        "Rest": "60s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Smith Machine"
+      },
+      {
+        "Name": "Helms Row",
+        "Sets": "3",
+        "Reps": "12-15",
+        "Rest": "180s",
+        "MuscleGroup": "Back",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Leaning Lateral",
+        "Sets": "5",
+        "Reps": "8",
+        "Rest": "60s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Preacher Curl",
+        "Sets": "3",
+        "Reps": "10-12",
+        "Rest": "150s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Step-Up",
+        "Sets": "5",
+        "Reps": "12",
+        "Rest": "45s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Smith Machine"
+      },
+      {
+        "Name": "Safety Bar Good Morning",
+        "Sets": "5",
+        "Reps": "8-10",
+        "Rest": "150s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Bosu Calf Raise",
+        "Sets": "3",
+        "Reps": "5",
+        "Rest": "120s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Cable Crunch",
+        "Sets": "5",
+        "Reps": "12-15",
+        "Rest": "90s",
+        "MuscleGroup": "Core",
+        "Equipment": "Bodyweight"
+      }
+    ]
+  },
+  {
+    "id": "PRG023",
+    "ProgramTitle": "Strength Conjugate Intermediate",
+    "FocusTag": "Strength",
+    "Duration": "8 weeks",
+    "DaysPerWeek": "6",
+    "Level": "Intermediate",
+    "Split": "Conjugate",
+    "Status": "Archived",
+    "TotalSets": 31,
+    "Exercises": [
+      {
+        "Name": "Deficit Push-Up",
+        "Sets": "3",
+        "Reps": "10",
+        "Rest": "120s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Resistance Band"
+      },
+      {
+        "Name": "Corner Bar Row",
+        "Sets": "5",
+        "Reps": "8-10",
+        "Rest": "120s",
+        "MuscleGroup": "Back",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "scarecrow",
+        "Sets": "4",
+        "Reps": "6-8",
+        "Rest": "60s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Close-Grip Bench",
+        "Sets": "5",
+        "Reps": "10",
+        "Rest": "45s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Squat",
+        "Sets": "3",
+        "Reps": "12-15",
+        "Rest": "150s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Good Morning",
+        "Sets": "4",
+        "Reps": "5",
+        "Rest": "90s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Sled Push",
+        "Sets": "4",
+        "Reps": "15-20",
+        "Rest": "60s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Bench Press Plank",
+        "Sets": "3",
+        "Reps": "8-10",
+        "Rest": "180s",
+        "MuscleGroup": "Core",
+        "Equipment": "Resistance Band"
+      }
+    ]
+  },
+  {
+    "id": "PRG024",
+    "ProgramTitle": "Strength Conjugate Advanced",
+    "FocusTag": "Strength",
+    "Duration": "4 weeks",
+    "DaysPerWeek": "4",
+    "Level": "Advanced",
+    "Split": "Conjugate",
+    "Status": "Active",
+    "TotalSets": 35,
+    "Exercises": [
+      {
+        "Name": "Chain Bench",
+        "Sets": "5",
+        "Reps": "10",
+        "Rest": "45s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Chin-Up",
+        "Sets": "5",
+        "Reps": "5",
+        "Rest": "150s",
+        "MuscleGroup": "Back",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Cross-Body Raise",
+        "Sets": "3",
+        "Reps": "5",
+        "Rest": "60s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Drag Curl",
+        "Sets": "5",
+        "Reps": "5",
+        "Rest": "90s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Smith Machine"
+      },
+      {
+        "Name": "Hip Belt Squat",
+        "Sets": "4",
+        "Reps": "10",
+        "Rest": "60s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Resistance Band"
+      },
+      {
+        "Name": "Clamshell",
+        "Sets": "5",
+        "Reps": "8-10",
+        "Rest": "45s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Seated Calf Raise",
+        "Sets": "4",
+        "Reps": "8-10",
+        "Rest": "90s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Bottoms-Up Carry",
+        "Sets": "4",
+        "Reps": "8",
+        "Rest": "45s",
+        "MuscleGroup": "Core",
+        "Equipment": "Kettlebell"
+      }
+    ]
+  },
+  {
+    "id": "PRG025",
+    "ProgramTitle": "Fat Loss Full Body Beginner",
+    "FocusTag": "Fat Loss",
+    "Duration": "12 weeks",
+    "DaysPerWeek": "3",
+    "Level": "Beginner",
+    "Split": "Full Body",
+    "Status": "Archived",
+    "TotalSets": 31,
+    "Exercises": [
+      {
+        "Name": "Board Press",
+        "Sets": "3",
+        "Reps": "5",
+        "Rest": "45s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Resistance Band"
+      },
+      {
+        "Name": "Back Extension",
+        "Sets": "3",
+        "Reps": "8-10",
+        "Rest": "120s",
+        "MuscleGroup": "Back",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "scarecrow",
+        "Sets": "4",
+        "Reps": "6-8",
+        "Rest": "60s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "JM Press",
+        "Sets": "4",
+        "Reps": "6-8",
+        "Rest": "120s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Lunge",
+        "Sets": "5",
+        "Reps": "12",
+        "Rest": "45s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Hip Thrust",
+        "Sets": "5",
+        "Reps": "10",
+        "Rest": "150s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Resistance Band"
+      },
+      {
+        "Name": "Seated Calf Raise",
+        "Sets": "4",
+        "Reps": "8-10",
+        "Rest": "90s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Bench Press Plank",
+        "Sets": "3",
+        "Reps": "8-10",
+        "Rest": "180s",
+        "MuscleGroup": "Core",
+        "Equipment": "Resistance Band"
+      }
+    ]
+  },
+  {
+    "id": "PRG026",
+    "ProgramTitle": "Fat Loss Full Body Intermediate",
+    "FocusTag": "Fat Loss",
+    "Duration": "12 weeks",
+    "DaysPerWeek": "5",
+    "Level": "Intermediate",
+    "Split": "Full Body",
+    "Status": "Draft",
+    "TotalSets": 33,
+    "Exercises": [
+      {
+        "Name": "Svend Press",
+        "Sets": "4",
+        "Reps": "15-20",
+        "Rest": "90s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Deadlift",
+        "Sets": "5",
+        "Reps": "12",
+        "Rest": "45s",
+        "MuscleGroup": "Back",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Push Press",
+        "Sets": "4",
+        "Reps": "5",
+        "Rest": "60s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Drag Curl",
+        "Sets": "5",
+        "Reps": "5",
+        "Rest": "90s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Smith Machine"
+      },
+      {
+        "Name": "Bulgarian Split Squat",
+        "Sets": "3",
+        "Reps": "12-15",
+        "Rest": "120s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Glute Bridge",
+        "Sets": "4",
+        "Reps": "12-15",
+        "Rest": "45s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Sled Drag",
+        "Sets": "4",
+        "Reps": "10-12",
+        "Rest": "45s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Smith Machine"
+      },
+      {
+        "Name": "Crunch",
+        "Sets": "4",
+        "Reps": "12-15",
+        "Rest": "120s",
+        "MuscleGroup": "Core",
+        "Equipment": "Barbell"
+      }
+    ]
+  },
+  {
+    "id": "PRG027",
+    "ProgramTitle": "Fat Loss Full Body Advanced",
+    "FocusTag": "Fat Loss",
+    "Duration": "16 weeks",
+    "DaysPerWeek": "4",
+    "Level": "Advanced",
+    "Split": "Full Body",
+    "Status": "Archived",
+    "TotalSets": 32,
+    "Exercises": [
+      {
+        "Name": "Bottom-Up Press",
+        "Sets": "3",
+        "Reps": "12-15",
+        "Rest": "150s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Wide Grip Row",
+        "Sets": "4",
+        "Reps": "12-15",
+        "Rest": "150s",
+        "MuscleGroup": "Back",
+        "Equipment": "Resistance Band"
+      },
+      {
+        "Name": "Push Press",
+        "Sets": "4",
+        "Reps": "5",
+        "Rest": "60s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Tricep Pushdown",
+        "Sets": "5",
+        "Reps": "15-20",
+        "Rest": "150s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Smith Machine"
+      },
+      {
+        "Name": "Hack Squat",
+        "Sets": "5",
+        "Reps": "8-10",
+        "Rest": "180s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Sumo Deadlift",
+        "Sets": "4",
+        "Reps": "12-15",
+        "Rest": "90s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Calf Press",
+        "Sets": "4",
+        "Reps": "5",
+        "Rest": "45s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Bench Press Plank",
+        "Sets": "3",
+        "Reps": "8-10",
+        "Rest": "180s",
+        "MuscleGroup": "Core",
+        "Equipment": "Resistance Band"
+      }
+    ]
+  },
+  {
+    "id": "PRG028",
+    "ProgramTitle": "Fat Loss Upper/Lower Beginner",
+    "FocusTag": "Fat Loss",
+    "Duration": "8 weeks",
+    "DaysPerWeek": "4",
+    "Level": "Beginner",
+    "Split": "Upper/Lower",
+    "Status": "Active",
+    "TotalSets": 31,
+    "Exercises": [
+      {
+        "Name": "Guillotine Press",
+        "Sets": "4",
+        "Reps": "12-15",
+        "Rest": "180s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Smith Machine"
+      },
+      {
+        "Name": "Dumbbell Press",
+        "Sets": "4",
+        "Reps": "12",
+        "Rest": "120s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Pull-Up",
+        "Sets": "3",
+        "Reps": "10",
+        "Rest": "45s",
+        "MuscleGroup": "Back",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Bicep Curl",
+        "Sets": "5",
+        "Reps": "8-10",
+        "Rest": "180s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Smith Machine"
+      },
+      {
+        "Name": "Belt Squat",
+        "Sets": "5",
+        "Reps": "8-10",
+        "Rest": "180s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Smith Machine"
+      },
+      {
+        "Name": "Glute Ham Raise",
+        "Sets": "3",
+        "Reps": "6-8",
+        "Rest": "90s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Seated Calf Raise",
+        "Sets": "4",
+        "Reps": "8-10",
+        "Rest": "90s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Ab Wheel Rollout",
+        "Sets": "3",
+        "Reps": "12-15",
+        "Rest": "45s",
+        "MuscleGroup": "Core",
+        "Equipment": "Resistance Band"
+      }
+    ]
+  },
+  {
+    "id": "PRG029",
+    "ProgramTitle": "Fat Loss Upper/Lower Intermediate",
+    "FocusTag": "Fat Loss",
+    "Duration": "6 weeks",
+    "DaysPerWeek": "5",
+    "Level": "Intermediate",
+    "Split": "Upper/Lower",
+    "Status": "Active",
+    "TotalSets": 32,
+    "Exercises": [
+      {
+        "Name": "Floor Press",
+        "Sets": "3",
+        "Reps": "15-20",
+        "Rest": "180s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Pike Push-Up",
+        "Sets": "3",
+        "Reps": "8-10",
+        "Rest": "150s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Batwing Row",
+        "Sets": "4",
+        "Reps": "10",
+        "Rest": "45s",
+        "MuscleGroup": "Back",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Wrist Curl",
+        "Sets": "5",
+        "Reps": "8",
+        "Rest": "150s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Slider Curl",
+        "Sets": "5",
+        "Reps": "12",
+        "Rest": "120s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Reverse Hyper",
+        "Sets": "3",
+        "Reps": "6-8",
+        "Rest": "150s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Smith Machine"
+      },
+      {
+        "Name": "Stair Climb",
+        "Sets": "5",
+        "Reps": "8",
+        "Rest": "90s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Bottoms-Up Carry",
+        "Sets": "4",
+        "Reps": "8",
+        "Rest": "45s",
+        "MuscleGroup": "Core",
+        "Equipment": "Kettlebell"
+      }
+    ]
+  },
+  {
+    "id": "PRG030",
+    "ProgramTitle": "Fat Loss Upper/Lower Advanced",
+    "FocusTag": "Fat Loss",
+    "Duration": "6 weeks",
+    "DaysPerWeek": "4",
+    "Level": "Advanced",
+    "Split": "Upper/Lower",
+    "Status": "Active",
+    "TotalSets": 35,
+    "Exercises": [
+      {
+        "Name": "Dumbbell Flye",
+        "Sets": "5",
+        "Reps": "8",
+        "Rest": "120s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Around the World",
+        "Sets": "4",
+        "Reps": "8",
+        "Rest": "45s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Chin-Up",
+        "Sets": "5",
+        "Reps": "5",
+        "Rest": "150s",
+        "MuscleGroup": "Back",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Floor Extension",
+        "Sets": "5",
+        "Reps": "5",
+        "Rest": "120s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Slider Curl",
+        "Sets": "5",
+        "Reps": "12",
+        "Rest": "120s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "RKC Plank",
+        "Sets": "4",
+        "Reps": "10",
+        "Rest": "180s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Sprint",
+        "Sets": "4",
+        "Reps": "6-8",
+        "Rest": "180s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Suitcase Carry",
+        "Sets": "3",
+        "Reps": "5",
+        "Rest": "180s",
+        "MuscleGroup": "Core",
+        "Equipment": "Machine"
+      }
+    ]
+  },
+  {
+    "id": "PRG031",
+    "ProgramTitle": "Fat Loss Circuit Beginner",
+    "FocusTag": "Fat Loss",
+    "Duration": "4 weeks",
+    "DaysPerWeek": "5",
+    "Level": "Beginner",
+    "Split": "Circuit",
+    "Status": "Active",
+    "TotalSets": 31,
+    "Exercises": [
+      {
+        "Name": "Machine Chest Press",
+        "Sets": "5",
+        "Reps": "8",
+        "Rest": "150s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Chin-Up",
+        "Sets": "5",
+        "Reps": "5",
+        "Rest": "150s",
+        "MuscleGroup": "Back",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Upright Row",
+        "Sets": "4",
+        "Reps": "5",
+        "Rest": "90s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Smith Machine"
+      },
+      {
+        "Name": "Cable Curl",
+        "Sets": "3",
+        "Reps": "15-20",
+        "Rest": "120s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Front Squat",
+        "Sets": "3",
+        "Reps": "10-12",
+        "Rest": "60s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Smith Machine"
+      },
+      {
+        "Name": "Jefferson Deadlift",
+        "Sets": "4",
+        "Reps": "8",
+        "Rest": "60s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Sprint",
+        "Sets": "4",
+        "Reps": "6-8",
+        "Rest": "180s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Copenhagen Plank",
+        "Sets": "3",
+        "Reps": "15-20",
+        "Rest": "60s",
+        "MuscleGroup": "Core",
+        "Equipment": "Resistance Band"
+      }
+    ]
+  },
+  {
+    "id": "PRG032",
+    "ProgramTitle": "Fat Loss Circuit Intermediate",
+    "FocusTag": "Fat Loss",
+    "Duration": "16 weeks",
+    "DaysPerWeek": "4",
+    "Level": "Intermediate",
+    "Split": "Circuit",
+    "Status": "Active",
+    "TotalSets": 32,
+    "Exercises": [
+      {
+        "Name": "Chain Bench",
+        "Sets": "5",
+        "Reps": "10",
+        "Rest": "45s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Mag Grip Pulldown",
+        "Sets": "4",
+        "Reps": "5",
+        "Rest": "150s",
+        "MuscleGroup": "Back",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Around the World",
+        "Sets": "4",
+        "Reps": "8",
+        "Rest": "45s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Preacher Curl",
+        "Sets": "3",
+        "Reps": "10-12",
+        "Rest": "150s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Romanian Deadlift",
+        "Sets": "4",
+        "Reps": "12",
+        "Rest": "120s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Stiff-Leg Deadlift",
+        "Sets": "3",
+        "Reps": "12-15",
+        "Rest": "90s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Depth Jump",
+        "Sets": "5",
+        "Reps": "8",
+        "Rest": "90s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Side Plank",
+        "Sets": "4",
+        "Reps": "8",
+        "Rest": "60s",
+        "MuscleGroup": "Core",
+        "Equipment": "Bodyweight"
+      }
+    ]
+  },
+  {
+    "id": "PRG033",
+    "ProgramTitle": "Fat Loss Circuit Advanced",
+    "FocusTag": "Fat Loss",
+    "Duration": "8 weeks",
+    "DaysPerWeek": "6",
+    "Level": "Advanced",
+    "Split": "Circuit",
+    "Status": "Archived",
+    "TotalSets": 30,
+    "Exercises": [
+      {
+        "Name": "Svend Press",
+        "Sets": "4",
+        "Reps": "15-20",
+        "Rest": "90s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "ISO-Lateral Row",
+        "Sets": "3",
+        "Reps": "12",
+        "Rest": "180s",
+        "MuscleGroup": "Back",
+        "Equipment": "Resistance Band"
+      },
+      {
+        "Name": "Z Press",
+        "Sets": "3",
+        "Reps": "6-8",
+        "Rest": "120s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Fat Grip Curl",
+        "Sets": "5",
+        "Reps": "10-12",
+        "Rest": "60s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Resistance Band"
+      },
+      {
+        "Name": "Reverse Hyper",
+        "Sets": "4",
+        "Reps": "15-20",
+        "Rest": "120s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Snatch Grip Deadlift",
+        "Sets": "5",
+        "Reps": "10",
+        "Rest": "90s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Bosu Calf Raise",
+        "Sets": "3",
+        "Reps": "5",
+        "Rest": "120s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Suitcase Carry",
+        "Sets": "3",
+        "Reps": "5",
+        "Rest": "180s",
+        "MuscleGroup": "Core",
+        "Equipment": "Machine"
+      }
+    ]
+  },
+  {
+    "id": "PRG034",
+    "ProgramTitle": "Fat Loss HIIT/Strength Beginner",
+    "FocusTag": "Fat Loss",
+    "Duration": "6 weeks",
+    "DaysPerWeek": "3",
+    "Level": "Beginner",
+    "Split": "HIIT/Strength",
+    "Status": "Active",
+    "TotalSets": 28,
+    "Exercises": [
+      {
+        "Name": "Ring Push-Up",
+        "Sets": "3",
+        "Reps": "8-10",
+        "Rest": "60s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Dynamic Effort Row",
+        "Sets": "4",
+        "Reps": "8",
+        "Rest": "60s",
+        "MuscleGroup": "Back",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Face Pull",
+        "Sets": "5",
+        "Reps": "15-20",
+        "Rest": "120s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Towel Curl",
+        "Sets": "4",
+        "Reps": "10",
+        "Rest": "120s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Safety Bar Squat",
+        "Sets": "3",
+        "Reps": "12",
+        "Rest": "90s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Fire Hydrant",
+        "Sets": "3",
+        "Reps": "12-15",
+        "Rest": "180s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Leg Press Calf Raise",
+        "Sets": "3",
+        "Reps": "10-12",
+        "Rest": "180s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Mountain Climber",
+        "Sets": "3",
+        "Reps": "10-12",
+        "Rest": "45s",
+        "MuscleGroup": "Core",
+        "Equipment": "Barbell"
+      }
+    ]
+  },
+  {
+    "id": "PRG035",
+    "ProgramTitle": "Fat Loss HIIT/Strength Intermediate",
+    "FocusTag": "Fat Loss",
+    "Duration": "4 weeks",
+    "DaysPerWeek": "5",
+    "Level": "Intermediate",
+    "Split": "HIIT/Strength",
+    "Status": "Draft",
+    "TotalSets": 31,
+    "Exercises": [
+      {
+        "Name": "Ring Push-Up",
+        "Sets": "3",
+        "Reps": "8-10",
+        "Rest": "60s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Wide Grip Pull-Up",
+        "Sets": "4",
+        "Reps": "6-8",
+        "Rest": "180s",
+        "MuscleGroup": "Back",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Clean and Press",
+        "Sets": "4",
+        "Reps": "10",
+        "Rest": "45s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Drag Curl",
+        "Sets": "5",
+        "Reps": "5",
+        "Rest": "90s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Smith Machine"
+      },
+      {
+        "Name": "Anderson Squat",
+        "Sets": "3",
+        "Reps": "5",
+        "Rest": "45s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Donkey Kick",
+        "Sets": "4",
+        "Reps": "10",
+        "Rest": "60s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Leg Press Calf Raise",
+        "Sets": "3",
+        "Reps": "10-12",
+        "Rest": "180s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Hollow Body Hold",
+        "Sets": "5",
+        "Reps": "15-20",
+        "Rest": "90s",
+        "MuscleGroup": "Core",
+        "Equipment": "Smith Machine"
+      }
+    ]
+  },
+  {
+    "id": "PRG036",
+    "ProgramTitle": "Fat Loss HIIT/Strength Advanced",
+    "FocusTag": "Fat Loss",
+    "Duration": "8 weeks",
+    "DaysPerWeek": "4",
+    "Level": "Advanced",
+    "Split": "HIIT/Strength",
+    "Status": "Active",
+    "TotalSets": 31,
+    "Exercises": [
+      {
+        "Name": "Dumbbell Flye",
+        "Sets": "5",
+        "Reps": "8",
+        "Rest": "120s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Hammer Strength Row",
+        "Sets": "5",
+        "Reps": "10-12",
+        "Rest": "120s",
+        "MuscleGroup": "Back",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Bent-Arm Lateral",
+        "Sets": "5",
+        "Reps": "10",
+        "Rest": "60s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Incline Curl",
+        "Sets": "4",
+        "Reps": "10",
+        "Rest": "60s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Safety Bar Squat",
+        "Sets": "3",
+        "Reps": "12",
+        "Rest": "90s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Pull-Through",
+        "Sets": "3",
+        "Reps": "12",
+        "Rest": "180s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Bosu Calf Raise",
+        "Sets": "3",
+        "Reps": "5",
+        "Rest": "120s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Medicine Ball Slam",
+        "Sets": "3",
+        "Reps": "8",
+        "Rest": "120s",
+        "MuscleGroup": "Core",
+        "Equipment": "Barbell"
+      }
+    ]
+  },
+  {
+    "id": "PRG037",
+    "ProgramTitle": "Endurance Full Body Beginner",
+    "FocusTag": "Endurance",
+    "Duration": "12 weeks",
+    "DaysPerWeek": "3",
+    "Level": "Beginner",
+    "Split": "Full Body",
+    "Status": "Active",
+    "TotalSets": 35,
+    "Exercises": [
+      {
+        "Name": "Reverse Grip Bench",
+        "Sets": "4",
+        "Reps": "12",
+        "Rest": "60s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Lat Pulldown",
+        "Sets": "5",
+        "Reps": "12",
+        "Rest": "180s",
+        "MuscleGroup": "Back",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Viking Press",
+        "Sets": "4",
+        "Reps": "10-12",
+        "Rest": "120s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Resistance Band"
+      },
+      {
+        "Name": "Suitcase Curl",
+        "Sets": "5",
+        "Reps": "10",
+        "Rest": "180s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Tempo Squat",
+        "Sets": "5",
+        "Reps": "12-15",
+        "Rest": "120s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "RKC Plank",
+        "Sets": "4",
+        "Reps": "10",
+        "Rest": "180s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Seated Calf Raise",
+        "Sets": "4",
+        "Reps": "8-10",
+        "Rest": "90s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Bottoms-Up Carry",
+        "Sets": "4",
+        "Reps": "8",
+        "Rest": "45s",
+        "MuscleGroup": "Core",
+        "Equipment": "Kettlebell"
+      }
+    ]
+  },
+  {
+    "id": "PRG038",
+    "ProgramTitle": "Endurance Full Body Intermediate",
+    "FocusTag": "Endurance",
+    "Duration": "16 weeks",
+    "DaysPerWeek": "6",
+    "Level": "Intermediate",
+    "Split": "Full Body",
+    "Status": "Draft",
+    "TotalSets": 33,
+    "Exercises": [
+      {
+        "Name": "Dip",
+        "Sets": "5",
+        "Reps": "8-10",
+        "Rest": "45s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Archer Row",
+        "Sets": "3",
+        "Reps": "15-20",
+        "Rest": "60s",
+        "MuscleGroup": "Back",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Around the World",
+        "Sets": "4",
+        "Reps": "8",
+        "Rest": "45s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Reverse Curl",
+        "Sets": "5",
+        "Reps": "8",
+        "Rest": "90s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Reverse Hyper",
+        "Sets": "4",
+        "Reps": "15-20",
+        "Rest": "120s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Donkey Kick",
+        "Sets": "4",
+        "Reps": "10",
+        "Rest": "60s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Tibialis Raise",
+        "Sets": "4",
+        "Reps": "10-12",
+        "Rest": "150s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Smith Machine"
+      },
+      {
+        "Name": "Jefferson Curl",
+        "Sets": "4",
+        "Reps": "15-20",
+        "Rest": "150s",
+        "MuscleGroup": "Core",
+        "Equipment": "Kettlebell"
+      }
+    ]
+  },
+  {
+    "id": "PRG039",
+    "ProgramTitle": "Endurance Full Body Advanced",
+    "FocusTag": "Endurance",
+    "Duration": "16 weeks",
+    "DaysPerWeek": "5",
+    "Level": "Advanced",
+    "Split": "Full Body",
+    "Status": "Draft",
+    "TotalSets": 31,
+    "Exercises": [
+      {
+        "Name": "Multi-Grip Press",
+        "Sets": "5",
+        "Reps": "12",
+        "Rest": "60s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Single-Arm Row",
+        "Sets": "3",
+        "Reps": "12",
+        "Rest": "45s",
+        "MuscleGroup": "Back",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Leaning Lateral",
+        "Sets": "5",
+        "Reps": "8",
+        "Rest": "60s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Overhead Extension",
+        "Sets": "4",
+        "Reps": "12-15",
+        "Rest": "150s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Resistance Band"
+      },
+      {
+        "Name": "Nordic Curl",
+        "Sets": "3",
+        "Reps": "8",
+        "Rest": "60s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Smith Machine"
+      },
+      {
+        "Name": "Meadows Deficit",
+        "Sets": "4",
+        "Reps": "5",
+        "Rest": "60s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Lateral Bound",
+        "Sets": "4",
+        "Reps": "10",
+        "Rest": "45s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Pallof Press",
+        "Sets": "3",
+        "Reps": "8",
+        "Rest": "60s",
+        "MuscleGroup": "Core",
+        "Equipment": "Dumbbell"
+      }
+    ]
+  },
+  {
+    "id": "PRG040",
+    "ProgramTitle": "Endurance Split Beginner",
+    "FocusTag": "Endurance",
+    "Duration": "8 weeks",
+    "DaysPerWeek": "3",
+    "Level": "Beginner",
+    "Split": "Split",
+    "Status": "Active",
+    "TotalSets": 29,
+    "Exercises": [
+      {
+        "Name": "Pin Press",
+        "Sets": "4",
+        "Reps": "5",
+        "Rest": "45s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Back Extension",
+        "Sets": "3",
+        "Reps": "8-10",
+        "Rest": "120s",
+        "MuscleGroup": "Back",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Lateral Raise",
+        "Sets": "3",
+        "Reps": "15-20",
+        "Rest": "60s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Diamond Push-Up",
+        "Sets": "3",
+        "Reps": "10-12",
+        "Rest": "150s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Pin Squat",
+        "Sets": "4",
+        "Reps": "12-15",
+        "Rest": "150s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Hip Thrust",
+        "Sets": "5",
+        "Reps": "10",
+        "Rest": "150s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Resistance Band"
+      },
+      {
+        "Name": "Jump Rope",
+        "Sets": "4",
+        "Reps": "5",
+        "Rest": "120s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Smith Machine"
+      },
+      {
+        "Name": "Kneeling Pallof",
+        "Sets": "3",
+        "Reps": "8-10",
+        "Rest": "45s",
+        "MuscleGroup": "Core",
+        "Equipment": "Kettlebell"
+      }
+    ]
+  },
+  {
+    "id": "PRG041",
+    "ProgramTitle": "Endurance Split Intermediate",
+    "FocusTag": "Endurance",
+    "Duration": "12 weeks",
+    "DaysPerWeek": "5",
+    "Level": "Intermediate",
+    "Split": "Split",
+    "Status": "Active",
+    "TotalSets": 31,
+    "Exercises": [
+      {
+        "Name": "Landmine Press",
+        "Sets": "4",
+        "Reps": "8",
+        "Rest": "60s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Neutral Grip Pull-Up",
+        "Sets": "4",
+        "Reps": "5",
+        "Rest": "180s",
+        "MuscleGroup": "Back",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Lateral Raise",
+        "Sets": "3",
+        "Reps": "15-20",
+        "Rest": "60s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Pinch Curl",
+        "Sets": "3",
+        "Reps": "8",
+        "Rest": "45s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Banded Leg Curl",
+        "Sets": "5",
+        "Reps": "6-8",
+        "Rest": "180s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Resistance Band"
+      },
+      {
+        "Name": "Cable Kickback",
+        "Sets": "4",
+        "Reps": "12",
+        "Rest": "120s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Prowler Push",
+        "Sets": "4",
+        "Reps": "12",
+        "Rest": "60s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Leg Raise",
+        "Sets": "4",
+        "Reps": "8-10",
+        "Rest": "60s",
+        "MuscleGroup": "Core",
+        "Equipment": "Resistance Band"
+      }
+    ]
+  },
+  {
+    "id": "PRG042",
+    "ProgramTitle": "Endurance Split Advanced",
+    "FocusTag": "Endurance",
+    "Duration": "12 weeks",
+    "DaysPerWeek": "5",
+    "Level": "Advanced",
+    "Split": "Split",
+    "Status": "Active",
+    "TotalSets": 33,
+    "Exercises": [
+      {
+        "Name": "Pec Deck",
+        "Sets": "3",
+        "Reps": "8",
+        "Rest": "150s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Chin-Up",
+        "Sets": "5",
+        "Reps": "5",
+        "Rest": "150s",
+        "MuscleGroup": "Back",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Cable Lateral Raise",
+        "Sets": "4",
+        "Reps": "10",
+        "Rest": "45s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Waiter Curl",
+        "Sets": "5",
+        "Reps": "15-20",
+        "Rest": "180s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Front Squat",
+        "Sets": "3",
+        "Reps": "10-12",
+        "Rest": "60s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Smith Machine"
+      },
+      {
+        "Name": "Sumo Deadlift",
+        "Sets": "4",
+        "Reps": "12-15",
+        "Rest": "90s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Single-Leg Calf Raise",
+        "Sets": "5",
+        "Reps": "15-20",
+        "Rest": "120s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Smith Machine"
+      },
+      {
+        "Name": "Bottoms-Up Carry",
+        "Sets": "4",
+        "Reps": "8",
+        "Rest": "45s",
+        "MuscleGroup": "Core",
+        "Equipment": "Kettlebell"
+      }
+    ]
+  },
+  {
+    "id": "PRG043",
+    "ProgramTitle": "Endurance Triathlon Beginner",
+    "FocusTag": "Endurance",
+    "Duration": "12 weeks",
+    "DaysPerWeek": "6",
+    "Level": "Beginner",
+    "Split": "Triathlon",
+    "Status": "Draft",
+    "TotalSets": 36,
+    "Exercises": [
+      {
+        "Name": "Bench Press",
+        "Sets": "3",
+        "Reps": "12-15",
+        "Rest": "45s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Yates Row",
+        "Sets": "5",
+        "Reps": "5",
+        "Rest": "45s",
+        "MuscleGroup": "Back",
+        "Equipment": "Smith Machine"
+      },
+      {
+        "Name": "Leaning Lateral",
+        "Sets": "5",
+        "Reps": "8",
+        "Rest": "60s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Tate Press",
+        "Sets": "5",
+        "Reps": "5",
+        "Rest": "45s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Leg Curl",
+        "Sets": "5",
+        "Reps": "12-15",
+        "Rest": "60s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Safety Bar Good Morning",
+        "Sets": "5",
+        "Reps": "8-10",
+        "Rest": "150s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Tibialis Raise",
+        "Sets": "4",
+        "Reps": "10-12",
+        "Rest": "150s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Smith Machine"
+      },
+      {
+        "Name": "Side Plank",
+        "Sets": "4",
+        "Reps": "8",
+        "Rest": "60s",
+        "MuscleGroup": "Core",
+        "Equipment": "Bodyweight"
+      }
+    ]
+  },
+  {
+    "id": "PRG044",
+    "ProgramTitle": "Endurance Triathlon Intermediate",
+    "FocusTag": "Endurance",
+    "Duration": "16 weeks",
+    "DaysPerWeek": "4",
+    "Level": "Intermediate",
+    "Split": "Triathlon",
+    "Status": "Active",
+    "TotalSets": 31,
+    "Exercises": [
+      {
+        "Name": "Chain Bench",
+        "Sets": "5",
+        "Reps": "10",
+        "Rest": "45s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Batwing Row",
+        "Sets": "4",
+        "Reps": "10",
+        "Rest": "45s",
+        "MuscleGroup": "Back",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Clean and Press",
+        "Sets": "4",
+        "Reps": "10",
+        "Rest": "45s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Pinwheel Curl",
+        "Sets": "3",
+        "Reps": "5",
+        "Rest": "180s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Hatfield Squat",
+        "Sets": "3",
+        "Reps": "8",
+        "Rest": "60s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Seated Good Morning",
+        "Sets": "4",
+        "Reps": "12",
+        "Rest": "180s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Standing Calf Raise",
+        "Sets": "5",
+        "Reps": "10",
+        "Rest": "45s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Pallof Press",
+        "Sets": "3",
+        "Reps": "8",
+        "Rest": "60s",
+        "MuscleGroup": "Core",
+        "Equipment": "Dumbbell"
+      }
+    ]
+  },
+  {
+    "id": "PRG045",
+    "ProgramTitle": "Endurance Triathlon Advanced",
+    "FocusTag": "Endurance",
+    "Duration": "12 weeks",
+    "DaysPerWeek": "5",
+    "Level": "Advanced",
+    "Split": "Triathlon",
+    "Status": "Active",
+    "TotalSets": 31,
+    "Exercises": [
+      {
+        "Name": "Pec Deck",
+        "Sets": "3",
+        "Reps": "8",
+        "Rest": "150s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Renegade Row",
+        "Sets": "3",
+        "Reps": "8-10",
+        "Rest": "45s",
+        "MuscleGroup": "Back",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Bradford Press",
+        "Sets": "3",
+        "Reps": "10-12",
+        "Rest": "60s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Wrist Curl",
+        "Sets": "5",
+        "Reps": "8",
+        "Rest": "150s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Belt Squat",
+        "Sets": "5",
+        "Reps": "8-10",
+        "Rest": "180s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Smith Machine"
+      },
+      {
+        "Name": "Hip Thrust",
+        "Sets": "5",
+        "Reps": "10",
+        "Rest": "150s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Resistance Band"
+      },
+      {
+        "Name": "Sled Drag",
+        "Sets": "4",
+        "Reps": "10-12",
+        "Rest": "45s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Smith Machine"
+      },
+      {
+        "Name": "Suitcase Carry",
+        "Sets": "3",
+        "Reps": "5",
+        "Rest": "180s",
+        "MuscleGroup": "Core",
+        "Equipment": "Machine"
+      }
+    ]
+  },
+  {
+    "id": "PRG046",
+    "ProgramTitle": "Athletic Upper/Lower Beginner",
+    "FocusTag": "Athletic",
+    "Duration": "4 weeks",
+    "DaysPerWeek": "5",
+    "Level": "Beginner",
+    "Split": "Upper/Lower",
+    "Status": "Draft",
+    "TotalSets": 32,
+    "Exercises": [
+      {
+        "Name": "Incline Dumbbell Press",
+        "Sets": "4",
+        "Reps": "10",
+        "Rest": "120s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Cuban Press",
+        "Sets": "4",
+        "Reps": "12-15",
+        "Rest": "60s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Archer Row",
+        "Sets": "3",
+        "Reps": "15-20",
+        "Rest": "60s",
+        "MuscleGroup": "Back",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Tate Press",
+        "Sets": "5",
+        "Reps": "5",
+        "Rest": "45s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Cossack Squat",
+        "Sets": "3",
+        "Reps": "10",
+        "Rest": "45s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Hip Thrust",
+        "Sets": "5",
+        "Reps": "10",
+        "Rest": "150s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Resistance Band"
+      },
+      {
+        "Name": "Lateral Bound",
+        "Sets": "4",
+        "Reps": "10",
+        "Rest": "45s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Turkish Get-Up",
+        "Sets": "4",
+        "Reps": "10",
+        "Rest": "180s",
+        "MuscleGroup": "Core",
+        "Equipment": "Resistance Band"
+      }
+    ]
+  },
+  {
+    "id": "PRG047",
+    "ProgramTitle": "Athletic Upper/Lower Intermediate",
+    "FocusTag": "Athletic",
+    "Duration": "4 weeks",
+    "DaysPerWeek": "3",
+    "Level": "Intermediate",
+    "Split": "Upper/Lower",
+    "Status": "Draft",
+    "TotalSets": 29,
+    "Exercises": [
+      {
+        "Name": "Pec Deck",
+        "Sets": "3",
+        "Reps": "8",
+        "Rest": "150s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Rear Delt Row",
+        "Sets": "4",
+        "Reps": "5",
+        "Rest": "60s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Renegade Row",
+        "Sets": "3",
+        "Reps": "8-10",
+        "Rest": "45s",
+        "MuscleGroup": "Back",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Pinwheel Curl",
+        "Sets": "3",
+        "Reps": "5",
+        "Rest": "180s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Reverse Hyper",
+        "Sets": "4",
+        "Reps": "15-20",
+        "Rest": "120s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Clamshell",
+        "Sets": "5",
+        "Reps": "8-10",
+        "Rest": "45s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Triple Under",
+        "Sets": "4",
+        "Reps": "12",
+        "Rest": "90s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Smith Machine"
+      },
+      {
+        "Name": "windshield Wiper",
+        "Sets": "3",
+        "Reps": "6-8",
+        "Rest": "90s",
+        "MuscleGroup": "Core",
+        "Equipment": "Smith Machine"
+      }
+    ]
+  },
+  {
+    "id": "PRG048",
+    "ProgramTitle": "Athletic Upper/Lower Advanced",
+    "FocusTag": "Athletic",
+    "Duration": "16 weeks",
+    "DaysPerWeek": "4",
+    "Level": "Advanced",
+    "Split": "Upper/Lower",
+    "Status": "Active",
+    "TotalSets": 29,
+    "Exercises": [
+      {
+        "Name": "Pin Press",
+        "Sets": "4",
+        "Reps": "5",
+        "Rest": "45s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Clean and Press",
+        "Sets": "4",
+        "Reps": "10",
+        "Rest": "45s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Shrugs",
+        "Sets": "3",
+        "Reps": "12",
+        "Rest": "180s",
+        "MuscleGroup": "Back",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Tricep Extension",
+        "Sets": "4",
+        "Reps": "8-10",
+        "Rest": "150s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Nordic Curl",
+        "Sets": "3",
+        "Reps": "8",
+        "Rest": "60s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Smith Machine"
+      },
+      {
+        "Name": "RKC Plank",
+        "Sets": "4",
+        "Reps": "10",
+        "Rest": "180s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Sprint",
+        "Sets": "4",
+        "Reps": "6-8",
+        "Rest": "180s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Pallof Press",
+        "Sets": "3",
+        "Reps": "8",
+        "Rest": "60s",
+        "MuscleGroup": "Core",
+        "Equipment": "Dumbbell"
+      }
+    ]
+  },
+  {
+    "id": "PRG049",
+    "ProgramTitle": "Athletic Push/Pull Beginner",
+    "FocusTag": "Athletic",
+    "Duration": "8 weeks",
+    "DaysPerWeek": "3",
+    "Level": "Beginner",
+    "Split": "Push/Pull",
+    "Status": "Archived",
+    "TotalSets": 34,
+    "Exercises": [
+      {
+        "Name": "Deficit Push-Up",
+        "Sets": "3",
+        "Reps": "10",
+        "Rest": "120s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Resistance Band"
+      },
+      {
+        "Name": "Overhead Press",
+        "Sets": "5",
+        "Reps": "10-12",
+        "Rest": "60s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Leg Curl",
+        "Sets": "5",
+        "Reps": "12-15",
+        "Rest": "60s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Clamshell",
+        "Sets": "5",
+        "Reps": "8-10",
+        "Rest": "45s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Lateral Bound",
+        "Sets": "4",
+        "Reps": "10",
+        "Rest": "45s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Dynamic Effort Row",
+        "Sets": "4",
+        "Reps": "8",
+        "Rest": "60s",
+        "MuscleGroup": "Back",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Decline Curl",
+        "Sets": "5",
+        "Reps": "8-10",
+        "Rest": "180s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Medicine Ball Slam",
+        "Sets": "3",
+        "Reps": "8",
+        "Rest": "120s",
+        "MuscleGroup": "Core",
+        "Equipment": "Barbell"
+      }
+    ]
+  },
+  {
+    "id": "PRG050",
+    "ProgramTitle": "Athletic Push/Pull Intermediate",
+    "FocusTag": "Athletic",
+    "Duration": "8 weeks",
+    "DaysPerWeek": "4",
+    "Level": "Intermediate",
+    "Split": "Push/Pull",
+    "Status": "Draft",
+    "TotalSets": 29,
+    "Exercises": [
+      {
+        "Name": "Cable Crossover",
+        "Sets": "3",
+        "Reps": "8",
+        "Rest": "120s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Cuban Press",
+        "Sets": "4",
+        "Reps": "12-15",
+        "Rest": "60s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Anderson Squat",
+        "Sets": "3",
+        "Reps": "5",
+        "Rest": "45s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Single-Leg RDL",
+        "Sets": "3",
+        "Reps": "6-8",
+        "Rest": "120s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Farmer Walk",
+        "Sets": "5",
+        "Reps": "10",
+        "Rest": "45s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Hammer Strength Row",
+        "Sets": "5",
+        "Reps": "10-12",
+        "Rest": "120s",
+        "MuscleGroup": "Back",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "V-Bar Pushdown",
+        "Sets": "3",
+        "Reps": "5",
+        "Rest": "180s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Medicine Ball Slam",
+        "Sets": "3",
+        "Reps": "8",
+        "Rest": "120s",
+        "MuscleGroup": "Core",
+        "Equipment": "Barbell"
+      }
+    ]
+  },
+  {
+    "id": "PRG051",
+    "ProgramTitle": "Athletic Push/Pull Advanced",
+    "FocusTag": "Athletic",
+    "Duration": "4 weeks",
+    "DaysPerWeek": "3",
+    "Level": "Advanced",
+    "Split": "Push/Pull",
+    "Status": "Active",
+    "TotalSets": 33,
+    "Exercises": [
+      {
+        "Name": "Floor Press",
+        "Sets": "3",
+        "Reps": "15-20",
+        "Rest": "180s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Push Press",
+        "Sets": "4",
+        "Reps": "5",
+        "Rest": "60s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Lunge",
+        "Sets": "5",
+        "Reps": "12",
+        "Rest": "45s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Banded Good Morning",
+        "Sets": "3",
+        "Reps": "15-20",
+        "Rest": "90s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Inverted Calf Raise",
+        "Sets": "5",
+        "Reps": "6-8",
+        "Rest": "150s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Hammer Strength Row",
+        "Sets": "5",
+        "Reps": "10-12",
+        "Rest": "120s",
+        "MuscleGroup": "Back",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Drag Curl",
+        "Sets": "5",
+        "Reps": "5",
+        "Rest": "90s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Smith Machine"
+      },
+      {
+        "Name": "V-Up",
+        "Sets": "3",
+        "Reps": "5",
+        "Rest": "120s",
+        "MuscleGroup": "Core",
+        "Equipment": "Kettlebell"
+      }
+    ]
+  },
+  {
+    "id": "PRG052",
+    "ProgramTitle": "Athletic Sport Specific Beginner",
+    "FocusTag": "Athletic",
+    "Duration": "12 weeks",
+    "DaysPerWeek": "4",
+    "Level": "Beginner",
+    "Split": "Sport Specific",
+    "Status": "Active",
+    "TotalSets": 34,
+    "Exercises": [
+      {
+        "Name": "Push-Up",
+        "Sets": "5",
+        "Reps": "8-10",
+        "Rest": "60s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "ISO-Lateral Row",
+        "Sets": "3",
+        "Reps": "12",
+        "Rest": "180s",
+        "MuscleGroup": "Back",
+        "Equipment": "Resistance Band"
+      },
+      {
+        "Name": "Overhead Press",
+        "Sets": "5",
+        "Reps": "10-12",
+        "Rest": "60s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Reverse Curl",
+        "Sets": "5",
+        "Reps": "8",
+        "Rest": "90s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Lunge",
+        "Sets": "5",
+        "Reps": "12",
+        "Rest": "45s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Pull-Through",
+        "Sets": "3",
+        "Reps": "12",
+        "Rest": "180s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Standing Calf Raise",
+        "Sets": "5",
+        "Reps": "10",
+        "Rest": "45s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Bench Press Plank",
+        "Sets": "3",
+        "Reps": "8-10",
+        "Rest": "180s",
+        "MuscleGroup": "Core",
+        "Equipment": "Resistance Band"
+      }
+    ]
+  },
+  {
+    "id": "PRG053",
+    "ProgramTitle": "Athletic Sport Specific Intermediate",
+    "FocusTag": "Athletic",
+    "Duration": "6 weeks",
+    "DaysPerWeek": "3",
+    "Level": "Intermediate",
+    "Split": "Sport Specific",
+    "Status": "Archived",
+    "TotalSets": 36,
+    "Exercises": [
+      {
+        "Name": "Svend Press",
+        "Sets": "4",
+        "Reps": "15-20",
+        "Rest": "90s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Seated Cable Row",
+        "Sets": "4",
+        "Reps": "15-20",
+        "Rest": "60s",
+        "MuscleGroup": "Back",
+        "Equipment": "Smith Machine"
+      },
+      {
+        "Name": "Cuban Press",
+        "Sets": "4",
+        "Reps": "12-15",
+        "Rest": "60s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Kickback",
+        "Sets": "5",
+        "Reps": "8",
+        "Rest": "180s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Step-Up",
+        "Sets": "5",
+        "Reps": "12",
+        "Rest": "45s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Smith Machine"
+      },
+      {
+        "Name": "Clamshell",
+        "Sets": "5",
+        "Reps": "8-10",
+        "Rest": "45s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Calf Press",
+        "Sets": "4",
+        "Reps": "5",
+        "Rest": "45s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Dragon Flag",
+        "Sets": "5",
+        "Reps": "10-12",
+        "Rest": "90s",
+        "MuscleGroup": "Core",
+        "Equipment": "Kettlebell"
+      }
+    ]
+  },
+  {
+    "id": "PRG054",
+    "ProgramTitle": "Athletic Sport Specific Advanced",
+    "FocusTag": "Athletic",
+    "Duration": "8 weeks",
+    "DaysPerWeek": "3",
+    "Level": "Advanced",
+    "Split": "Sport Specific",
+    "Status": "Archived",
+    "TotalSets": 30,
+    "Exercises": [
+      {
+        "Name": "Wide Grip Bench",
+        "Sets": "3",
+        "Reps": "6-8",
+        "Rest": "90s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Kroc Row",
+        "Sets": "3",
+        "Reps": "8",
+        "Rest": "60s",
+        "MuscleGroup": "Back",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Cable Lateral Raise",
+        "Sets": "4",
+        "Reps": "10",
+        "Rest": "45s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Concentration Curl",
+        "Sets": "3",
+        "Reps": "10",
+        "Rest": "180s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Leg Extension",
+        "Sets": "5",
+        "Reps": "12",
+        "Rest": "60s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "RKC Plank",
+        "Sets": "4",
+        "Reps": "10",
+        "Rest": "180s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Calf Stretch",
+        "Sets": "4",
+        "Reps": "15-20",
+        "Rest": "45s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Smith Machine"
+      },
+      {
+        "Name": "Ab Vacuum",
+        "Sets": "4",
+        "Reps": "6-8",
+        "Rest": "180s",
+        "MuscleGroup": "Core",
+        "Equipment": "Smith Machine"
+      }
+    ]
+  },
+  {
+    "id": "PRG055",
+    "ProgramTitle": "Mobility Full Body Beginner",
+    "FocusTag": "Mobility",
+    "Duration": "8 weeks",
+    "DaysPerWeek": "4",
+    "Level": "Beginner",
+    "Split": "Full Body",
+    "Status": "Archived",
+    "TotalSets": 34,
+    "Exercises": [
+      {
+        "Name": "Ring Push-Up",
+        "Sets": "3",
+        "Reps": "8-10",
+        "Rest": "60s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Hammer Strength Row",
+        "Sets": "5",
+        "Reps": "10-12",
+        "Rest": "120s",
+        "MuscleGroup": "Back",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Landmine Lateral Raise",
+        "Sets": "4",
+        "Reps": "15-20",
+        "Rest": "180s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Resistance Band"
+      },
+      {
+        "Name": "Drag Curl",
+        "Sets": "5",
+        "Reps": "5",
+        "Rest": "90s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Smith Machine"
+      },
+      {
+        "Name": "Romanian Deadlift",
+        "Sets": "4",
+        "Reps": "12",
+        "Rest": "120s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Snatch Grip Deadlift",
+        "Sets": "5",
+        "Reps": "10",
+        "Rest": "90s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Lateral Bound",
+        "Sets": "4",
+        "Reps": "10",
+        "Rest": "45s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Woodchop",
+        "Sets": "4",
+        "Reps": "12",
+        "Rest": "45s",
+        "MuscleGroup": "Core",
+        "Equipment": "Dumbbell"
+      }
+    ]
+  },
+  {
+    "id": "PRG056",
+    "ProgramTitle": "Mobility Full Body Intermediate",
+    "FocusTag": "Mobility",
+    "Duration": "8 weeks",
+    "DaysPerWeek": "4",
+    "Level": "Intermediate",
+    "Split": "Full Body",
+    "Status": "Active",
+    "TotalSets": 32,
+    "Exercises": [
+      {
+        "Name": "Board Press",
+        "Sets": "3",
+        "Reps": "5",
+        "Rest": "45s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Resistance Band"
+      },
+      {
+        "Name": "Renegade Row",
+        "Sets": "3",
+        "Reps": "8-10",
+        "Rest": "45s",
+        "MuscleGroup": "Back",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Front Raise",
+        "Sets": "5",
+        "Reps": "8-10",
+        "Rest": "180s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Suitcase Curl",
+        "Sets": "5",
+        "Reps": "10",
+        "Rest": "180s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Deficit Reverse Lunge",
+        "Sets": "4",
+        "Reps": "15-20",
+        "Rest": "90s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Step-Up",
+        "Sets": "3",
+        "Reps": "12-15",
+        "Rest": "120s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Lateral Bound",
+        "Sets": "4",
+        "Reps": "10",
+        "Rest": "45s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Overhead Carry",
+        "Sets": "5",
+        "Reps": "12-15",
+        "Rest": "120s",
+        "MuscleGroup": "Core",
+        "Equipment": "Smith Machine"
+      }
+    ]
+  },
+  {
+    "id": "PRG057",
+    "ProgramTitle": "Mobility Full Body Advanced",
+    "FocusTag": "Mobility",
+    "Duration": "12 weeks",
+    "DaysPerWeek": "4",
+    "Level": "Advanced",
+    "Split": "Full Body",
+    "Status": "Draft",
+    "TotalSets": 28,
+    "Exercises": [
+      {
+        "Name": "Close Grip Bench",
+        "Sets": "4",
+        "Reps": "8",
+        "Rest": "150s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Resistance Band"
+      },
+      {
+        "Name": "Renegade Row",
+        "Sets": "3",
+        "Reps": "8-10",
+        "Rest": "45s",
+        "MuscleGroup": "Back",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Cable Lateral Raise",
+        "Sets": "4",
+        "Reps": "10",
+        "Rest": "45s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Diamond Push-Up",
+        "Sets": "3",
+        "Reps": "10-12",
+        "Rest": "150s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Anderson Squat",
+        "Sets": "3",
+        "Reps": "5",
+        "Rest": "45s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Seated Good Morning",
+        "Sets": "4",
+        "Reps": "12",
+        "Rest": "180s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Single Leg Press Calf",
+        "Sets": "4",
+        "Reps": "6-8",
+        "Rest": "180s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Resistance Band"
+      },
+      {
+        "Name": "Suspension Pike",
+        "Sets": "3",
+        "Reps": "8-10",
+        "Rest": "120s",
+        "MuscleGroup": "Core",
+        "Equipment": "Machine"
+      }
+    ]
+  },
+  {
+    "id": "PRG058",
+    "ProgramTitle": "Mobility Split Beginner",
+    "FocusTag": "Mobility",
+    "Duration": "4 weeks",
+    "DaysPerWeek": "6",
+    "Level": "Beginner",
+    "Split": "Split",
+    "Status": "Archived",
+    "TotalSets": 34,
+    "Exercises": [
+      {
+        "Name": "Landmine Press",
+        "Sets": "4",
+        "Reps": "8",
+        "Rest": "60s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Deadlift",
+        "Sets": "5",
+        "Reps": "12",
+        "Rest": "45s",
+        "MuscleGroup": "Back",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Rear Delt Flye",
+        "Sets": "3",
+        "Reps": "8",
+        "Rest": "90s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Suitcase Curl",
+        "Sets": "5",
+        "Reps": "10",
+        "Rest": "180s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Hack Squat",
+        "Sets": "5",
+        "Reps": "8-10",
+        "Rest": "180s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Paused Deadlift",
+        "Sets": "5",
+        "Reps": "12",
+        "Rest": "120s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Lateral Bound",
+        "Sets": "4",
+        "Reps": "10",
+        "Rest": "45s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Toes to Bar",
+        "Sets": "3",
+        "Reps": "15-20",
+        "Rest": "45s",
+        "MuscleGroup": "Core",
+        "Equipment": "Kettlebell"
+      }
+    ]
+  },
+  {
+    "id": "PRG059",
+    "ProgramTitle": "Mobility Split Intermediate",
+    "FocusTag": "Mobility",
+    "Duration": "4 weeks",
+    "DaysPerWeek": "4",
+    "Level": "Intermediate",
+    "Split": "Split",
+    "Status": "Archived",
+    "TotalSets": 32,
+    "Exercises": [
+      {
+        "Name": "Bench Press",
+        "Sets": "3",
+        "Reps": "12-15",
+        "Rest": "45s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Shrugs",
+        "Sets": "3",
+        "Reps": "12",
+        "Rest": "180s",
+        "MuscleGroup": "Back",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Sphinx Raise",
+        "Sets": "5",
+        "Reps": "8",
+        "Rest": "60s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Resistance Band"
+      },
+      {
+        "Name": "Pin Extension",
+        "Sets": "4",
+        "Reps": "12-15",
+        "Rest": "90s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Hip Belt Squat",
+        "Sets": "4",
+        "Reps": "10",
+        "Rest": "60s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Resistance Band"
+      },
+      {
+        "Name": "Clamshell",
+        "Sets": "5",
+        "Reps": "8-10",
+        "Rest": "45s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Stair Climb",
+        "Sets": "5",
+        "Reps": "8",
+        "Rest": "90s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Pallof Press",
+        "Sets": "3",
+        "Reps": "8",
+        "Rest": "60s",
+        "MuscleGroup": "Core",
+        "Equipment": "Dumbbell"
+      }
+    ]
+  },
+  {
+    "id": "PRG060",
+    "ProgramTitle": "Mobility Split Advanced",
+    "FocusTag": "Mobility",
+    "Duration": "4 weeks",
+    "DaysPerWeek": "6",
+    "Level": "Advanced",
+    "Split": "Split",
+    "Status": "Draft",
+    "TotalSets": 31,
+    "Exercises": [
+      {
+        "Name": "Ring Push-Up",
+        "Sets": "3",
+        "Reps": "8-10",
+        "Rest": "60s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Kroc Row",
+        "Sets": "3",
+        "Reps": "8",
+        "Rest": "60s",
+        "MuscleGroup": "Back",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Leaning Lateral",
+        "Sets": "5",
+        "Reps": "8",
+        "Rest": "60s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Rack Extension",
+        "Sets": "5",
+        "Reps": "12",
+        "Rest": "60s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Safety Bar Squat",
+        "Sets": "3",
+        "Reps": "12",
+        "Rest": "90s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Chain Deadlift",
+        "Sets": "3",
+        "Reps": "10",
+        "Rest": "45s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Lateral Bound",
+        "Sets": "4",
+        "Reps": "10",
+        "Rest": "45s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Dragon Flag",
+        "Sets": "5",
+        "Reps": "10-12",
+        "Rest": "90s",
+        "MuscleGroup": "Core",
+        "Equipment": "Kettlebell"
+      }
+    ]
+  },
+  {
+    "id": "PRG061",
+    "ProgramTitle": "Mobility Flow Beginner",
+    "FocusTag": "Mobility",
+    "Duration": "4 weeks",
+    "DaysPerWeek": "3",
+    "Level": "Beginner",
+    "Split": "Flow",
+    "Status": "Archived",
+    "TotalSets": 30,
+    "Exercises": [
+      {
+        "Name": "Multi-Grip Press",
+        "Sets": "5",
+        "Reps": "12",
+        "Rest": "60s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "ISO-Lateral Row",
+        "Sets": "3",
+        "Reps": "12",
+        "Rest": "180s",
+        "MuscleGroup": "Back",
+        "Equipment": "Resistance Band"
+      },
+      {
+        "Name": "Lateral Raise",
+        "Sets": "3",
+        "Reps": "15-20",
+        "Rest": "60s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Zottman Curl",
+        "Sets": "3",
+        "Reps": "8",
+        "Rest": "120s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Step-Up",
+        "Sets": "5",
+        "Reps": "12",
+        "Rest": "45s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Smith Machine"
+      },
+      {
+        "Name": "Hip Thrust",
+        "Sets": "5",
+        "Reps": "10",
+        "Rest": "150s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Resistance Band"
+      },
+      {
+        "Name": "Leg Press Calf Raise",
+        "Sets": "3",
+        "Reps": "10-12",
+        "Rest": "180s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Medicine Ball Slam",
+        "Sets": "3",
+        "Reps": "8",
+        "Rest": "120s",
+        "MuscleGroup": "Core",
+        "Equipment": "Barbell"
+      }
+    ]
+  },
+  {
+    "id": "PRG062",
+    "ProgramTitle": "Mobility Flow Intermediate",
+    "FocusTag": "Mobility",
+    "Duration": "4 weeks",
+    "DaysPerWeek": "4",
+    "Level": "Intermediate",
+    "Split": "Flow",
+    "Status": "Draft",
+    "TotalSets": 29,
+    "Exercises": [
+      {
+        "Name": "Wide Grip Bench",
+        "Sets": "3",
+        "Reps": "6-8",
+        "Rest": "90s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Corner Bar Row",
+        "Sets": "5",
+        "Reps": "8-10",
+        "Rest": "120s",
+        "MuscleGroup": "Back",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Clean and Press",
+        "Sets": "4",
+        "Reps": "10",
+        "Rest": "45s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "V-Bar Pushdown",
+        "Sets": "3",
+        "Reps": "5",
+        "Rest": "180s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Lateral Lunge",
+        "Sets": "3",
+        "Reps": "8",
+        "Rest": "45s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Glute Bridge",
+        "Sets": "4",
+        "Reps": "12-15",
+        "Rest": "45s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Calf Press",
+        "Sets": "4",
+        "Reps": "5",
+        "Rest": "45s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Suspension Pike",
+        "Sets": "3",
+        "Reps": "8-10",
+        "Rest": "120s",
+        "MuscleGroup": "Core",
+        "Equipment": "Machine"
+      }
+    ]
+  },
+  {
+    "id": "PRG063",
+    "ProgramTitle": "Mobility Flow Advanced",
+    "FocusTag": "Mobility",
+    "Duration": "6 weeks",
+    "DaysPerWeek": "3",
+    "Level": "Advanced",
+    "Split": "Flow",
+    "Status": "Active",
+    "TotalSets": 32,
+    "Exercises": [
+      {
+        "Name": "Decline Press",
+        "Sets": "5",
+        "Reps": "12",
+        "Rest": "90s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Chin-Up",
+        "Sets": "5",
+        "Reps": "5",
+        "Rest": "150s",
+        "MuscleGroup": "Back",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Sphinx Raise",
+        "Sets": "5",
+        "Reps": "8",
+        "Rest": "60s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Resistance Band"
+      },
+      {
+        "Name": "Diamond Push-Up",
+        "Sets": "3",
+        "Reps": "10-12",
+        "Rest": "150s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Front Squat",
+        "Sets": "3",
+        "Reps": "10-12",
+        "Rest": "60s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Smith Machine"
+      },
+      {
+        "Name": "Frog Pump",
+        "Sets": "4",
+        "Reps": "12-15",
+        "Rest": "45s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Smith Machine"
+      },
+      {
+        "Name": "Sled Push",
+        "Sets": "4",
+        "Reps": "15-20",
+        "Rest": "60s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Pallof Press",
+        "Sets": "3",
+        "Reps": "8",
+        "Rest": "60s",
+        "MuscleGroup": "Core",
+        "Equipment": "Dumbbell"
+      }
+    ]
+  },
+  {
+    "id": "PRG064",
+    "ProgramTitle": "Rehab Full Body Beginner",
+    "FocusTag": "Rehab",
+    "Duration": "6 weeks",
+    "DaysPerWeek": "4",
+    "Level": "Beginner",
+    "Split": "Full Body",
+    "Status": "Draft",
+    "TotalSets": 33,
+    "Exercises": [
+      {
+        "Name": "Bench Press",
+        "Sets": "3",
+        "Reps": "12-15",
+        "Rest": "45s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Deadlift",
+        "Sets": "5",
+        "Reps": "12",
+        "Rest": "45s",
+        "MuscleGroup": "Back",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Overhead Press",
+        "Sets": "5",
+        "Reps": "10-12",
+        "Rest": "60s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Kickback",
+        "Sets": "5",
+        "Reps": "8",
+        "Rest": "180s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Anderson Squat",
+        "Sets": "3",
+        "Reps": "5",
+        "Rest": "45s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Pull-Through",
+        "Sets": "3",
+        "Reps": "12",
+        "Rest": "180s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Isometric Calf Hold",
+        "Sets": "5",
+        "Reps": "10-12",
+        "Rest": "45s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Leg Raise",
+        "Sets": "4",
+        "Reps": "8-10",
+        "Rest": "60s",
+        "MuscleGroup": "Core",
+        "Equipment": "Resistance Band"
+      }
+    ]
+  },
+  {
+    "id": "PRG065",
+    "ProgramTitle": "Rehab Full Body Intermediate",
+    "FocusTag": "Rehab",
+    "Duration": "4 weeks",
+    "DaysPerWeek": "3",
+    "Level": "Intermediate",
+    "Split": "Full Body",
+    "Status": "Active",
+    "TotalSets": 34,
+    "Exercises": [
+      {
+        "Name": "Wide Grip Bench",
+        "Sets": "3",
+        "Reps": "6-8",
+        "Rest": "90s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Batwing Row",
+        "Sets": "4",
+        "Reps": "10",
+        "Rest": "45s",
+        "MuscleGroup": "Back",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Military Press",
+        "Sets": "5",
+        "Reps": "10-12",
+        "Rest": "150s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Suitcase Curl",
+        "Sets": "5",
+        "Reps": "10",
+        "Rest": "180s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Sissy Squat",
+        "Sets": "5",
+        "Reps": "5",
+        "Rest": "45s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Fire Hydrant",
+        "Sets": "3",
+        "Reps": "12-15",
+        "Rest": "180s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Stair Climb",
+        "Sets": "5",
+        "Reps": "8",
+        "Rest": "90s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Jefferson Curl",
+        "Sets": "4",
+        "Reps": "15-20",
+        "Rest": "150s",
+        "MuscleGroup": "Core",
+        "Equipment": "Kettlebell"
+      }
+    ]
+  },
+  {
+    "id": "PRG066",
+    "ProgramTitle": "Rehab Full Body Advanced",
+    "FocusTag": "Rehab",
+    "Duration": "6 weeks",
+    "DaysPerWeek": "3",
+    "Level": "Advanced",
+    "Split": "Full Body",
+    "Status": "Active",
+    "TotalSets": 34,
+    "Exercises": [
+      {
+        "Name": "Multi-Grip Press",
+        "Sets": "5",
+        "Reps": "12",
+        "Rest": "60s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Hammer Strength Row",
+        "Sets": "5",
+        "Reps": "10-12",
+        "Rest": "120s",
+        "MuscleGroup": "Back",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Dumbbell Press",
+        "Sets": "4",
+        "Reps": "12",
+        "Rest": "120s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Tricep Extension",
+        "Sets": "4",
+        "Reps": "8-10",
+        "Rest": "150s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Squat",
+        "Sets": "3",
+        "Reps": "12-15",
+        "Rest": "150s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Donkey Kick",
+        "Sets": "4",
+        "Reps": "10",
+        "Rest": "60s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Double Under",
+        "Sets": "4",
+        "Reps": "12",
+        "Rest": "150s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Cable Crunch",
+        "Sets": "5",
+        "Reps": "12-15",
+        "Rest": "90s",
+        "MuscleGroup": "Core",
+        "Equipment": "Bodyweight"
+      }
+    ]
+  },
+  {
+    "id": "PRG067",
+    "ProgramTitle": "Rehab Isolation Beginner",
+    "FocusTag": "Rehab",
+    "Duration": "6 weeks",
+    "DaysPerWeek": "6",
+    "Level": "Beginner",
+    "Split": "Isolation",
+    "Status": "Active",
+    "TotalSets": 31,
+    "Exercises": [
+      {
+        "Name": "Chain Bench",
+        "Sets": "5",
+        "Reps": "10",
+        "Rest": "45s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Dynamic Effort Row",
+        "Sets": "4",
+        "Reps": "8",
+        "Rest": "60s",
+        "MuscleGroup": "Back",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Cable Lateral Raise",
+        "Sets": "4",
+        "Reps": "10",
+        "Rest": "45s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Incline Curl",
+        "Sets": "4",
+        "Reps": "10",
+        "Rest": "60s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Cossack Squat",
+        "Sets": "3",
+        "Reps": "10",
+        "Rest": "45s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Single-Leg RDL",
+        "Sets": "3",
+        "Reps": "6-8",
+        "Rest": "120s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Tibialis Raise",
+        "Sets": "4",
+        "Reps": "10-12",
+        "Rest": "150s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Smith Machine"
+      },
+      {
+        "Name": "Jefferson Curl",
+        "Sets": "4",
+        "Reps": "15-20",
+        "Rest": "150s",
+        "MuscleGroup": "Core",
+        "Equipment": "Kettlebell"
+      }
+    ]
+  },
+  {
+    "id": "PRG068",
+    "ProgramTitle": "Rehab Isolation Intermediate",
+    "FocusTag": "Rehab",
+    "Duration": "8 weeks",
+    "DaysPerWeek": "5",
+    "Level": "Intermediate",
+    "Split": "Isolation",
+    "Status": "Active",
+    "TotalSets": 32,
+    "Exercises": [
+      {
+        "Name": "Floor Press",
+        "Sets": "3",
+        "Reps": "15-20",
+        "Rest": "180s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Hammer Strength Row",
+        "Sets": "5",
+        "Reps": "10-12",
+        "Rest": "120s",
+        "MuscleGroup": "Back",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Wall Slide",
+        "Sets": "5",
+        "Reps": "10-12",
+        "Rest": "90s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Hammer Curl",
+        "Sets": "5",
+        "Reps": "15-20",
+        "Rest": "90s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Cossack Squat",
+        "Sets": "3",
+        "Reps": "10",
+        "Rest": "45s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Spider Crawl",
+        "Sets": "3",
+        "Reps": "8",
+        "Rest": "60s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Standing Calf Raise",
+        "Sets": "5",
+        "Reps": "10",
+        "Rest": "45s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Windmill",
+        "Sets": "3",
+        "Reps": "8",
+        "Rest": "90s",
+        "MuscleGroup": "Core",
+        "Equipment": "Dumbbell"
+      }
+    ]
+  },
+  {
+    "id": "PRG069",
+    "ProgramTitle": "Rehab Isolation Advanced",
+    "FocusTag": "Rehab",
+    "Duration": "4 weeks",
+    "DaysPerWeek": "3",
+    "Level": "Advanced",
+    "Split": "Isolation",
+    "Status": "Active",
+    "TotalSets": 30,
+    "Exercises": [
+      {
+        "Name": "Incline Dumbbell Press",
+        "Sets": "4",
+        "Reps": "10",
+        "Rest": "120s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Renegade Row",
+        "Sets": "3",
+        "Reps": "8-10",
+        "Rest": "45s",
+        "MuscleGroup": "Back",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Sphinx Raise",
+        "Sets": "5",
+        "Reps": "8",
+        "Rest": "60s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Resistance Band"
+      },
+      {
+        "Name": "Preacher Curl",
+        "Sets": "3",
+        "Reps": "10-12",
+        "Rest": "150s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Cossack Squat",
+        "Sets": "3",
+        "Reps": "10",
+        "Rest": "45s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Snatch Grip RDL",
+        "Sets": "4",
+        "Reps": "12",
+        "Rest": "180s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Double Under",
+        "Sets": "4",
+        "Reps": "12",
+        "Rest": "150s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Ab Vacuum",
+        "Sets": "4",
+        "Reps": "6-8",
+        "Rest": "180s",
+        "MuscleGroup": "Core",
+        "Equipment": "Smith Machine"
+      }
+    ]
+  },
+  {
+    "id": "PRG070",
+    "ProgramTitle": "Rehab Prehab Beginner",
+    "FocusTag": "Rehab",
+    "Duration": "16 weeks",
+    "DaysPerWeek": "3",
+    "Level": "Beginner",
+    "Split": "Prehab",
+    "Status": "Draft",
+    "TotalSets": 35,
+    "Exercises": [
+      {
+        "Name": "Reverse Grip Bench",
+        "Sets": "4",
+        "Reps": "12",
+        "Rest": "60s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Renegade Row",
+        "Sets": "3",
+        "Reps": "8-10",
+        "Rest": "45s",
+        "MuscleGroup": "Back",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "External Rotation",
+        "Sets": "5",
+        "Reps": "10-12",
+        "Rest": "60s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Tate Press",
+        "Sets": "5",
+        "Reps": "5",
+        "Rest": "45s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Reverse Lunge",
+        "Sets": "4",
+        "Reps": "12",
+        "Rest": "150s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Sumo Deadlift",
+        "Sets": "4",
+        "Reps": "12-15",
+        "Rest": "90s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Calf Raise Machine",
+        "Sets": "5",
+        "Reps": "15-20",
+        "Rest": "90s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Half-Kneeling Chop",
+        "Sets": "5",
+        "Reps": "5",
+        "Rest": "45s",
+        "MuscleGroup": "Core",
+        "Equipment": "Cable"
+      }
+    ]
+  },
+  {
+    "id": "PRG071",
+    "ProgramTitle": "Rehab Prehab Intermediate",
+    "FocusTag": "Rehab",
+    "Duration": "6 weeks",
+    "DaysPerWeek": "6",
+    "Level": "Intermediate",
+    "Split": "Prehab",
+    "Status": "Draft",
+    "TotalSets": 33,
+    "Exercises": [
+      {
+        "Name": "Dumbbell Flye",
+        "Sets": "5",
+        "Reps": "8",
+        "Rest": "120s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Batwing Row",
+        "Sets": "4",
+        "Reps": "10",
+        "Rest": "45s",
+        "MuscleGroup": "Back",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "scarecrow",
+        "Sets": "4",
+        "Reps": "6-8",
+        "Rest": "60s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Band Pushdown",
+        "Sets": "5",
+        "Reps": "10-12",
+        "Rest": "60s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Resistance Band"
+      },
+      {
+        "Name": "Nordic Hamstring",
+        "Sets": "3",
+        "Reps": "10",
+        "Rest": "60s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Donkey Kick",
+        "Sets": "4",
+        "Reps": "10",
+        "Rest": "60s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Inverted Calf Raise",
+        "Sets": "5",
+        "Reps": "6-8",
+        "Rest": "150s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Lateral Medicine Ball Throw",
+        "Sets": "3",
+        "Reps": "8-10",
+        "Rest": "60s",
+        "MuscleGroup": "Core",
+        "Equipment": "Smith Machine"
+      }
+    ]
+  },
+  {
+    "id": "PRG072",
+    "ProgramTitle": "Rehab Prehab Advanced",
+    "FocusTag": "Rehab",
+    "Duration": "4 weeks",
+    "DaysPerWeek": "5",
+    "Level": "Advanced",
+    "Split": "Prehab",
+    "Status": "Archived",
+    "TotalSets": 29,
+    "Exercises": [
+      {
+        "Name": "Bottom-Up Press",
+        "Sets": "3",
+        "Reps": "12-15",
+        "Rest": "150s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Dynamic Effort Row",
+        "Sets": "4",
+        "Reps": "8",
+        "Rest": "60s",
+        "MuscleGroup": "Back",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Pike Push-Up",
+        "Sets": "3",
+        "Reps": "8-10",
+        "Rest": "150s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Bicep Curl",
+        "Sets": "5",
+        "Reps": "8-10",
+        "Rest": "180s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Smith Machine"
+      },
+      {
+        "Name": "Anderson Squat",
+        "Sets": "3",
+        "Reps": "5",
+        "Rest": "45s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Chain Deadlift",
+        "Sets": "3",
+        "Reps": "10",
+        "Rest": "45s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Sled Push",
+        "Sets": "4",
+        "Reps": "15-20",
+        "Rest": "60s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Ab Vacuum",
+        "Sets": "4",
+        "Reps": "6-8",
+        "Rest": "180s",
+        "MuscleGroup": "Core",
+        "Equipment": "Smith Machine"
+      }
+    ]
+  },
+  {
+    "id": "PRG073",
+    "ProgramTitle": "Powerlifting Squat/Bench/Dead Beginner",
+    "FocusTag": "Powerlifting",
+    "Duration": "6 weeks",
+    "DaysPerWeek": "5",
+    "Level": "Beginner",
+    "Split": "Squat/Bench/Dead",
+    "Status": "Archived",
+    "TotalSets": 35,
+    "Exercises": [
+      {
+        "Name": "Neutral Grip Press",
+        "Sets": "5",
+        "Reps": "8",
+        "Rest": "45s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Kroc Row",
+        "Sets": "3",
+        "Reps": "8",
+        "Rest": "60s",
+        "MuscleGroup": "Back",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Front Raise",
+        "Sets": "5",
+        "Reps": "8-10",
+        "Rest": "180s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Diamond Push-Up",
+        "Sets": "3",
+        "Reps": "10-12",
+        "Rest": "150s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Leg Curl",
+        "Sets": "5",
+        "Reps": "12-15",
+        "Rest": "60s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Cable Kickback",
+        "Sets": "4",
+        "Reps": "12",
+        "Rest": "120s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Standing Calf Raise",
+        "Sets": "5",
+        "Reps": "10",
+        "Rest": "45s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Half-Kneeling Chop",
+        "Sets": "5",
+        "Reps": "5",
+        "Rest": "45s",
+        "MuscleGroup": "Core",
+        "Equipment": "Cable"
+      }
+    ]
+  },
+  {
+    "id": "PRG074",
+    "ProgramTitle": "Powerlifting Squat/Bench/Dead Intermediate",
+    "FocusTag": "Powerlifting",
+    "Duration": "16 weeks",
+    "DaysPerWeek": "4",
+    "Level": "Intermediate",
+    "Split": "Squat/Bench/Dead",
+    "Status": "Archived",
+    "TotalSets": 31,
+    "Exercises": [
+      {
+        "Name": "Pin Press",
+        "Sets": "4",
+        "Reps": "5",
+        "Rest": "45s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Lat Pulldown",
+        "Sets": "5",
+        "Reps": "12",
+        "Rest": "180s",
+        "MuscleGroup": "Back",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Rear Delt Flye",
+        "Sets": "3",
+        "Reps": "8",
+        "Rest": "90s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Cable Curl",
+        "Sets": "3",
+        "Reps": "15-20",
+        "Rest": "120s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Deficit Reverse Lunge",
+        "Sets": "4",
+        "Reps": "15-20",
+        "Rest": "90s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Safety Bar Good Morning",
+        "Sets": "5",
+        "Reps": "8-10",
+        "Rest": "150s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Sled Drag",
+        "Sets": "4",
+        "Reps": "10-12",
+        "Rest": "45s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Smith Machine"
+      },
+      {
+        "Name": "Kneeling Pallof",
+        "Sets": "3",
+        "Reps": "8-10",
+        "Rest": "45s",
+        "MuscleGroup": "Core",
+        "Equipment": "Kettlebell"
+      }
+    ]
+  },
+  {
+    "id": "PRG075",
+    "ProgramTitle": "Powerlifting Squat/Bench/Dead Advanced",
+    "FocusTag": "Powerlifting",
+    "Duration": "8 weeks",
+    "DaysPerWeek": "6",
+    "Level": "Advanced",
+    "Split": "Squat/Bench/Dead",
+    "Status": "Archived",
+    "TotalSets": 34,
+    "Exercises": [
+      {
+        "Name": "Incline Press",
+        "Sets": "3",
+        "Reps": "6-8",
+        "Rest": "90s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Seal Row",
+        "Sets": "5",
+        "Reps": "8",
+        "Rest": "150s",
+        "MuscleGroup": "Back",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Around the World",
+        "Sets": "4",
+        "Reps": "8",
+        "Rest": "45s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Kickback",
+        "Sets": "5",
+        "Reps": "8",
+        "Rest": "180s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Lunge",
+        "Sets": "5",
+        "Reps": "12",
+        "Rest": "45s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Good Morning",
+        "Sets": "4",
+        "Reps": "5",
+        "Rest": "90s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Isometric Calf Hold",
+        "Sets": "5",
+        "Reps": "10-12",
+        "Rest": "45s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Suitcase Carry",
+        "Sets": "3",
+        "Reps": "5",
+        "Rest": "180s",
+        "MuscleGroup": "Core",
+        "Equipment": "Machine"
+      }
+    ]
+  },
+  {
+    "id": "PRG076",
+    "ProgramTitle": "Powerlifting Conjugate Beginner",
+    "FocusTag": "Powerlifting",
+    "Duration": "6 weeks",
+    "DaysPerWeek": "6",
+    "Level": "Beginner",
+    "Split": "Conjugate",
+    "Status": "Archived",
+    "TotalSets": 32,
+    "Exercises": [
+      {
+        "Name": "Decline Press",
+        "Sets": "5",
+        "Reps": "12",
+        "Rest": "90s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Kroc Row",
+        "Sets": "3",
+        "Reps": "8",
+        "Rest": "60s",
+        "MuscleGroup": "Back",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Front Raise",
+        "Sets": "5",
+        "Reps": "8-10",
+        "Rest": "180s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Rope Pushdown",
+        "Sets": "4",
+        "Reps": "8",
+        "Rest": "120s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Romanian Deadlift",
+        "Sets": "4",
+        "Reps": "12",
+        "Rest": "120s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Snatch Grip RDL",
+        "Sets": "4",
+        "Reps": "12",
+        "Rest": "180s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Hill Sprint",
+        "Sets": "4",
+        "Reps": "10",
+        "Rest": "90s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Windmill",
+        "Sets": "3",
+        "Reps": "8",
+        "Rest": "90s",
+        "MuscleGroup": "Core",
+        "Equipment": "Dumbbell"
+      }
+    ]
+  },
+  {
+    "id": "PRG077",
+    "ProgramTitle": "Powerlifting Conjugate Intermediate",
+    "FocusTag": "Powerlifting",
+    "Duration": "6 weeks",
+    "DaysPerWeek": "4",
+    "Level": "Intermediate",
+    "Split": "Conjugate",
+    "Status": "Archived",
+    "TotalSets": 33,
+    "Exercises": [
+      {
+        "Name": "Floor Press",
+        "Sets": "3",
+        "Reps": "15-20",
+        "Rest": "180s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Corner Bar Row",
+        "Sets": "5",
+        "Reps": "8-10",
+        "Rest": "120s",
+        "MuscleGroup": "Back",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Trap Raise",
+        "Sets": "4",
+        "Reps": "12",
+        "Rest": "180s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Resistance Band"
+      },
+      {
+        "Name": "Tricep Extension",
+        "Sets": "4",
+        "Reps": "8-10",
+        "Rest": "150s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Step-Up",
+        "Sets": "5",
+        "Reps": "12",
+        "Rest": "45s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Smith Machine"
+      },
+      {
+        "Name": "Paused Deadlift",
+        "Sets": "5",
+        "Reps": "12",
+        "Rest": "120s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Single Leg Press Calf",
+        "Sets": "4",
+        "Reps": "6-8",
+        "Rest": "180s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Resistance Band"
+      },
+      {
+        "Name": "Plank",
+        "Sets": "3",
+        "Reps": "8",
+        "Rest": "150s",
+        "MuscleGroup": "Core",
+        "Equipment": "Barbell"
+      }
+    ]
+  },
+  {
+    "id": "PRG078",
+    "ProgramTitle": "Powerlifting Conjugate Advanced",
+    "FocusTag": "Powerlifting",
+    "Duration": "16 weeks",
+    "DaysPerWeek": "3",
+    "Level": "Advanced",
+    "Split": "Conjugate",
+    "Status": "Active",
+    "TotalSets": 29,
+    "Exercises": [
+      {
+        "Name": "Close Grip Bench",
+        "Sets": "4",
+        "Reps": "8",
+        "Rest": "150s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Resistance Band"
+      },
+      {
+        "Name": "Back Extension",
+        "Sets": "3",
+        "Reps": "8-10",
+        "Rest": "120s",
+        "MuscleGroup": "Back",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Around the World",
+        "Sets": "4",
+        "Reps": "8",
+        "Rest": "45s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Close-Grip Bench",
+        "Sets": "5",
+        "Reps": "10",
+        "Rest": "45s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Front Squat",
+        "Sets": "3",
+        "Reps": "10-12",
+        "Rest": "60s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Smith Machine"
+      },
+      {
+        "Name": "Glute Ham Raise",
+        "Sets": "3",
+        "Reps": "6-8",
+        "Rest": "90s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Pogo Jump",
+        "Sets": "3",
+        "Reps": "6-8",
+        "Rest": "90s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Woodchop",
+        "Sets": "4",
+        "Reps": "12",
+        "Rest": "45s",
+        "MuscleGroup": "Core",
+        "Equipment": "Dumbbell"
+      }
+    ]
+  },
+  {
+    "id": "PRG079",
+    "ProgramTitle": "Powerlifting Peaking Beginner",
+    "FocusTag": "Powerlifting",
+    "Duration": "8 weeks",
+    "DaysPerWeek": "5",
+    "Level": "Beginner",
+    "Split": "Peaking",
+    "Status": "Archived",
+    "TotalSets": 35,
+    "Exercises": [
+      {
+        "Name": "Banded Bench",
+        "Sets": "4",
+        "Reps": "6-8",
+        "Rest": "180s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Resistance Band"
+      },
+      {
+        "Name": "Wide Grip Row",
+        "Sets": "4",
+        "Reps": "12-15",
+        "Rest": "150s",
+        "MuscleGroup": "Back",
+        "Equipment": "Resistance Band"
+      },
+      {
+        "Name": "Sphinx Raise",
+        "Sets": "5",
+        "Reps": "8",
+        "Rest": "60s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Resistance Band"
+      },
+      {
+        "Name": "Concentration Curl",
+        "Sets": "3",
+        "Reps": "10",
+        "Rest": "180s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Leg Press",
+        "Sets": "4",
+        "Reps": "12",
+        "Rest": "90s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Zercher Good Morning",
+        "Sets": "5",
+        "Reps": "10",
+        "Rest": "150s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Stair Climb",
+        "Sets": "5",
+        "Reps": "8",
+        "Rest": "90s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Hanging Knee Raise",
+        "Sets": "5",
+        "Reps": "6-8",
+        "Rest": "180s",
+        "MuscleGroup": "Core",
+        "Equipment": "Cable"
+      }
+    ]
+  },
+  {
+    "id": "PRG080",
+    "ProgramTitle": "Powerlifting Peaking Intermediate",
+    "FocusTag": "Powerlifting",
+    "Duration": "8 weeks",
+    "DaysPerWeek": "3",
+    "Level": "Intermediate",
+    "Split": "Peaking",
+    "Status": "Archived",
+    "TotalSets": 30,
+    "Exercises": [
+      {
+        "Name": "Chain Bench",
+        "Sets": "5",
+        "Reps": "10",
+        "Rest": "45s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "T-Bar Row",
+        "Sets": "3",
+        "Reps": "12",
+        "Rest": "90s",
+        "MuscleGroup": "Back",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Dumbbell Press",
+        "Sets": "4",
+        "Reps": "12",
+        "Rest": "120s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Tate Press",
+        "Sets": "5",
+        "Reps": "5",
+        "Rest": "45s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Squat",
+        "Sets": "3",
+        "Reps": "12-15",
+        "Rest": "150s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Single-Leg RDL",
+        "Sets": "3",
+        "Reps": "6-8",
+        "Rest": "120s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Banded Calf Raise",
+        "Sets": "3",
+        "Reps": "15-20",
+        "Rest": "180s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Crunch",
+        "Sets": "4",
+        "Reps": "12-15",
+        "Rest": "120s",
+        "MuscleGroup": "Core",
+        "Equipment": "Barbell"
+      }
+    ]
+  },
+  {
+    "id": "PRG081",
+    "ProgramTitle": "Powerlifting Peaking Advanced",
+    "FocusTag": "Powerlifting",
+    "Duration": "8 weeks",
+    "DaysPerWeek": "6",
+    "Level": "Advanced",
+    "Split": "Peaking",
+    "Status": "Active",
+    "TotalSets": 30,
+    "Exercises": [
+      {
+        "Name": "Wide Grip Bench",
+        "Sets": "3",
+        "Reps": "6-8",
+        "Rest": "90s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Seal Row",
+        "Sets": "5",
+        "Reps": "8",
+        "Rest": "150s",
+        "MuscleGroup": "Back",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Pike Push-Up",
+        "Sets": "3",
+        "Reps": "8-10",
+        "Rest": "150s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Bodyweight"
+      },
+      {
+        "Name": "Band Pushdown",
+        "Sets": "5",
+        "Reps": "10-12",
+        "Rest": "60s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Resistance Band"
+      },
+      {
+        "Name": "Leg Extension",
+        "Sets": "5",
+        "Reps": "12",
+        "Rest": "60s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Single-Leg RDL",
+        "Sets": "3",
+        "Reps": "6-8",
+        "Rest": "120s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Banded Calf Raise",
+        "Sets": "3",
+        "Reps": "15-20",
+        "Rest": "180s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Ab Wheel Rollout",
+        "Sets": "3",
+        "Reps": "12-15",
+        "Rest": "45s",
+        "MuscleGroup": "Core",
+        "Equipment": "Resistance Band"
+      }
+    ]
+  },
+  {
+    "id": "PRG082",
+    "ProgramTitle": "Bodybuilding Bro Split Beginner",
+    "FocusTag": "Bodybuilding",
+    "Duration": "16 weeks",
+    "DaysPerWeek": "3",
+    "Level": "Beginner",
+    "Split": "Bro Split",
+    "Status": "Active",
+    "TotalSets": 34,
+    "Exercises": [
+      {
+        "Name": "Incline Dumbbell Press",
+        "Sets": "4",
+        "Reps": "10",
+        "Rest": "120s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Helms Row",
+        "Sets": "3",
+        "Reps": "12-15",
+        "Rest": "180s",
+        "MuscleGroup": "Back",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Face Pull",
+        "Sets": "5",
+        "Reps": "15-20",
+        "Rest": "120s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Fat Grip Curl",
+        "Sets": "5",
+        "Reps": "10-12",
+        "Rest": "60s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Resistance Band"
+      },
+      {
+        "Name": "Cossack Squat",
+        "Sets": "3",
+        "Reps": "10",
+        "Rest": "45s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Good Morning",
+        "Sets": "4",
+        "Reps": "5",
+        "Rest": "90s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Single-Leg Calf Raise",
+        "Sets": "5",
+        "Reps": "15-20",
+        "Rest": "120s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Smith Machine"
+      },
+      {
+        "Name": "Dragon Flag",
+        "Sets": "5",
+        "Reps": "10-12",
+        "Rest": "90s",
+        "MuscleGroup": "Core",
+        "Equipment": "Kettlebell"
+      }
+    ]
+  },
+  {
+    "id": "PRG083",
+    "ProgramTitle": "Bodybuilding Bro Split Intermediate",
+    "FocusTag": "Bodybuilding",
+    "Duration": "6 weeks",
+    "DaysPerWeek": "6",
+    "Level": "Intermediate",
+    "Split": "Bro Split",
+    "Status": "Active",
+    "TotalSets": 30,
+    "Exercises": [
+      {
+        "Name": "Incline Dumbbell Press",
+        "Sets": "4",
+        "Reps": "10",
+        "Rest": "120s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Batwing Row",
+        "Sets": "4",
+        "Reps": "10",
+        "Rest": "45s",
+        "MuscleGroup": "Back",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Front Raise",
+        "Sets": "5",
+        "Reps": "8-10",
+        "Rest": "180s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Hammer Curl",
+        "Sets": "5",
+        "Reps": "15-20",
+        "Rest": "90s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Squat",
+        "Sets": "3",
+        "Reps": "12-15",
+        "Rest": "150s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Step-Up",
+        "Sets": "3",
+        "Reps": "12-15",
+        "Rest": "120s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Kettlebell"
+      },
+      {
+        "Name": "Bosu Calf Raise",
+        "Sets": "3",
+        "Reps": "5",
+        "Rest": "120s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Toes to Bar",
+        "Sets": "3",
+        "Reps": "15-20",
+        "Rest": "45s",
+        "MuscleGroup": "Core",
+        "Equipment": "Kettlebell"
+      }
+    ]
+  },
+  {
+    "id": "PRG084",
+    "ProgramTitle": "Bodybuilding Bro Split Advanced",
+    "FocusTag": "Bodybuilding",
+    "Duration": "12 weeks",
+    "DaysPerWeek": "4",
+    "Level": "Advanced",
+    "Split": "Bro Split",
+    "Status": "Draft",
+    "TotalSets": 30,
+    "Exercises": [
+      {
+        "Name": "Chain Bench",
+        "Sets": "5",
+        "Reps": "10",
+        "Rest": "45s",
+        "MuscleGroup": "Chest",
+        "Equipment": "Dumbbell"
+      },
+      {
+        "Name": "Batwing Row",
+        "Sets": "4",
+        "Reps": "10",
+        "Rest": "45s",
+        "MuscleGroup": "Back",
+        "Equipment": "Machine"
+      },
+      {
+        "Name": "Landmine Lateral Raise",
+        "Sets": "4",
+        "Reps": "15-20",
+        "Rest": "180s",
+        "MuscleGroup": "Shoulders",
+        "Equipment": "Resistance Band"
+      },
+      {
+        "Name": "JM Press",
+        "Sets": "4",
+        "Reps": "6-8",
+        "Rest": "120s",
+        "MuscleGroup": "Arms",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Cambridge Squat",
+        "Sets": "4",
+        "Reps": "12-15",
+        "Rest": "120s",
+        "MuscleGroup": "Legs",
+        "Equipment": "Barbell"
+      },
+      {
+        "Name": "Stiff-Leg Deadlift",
+        "Sets": "3",
+        "Reps": "12-15",
+        "Rest": "90s",
+        "MuscleGroup": "Glutes",
+        "Equipment": "Cable"
+      },
+      {
+        "Name": "Skip",
+        "Sets": "3",
+        "Reps": "12-15",
+        "Rest": "180s",
+        "MuscleGroup": "Calves",
+        "Equipment": "Smith Machine"
+      },
+      {
+        "Name": "Suitcase Carry",
+        "Sets": "3",
+        "Reps": "5",
+        "Rest": "180s",
+        "MuscleGroup": "Core",
+        "Equipment": "Machine"
+      }
+    ]
+  }
+]

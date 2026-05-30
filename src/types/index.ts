@@ -34,3 +34,121 @@ export interface Client {
   program: string;
   programPhase: string;
 }
+
+// ── Program Builder Types ──
+
+export type SetType = 'Normal' | 'Warm-up' | 'Drop Set' | 'To Failure' | 'AMRAP';
+export type SetStatus = 'done' | 'empty';
+export type ExerciseUnit = 'kg' | 'lbs';
+
+export interface ExerciseSet {
+  set: number;
+  prescribed: string;
+  clientLoad: string;
+  load: string;
+  reps: string;
+  rpe: string;
+  rest: string;
+  type: SetType;
+  done: SetStatus;
+  note?: string;
+  lastWeekLoad?: string;
+  lastWeekReps?: string;
+}
+
+export interface Exercise {
+  id: string;
+  name: string;
+  scheme: string;
+  target: string;
+  unit: ExerciseUnit;
+  sets: ExerciseSet[];
+  muscleGroup: string;
+  _expanded?: boolean;
+  _showNotes?: boolean;
+  _dayIndex?: number;
+  _method?: string;
+}
+
+export interface WorkoutSession {
+  name: string;
+  exercises: Exercise[];
+  startTime?: Date;
+}
+
+export interface LiftRecord {
+  val: string;
+  date: string;
+}
+
+export type LiftRecordsMap = Record<string, Record<string, LiftRecord>>;
+
+// ── Saved Program (from All-in-One Creator) ──
+
+export interface CreatorExercise {
+  code: string;
+  name: string;
+  sets: number;
+  reps: string;
+  pct1RM: string;
+  tempo: string;
+  rest: string;
+}
+
+export interface ClientProfile {
+  experience: string;
+  equipment: string;
+  timePerSession: number;
+}
+
+export interface DayExercise {
+  code: string;
+  name: string;
+  sets: number;
+  reps: string;
+  pct1RM: string;
+  tempo: string;
+  rest: string;
+}
+
+export interface DayData {
+  day: string;
+  dayNumber: number;
+  method: string;
+  exercises: DayExercise[];
+}
+
+export interface ProgramData {
+  id?: string;
+  goal: string;
+  method: string;
+  clientContext: {
+    ageRange: string;
+    experience: string;
+    bodyType: string;
+    availability: string;
+    limitations: string[];
+    otherLimitation: string;
+  };
+  phases: { id: string; name: string; weeks: number; focus: string; color: string; active: boolean }[];
+  weeklyHours: number;
+  split: { day: string; active: boolean; workout: string }[];
+  exercises: CreatorExercise[];
+  programName: string;
+  description: string;
+  tags: string[];
+  isPublic: boolean;
+  assignedClient: string;
+  template?: string;
+  trainingMethod?: string;
+  clientProfile?: ClientProfile;
+  totalSets?: number;
+  days?: DayData[];
+}
+
+export interface SavedProgram {
+  id: string;
+  createdAt: string;
+  updatedAt: string;
+  data: ProgramData;
+}

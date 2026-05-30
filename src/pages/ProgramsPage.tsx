@@ -1,1163 +1,757 @@
-import { useState, useEffect, useMemo, useCallback } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useState, useEffect, useMemo, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
-  FolderOpen,
-  CheckCircle,
-  TrendingUp,
-  Archive,
-  Search,
-  Clock,
-  Calendar,
-  Users,
-  Edit,
-  Copy,
-  UserPlus,
-  ArchiveIcon,
-  MoreVertical,
-  Grid3X3,
-  List,
-  Star,
-  Filter,
-  X,
   Dumbbell,
+  Play,
+  Pencil,
+  Copy,
+  Trash2,
+  Plus,
+  Search,
+  SlidersHorizontal,
   Zap,
-  Wind,
-  HeartPulse,
-  Activity,
-  ChevronDown,
-  ChevronLeft,
-  ChevronRight,
-  ChevronUp,
-  Eye,
-  EyeOff,
-} from 'lucide-react'
-import { cn } from '../lib/utils'
+  Layers,
+  Flame,
+  Columns,
+  Circle,
+  Settings,
+  Trophy,
+  Clock,
+  User,
 
-// ── Types ──────────────────────────────────────────────
-interface TrainingMethod {
-  Name: string
-  Goal: string
-  Duration: string
-  Frequency: string
-  TargetAudience: string
-  Equipment: string
-  Structure: string
-  Progression: string
-  NutritionNotes: string
-  TrackingMetrics: string
-  SafetyNotes: string
-  MediaAssets?: string
-  Category: string
+  X,
+} from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import type { SavedProgram } from '@/types';
+
+// ── Template Definitions ────────────────────────────────────────
+interface TemplateDef {
+  key: string;
+  label: string;
+  icon: React.ReactNode;
+  color: string;
+  bg: string;
+  border: string;
+  gradient: string;
+  focus: string;
+  description: string;
 }
 
-interface Program {
-  id: string
-  name: string
-  goal: string
-  method: string
-  category: string
-  difficulty: string
-  duration: string
-  frequency: string
-  equipment: string
-  structure: string
-  progression: string
-  timesAssigned: number
-  activeClients: number
-  lastAssigned: string
-  archived: boolean
-  createdAt: string
-  colorBanner: string
+const TEMPLATES: TemplateDef[] = [
+  {
+    key: 'GVT',
+    label: 'GVT',
+    icon: <Layers size={20} />,
+    color: '#8B5CF6',
+    bg: 'bg-[#8B5CF6]/10',
+    border: 'border-[#8B5CF6]/30',
+    gradient: 'from-[#8B5CF6] to-[#A78BFA]',
+    focus: 'Hypertrophy',
+    description: '10×10 high-volume German Volume Training',
+  },
+  {
+    key: 'GBC',
+    label: 'GBC',
+    icon: <Flame size={20} />,
+    color: '#F97316',
+    bg: 'bg-[#F97316]/10',
+    border: 'border-[#F97316]/30',
+    gradient: 'from-[#F97316] to-[#FB923C]',
+    focus: 'Fat Loss',
+    description: 'Superset-driven German Body Composition',
+  },
+  {
+    key: 'HIIT',
+    label: 'HIIT',
+    icon: <Zap size={20} />,
+    color: '#EF4444',
+    bg: 'bg-[#EF4444]/10',
+    border: 'border-[#EF4444]/30',
+    gradient: 'from-[#EF4444] to-[#F87171]',
+    focus: 'Conditioning',
+    description: 'High-intensity interval metabolic training',
+  },
+  {
+    key: 'PPL',
+    label: 'PPL',
+    icon: <Columns size={20} />,
+    color: '#00AEEF',
+    bg: 'bg-[#00AEEF]/10',
+    border: 'border-[#00AEEF]/30',
+    gradient: 'from-[#00AEEF] to-[#38BDF8]',
+    focus: 'Hypertrophy',
+    description: 'Push Pull Legs — 3 to 6 day split',
+  },
+  {
+    key: 'Full Body',
+    label: 'Full Body',
+    icon: <Circle size={20} />,
+    color: '#22C55E',
+    bg: 'bg-[#22C55E]/10',
+    border: 'border-[#22C55E]/30',
+    gradient: 'from-[#22C55E] to-[#4ADE80]',
+    focus: 'Strength',
+    description: 'Complete body training every session',
+  },
+  {
+    key: 'Strength',
+    label: 'Strength',
+    icon: <Trophy size={20} />,
+    color: '#EAB308',
+    bg: 'bg-[#EAB308]/10',
+    border: 'border-[#EAB308]/30',
+    gradient: 'from-[#EAB308] to-[#FDE047]',
+    focus: 'Power',
+    description: 'Low-rep, high-load powerlifting style',
+  },
+  {
+    key: 'Custom',
+    label: 'Custom',
+    icon: <Settings size={20} />,
+    color: '#6B7280',
+    bg: 'bg-[#6B7280]/10',
+    border: 'border-[#6B7280]/30',
+    gradient: 'from-[#6B7280] to-[#9CA3AF]',
+    focus: 'Flexible',
+    description: 'User-defined template — any configuration',
+  },
+];
+
+const TEMPLATE_KEYS = TEMPLATES.map(t => t.key);
+
+function getTemplateDef(key?: string): TemplateDef | undefined {
+  return TEMPLATES.find(t => t.key === key) || TEMPLATES.find(t => t.key === 'Custom');
 }
 
-// ── Constants ──────────────────────────────────────────
-const GOAL_OPTIONS = [
-  { label: 'Lose Fat', value: 'fat loss' },
-  { label: 'Build Muscle', value: 'muscle' },
-  { label: 'Strength', value: 'strength' },
-  { label: 'Endurance', value: 'endurance' },
-  { label: 'Rehabilitation', value: 'rehab' },
-  { label: 'General Fitness', value: 'general' },
-]
+// ── Goal Colors ─────────────────────────────────────────────────
+const GOAL_COLORS: Record<string, { bg: string; text: string; gradient: string }> = {
+  strength:    { bg: 'bg-[#00AEEF]/10', text: 'text-[#00AEEF]', gradient: 'from-[#00AEEF] to-[#008DC4]' },
+  hypertrophy: { bg: 'bg-[#8B5CF6]/10', text: 'text-[#8B5CF6]', gradient: 'from-[#8B5CF6] to-[#7C4FE4]' },
+  fatloss:     { bg: 'bg-[#22C55E]/10', text: 'text-[#22C55E]', gradient: 'from-[#22C55E] to-[#1EAD4E]' },
+  endurance:   { bg: 'bg-[#F59E0B]/10', text: 'text-[#F59E0B]', gradient: 'from-[#F59E0B] to-[#D97706]' },
+  rehab:       { bg: 'bg-[#6B7280]/10', text: 'text-[#6B7280]', gradient: 'from-[#6B7280] to-[#4B5563]' },
+  power:       { bg: 'bg-[#EAB308]/10', text: 'text-[#EAB308]', gradient: 'from-[#EAB308] to-[#CA8A04]' },
+};
 
-const DIFFICULTY_OPTIONS = ['Beginner', 'Intermediate', 'Advanced', 'Elite']
+const GOAL_LABELS: Record<string, string> = {
+  strength: 'Strength',
+  hypertrophy: 'Hypertrophy',
+  fatloss: 'Fat Loss',
+  endurance: 'Endurance',
+  rehab: 'Rehab',
+  power: 'Power',
+};
 
-const GOAL_COLOR_MAP: Record<string, string> = {
-  'fat loss': 'linear-gradient(135deg, #22C55E, #16A34A)',
-  'lose fat': 'linear-gradient(135deg, #22C55E, #16A34A)',
-  'weight loss': 'linear-gradient(135deg, #22C55E, #16A34A)',
-  'muscle': 'linear-gradient(135deg, #8B5CF6, #6D28D9)',
-  'hypertrophy': 'linear-gradient(135deg, #8B5CF6, #6D28D9)',
-  'build muscle': 'linear-gradient(135deg, #8B5CF6, #6D28D9)',
-  'strength': 'linear-gradient(135deg, #00AEEF, #0077B6)',
-  'endurance': 'linear-gradient(135deg, #F97316, #EA580C)',
-  'rehab': 'linear-gradient(135deg, #EAB308, #CA8A04)',
-  'rehabilitation': 'linear-gradient(135deg, #EAB308, #CA8A04)',
-  'general': 'linear-gradient(135deg, #C0C0C0, #9CA3AF)',
-  'athletic': 'linear-gradient(135deg, #EC4899, #DB2777)',
+function getGoalColor(goal: string) {
+  return GOAL_COLORS[goal] || GOAL_COLORS.strength;
 }
 
-const GOAL_BG_MAP: Record<string, string> = {
-  'fat loss': 'rgba(34,197,94,0.15)',
-  'lose fat': 'rgba(34,197,94,0.15)',
-  'weight loss': 'rgba(34,197,94,0.15)',
-  'muscle': 'rgba(139,92,246,0.15)',
-  'hypertrophy': 'rgba(139,92,246,0.15)',
-  'build muscle': 'rgba(139,92,246,0.15)',
-  'strength': 'rgba(0,174,239,0.15)',
-  'endurance': 'rgba(249,115,22,0.15)',
-  'rehab': 'rgba(234,179,8,0.15)',
-  'rehabilitation': 'rgba(234,179,8,0.15)',
-  'general': 'rgba(192,192,192,0.15)',
-  'athletic': 'rgba(236,72,153,0.15)',
+function getGoalLabel(goal: string) {
+  return GOAL_LABELS[goal] || goal;
 }
 
-const DIFFICULTY_COLOR: Record<string, { text: string; bg: string }> = {
-  Beginner: { text: '#22C55E', bg: 'rgba(34,197,94,0.15)' },
-  Intermediate: { text: '#EAB308', bg: 'rgba(234,179,8,0.15)' },
-  Advanced: { text: '#F97316', bg: 'rgba(249,115,22,0.15)' },
-  Elite: { text: '#EF4444', bg: 'rgba(239,68,68,0.15)' },
-}
+// ── Local Storage Helpers ───────────────────────────────────────
+const PROGRAMS_KEY = 'azfit-programs';
+const SESSION_KEY = (id: string) => `azfit-session-${id}`;
 
-// ── Helpers ────────────────────────────────────────────
-function normalizeGoal(goal: string): string {
-  const g = goal.toLowerCase()
-  if (g.includes('fat') || g.includes('loss')) return 'fat loss'
-  if (g.includes('muscle') || g.includes('hypertrophy')) return 'muscle'
-  if (g.includes('strength')) return 'strength'
-  if (g.includes('endurance')) return 'endurance'
-  if (g.includes('rehab')) return 'rehab'
-  if (g.includes('athletic')) return 'athletic'
-  return 'general'
-}
-
-function getGoalColor(goal: string): string {
-  return GOAL_COLOR_MAP[normalizeGoal(goal)] || GOAL_COLOR_MAP['general']
-}
-
-function getGoalBg(goal: string): string {
-  return GOAL_BG_MAP[normalizeGoal(goal)] || GOAL_BG_MAP['general']
-}
-
-function getDifficultyColor(diff: string) {
-  return DIFFICULTY_COLOR[diff] || DIFFICULTY_COLOR['Intermediate']
-}
-
-function getGoalIcon(goal: string, size = 32) {
-  const g = normalizeGoal(goal)
-  switch (g) {
-    case 'fat loss': return <Zap size={size} className="text-white" />
-    case 'muscle': return <Dumbbell size={size} className="text-white" />
-    case 'strength': return <Zap size={size} className="text-white" />
-    case 'endurance': return <Wind size={size} className="text-white" />
-    case 'rehab': return <HeartPulse size={size} className="text-white" />
-    default: return <Activity size={size} className="text-white" />
+function getPrograms(): SavedProgram[] {
+  try {
+    const raw = localStorage.getItem(PROGRAMS_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch {
+    return [];
   }
 }
 
-function getMethodFromName(name: string): string {
-  if (name.includes('Upper') || name.includes('Lower')) return 'Upper/Lower'
-  if (name.includes('PPL') || name.includes('Push') || name.includes('Pull')) return 'Push/Pull/Legs'
-  if (name.includes('5x5') || name.includes('5/3/1') || name.includes('StrongLifts')) return 'Full Body'
-  if (name.includes('Bro')) return 'Bro Split'
-  if (name.includes('Circuit') || name.includes('HIIT')) return 'Circuit/HIIT'
-  if (name.includes('Full Body')) return 'Full Body'
-  return 'Other'
+function savePrograms(list: SavedProgram[]) {
+  localStorage.setItem(PROGRAMS_KEY, JSON.stringify(list));
 }
 
-function generateSamplePrograms(methods: TrainingMethod[]): Program[] {
-  const now = new Date()
-  return methods.map((m, i) => {
-    const diffKeywords: Record<string, string> = {
-      beginner: 'Beginner',
-      intermediate: 'Intermediate',
-      advanced: 'Advanced',
-      elite: 'Elite',
-    }
-    let difficulty = 'Intermediate'
-    for (const [key, val] of Object.entries(diffKeywords)) {
-      if (m.TargetAudience.toLowerCase().includes(key)) {
-        difficulty = val
-        break
-      }
-    }
-    const timesAssigned = [18, 24, 15, 9, 7, 11, 6, 13, 20, 4, 8, 12, 5, 3, 10, 14, 2, 16, 6, 9][i % 20]
-    const daysAgo = [1, 3, 7, 14, 2, 5, 21, 10, 4, 30, 6, 8, 12, 25, 9, 3, 15, 7, 11, 2][i % 20]
-    const lastAssigned = new Date(now)
-    lastAssigned.setDate(lastAssigned.getDate() - daysAgo)
-    const createdDaysAgo = [30, 60, 14, 90, 45, 120, 7, 200, 55, 80][i % 10]
-    const createdAt = new Date(now)
-    createdAt.setDate(createdAt.getDate() - createdDaysAgo)
-
-    return {
-      id: `prog-${i + 1}`,
-      name: m.Name,
-      goal: m.Goal,
-      method: getMethodFromName(m.Name),
-      category: m.Category,
-      difficulty,
-      duration: `${m.Duration} wk`,
-      frequency: `${m.Frequency}x/wk`,
-      equipment: m.Equipment,
-      structure: m.Structure,
-      progression: m.Progression,
-      timesAssigned,
-      activeClients: Math.floor(timesAssigned * 0.4),
-      lastAssigned: daysAgo === 1 ? '1 day ago' : `${daysAgo} days ago`,
-      archived: i >= methods.length - 9,
-      createdAt: createdAt.toISOString(),
-      colorBanner: getGoalColor(m.Goal),
-    }
-  })
+function getSessionProgress(programId: string): { completedSets: number; totalSets: number } {
+  try {
+    const raw = localStorage.getItem(SESSION_KEY(programId));
+    if (!raw) return { completedSets: 0, totalSets: 0 };
+    const session = JSON.parse(raw);
+    const exercises = session.exercises || [];
+    let completed = 0;
+    let total = 0;
+    exercises.forEach((ex: { sets: Array<{ done: string }> }) => {
+      ex.sets.forEach((s: { done: string }) => {
+        total++;
+        if (s.done !== 'empty') completed++;
+      });
+    });
+    return { completedSets: completed, totalSets: total };
+  } catch {
+    return { completedSets: 0, totalSets: 0 };
+  }
 }
 
-// ── Components ─────────────────────────────────────────
+// ── DB Programs Loader ──────────────────────────────────────────
+async function loadDbPrograms(): Promise<SavedProgram[]> {
+  try {
+    const res = await fetch('./programs_db.json');
+    if (!res.ok) return [];
+    return await res.json();
+  } catch {
+    return [];
+  }
+}
 
-/** Stat Card */
-function StatCard({
-  icon: Icon,
-  label,
-  value,
-  color,
-  delay,
+// ── Template Feature Card ───────────────────────────────────────
+function TemplateFeatureCard({
+  template,
+  isActive,
+  onClick,
+  count,
 }: {
-  icon: React.ElementType
-  label: string
-  value: string
-  color: string
-  delay: number
+  template: TemplateDef;
+  isActive: boolean;
+  onClick: () => void;
+  count: number;
 }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 15 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, delay, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
-      className="flex items-center gap-3"
+    <motion.button
+      whileHover={{ y: -3, scale: 1.02 }}
+      whileTap={{ scale: 0.98 }}
+      onClick={onClick}
+      className={`relative flex-shrink-0 w-[180px] rounded-xl border p-4 text-left transition-all ${
+        isActive
+          ? `${template.bg} ${template.border} ring-1 ring-[${template.color}]/40`
+          : 'bg-[#141414] border-[#2A2A2A] hover:border-[#3A3A3A]'
+      }`}
     >
-      <div
-        className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
-        style={{ backgroundColor: `${color}20` }}
-      >
-        <Icon size={20} style={{ color }} />
+      <div className="flex items-center gap-2 mb-2">
+        <div
+          className="w-8 h-8 rounded-lg flex items-center justify-center"
+          style={{ backgroundColor: `${template.color}20`, color: template.color }}
+        >
+          {template.icon}
+        </div>
+        <span className="text-[#F0F0F0] font-semibold text-sm">{template.label}</span>
       </div>
-      <div className="min-w-0">
-        <p className="text-[#F0F0F0] font-semibold text-lg leading-tight truncate" style={{ fontFamily: 'Space Mono, monospace' }}>
-          {value}
-        </p>
-        <p className="text-[#6B6B6B] text-xs truncate">{label}</p>
+      <p className="text-[#6B7280] text-[11px] leading-relaxed mb-2">{template.description}</p>
+      <div className="flex items-center justify-between">
+        <span
+          className="text-[10px] px-1.5 py-0.5 rounded font-medium"
+          style={{ backgroundColor: `${template.color}15`, color: template.color }}
+        >
+          {template.focus}
+        </span>
+        <span className="text-[#555] text-[10px] font-mono">{count} programs</span>
       </div>
-    </motion.div>
-  )
+      {isActive && (
+        <div
+          className="absolute top-2 right-2 w-2 h-2 rounded-full"
+          style={{ backgroundColor: template.color }}
+        />
+      )}
+    </motion.button>
+  );
 }
 
-/** Generate mock program schedule */
-function generateMockSchedule(program: Program) {
-  const freq = parseInt(program.frequency) || 3
-  const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-  const exercises = [
-    ['Squats', 'Bench Press', 'Barbell Rows', 'Overhead Press'],
-    ['Deadlifts', 'Pull-Ups', 'Dumbbell Lunges', 'Face Pulls'],
-    ['Leg Press', 'Incline Dumbbell Press', 'Lat Pulldowns', 'Lateral Raises'],
-    ['Romanian Deadlifts', 'Push-Ups', 'Seated Cable Rows', 'Plank'],
-    ['Box Jumps', 'Dumbbell Bench', 'Bent-Over Rows', 'Tricep Dips'],
-    ['Goblet Squats', 'Chest Flyes', 'Pull-Ups', 'Farmer\'s Carry'],
-  ]
-  const types = ['Strength', 'Hypertrophy', 'Endurance', 'Power', 'Recovery']
-  
-  const schedule = []
-  for (let i = 0; i < freq; i++) {
-    const dayIndex = Math.floor((i / freq) * 7 + (7 / freq) / 2)
-    schedule.push({
-      day: days[Math.min(dayIndex, 6)],
-      type: types[i % types.length],
-      exercises: exercises[i % exercises.length],
-      duration: `${40 + Math.floor(Math.random() * 30)} min`,
-      intensity: ['Low', 'Moderate', 'High', 'Very High'][i % 4],
-    })
-  }
-  return schedule
-}
-
-/** Program Card — Standardized compact with expand interaction */
+// ── Program Card ────────────────────────────────────────────────
 function ProgramCard({
   program,
-  index,
-  onAction,
-  isExpanded,
-  showFullDetail,
-  onToggleExpand,
-  onToggleDetail,
+  onStart,
+  onEdit,
+  onDuplicate,
+  onDelete,
+  isReadOnly,
 }: {
-  program: Program
-  index: number
-  onAction: (action: string, program: Program) => void
-  isExpanded: boolean
-  showFullDetail: boolean
-  onToggleExpand: () => void
-  onToggleDetail: () => void
+  program: SavedProgram;
+  onStart: () => void;
+  onEdit: () => void;
+  onDuplicate: () => void;
+  onDelete: () => void;
+  isReadOnly?: boolean;
 }) {
-  const [menuOpen, setMenuOpen] = useState(false)
-  const diffColor = getDifficultyColor(program.difficulty)
-  const goalLabel = GOAL_OPTIONS.find(g => program.goal.toLowerCase().includes(g.value))?.label || program.goal
-  const schedule = useMemo(() => generateMockSchedule(program), [program.id])
+  const d = program.data;
+  const goal = getGoalColor(d.goal);
+  const goalLabel = getGoalLabel(d.goal);
+  const tmpl = getTemplateDef(d.template);
+  const totalWeeks = d.phases.filter(p => p.active).reduce((s, p) => s + p.weeks, 0);
+  const activeDays = d.split.filter(day => day.active).length;
+  const totalExercises = d.exercises.length;
+  const totalSets = d.totalSets || d.exercises.reduce((sum, ex) => sum + ex.sets, 0);
+  const progress = getSessionProgress(program.id);
+  const progressPct = progress.totalSets > 0
+    ? Math.round((progress.completedSets / progress.totalSets) * 100)
+    : 0;
 
   return (
     <motion.div
       layout
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -10 }}
-      transition={{
-        layout: { duration: 0.4, ease: [0.16, 1, 0.3, 1] },
-        opacity: { duration: 0.35, delay: index * 0.04 },
-        y: { duration: 0.35, delay: index * 0.04 },
-      }}
-      className={cn(
-        "relative bg-[#141414] border border-[#2A2A2A] rounded-xl overflow-hidden flex flex-col cursor-pointer transition-colors duration-200",
-        isExpanded ? "ring-1 ring-[#00AEEF] shadow-[0_8px_32px_rgba(0,174,239,0.15)]" : "hover:border-[#3A3A3A]"
-      )}
-      onClick={() => {
-        if (!menuOpen) onToggleExpand()
-      }}
-      onMouseLeave={() => setMenuOpen(false)}
+      exit={{ opacity: 0, y: -12 }}
+      whileHover={{ y: -2 }}
+      className="group relative rounded-xl border border-[#2A2A2A] bg-[#141414] overflow-hidden hover:border-[#3A3A3A] transition-colors"
     >
-      {/* Compact Content — standardized size */}
-      <div className={cn("p-3 flex flex-col", !isExpanded && "min-h-[148px]")}>
-        {/* Header: [Program Icon] [Program Title] [Most Used Badge] */}
-        <div className="flex items-center gap-2 mb-2.5">
-          <div
-            className="w-7 h-7 rounded-md flex items-center justify-center flex-shrink-0"
-            style={{ background: program.colorBanner }}
-          >
-            {getGoalIcon(program.goal, 14)}
-          </div>
-          <h3 className="text-[#F0F0F0] font-semibold text-[13px] leading-snug flex-1 min-w-0 truncate">
-            {program.name}
-          </h3>
-          {program.timesAssigned >= 15 && (
-            <span className="flex-shrink-0 flex items-center gap-1 bg-[rgba(234,179,8,0.15)] border border-[rgba(234,179,8,0.3)] text-[#EAB308] text-[9px] font-semibold px-1.5 py-0.5 rounded-full">
-              <Star size={8} /> Most Used
-            </span>
-          )}
-          {/* More menu */}
-          <div className="relative flex-shrink-0" onClick={(e) => e.stopPropagation()}>
-            <button
-              onClick={(e) => { e.stopPropagation(); setMenuOpen(!menuOpen) }}
-              className="text-[#6B6B6B] hover:text-[#F0F0F0] p-0.5 rounded transition-colors"
-              aria-label="More actions"
-            >
-              <MoreVertical size={14} />
-            </button>
-            <AnimatePresence>
-              {menuOpen && (
-                <>
-                  <div className="fixed inset-0 z-40" onClick={() => setMenuOpen(false)} />
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ duration: 0.15 }}
-                    className="absolute right-0 top-6 w-44 bg-[#1A1A1A] border border-[#2A2A2A] rounded-lg shadow-[0_8px_24px_rgba(0,0,0,0.4)] z-50 py-1"
-                  >
-                    {[
-                      { label: 'Edit Program', icon: Edit, action: 'edit' },
-                      { label: 'Duplicate', icon: Copy, action: 'duplicate' },
-                      { label: 'Assign to Client', icon: UserPlus, action: 'assign' },
-                      { label: program.archived ? 'Restore' : 'Archive', icon: ArchiveIcon, action: 'archive' },
-                    ].map((item) => (
-                      <button
-                        key={item.action}
-                        onClick={(e) => { e.stopPropagation(); setMenuOpen(false); onAction(item.action, program) }}
-                        className="w-full flex items-center gap-2 px-3 py-1.5 text-[#A0A0A0] hover:text-[#F0F0F0] hover:bg-[#242424] text-xs transition-colors"
-                      >
-                        <item.icon size={13} />
-                        {item.label}
-                      </button>
-                    ))}
-                  </motion.div>
-                </>
+      {/* Color banner */}
+      <div className={`h-1.5 w-full bg-gradient-to-r ${goal.gradient}`} />
+
+      <div className="p-4">
+        {/* Header */}
+        <div className="flex items-start justify-between gap-2 mb-3">
+          <div className="min-w-0">
+            <h3 className="text-[#F0F0F0] font-semibold text-sm truncate">
+              {d.programName || 'Untitled Program'}
+            </h3>
+            <div className="flex items-center gap-1.5 mt-1 flex-wrap">
+              <span className={`text-[10px] px-1.5 py-0.5 rounded font-medium ${goal.bg} ${goal.text}`}>
+                {goalLabel}
+              </span>
+              {tmpl && (
+                <span
+                  className="text-[10px] px-1.5 py-0.5 rounded font-medium"
+                  style={{ backgroundColor: `${tmpl.color}15`, color: tmpl.color }}
+                >
+                  {tmpl.label}
+                </span>
               )}
-            </AnimatePresence>
+              {d.trainingMethod && (
+                <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#1A1A1A] text-[#A0A0A0] font-medium">
+                  {d.trainingMethod}
+                </span>
+              )}
+              {isReadOnly && (
+                <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#1A1A1A] text-[#6B7280] font-medium">
+                  Built-in
+                </span>
+              )}
+            </div>
+          </div>
+          {!isReadOnly && (
+            <button
+              onClick={onDelete}
+              className="opacity-0 group-hover:opacity-100 p-1.5 rounded-lg text-[#666] hover:text-[#EF4444] hover:bg-[#EF4444]/10 transition-all"
+              title="Delete"
+            >
+              <Trash2 size={14} />
+            </button>
+          )}
+        </div>
+
+        {/* Client Profile micro-bar */}
+        {d.clientProfile && (
+          <div className="flex items-center gap-3 mb-3 px-2 py-1.5 rounded-lg bg-[#0A0A0A]/60 border border-[#1F1F1F]">
+            <div className="flex items-center gap-1 text-[10px] text-[#6B7280]">
+              <User size={10} className="text-[#A0A0A0]" />
+              <span className="text-[#A0A0A0]">{d.clientProfile.experience}</span>
+            </div>
+            <div className="w-px h-3 bg-[#2A2A2A]" />
+            <div className="flex items-center gap-1 text-[10px] text-[#6B7280]">
+              <Dumbbell size={10} className="text-[#A0A0A0]" />
+              <span className="text-[#A0A0A0]">{d.clientProfile.equipment}</span>
+            </div>
+            <div className="w-px h-3 bg-[#2A2A2A]" />
+            <div className="flex items-center gap-1 text-[10px] text-[#6B7280]">
+              <Clock size={10} className="text-[#A0A0A0]" />
+              <span className="text-[#A0A0A0]">{d.clientProfile.timePerSession}m</span>
+            </div>
+          </div>
+        )}
+
+        {/* Stats grid */}
+        <div className="grid grid-cols-4 gap-2 mb-3">
+          <div className="bg-[#0A0A0A] rounded-lg p-2 text-center border border-[#1F1F1F]">
+            <div className="text-[#F0F0F0] font-mono font-bold text-sm">{totalWeeks}w</div>
+            <div className="text-[#666] text-[10px]">Duration</div>
+          </div>
+          <div className="bg-[#0A0A0A] rounded-lg p-2 text-center border border-[#1F1F1F]">
+            <div className="text-[#00AEEF] font-mono font-bold text-sm">{activeDays}<span className="text-[#555] text-[10px]">/wk</span></div>
+            <div className="text-[#666] text-[10px]">Days</div>
+          </div>
+          <div className="bg-[#0A0A0A] rounded-lg p-2 text-center border border-[#1F1F1F]">
+            <div className="text-[#F0F0F0] font-mono font-bold text-sm">{totalExercises}</div>
+            <div className="text-[#666] text-[10px]">Exercises</div>
+          </div>
+          <div className="bg-[#0A0A0A] rounded-lg p-2 text-center border border-[#1F1F1F]">
+            <div className="text-[#F0F0F0] font-mono font-bold text-sm">{totalSets}</div>
+            <div className="text-[#666] text-[10px]">Sets</div>
           </div>
         </div>
 
-        {/* Row 1: (Levels) (Equipment) (Other Tags) (Type of Program) */}
-        <div className="flex flex-wrap gap-1 mb-2">
-          <span
-            className="text-[9px] font-semibold px-1.5 py-0.5 rounded-full"
-            style={{ backgroundColor: diffColor.bg, color: diffColor.text }}
-          >
-            {program.difficulty}
-          </span>
-          <span className="text-[9px] font-semibold px-1.5 py-0.5 rounded-full bg-[rgba(192,192,192,0.1)] text-[#C0C0C0]">
-            {program.equipment}
-          </span>
-          <span
-            className="text-[9px] font-semibold px-1.5 py-0.5 rounded-full"
-            style={{ backgroundColor: getGoalBg(program.goal), color: '#F0F0F0' }}
-          >
-            {goalLabel}
-          </span>
-          <span className="text-[9px] font-semibold px-1.5 py-0.5 rounded-full bg-[rgba(0,174,239,0.1)] text-[#00AEEF]">
-            {program.method}
-          </span>
+        {/* Progress bar */}
+        <div className="mb-3">
+          <div className="flex items-center justify-between text-[10px] mb-1">
+            <span className="text-[#666]">Session Progress</span>
+            <span className="text-[#A0A0A0] font-mono">{progress.completedSets}/{progress.totalSets} sets</span>
+          </div>
+          <div className="h-1.5 bg-[#1A1A1A] rounded-full overflow-hidden">
+            <div
+              className={`h-full rounded-full bg-gradient-to-r ${goal.gradient} transition-all duration-500`}
+              style={{ width: `${Math.min(progressPct, 100)}%` }}
+            />
+          </div>
         </div>
 
-        {/* Row 2: (# Weeks) (Last Updated / # Days Ago) (# Active Users) */}
-        <div className="mt-auto flex items-center justify-between text-[9px] text-[#6B6B6B]">
-          <div className="flex items-center gap-3">
-            <div className="flex items-center gap-1">
-              <Calendar size={10} className="text-[#6B6B6B]" />
-              <span>{program.duration}</span>
-            </div>
-            <div className="flex items-center gap-1">
-              <Clock size={10} className="text-[#6B6B6B]" />
-              <span>{program.lastAssigned}</span>
-            </div>
+        {/* Phase pills */}
+        {d.phases.filter(p => p.active).length > 0 && (
+          <div className="flex flex-wrap gap-1 mb-3">
+            {d.phases.filter(p => p.active).map((phase) => (
+              <span
+                key={phase.id}
+                className="text-[10px] px-1.5 py-0.5 rounded font-medium"
+                style={{ backgroundColor: `${phase.color}15`, color: phase.color }}
+              >
+                {phase.name}
+              </span>
+            ))}
           </div>
-          <div className="flex items-center gap-1 text-[#A0A0A0]">
-            <Users size={10} className="text-[#6B6B6B]" />
-            <span>{program.activeClients} active</span>
-          </div>
+        )}
+
+        {/* Actions */}
+        <div className="flex items-center gap-2 pt-2 border-t border-[#1F1F1F]">
+          <Button
+            onClick={onStart}
+            size="sm"
+            className={`flex-1 h-8 text-xs font-semibold bg-gradient-to-r ${goal.gradient} text-white hover:opacity-90`}
+          >
+            <Play size={13} className="mr-1" />
+            {progressPct > 0 ? 'Resume Session' : 'Start Session'}
+          </Button>
+          {!isReadOnly && (
+            <>
+              <button
+                onClick={onEdit}
+                className="h-8 w-8 flex items-center justify-center rounded-lg border border-[#2A2A2A] text-[#A0A0A0] hover:text-[#00AEEF] hover:border-[#00AEEF]/30 transition-colors"
+                title="Edit"
+              >
+                <Pencil size={13} />
+              </button>
+              <button
+                onClick={onDuplicate}
+                className="h-8 w-8 flex items-center justify-center rounded-lg border border-[#2A2A2A] text-[#A0A0A0] hover:text-[#8B5CF6] hover:border-[#8B5CF6]/30 transition-colors"
+                title="Duplicate"
+              >
+                <Copy size={13} />
+              </button>
+            </>
+          )}
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+// ── Empty State ─────────────────────────────────────────────────
+function EmptyState({ onCreate }: { onCreate: () => void }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="flex flex-col items-center justify-center py-20 text-center"
+    >
+      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#00AEEF]/20 to-[#A855F7]/10 flex items-center justify-center mb-4 border border-[#00AEEF]/20">
+        <Dumbbell size={28} className="text-[#00AEEF]" />
+      </div>
+      <h3 className="text-[#F0F0F0] font-semibold text-lg mb-1">No Active Programs</h3>
+      <p className="text-[#6B7280] text-sm max-w-sm mb-6">
+        Create your first program using the All-in-One Program Creator and assign it to a client.
+      </p>
+      <Button
+        onClick={onCreate}
+        className="bg-gradient-to-r from-[#00AEEF] to-[#A855F7] text-white font-semibold px-6"
+      >
+        <Zap size={16} className="mr-2" />
+        Create New Program
+      </Button>
+    </motion.div>
+  );
+}
+
+// ── Main Page ───────────────────────────────────────────────────
+export default function ProgramsPage() {
+  const navigate = useNavigate();
+  const [programs, setPrograms] = useState<SavedProgram[]>([]);
+  const [dbPrograms, setDbPrograms] = useState<SavedProgram[]>([]);
+  const [search, setSearch] = useState('');
+  const [goalFilter, setGoalFilter] = useState('all');
+  const [templateFilter, setTemplateFilter] = useState<string | null>(null);
+  const [sortBy, setSortBy] = useState<'newest' | 'alpha'>('newest');
+  const [showFilters, setShowFilters] = useState(false);
+  const [loaded, setLoaded] = useState(false);
+
+  // Load programs on mount
+  useEffect(() => {
+    const local = getPrograms();
+    setPrograms(local);
+    loadDbPrograms().then(db => {
+      setDbPrograms(db);
+      setLoaded(true);
+    });
+  }, []);
+
+  const handleDelete = useCallback((id: string) => {
+    const next = programs.filter(p => p.id !== id);
+    setPrograms(next);
+    savePrograms(next);
+    localStorage.removeItem(SESSION_KEY(id));
+  }, [programs]);
+
+  const handleDuplicate = useCallback((program: SavedProgram) => {
+    const dup: SavedProgram = {
+      ...program,
+      id: `prog_${Date.now()}`,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      data: {
+        ...program.data,
+        programName: `${program.data.programName || 'Untitled'} (Copy)`,
+      },
+    };
+    const next = [...programs, dup];
+    setPrograms(next);
+    savePrograms(next);
+  }, [programs]);
+
+  const handleEdit = useCallback((program: SavedProgram) => {
+    localStorage.setItem('azfit-creator-edit-id', program.id);
+    navigate('/programs/create');
+  }, [navigate]);
+
+  const handleStart = useCallback((id: string, isDb?: boolean) => {
+    if (isDb) {
+      const dbProg = dbPrograms.find(p => p.id === id);
+      if (dbProg) {
+        const existing = getPrograms();
+        if (!existing.find(p => p.id === id)) {
+          savePrograms([...existing, dbProg]);
+        }
+      }
+    }
+    navigate(`/programs/session/${id}`);
+  }, [navigate, dbPrograms]);
+
+  // Count programs per template
+  const allPrograms = useMemo(() => [...programs, ...dbPrograms], [programs, dbPrograms]);
+  const templateCounts = useMemo(() => {
+    const counts: Record<string, number> = {};
+    TEMPLATE_KEYS.forEach(k => counts[k] = 0);
+    allPrograms.forEach(p => {
+      const t = p.data.template || 'Custom';
+      counts[t] = (counts[t] || 0) + 1;
+    });
+    return counts;
+  }, [allPrograms]);
+
+  // Filtering & sorting
+  const filtered = useMemo(() => {
+    let list = [...allPrograms];
+
+    if (search.trim()) {
+      const q = search.toLowerCase();
+      list = list.filter(p =>
+        (p.data.programName || '').toLowerCase().includes(q) ||
+        (p.data.assignedClient || '').toLowerCase().includes(q) ||
+        (p.data.goal || '').toLowerCase().includes(q) ||
+        (p.data.template || '').toLowerCase().includes(q)
+      );
+    }
+
+    if (goalFilter !== 'all') {
+      list = list.filter(p => p.data.goal === goalFilter);
+    }
+
+    if (templateFilter) {
+      list = list.filter(p => (p.data.template || 'Custom') === templateFilter);
+    }
+
+    if (sortBy === 'newest') {
+      list.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+    } else {
+      list.sort((a, b) => (a.data.programName || '').localeCompare(b.data.programName || ''));
+    }
+
+    return list;
+  }, [allPrograms, search, goalFilter, templateFilter, sortBy]);
+
+  const dbIds = new Set(dbPrograms.map(p => p.id));
+
+  const goalOptions = ['all', 'strength', 'hypertrophy', 'fatloss', 'endurance', 'rehab', 'power'];
+
+  return (
+    <div className="w-full max-w-[1440px] mx-auto">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+        <div>
+          <h1 className="text-[#F0F0F0] text-xl font-semibold flex items-center gap-2">
+            <Dumbbell size={22} className="text-[#00AEEF]" />
+            Active Programs
+          </h1>
+          <p className="text-[#6B7280] text-sm mt-0.5">
+            {programs.length} custom program{programs.length !== 1 ? 's' : ''} · {dbPrograms.length} built-in
+          </p>
+        </div>
+        <div className="flex items-center gap-2">
+          <Button
+            onClick={() => navigate('/programs/create')}
+            size="sm"
+            className="bg-gradient-to-r from-[#00AEEF] to-[#A855F7] text-white font-semibold"
+          >
+            <Plus size={16} className="mr-1.5" />
+            New Program
+          </Button>
         </div>
       </div>
 
-      {/* Expanded Detail View */}
+      {/* Featured Templates */}
+      <div className="mb-6">
+        <div className="flex items-center justify-between mb-3">
+          <h2 className="text-[#A0A0A0] text-xs font-semibold uppercase tracking-wider">
+            Program Templates
+          </h2>
+          {templateFilter && (
+            <button
+              onClick={() => setTemplateFilter(null)}
+              className="text-[10px] text-[#6B7280] hover:text-[#F0F0F0] flex items-center gap-1 transition-colors"
+            >
+              <X size={10} />
+              Clear filter
+            </button>
+          )}
+        </div>
+        <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-[#2A2A2A] scrollbar-track-transparent">
+          {TEMPLATES.map((tmpl) => (
+            <TemplateFeatureCard
+              key={tmpl.key}
+              template={tmpl}
+              isActive={templateFilter === tmpl.key}
+              onClick={() => setTemplateFilter(templateFilter === tmpl.key ? null : tmpl.key)}
+              count={templateCounts[tmpl.key] || 0}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Filters */}
+      <div className="flex flex-wrap items-center gap-3 mb-6">
+        <div className="relative flex-1 min-w-[200px] max-w-sm">
+          <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#6B7280]" />
+          <input
+            type="text"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search programs, clients, goals, templates..."
+            className="w-full h-10 pl-9 pr-4 rounded-lg bg-[#141414] border border-[#2A2A2A]/50 text-[#F0F0F0] text-sm placeholder:text-[#6B7280] focus:outline-none focus:border-[#00AEEF]/50"
+          />
+        </div>
+        <button
+          onClick={() => setShowFilters(!showFilters)}
+          className={`h-10 px-3 rounded-lg border text-sm flex items-center gap-2 transition-colors ${
+            showFilters
+              ? 'border-[#00AEEF] text-[#00AEEF] bg-[#00AEEF]/5'
+              : 'border-[#2A2A2A]/50 text-[#A0A0A0] hover:border-[#374151]'
+          }`}
+        >
+          <SlidersHorizontal size={15} />
+          Filters
+        </button>
+      </div>
+
       <AnimatePresence>
-        {isExpanded && (
+        {showFilters && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="border-t border-[#2A2A2A] bg-[#0A0A0A] overflow-hidden"
-            onClick={(e) => e.stopPropagation()}
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="overflow-hidden mb-6"
           >
-            <div className="p-4 space-y-4">
-              {/* Header */}
-              <div className="flex items-center justify-between">
-                <h4 className="text-[#F0F0F0] font-semibold text-sm">Program Overview</h4>
-                <button
-                  onClick={onToggleExpand}
-                  className="text-[#A0A0A0] hover:text-[#F0F0F0] text-xs flex items-center gap-1 px-2 py-1 rounded hover:bg-[#242424] transition-colors"
-                >
-                  Hide Program <ChevronUp size={14} />
-                </button>
-              </div>
-
-              {/* Description */}
-              <div className="text-[#A0A0A0] text-xs leading-relaxed space-y-2">
-                <p>
-                  <strong className="text-[#F0F0F0]">Structure:</strong> {program.structure}
-                </p>
-                <p>
-                  <strong className="text-[#F0F0F0]">Equipment:</strong> {program.equipment}
-                </p>
-                <p>
-                  <strong className="text-[#F0F0F0]">Progression:</strong> {program.progression}
-                </p>
-              </div>
-
-              {/* Actions Row */}
-              <div className="flex flex-wrap gap-2">
-                {[
-                  { label: 'Edit', icon: Edit, action: 'edit' },
-                  { label: 'Duplicate', icon: Copy, action: 'duplicate' },
-                  { label: 'Assign', icon: UserPlus, action: 'assign' },
-                  { label: program.archived ? 'Restore' : 'Archive', icon: ArchiveIcon, action: 'archive' },
-                ].map((btn) => (
-                  <button
-                    key={btn.action}
-                    onClick={() => onAction(btn.action, program)}
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-[#1A1A1A] text-[#A0A0A0] hover:text-[#F0F0F0] hover:bg-[#242424] border border-[#2A2A2A] transition-colors"
-                  >
-                    <btn.icon size={12} />
-                    {btn.label}
-                  </button>
-                ))}
-              </div>
-
-              {/* View Full Program Toggle */}
-              <div className="pt-2 border-t border-[#1F1F1F]">
-                <button
-                  onClick={onToggleDetail}
-                  className="w-full flex items-center justify-center gap-2 py-2 text-xs font-medium text-[#00AEEF] hover:text-[#33BEF2] transition-colors"
-                >
-                  {showFullDetail ? (
-                    <><EyeOff size={13} /> Hide Full Schedule</>
-                  ) : (
-                    <><Eye size={13} /> View Full Program</>
-                  )}
-                  <motion.span
-                    animate={{ rotate: showFullDetail ? 180 : 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <ChevronDown size={13} />
-                  </motion.span>
-                </button>
-
-                {/* Full Schedule */}
-                <AnimatePresence>
-                  {showFullDetail && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                      className="overflow-hidden"
+            <div className="flex flex-wrap items-center gap-3 p-3 rounded-xl bg-[#141414] border border-[#2A2A2A]/30">
+              <div className="flex items-center gap-2">
+                <span className="text-[#6B7280] text-xs font-medium">Goal:</span>
+                <div className="flex flex-wrap gap-1">
+                  {goalOptions.map(g => (
+                    <button
+                      key={g}
+                      onClick={() => setGoalFilter(g)}
+                      className={`px-2.5 py-1 rounded-full text-[11px] font-medium border transition-all ${
+                        goalFilter === g
+                          ? 'border-[#00AEEF] bg-[#00AEEF]/10 text-[#00AEEF]'
+                          : 'border-[#2A2A2A]/50 text-[#6B7280] hover:border-[#374151]'
+                      }`}
                     >
-                      <div className="pt-3 space-y-3">
-                        <h5 className="text-[#F0F0F0] text-xs font-semibold">Weekly Schedule</h5>
-                        {schedule.map((day, i) => (
-                          <motion.div
-                            key={day.day}
-                            initial={{ opacity: 0, x: -10 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: i * 0.06, duration: 0.25 }}
-                            className="bg-[#141414] border border-[#1F1F1F] rounded-lg p-3"
-                          >
-                            <div className="flex items-center justify-between mb-2">
-                              <div className="flex items-center gap-2">
-                                <span className="text-[#F0F0F0] text-xs font-semibold">{day.day}</span>
-                                <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-[#00AEEF]/10 text-[#00AEEF] border border-[#00AEEF]/20">
-                                  {day.type}
-                                </span>
-                              </div>
-                              <div className="flex items-center gap-2 text-[9px] text-[#6B6B6B]">
-                                <span>{day.duration}</span>
-                                <span className="text-[#A0A0A0]">{day.intensity}</span>
-                              </div>
-                            </div>
-                            <div className="flex flex-wrap gap-1">
-                              {day.exercises.map((ex, j) => (
-                                <span
-                                  key={j}
-                                  className="text-[9px] text-[#A0A0A0] bg-[#1A1A1A] px-2 py-0.5 rounded"
-                                >
-                                  {ex}
-                                </span>
-                              ))}
-                            </div>
-                          </motion.div>
-                        ))}
-
-                        {/* Summary Footer */}
-                        <div className="grid grid-cols-3 gap-2 pt-2">
-                          <div className="bg-[#141414] border border-[#1F1F1F] rounded-lg p-2 text-center">
-                            <p className="text-[#00AEEF] text-xs font-bold">{program.duration}</p>
-                            <p className="text-[9px] text-[#6B6B6B]">Duration</p>
-                          </div>
-                          <div className="bg-[#141414] border border-[#1F1F1F] rounded-lg p-2 text-center">
-                            <p className="text-[#00AEEF] text-xs font-bold">{program.frequency}</p>
-                            <p className="text-[9px] text-[#6B6B6B]">Frequency</p>
-                          </div>
-                          <div className="bg-[#141414] border border-[#1F1F1F] rounded-lg p-2 text-center">
-                            <p className="text-[#00AEEF] text-xs font-bold">{program.difficulty}</p>
-                            <p className="text-[9px] text-[#6B6B6B]">Level</p>
-                          </div>
-                        </div>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                      {g === 'all' ? 'All' : getGoalLabel(g)}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div className="w-px h-6 bg-[#2A2A2A]/50 hidden sm:block" />
+              <div className="flex items-center gap-2">
+                <span className="text-[#6B7280] text-xs font-medium">Template:</span>
+                <div className="flex flex-wrap gap-1">
+                  {TEMPLATES.map(t => (
+                    <button
+                      key={t.key}
+                      onClick={() => setTemplateFilter(templateFilter === t.key ? null : t.key)}
+                      className={`px-2.5 py-1 rounded-full text-[11px] font-medium border transition-all ${
+                        templateFilter === t.key
+                          ? 'border-[#00AEEF] bg-[#00AEEF]/10 text-[#00AEEF]'
+                          : 'border-[#2A2A2A]/50 text-[#6B7280] hover:border-[#374151]'
+                      }`}
+                    >
+                      {t.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div className="w-px h-6 bg-[#2A2A2A]/50 hidden sm:block" />
+              <div className="flex items-center gap-2">
+                <span className="text-[#6B7280] text-xs font-medium">Sort:</span>
+                <select
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value as 'newest' | 'alpha')}
+                  className="h-8 px-2 rounded-lg bg-[#0A0A0A] border border-[#2A2A2A]/50 text-[#A0A0A0] text-xs focus:outline-none focus:border-[#00AEEF]/50"
+                >
+                  <option value="newest">Newest First</option>
+                  <option value="alpha">Alphabetical</option>
+                </select>
               </div>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.div>
-  )
-}
-
-/** Program List Row */
-function ProgramListRow({
-  program,
-  index,
-  onAction,
-}: {
-  program: Program
-  index: number
-  onAction: (action: string, program: Program) => void
-}) {
-  const [hovered, setHovered] = useState(false)
-  const diffColor = getDifficultyColor(program.difficulty)
-  const goalLabel = GOAL_OPTIONS.find(g => program.goal.toLowerCase().includes(g.value))?.label || program.goal
-
-  return (
-    <motion.tr
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.2, delay: index * 0.03 }}
-      className={cn(
-        'border-b border-[#1F1F1F] transition-colors duration-150',
-        index % 2 === 0 ? 'bg-[#0A0A0A]' : 'bg-[#141414]',
-        hovered && 'bg-[#242424]'
-      )}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
-      <td className="px-4 py-3.5">
-        <div className="flex items-center gap-3">
-          <div className="w-2 h-8 rounded-full flex-shrink-0" style={{ background: program.colorBanner }} />
-          <div>
-            <p className="text-[#F0F0F0] text-sm font-medium">{program.name}</p>
-            {program.timesAssigned >= 15 && (
-              <span className="inline-flex items-center gap-1 text-[10px] text-[#EAB308] font-semibold">
-                <Star size={10} /> Most Used
-              </span>
-            )}
-          </div>
-        </div>
-      </td>
-      <td className="px-4 py-3.5">
-        <span className="text-xs font-semibold px-2 py-0.5 rounded-full" style={{ backgroundColor: getGoalBg(program.goal), color: '#F0F0F0' }}>
-          {goalLabel}
-        </span>
-      </td>
-      <td className="px-4 py-3.5 text-[#A0A0A0] text-xs">{program.method}</td>
-      <td className="px-4 py-3.5">
-        <span className="text-xs font-semibold" style={{ color: diffColor.text }}>{program.difficulty}</span>
-      </td>
-      <td className="px-4 py-3.5 text-[#A0A0A0] text-xs">{program.duration}</td>
-      <td className="px-4 py-3.5 text-[#A0A0A0] text-xs">{program.frequency}</td>
-      <td className="px-4 py-3.5 text-[#A0A0A0] text-xs">{program.timesAssigned}x</td>
-      <td className="px-4 py-3.5 text-[#6B6B6B] text-xs">{program.lastAssigned}</td>
-      <td className="px-4 py-3.5">
-        <div className={cn('flex items-center gap-1 transition-opacity', hovered ? 'opacity-100' : 'opacity-40')}>
-          {[
-            { icon: Edit, action: 'edit' },
-            { icon: Copy, action: 'duplicate' },
-            { icon: UserPlus, action: 'assign' },
-            { icon: ArchiveIcon, action: 'archive' },
-          ].map((btn) => (
-            <button
-              key={btn.action}
-              onClick={() => onAction(btn.action, program)}
-              className="text-[#A0A0A0] hover:text-[#F0F0F0] p-1.5 rounded hover:bg-[#242424] transition-colors"
-              aria-label={btn.action}
-            >
-              <btn.icon size={14} />
-            </button>
-          ))}
-        </div>
-      </td>
-    </motion.tr>
-  )
-}
-
-/** Pagination */
-function Pagination({
-  currentPage,
-  totalPages,
-  onPageChange,
-}: {
-  currentPage: number
-  totalPages: number
-  onPageChange: (p: number) => void
-}) {
-  if (totalPages <= 1) return null
-
-  const pages: (number | string)[] = []
-  if (totalPages <= 7) {
-    for (let i = 1; i <= totalPages; i++) pages.push(i)
-  } else {
-    pages.push(1)
-    if (currentPage > 3) pages.push('...')
-    const start = Math.max(2, currentPage - 1)
-    const end = Math.min(totalPages - 1, currentPage + 1)
-    for (let i = start; i <= end; i++) pages.push(i)
-    if (currentPage < totalPages - 2) pages.push('...')
-    pages.push(totalPages)
-  }
-
-  return (
-    <div className="flex items-center justify-center gap-2 mt-8">
-      <button
-        onClick={() => onPageChange(currentPage - 1)}
-        disabled={currentPage === 1}
-        className="p-2 rounded-lg text-[#A0A0A0] hover:text-[#F0F0F0] hover:bg-[#242424] disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-      >
-        <ChevronLeft size={16} />
-      </button>
-      {pages.map((p, i) => (
-        typeof p === 'string' ? (
-          <span key={`dots-${i}`} className="text-[#6B6B6B] px-1">{p}</span>
-        ) : (
-          <button
-            key={p}
-            onClick={() => onPageChange(p)}
-            className={cn(
-              'w-9 h-9 rounded-lg text-sm font-medium transition-colors',
-              p === currentPage
-                ? 'bg-[#00AEEF] text-white'
-                : 'text-[#A0A0A0] hover:text-[#F0F0F0] hover:bg-[#242424]'
-            )}
-          >
-            {p}
-          </button>
-        )
-      ))}
-      <button
-        onClick={() => onPageChange(currentPage + 1)}
-        disabled={currentPage === totalPages}
-        className="p-2 rounded-lg text-[#A0A0A0] hover:text-[#F0F0F0] hover:bg-[#242424] disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-      >
-        <ChevronRight size={16} />
-      </button>
-    </div>
-  )
-}
-
-// ── Main Page ──────────────────────────────────────────
-export default function ProgramsPage() {
-  const navigate = useNavigate()
-  const [programs, setPrograms] = useState<Program[]>([])
-  const [loading, setLoading] = useState(true)
-
-  // Filter state
-  const [searchQuery, setSearchQuery] = useState('')
-  const [selectedGoals, setSelectedGoals] = useState<string[]>([])
-  const [selectedMethod, setSelectedMethod] = useState<string>('')
-  const [selectedDifficulties, setSelectedDifficulties] = useState<string[]>([])
-  const [showArchived, setShowArchived] = useState(false)
-
-  // Sort & view
-  const [sortBy, setSortBy] = useState<'mostUsed' | 'newest' | 'alpha'>('mostUsed')
-  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid')
-
-  // Pagination
-  const [currentPage, setCurrentPage] = useState(1)
-  const pageSize = 12
-
-  // Expanded card
-  const [expandedId, setExpandedId] = useState<string | null>(null)
-  const [fullDetailId, setFullDetailId] = useState<string | null>(null)
-
-  const toggleExpanded = (id: string) => {
-    setExpandedId(prev => prev === id ? null : id)
-    setFullDetailId(null)
-  }
-
-  // Fetch data
-  useEffect(() => {
-    fetch('./training_methods.json')
-      .then((r) => r.json())
-      .then((data: TrainingMethod[]) => {
-        const progs = generateSamplePrograms(data)
-        setPrograms(progs)
-        setLoading(false)
-      })
-      .catch(() => setLoading(false))
-  }, [])
-
-  // Derive filter options from data
-  const methodOptions = useMemo(() => {
-    const methods = new Set<string>()
-    programs.forEach((p) => methods.add(p.method))
-    return Array.from(methods).sort()
-  }, [programs])
-
-  // Stats
-  const stats = useMemo(() => {
-    const total = programs.length
-    const active = programs.filter(p => !p.archived).length
-    const archived = programs.filter(p => p.archived).length
-    const mostUsed = programs.reduce((a, b) => (a.timesAssigned > b.timesAssigned ? a : b), programs[0])
-    return { total, active, archived, mostUsedName: mostUsed?.name || '—' }
-  }, [programs])
-
-  // Filtered & sorted programs
-  const filtered = useMemo(() => {
-    let result = programs
-
-    // Archive filter
-    if (!showArchived) {
-      result = result.filter(p => !p.archived)
-    }
-
-    // Search
-    if (searchQuery.trim()) {
-      const q = searchQuery.toLowerCase()
-      result = result.filter(p =>
-        p.name.toLowerCase().includes(q) ||
-        p.goal.toLowerCase().includes(q) ||
-        p.method.toLowerCase().includes(q) ||
-        p.equipment.toLowerCase().includes(q)
-      )
-    }
-
-    // Goal filter
-    if (selectedGoals.length > 0) {
-      result = result.filter(p => {
-        const pg = normalizeGoal(p.goal)
-        return selectedGoals.some(sg => pg.includes(sg))
-      })
-    }
-
-    // Method filter
-    if (selectedMethod) {
-      result = result.filter(p => p.method === selectedMethod)
-    }
-
-    // Difficulty filter
-    if (selectedDifficulties.length > 0) {
-      result = result.filter(p => selectedDifficulties.includes(p.difficulty))
-    }
-
-    // Sort
-    switch (sortBy) {
-      case 'mostUsed':
-        result = [...result].sort((a, b) => b.timesAssigned - a.timesAssigned)
-        break
-      case 'newest':
-        result = [...result].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-        break
-      case 'alpha':
-        result = [...result].sort((a, b) => a.name.localeCompare(b.name))
-        break
-    }
-
-    return result
-  }, [programs, searchQuery, selectedGoals, selectedMethod, selectedDifficulties, showArchived, sortBy])
-
-  const totalPages = Math.ceil(filtered.length / pageSize)
-  const paginated = filtered.slice((currentPage - 1) * pageSize, currentPage * pageSize)
-
-  // Reset page on filter change
-  useEffect(() => { setCurrentPage(1) }, [searchQuery, selectedGoals, selectedMethod, selectedDifficulties, showArchived, sortBy])
-
-  // Actions
-  const handleAction = useCallback((action: string, program: Program) => {
-    switch (action) {
-      case 'edit':
-        navigate(`/programs/${program.id}/edit`)
-        break
-      case 'duplicate':
-        alert(`Duplicated: ${program.name} (Copy)`)
-        break
-      case 'assign':
-        alert(`Assign "${program.name}" to client`)
-        break
-      case 'archive':
-        setPrograms(prev => prev.map(p => p.id === program.id ? { ...p, archived: !p.archived } : p))
-        break
-    }
-  }, [navigate])
-
-  // Active filter count
-  const activeFilterCount = selectedGoals.length + (selectedMethod ? 1 : 0) + selectedDifficulties.length + (showArchived ? 1 : 0)
-
-  const clearFilters = () => {
-    setSearchQuery('')
-    setSelectedGoals([])
-    setSelectedMethod('')
-    setSelectedDifficulties([])
-    setShowArchived(false)
-  }
-
-  // Toggle helpers
-  const toggleGoal = (goal: string) => {
-    setSelectedGoals(prev => prev.includes(goal) ? prev.filter(g => g !== goal) : [...prev, goal])
-  }
-  const toggleDifficulty = (diff: string) => {
-    setSelectedDifficulties(prev => prev.includes(diff) ? prev.filter(d => d !== diff) : [...prev, diff])
-  }
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
-      className="max-w-[1440px] mx-auto"
-    >
-      {/* Header */}
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <h1 className="text-[#F0F0F0] text-2xl font-semibold tracking-tight" style={{ fontFamily: 'Playfair Display, Georgia, serif' }}>
-            Program Library
-          </h1>
-          <p className="text-[#A0A0A0] text-sm mt-0.5">{filtered.length} program{filtered.length !== 1 ? 's' : ''} available</p>
-        </div>
-        <button
-          onClick={() => navigate('/programs/new')}
-          className="bg-[#00AEEF] hover:bg-[#009BD6] text-white font-semibold px-5 py-2.5 rounded-xl transition-all duration-200 hover:scale-[1.02] text-sm flex items-center gap-2"
-        >
-          <Dumbbell size={16} />
-          New Program
-        </button>
-      </div>
-
-      {/* Stats Bar */}
-      <div className="bg-[#141414] border border-[#2A2A2A] rounded-xl px-6 py-5 mb-6">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <StatCard icon={FolderOpen} label="Total Programs" value={String(stats.total)} color="#F0F0F0" delay={0} />
-          <StatCard icon={CheckCircle} label="Active" value={String(stats.active)} color="#22C55E" delay={0.06} />
-          <StatCard icon={TrendingUp} label="Most Used This Month" value={stats.mostUsedName} color="#00AEEF" delay={0.12} />
-          <button
-            onClick={() => setShowArchived(!showArchived)}
-            className="text-left"
-          >
-            <StatCard icon={Archive} label={showArchived ? 'Showing Archived' : 'Archived'} value={String(stats.archived)} color="#6B6B6B" delay={0.18} />
-          </button>
-        </div>
-      </div>
-
-      {/* Filter Bar */}
-      <div className="bg-[#141414] border border-[#2A2A2A] rounded-xl px-5 py-4 mb-4">
-        <div className="flex flex-wrap items-center gap-3">
-          {/* Search */}
-          <div className="flex items-center bg-[#1A1A1A] rounded-full border border-[#2A2A2A] focus-within:border-[#00AEEF] transition-colors w-full sm:w-72">
-            <Search size={16} className="text-[#6B6B6B] ml-3 flex-shrink-0" />
-            <input
-              type="text"
-              placeholder="Search programs..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="bg-transparent text-[#F0F0F0] text-sm placeholder-[#6B6B6B] px-3 py-2 w-full outline-none"
-            />
-            {searchQuery && (
-              <button onClick={() => setSearchQuery('')} className="text-[#6B6B6B] hover:text-[#F0F0F0] mr-3">
-                <X size={14} />
-              </button>
-            )}
-          </div>
-
-          {/* Goal Filter */}
-          <div className="relative group">
-            <button className="flex items-center gap-2 bg-[#1A1A1A] border border-[#2A2A2A] hover:border-[#00AEEF] text-[#A0A0A0] text-sm px-4 py-2 rounded-lg transition-colors">
-              <Filter size={14} />
-              Goal
-              {selectedGoals.length > 0 && (
-                <span className="bg-[#00AEEF] text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
-                  {selectedGoals.length}
-                </span>
-              )}
-              <ChevronDown size={14} />
-            </button>
-            <div className="absolute top-full left-0 mt-2 w-52 bg-[#1A1A1A] border border-[#2A2A2A] rounded-lg shadow-[0_8px_24px_rgba(0,0,0,0.4)] opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-opacity z-30 py-1">
-              {GOAL_OPTIONS.map((goal) => (
-                <button
-                  key={goal.value}
-                  onClick={() => toggleGoal(goal.value)}
-                  className={cn(
-                    'w-full flex items-center gap-2.5 px-3 py-2 text-sm transition-colors',
-                    selectedGoals.includes(goal.value)
-                      ? 'text-[#00AEEF] bg-[rgba(0,174,239,0.1)]'
-                      : 'text-[#A0A0A0] hover:text-[#F0F0F0] hover:bg-[#242424]'
-                  )}
-                >
-                  <div className={cn(
-                    'w-4 h-4 rounded border flex items-center justify-center transition-colors',
-                    selectedGoals.includes(goal.value) ? 'bg-[#00AEEF] border-[#00AEEF]' : 'border-[#6B6B6B]'
-                  )}>
-                    {selectedGoals.includes(goal.value) && <CheckCircle size={10} className="text-white" />}
-                  </div>
-                  {goal.label}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Method Filter */}
-          <div className="relative group">
-            <button className="flex items-center gap-2 bg-[#1A1A1A] border border-[#2A2A2A] hover:border-[#00AEEF] text-[#A0A0A0] text-sm px-4 py-2 rounded-lg transition-colors">
-              <Dumbbell size={14} />
-              Method
-              {selectedMethod && (
-                <span className="bg-[#00AEEF] text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">1</span>
-              )}
-              <ChevronDown size={14} />
-            </button>
-            <div className="absolute top-full left-0 mt-2 w-48 bg-[#1A1A1A] border border-[#2A2A2A] rounded-lg shadow-[0_8px_24px_rgba(0,0,0,0.4)] opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-opacity z-30 py-1">
-              <button
-                onClick={() => setSelectedMethod('')}
-                className={cn(
-                  'w-full text-left px-3 py-2 text-sm transition-colors',
-                  !selectedMethod ? 'text-[#00AEEF] bg-[rgba(0,174,239,0.1)]' : 'text-[#A0A0A0] hover:text-[#F0F0F0] hover:bg-[#242424]'
-                )}
-              >
-                All Methods
-              </button>
-              {methodOptions.map((m) => (
-                <button
-                  key={m}
-                  onClick={() => setSelectedMethod(m === selectedMethod ? '' : m)}
-                  className={cn(
-                    'w-full text-left px-3 py-2 text-sm transition-colors',
-                    selectedMethod === m ? 'text-[#00AEEF] bg-[rgba(0,174,239,0.1)]' : 'text-[#A0A0A0] hover:text-[#F0F0F0] hover:bg-[#242424]'
-                  )}
-                >
-                  {m}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Difficulty Filter */}
-          <div className="flex items-center gap-1.5 flex-wrap">
-            {DIFFICULTY_OPTIONS.map((diff) => (
-              <button
-                key={diff}
-                onClick={() => toggleDifficulty(diff)}
-                className={cn(
-                  'text-xs font-semibold px-3 py-1.5 rounded-full border transition-all duration-200',
-                  selectedDifficulties.includes(diff)
-                    ? 'border-[#00AEEF] bg-[rgba(0,174,239,0.15)] text-[#00AEEF]'
-                    : 'border-[#2A2A2A] bg-[#1A1A1A] text-[#6B6B6B] hover:text-[#A0A0A0] hover:border-[#3A3A3A]'
-                )}
-              >
-                {diff}
-              </button>
-            ))}
-          </div>
-
-          {/* Clear Filters */}
-          {activeFilterCount > 0 && (
-            <button
-              onClick={clearFilters}
-              className="text-[#EF4444] hover:text-[#DC2626] text-sm font-medium flex items-center gap-1 transition-colors"
-            >
-              <X size={14} />
-              Clear all
-            </button>
-          )}
-        </div>
-
-        {/* Selected goal pills */}
-        {selectedGoals.length > 0 && (
-          <div className="flex flex-wrap gap-1.5 mt-3 pt-3 border-t border-[#1F1F1F]">
-            {selectedGoals.map((goal) => {
-              const label = GOAL_OPTIONS.find(g => g.value === goal)?.label || goal
-              return (
-                <span key={goal} className="inline-flex items-center gap-1 bg-[rgba(0,174,239,0.1)] text-[#00AEEF] text-xs px-2.5 py-1 rounded-full">
-                  {label}
-                  <button onClick={() => toggleGoal(goal)} className="hover:text-white"><X size={10} /></button>
-                </span>
-              )
-            })}
-          </div>
-        )}
-      </div>
-
-      {/* Sort & View Controls */}
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-2">
-          <span className="text-[#6B6B6B] text-sm">Sort by:</span>
-          <div className="relative">
-            <select
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value as typeof sortBy)}
-              className="appearance-none bg-[#1A1A1A] border border-[#2A2A2A] text-[#A0A0A0] text-sm px-3 py-1.5 pr-8 rounded-lg focus:border-[#00AEEF] outline-none cursor-pointer"
-            >
-              <option value="mostUsed">Most Used</option>
-              <option value="newest">Newest First</option>
-              <option value="alpha">Name A-Z</option>
-            </select>
-            <ChevronDown size={14} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#6B6B6B] pointer-events-none" />
-          </div>
-        </div>
-        <div className="flex items-center bg-[#1A1A1A] border border-[#2A2A2A] rounded-lg p-0.5">
-          <button
-            onClick={() => setViewMode('grid')}
-            className={cn(
-              'p-1.5 rounded-md transition-colors',
-              viewMode === 'grid' ? 'bg-[#242424] text-[#F0F0F0]' : 'text-[#6B6B6B] hover:text-[#A0A0A0]'
-            )}
-            aria-label="Grid view"
-          >
-            <Grid3X3 size={16} />
-          </button>
-          <button
-            onClick={() => setViewMode('list')}
-            className={cn(
-              'p-1.5 rounded-md transition-colors',
-              viewMode === 'list' ? 'bg-[#242424] text-[#F0F0F0]' : 'text-[#6B6B6B] hover:text-[#A0A0A0]'
-            )}
-            aria-label="List view"
-          >
-            <List size={16} />
-          </button>
-        </div>
-      </div>
 
       {/* Content */}
-      {loading ? (
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 items-start">
-          {Array.from({ length: 10 }).map((_, i) => (
-            <div key={i} className="bg-[#141414] border border-[#2A2A2A] rounded-xl overflow-hidden animate-pulse">
-              <div className="h-14 bg-[#1A1A1A]" />
-              <div className="p-3 space-y-2">
-                <div className="h-3 bg-[#1A1A1A] rounded w-3/4" />
-                <div className="flex gap-1">
-                  <div className="h-4 bg-[#1A1A1A] rounded w-12" />
-                  <div className="h-4 bg-[#1A1A1A] rounded w-10" />
-                </div>
-                <div className="h-2 bg-[#1A1A1A] rounded w-full" />
-              </div>
-            </div>
-          ))}
+      {!loaded ? (
+        <div className="text-center py-16">
+          <p className="text-[#6B7280] text-sm">Loading programs...</p>
         </div>
+      ) : allPrograms.length === 0 ? (
+        <EmptyState onCreate={() => navigate('/programs/create')} />
       ) : filtered.length === 0 ? (
-        <div className="flex flex-col items-center justify-center py-24">
-          <Search size={48} className="text-[#6B6B6B] mb-4 opacity-50" />
-          <h3 className="text-[#F0F0F0] font-semibold text-base mb-1">No programs found</h3>
-          <p className="text-[#A0A0A0] text-sm mb-4">Try adjusting your search or filters</p>
+        <div className="text-center py-16">
+          <p className="text-[#6B7280] text-sm">No programs match your filters.</p>
           <button
-            onClick={clearFilters}
-            className="border border-[#00AEEF] text-[#00AEEF] hover:bg-[rgba(0,174,239,0.1)] font-medium px-4 py-2 rounded-lg text-sm transition-colors"
+            onClick={() => { setSearch(''); setGoalFilter('all'); setTemplateFilter(null); }}
+            className="text-[#00AEEF] text-sm mt-2 hover:underline"
           >
-            Clear filters
+            Clear all filters
           </button>
         </div>
-      ) : viewMode === 'grid' ? (
+      ) : (
         <motion.div
           layout
-          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 items-start"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
         >
           <AnimatePresence mode="popLayout">
-            {paginated.map((program, i) => (
+            {filtered.map((program) => (
               <ProgramCard
                 key={program.id}
                 program={program}
-                index={i}
-                onAction={handleAction}
-                isExpanded={expandedId === program.id}
-                showFullDetail={fullDetailId === program.id}
-                onToggleExpand={() => toggleExpanded(program.id)}
-                onToggleDetail={() => setFullDetailId(prev => prev === program.id ? null : program.id)}
+                onStart={() => handleStart(program.id, dbIds.has(program.id))}
+                onEdit={() => handleEdit(program)}
+                onDuplicate={() => handleDuplicate(program)}
+                onDelete={() => handleDelete(program.id)}
+                isReadOnly={dbIds.has(program.id)}
               />
             ))}
           </AnimatePresence>
         </motion.div>
-      ) : (
-        <div className="bg-[#141414] border border-[#2A2A2A] rounded-xl overflow-hidden">
-          <table className="w-full">
-            <thead>
-              <tr className="bg-[#141414] border-b border-[#2A2A2A]">
-                {['Name', 'Goal', 'Method', 'Difficulty', 'Duration', 'Frequency', 'Used', 'Last', ''].map((h) => (
-                  <th key={h} className="text-left px-4 py-3 text-[#6B6B6B] text-xs font-semibold uppercase tracking-wider">
-                    {h}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              <AnimatePresence>
-                {paginated.map((program, i) => (
-                  <ProgramListRow key={program.id} program={program} index={i} onAction={handleAction} />
-                ))}
-              </AnimatePresence>
-            </tbody>
-          </table>
-        </div>
       )}
-
-      {/* Pagination */}
-      {filtered.length > 0 && (
-        <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
-      )}
-    </motion.div>
-  )
+    </div>
+  );
 }

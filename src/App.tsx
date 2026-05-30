@@ -14,6 +14,7 @@ import NutritionPage from './pages/NutritionPage'
 import SettingsPage from './pages/SettingsPage'
 import PhotosPage from './pages/PhotosPage'
 import ExercisesPage from './pages/ExercisesPage'
+import ProgramBuilderPage from './pages/ProgramBuilderPage'
 import PlannedFeaturesPage from './pages/PlannedFeaturesPage'
 
 export default function App() {
@@ -33,6 +34,7 @@ export default function App() {
       <Route path="/settings" element={<Layout><SettingsPage /></Layout>} />
       <Route path="/photos" element={<Layout><PhotosPage /></Layout>} />
       <Route path="/exercises" element={<Layout><ExercisesPage /></Layout>} />
+      <Route path="/programs/session/:programId" element={<Layout><ProgramBuilderPage /></Layout>} />
       <Route path="/roadmap" element={<Layout><PlannedFeaturesPage /></Layout>} />
     </Routes>
   )

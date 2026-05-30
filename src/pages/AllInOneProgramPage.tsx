@@ -1,10 +1,10 @@
 import { useState, useCallback, useMemo } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   Zap,
   Bot,
   Save,
-  ClipboardList,
   RotateCcw,
   ChevronDown,
   ChevronUp,
@@ -31,8 +31,10 @@ import {
   Layers,
   Calendar,
   Users,
+  Play,
 } from 'lucide-react'
 import { cn } from '../lib/utils'
+import type { ProgramData, SavedProgram } from '@/types'
 
 // ── shadcn/ui imports ──────────────────────────────────
 import { Button } from '../components/ui/button'
@@ -46,31 +48,50 @@ import { Textarea } from '../components/ui/textarea'
 // TYPES
 // ═══════════════════════════════════════════════════════════
 
-interface ProgramData {
-  goal: string
-  method: string
-  clientContext: {
-    ageRange: string
-    experience: string
-    bodyType: string
-    availability: string
-    limitations: string[]
-    otherLimitation: string
-  }
-  phases: { id: string; name: string; weeks: number; focus: string; color: string; active: boolean }[]
-  weeklyHours: number
-  split: { day: string; active: boolean; workout: string }[]
-  exercises: { code: string; name: string; sets: number; reps: string; pct1RM: string; tempo: string; rest: string }[]
-  programName: string
-  description: string
-  tags: string[]
-  isPublic: boolean
-  assignedClient: string
-}
-
 interface StepProps {
   data: ProgramData
   updateData: (partial: Partial<ProgramData> | ((prev: ProgramData) => Partial<ProgramData>)) => void
+  onSave?: () => void
+  onSaveAndAssign?: () => void
+}
+
+// ═══════════════════════════════════════════════════════════
+// LOCAL STORAGE HELPERS
+// ═══════════════════════════════════════════════════════════
+
+const PROGRAMS_STORAGE_KEY = 'azfit-programs'
+
+function getSavedPrograms(): SavedProgram[] {
+  try {
+    const raw = localStorage.getItem(PROGRAMS_STORAGE_KEY)
+    return raw ? JSON.parse(raw) : []
+  } catch {
+    return []
+  }
+}
+
+function saveProgram(data: ProgramData): SavedProgram {
+  const programs = getSavedPrograms()
+  const now = new Date().toISOString()
+  const id = data.id || `prog_${Date.now()}`
+  const updated: ProgramData = { ...data, id }
+
+  const existingIndex = programs.findIndex(p => p.id === id)
+  const saved: SavedProgram = {
+    id,
+    createdAt: existingIndex >= 0 ? programs[existingIndex].createdAt : now,
+    updatedAt: now,
+    data: updated,
+  }
+
+  if (existingIndex >= 0) {
+    programs[existingIndex] = saved
+  } else {
+    programs.push(saved)
+  }
+
+  localStorage.setItem(PROGRAMS_STORAGE_KEY, JSON.stringify(programs))
+  return saved
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -1504,7 +1525,7 @@ function Step7Preview({ data }: StepProps) {
 // STEP 8: Save & Assign
 // ═══════════════════════════════════════════════════════════
 
-function Step8Save({ data, updateData }: StepProps) {
+function Step8Save({ data, updateData, onSave, onSaveAndAssign }: StepProps) {
   const toggleTag = useCallback(
     (tag: string) => {
       updateData((prev) => {
@@ -1596,13 +1617,27 @@ function Step8Save({ data, updateData }: StepProps) {
 
       {/* Big action buttons */}
       <div className="flex flex-col sm:flex-row gap-3 pt-2">
-        <Button className="bg-[#00AEEF] hover:bg-[#0099D1] text-white font-semibold px-6">
+        <Button
+          onClick={onSave}
+          className="bg-[#00AEEF] hover:bg-[#0099D1] text-white font-semibold px-6"
+        >
           <Save className="w-4 h-4 mr-2" />
           Save Program
         </Button>
-        <Button className="bg-[#22C55E] hover:bg-[#1EAD4E] text-white font-semibold px-6">
+        <Button
+          onClick={onSaveAndAssign}
+          className="bg-[#22C55E] hover:bg-[#1EAD4E] text-white font-semibold px-6"
+        >
           <Check className="w-4 h-4 mr-2" />
           Save & Assign
+        </Button>
+        <Button
+          variant="outline"
+          onClick={onSaveAndAssign}
+          className="border-[var(--cyan)] text-[var(--cyan)] hover:bg-[var(--cyan)]/10 font-semibold px-6"
+        >
+          <Play className="w-4 h-4 mr-2" />
+          Open in Session
         </Button>
         <Button variant="ghost" className="text-[#EF4444] hover:text-[#EF4444] hover:bg-[#EF4444]/10">
           <X className="w-4 h-4 mr-2" />
@@ -1707,8 +1742,28 @@ const defaultData: ProgramData = {
 }
 
 export default function AllInOneProgramPage() {
-  const [data, setData] = useState<ProgramData>(defaultData)
+  const navigate = useNavigate()
+  const [data, setData] = useState<ProgramData>(() => {
+    // Check if we're loading a saved program for editing
+    const editId = localStorage.getItem('azfit-creator-edit-id')
+    if (editId) {
+      localStorage.removeItem('azfit-creator-edit-id')
+      const programs = getSavedPrograms()
+      const found = programs.find(p => p.id === editId)
+      if (found) {
+        return found.data
+      }
+    }
+    return defaultData
+  })
   const [openSteps, setOpenSteps] = useState<Record<number, boolean>>({ 0: true })
+  const [savedList, setSavedList] = useState<SavedProgram[]>(getSavedPrograms())
+  const [saveFlash, setSaveFlash] = useState(false)
+
+  const loadSavedProgram = useCallback((saved: SavedProgram) => {
+    setData(saved.data)
+    setOpenSteps({ 6: true })
+  }, [])
 
   const toggleStep = useCallback((idx: number) => {
     setOpenSteps((prev) => ({ ...prev, [idx]: !prev[idx] }))
@@ -1793,14 +1848,35 @@ export default function AllInOneProgramPage() {
                 <Bot className="w-4 h-4 mr-1.5" />
                 Auto-Generate Full Program
               </Button>
-              <Button variant="outline" size="sm" className="border-[#2A2A2A] text-[#F0F0F0] hover:bg-[#1A1A1A] text-xs">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  saveProgram(data)
+                  setSavedList(getSavedPrograms())
+                  setSaveFlash(true)
+                  setTimeout(() => setSaveFlash(false), 1200)
+                }}
+                className={`border-[#2A2A2A] text-[#F0F0F0] hover:bg-[#1A1A1A] text-xs transition-all ${saveFlash ? 'border-[#22C55E] text-[#22C55E]' : ''}`}
+              >
                 <Save className="w-3.5 h-3.5 mr-1" />
-                Save Program
+                {saveFlash ? 'Saved!' : 'Save Program'}
               </Button>
-              <Button variant="outline" size="sm" className="border-[#2A2A2A] text-[#F0F0F0] hover:bg-[#1A1A1A] text-xs">
-                <ClipboardList className="w-3.5 h-3.5 mr-1" />
-                Load Template
-              </Button>
+              {savedList.length > 0 && (
+                <select
+                  value=""
+                  onChange={(e) => {
+                    const saved = savedList.find(p => p.id === e.target.value)
+                    if (saved) loadSavedProgram(saved)
+                  }}
+                  className="h-9 bg-[#141414] border border-[#2A2A2A] text-[#F0F0F0] text-xs rounded-lg px-3 focus:outline-none focus:border-[#00AEEF]"
+                >
+                  <option value="">Load Saved...</option>
+                  {savedList.map((p) => (
+                    <option key={p.id} value={p.id}>{p.data.programName || 'Untitled'}</option>
+                  ))}
+                </select>
+              )}
               <Button
                 variant="ghost"
                 size="sm"
@@ -1887,7 +1963,21 @@ export default function AllInOneProgramPage() {
                         className="overflow-hidden"
                       >
                         <div className="bg-[#141414] border border-t-0 border-[#2A2A2A] rounded-b-xl p-4 sm:p-5">
-                          <Component data={data} updateData={updateData} />
+                          <Component
+                        data={data}
+                        updateData={updateData}
+                        onSave={() => {
+                          saveProgram(data)
+                          setSavedList(getSavedPrograms())
+                          setSaveFlash(true)
+                          setTimeout(() => setSaveFlash(false), 1200)
+                        }}
+                        onSaveAndAssign={() => {
+                          const saved = saveProgram(data)
+                          setSavedList(getSavedPrograms())
+                          navigate('/programs/session/' + saved.id)
+                        }}
+                      />
                         </div>
                       </motion.div>
                     )}
