@@ -1,0 +1,1713 @@
+{
+  "version": "1.0",
+  "generatedAt": "2026-05-30T18:56:59.382Z",
+  "goalMethodMatrix": [
+    {
+      "goal": "Mind-Body (Yoga, Pilates, Breathwork)",
+      "method": "Breathwork",
+      "score": 127
+    },
+    {
+      "goal": "Stress Reduction",
+      "method": "Breathwork",
+      "score": 120
+    },
+    {
+      "goal": "Mind-Body (Yoga, Pilates, Breathwork)",
+      "method": "Meditation & Movement",
+      "score": 100
+    },
+    {
+      "goal": "Mind-Body (Yoga, Pilates, Breathwork)",
+      "method": "Yoga",
+      "score": 100
+    },
+    {
+      "goal": "Stress Reduction",
+      "method": "Meditation & Movement",
+      "score": 95
+    },
+    {
+      "goal": "Swimming",
+      "method": "Interval Training",
+      "score": 95
+    },
+    {
+      "goal": "Cycling",
+      "method": "Interval Training",
+      "score": 92
+    },
+    {
+      "goal": "Mind-Body (Yoga, Pilates, Breathwork)",
+      "method": "Mobility Flow",
+      "score": 76
+    },
+    {
+      "goal": "Mind-Body (Yoga, Pilates, Breathwork)",
+      "method": "Stretching Protocols",
+      "score": 76
+    },
+    {
+      "goal": "Running (5K, 10K, Half Marathon)",
+      "method": "Fartlek Training",
+      "score": 76
+    },
+    {
+      "goal": "Running (5K, 10K, Half Marathon)",
+      "method": "Interval Training",
+      "score": 76
+    },
+    {
+      "goal": "Build Muscle",
+      "method": "Escalating Density Training",
+      "score": 73
+    },
+    {
+      "goal": "Build Muscle",
+      "method": "Pyramid Sets",
+      "score": 73
+    },
+    {
+      "goal": "Build Muscle",
+      "method": "Tempo Training",
+      "score": 73
+    },
+    {
+      "goal": "Hockey",
+      "method": "Speed & Agility Ladder Work",
+      "score": 73
+    },
+    {
+      "goal": "Mobility & Flexibility",
+      "method": "Stretching Protocols",
+      "score": 73
+    },
+    {
+      "goal": "Mobility & Flexibility",
+      "method": "Yoga",
+      "score": 73
+    },
+    {
+      "goal": "Rowing",
+      "method": "Fartlek Training",
+      "score": 73
+    },
+    {
+      "goal": "Rowing",
+      "method": "Interval Training",
+      "score": 73
+    },
+    {
+      "goal": "Stress Reduction",
+      "method": "Active Recovery Sessions",
+      "score": 73
+    },
+    {
+      "goal": "Stress Reduction",
+      "method": "Yoga",
+      "score": 73
+    },
+    {
+      "goal": "Swimming",
+      "method": "Fartlek Training",
+      "score": 73
+    },
+    {
+      "goal": "Tennis",
+      "method": "Speed & Agility Ladder Work",
+      "score": 73
+    },
+    {
+      "goal": "American Football",
+      "method": "Olympic Lifts",
+      "score": 71
+    },
+    {
+      "goal": "American Football",
+      "method": "Plyometrics",
+      "score": 71
+    },
+    {
+      "goal": "Basketball",
+      "method": "Speed & Agility Ladder Work",
+      "score": 71
+    },
+    {
+      "goal": "Build Muscle",
+      "method": "Progressive Overload",
+      "score": 71
+    },
+    {
+      "goal": "Conditioning",
+      "method": "AMRAP (As Many Reps As Possible)",
+      "score": 71
+    },
+    {
+      "goal": "Conditioning",
+      "method": "EMOM (Every Minute on the Minute)",
+      "score": 71
+    },
+    {
+      "goal": "Cycling",
+      "method": "Fartlek Training",
+      "score": 71
+    },
+    {
+      "goal": "Endurance",
+      "method": "Fartlek Training",
+      "score": 71
+    },
+    {
+      "goal": "Endurance",
+      "method": "Interval Training",
+      "score": 71
+    },
+    {
+      "goal": "Hyrox",
+      "method": "AMRAP (As Many Reps As Possible)",
+      "score": 71
+    },
+    {
+      "goal": "Rugby",
+      "method": "Speed & Agility Ladder Work",
+      "score": 71
+    },
+    {
+      "goal": "Soccer",
+      "method": "Speed & Agility Ladder Work",
+      "score": 71
+    },
+    {
+      "goal": "Corporate Wellness",
+      "method": "Breathwork",
+      "score": 55
+    },
+    {
+      "goal": "Corporate Wellness",
+      "method": "Meditation & Movement",
+      "score": 55
+    },
+    {
+      "goal": "General Fitness",
+      "method": "Straight Sets",
+      "score": 55
+    },
+    {
+      "goal": "Hybrid Programs (Strength + Conditioning, Fat Loss + Performance)",
+      "method": "German Volume Training (10x10)",
+      "score": 55
+    },
+    {
+      "goal": "Marathon",
+      "method": "Fartlek Training",
+      "score": 55
+    },
+    {
+      "goal": "Mind-Body (Yoga, Pilates, Breathwork)",
+      "method": "Active Recovery Sessions",
+      "score": 55
+    },
+    {
+      "goal": "Prehab / Rehab",
+      "method": "Mobility Flow",
+      "score": 55
+    },
+    {
+      "goal": "Running (5K, 10K, Half Marathon)",
+      "method": "AMRAP (As Many Reps As Possible)",
+      "score": 55
+    },
+    {
+      "goal": "Running (5K, 10K, Half Marathon)",
+      "method": "Functional Training",
+      "score": 55
+    },
+    {
+      "goal": "American Football",
+      "method": "Cluster Sets",
+      "score": 53
+    },
+    {
+      "goal": "American Football",
+      "method": "Sprint Intervals",
+      "score": 53
+    },
+    {
+      "goal": "American Football",
+      "method": "Wave Loading",
+      "score": 53
+    },
+    {
+      "goal": "Body Recomposition",
+      "method": "EMOM (Every Minute on the Minute)",
+      "score": 53
+    },
+    {
+      "goal": "Body Recomposition",
+      "method": "Escalating Density Training",
+      "score": 53
+    },
+    {
+      "goal": "Body Recomposition",
+      "method": "HIIT",
+      "score": 53
+    },
+    {
+      "goal": "Body Recomposition",
+      "method": "Interval Training",
+      "score": 53
+    },
+    {
+      "goal": "Body Recomposition",
+      "method": "Tabata",
+      "score": 53
+    },
+    {
+      "goal": "Build Muscle",
+      "method": "German Volume Training (10x10)",
+      "score": 53
+    },
+    {
+      "goal": "Build Muscle",
+      "method": "Linear Periodization",
+      "score": 53
+    },
+    {
+      "goal": "Build Muscle",
+      "method": "Rest-Pause",
+      "score": 53
+    },
+    {
+      "goal": "Build Muscle",
+      "method": "Straight Sets",
+      "score": 53
+    },
+    {
+      "goal": "Build Muscle",
+      "method": "Time Under Tension (TUT)",
+      "score": 53
+    },
+    {
+      "goal": "Fat Loss",
+      "method": "Circuit Conditioning",
+      "score": 53
+    },
+    {
+      "goal": "Fat Loss",
+      "method": "Circuits",
+      "score": 53
+    },
+    {
+      "goal": "Fat Loss",
+      "method": "HIIT",
+      "score": 53
+    },
+    {
+      "goal": "Fat Loss",
+      "method": "Interval Training",
+      "score": 53
+    },
+    {
+      "goal": "Hockey",
+      "method": "AMRAP (As Many Reps As Possible)",
+      "score": 53
+    },
+    {
+      "goal": "Hockey",
+      "method": "EMOM (Every Minute on the Minute)",
+      "score": 53
+    },
+    {
+      "goal": "Lose Weight",
+      "method": "Circuit Conditioning",
+      "score": 53
+    },
+    {
+      "goal": "Lose Weight",
+      "method": "Circuits",
+      "score": 53
+    },
+    {
+      "goal": "Lose Weight",
+      "method": "HIIT",
+      "score": 53
+    },
+    {
+      "goal": "Lose Weight",
+      "method": "Interval Training",
+      "score": 53
+    },
+    {
+      "goal": "Mobility & Flexibility",
+      "method": "Active Recovery Sessions",
+      "score": 53
+    },
+    {
+      "goal": "Mobility & Flexibility",
+      "method": "Breathwork",
+      "score": 53
+    },
+    {
+      "goal": "Mobility & Flexibility",
+      "method": "Mobility Flow",
+      "score": 53
+    },
+    {
+      "goal": "Rowing",
+      "method": "HIIT",
+      "score": 53
+    },
+    {
+      "goal": "Running (5K, 10K, Half Marathon)",
+      "method": "Progressive Overload",
+      "score": 53
+    },
+    {
+      "goal": "Seasonal Goals (Summer Shred, Winter Bulk)",
+      "method": "EMOM (Every Minute on the Minute)",
+      "score": 53
+    },
+    {
+      "goal": "Seasonal Goals (Summer Shred, Winter Bulk)",
+      "method": "Escalating Density Training",
+      "score": 53
+    },
+    {
+      "goal": "Seasonal Goals (Summer Shred, Winter Bulk)",
+      "method": "HIIT",
+      "score": 53
+    },
+    {
+      "goal": "Seasonal Goals (Summer Shred, Winter Bulk)",
+      "method": "Interval Training",
+      "score": 53
+    },
+    {
+      "goal": "Seasonal Goals (Summer Shred, Winter Bulk)",
+      "method": "Tabata",
+      "score": 53
+    },
+    {
+      "goal": "Strength",
+      "method": "Escalating Density Training",
+      "score": 53
+    },
+    {
+      "goal": "Strength",
+      "method": "Functional Training",
+      "score": 53
+    },
+    {
+      "goal": "Strength",
+      "method": "Interval Training",
+      "score": 53
+    },
+    {
+      "goal": "Strength",
+      "method": "Skill Work (Agility, Speed, Coordination)",
+      "score": 53
+    },
+    {
+      "goal": "Strength",
+      "method": "Sport-Specific Drills",
+      "score": 53
+    },
+    {
+      "goal": "Stress Reduction",
+      "method": "Mobility Flow",
+      "score": 53
+    },
+    {
+      "goal": "Stress Reduction",
+      "method": "Stretching Protocols",
+      "score": 53
+    },
+    {
+      "goal": "Swimming",
+      "method": "Circuit Conditioning",
+      "score": 53
+    },
+    {
+      "goal": "Swimming",
+      "method": "Circuits",
+      "score": 53
+    },
+    {
+      "goal": "Swimming",
+      "method": "Functional Training",
+      "score": 53
+    },
+    {
+      "goal": "Swimming",
+      "method": "HIIT",
+      "score": 53
+    },
+    {
+      "goal": "Tennis",
+      "method": "AMRAP (As Many Reps As Possible)",
+      "score": 53
+    },
+    {
+      "goal": "Tennis",
+      "method": "EMOM (Every Minute on the Minute)",
+      "score": 53
+    },
+    {
+      "goal": "Tennis",
+      "method": "Skill Work (Agility, Speed, Coordination)",
+      "score": 53
+    },
+    {
+      "goal": "Tennis",
+      "method": "Sport-Specific Drills",
+      "score": 53
+    },
+    {
+      "goal": "Triathlon",
+      "method": "Fartlek Training",
+      "score": 53
+    },
+    {
+      "goal": "Volleyball",
+      "method": "Speed & Agility Ladder Work",
+      "score": 53
+    },
+    {
+      "goal": "Basketball",
+      "method": "AMRAP (As Many Reps As Possible)",
+      "score": 51
+    },
+    {
+      "goal": "Basketball",
+      "method": "EMOM (Every Minute on the Minute)",
+      "score": 51
+    },
+    {
+      "goal": "Combat Sports (Boxing, MMA, Judo, Wrestling)",
+      "method": "AMRAP (As Many Reps As Possible)",
+      "score": 51
+    },
+    {
+      "goal": "Combat Sports (Boxing, MMA, Judo, Wrestling)",
+      "method": "EMOM (Every Minute on the Minute)",
+      "score": 51
+    },
+    {
+      "goal": "Combat Sports (Boxing, MMA, Judo, Wrestling)",
+      "method": "Sprint Intervals",
+      "score": 51
+    },
+    {
+      "goal": "Combat Sports (Boxing, MMA, Judo, Wrestling)",
+      "method": "Tabata",
+      "score": 51
+    }
+  ],
+  "goalProgramPipelines": [
+    {
+      "goal": "Rugby",
+      "method": "Speed & Agility Ladder Work",
+      "program": "Speed & Agility Program",
+      "score": 60
+    },
+    {
+      "goal": "Soccer",
+      "method": "Speed & Agility Ladder Work",
+      "program": "Speed & Agility Program",
+      "score": 60
+    },
+    {
+      "goal": "Basketball",
+      "method": "Speed & Agility Ladder Work",
+      "program": "Speed & Agility Program",
+      "score": 60
+    },
+    {
+      "goal": "American Football",
+      "method": "Plyometrics",
+      "program": "Plyometric Power Program",
+      "score": 60
+    },
+    {
+      "goal": "Tennis",
+      "method": "Speed & Agility Ladder Work",
+      "program": "Speed & Agility Program",
+      "score": 60
+    },
+    {
+      "goal": "Hockey",
+      "method": "Speed & Agility Ladder Work",
+      "program": "Speed & Agility Program",
+      "score": 60
+    },
+    {
+      "goal": "Build Muscle",
+      "method": "Powerlifting",
+      "program": "Powerlifting",
+      "score": 55
+    },
+    {
+      "goal": "Strength",
+      "method": "Functional Training",
+      "program": "Functional Training",
+      "score": 55
+    },
+    {
+      "goal": "Strength",
+      "method": "Plyometrics",
+      "program": "Plyometric Power Program",
+      "score": 55
+    },
+    {
+      "goal": "Endurance",
+      "method": "Functional Training",
+      "program": "Functional Training",
+      "score": 55
+    },
+    {
+      "goal": "Hyrox",
+      "method": "Powerlifting",
+      "program": "Powerlifting",
+      "score": 55
+    },
+    {
+      "goal": "CrossFit",
+      "method": "Powerlifting",
+      "program": "Powerlifting",
+      "score": 55
+    },
+    {
+      "goal": "Triathlon",
+      "method": "Powerlifting",
+      "program": "Powerlifting",
+      "score": 55
+    },
+    {
+      "goal": "Marathon",
+      "method": "Powerlifting",
+      "program": "Powerlifting",
+      "score": 55
+    },
+    {
+      "goal": "Running (5K, 10K, Half Marathon)",
+      "method": "Powerlifting",
+      "program": "Powerlifting",
+      "score": 55
+    },
+    {
+      "goal": "Running (5K, 10K, Half Marathon)",
+      "method": "Functional Training",
+      "program": "Functional Training",
+      "score": 55
+    },
+    {
+      "goal": "Rugby",
+      "method": "Powerlifting",
+      "program": "Powerlifting",
+      "score": 55
+    },
+    {
+      "goal": "Rugby",
+      "method": "Plyometrics",
+      "program": "Plyometric Power Program",
+      "score": 55
+    },
+    {
+      "goal": "Tag Rugby",
+      "method": "Speed & Agility Ladder Work",
+      "program": "Speed & Agility Program",
+      "score": 55
+    },
+    {
+      "goal": "American Football",
+      "method": "Powerlifting",
+      "program": "Powerlifting",
+      "score": 55
+    },
+    {
+      "goal": "Swimming",
+      "method": "Functional Training",
+      "program": "Functional Training",
+      "score": 55
+    },
+    {
+      "goal": "Cycling",
+      "method": "Functional Training",
+      "program": "Functional Training",
+      "score": 55
+    },
+    {
+      "goal": "Volleyball",
+      "method": "Speed & Agility Ladder Work",
+      "program": "Speed & Agility Program",
+      "score": 55
+    },
+    {
+      "goal": "Stress Reduction",
+      "method": "Breathwork",
+      "program": "Stress Reduction Flow",
+      "score": 55
+    },
+    {
+      "goal": "Mind-Body (Yoga, Pilates, Breathwork)",
+      "method": "Breathwork",
+      "program": "Stress Reduction Flow",
+      "score": 53
+    },
+    {
+      "goal": "Build Muscle",
+      "method": "German Volume Training (10x10)",
+      "program": "German Volume Training (10x10)",
+      "score": 50
+    },
+    {
+      "goal": "Build Muscle",
+      "method": "Functional Training",
+      "program": "Functional Training",
+      "score": 50
+    },
+    {
+      "goal": "Build Muscle",
+      "method": "Speed & Agility Ladder Work",
+      "program": "Speed & Agility Program",
+      "score": 50
+    },
+    {
+      "goal": "Strength",
+      "method": "Powerlifting",
+      "program": "Powerlifting",
+      "score": 50
+    },
+    {
+      "goal": "Strength",
+      "method": "Speed & Agility Ladder Work",
+      "program": "Speed & Agility Program",
+      "score": 50
+    },
+    {
+      "goal": "Endurance",
+      "method": "Powerlifting",
+      "program": "Powerlifting",
+      "score": 50
+    },
+    {
+      "goal": "Endurance",
+      "method": "Speed & Agility Ladder Work",
+      "program": "Speed & Agility Program",
+      "score": 50
+    },
+    {
+      "goal": "Hypertrophy",
+      "method": "Powerlifting",
+      "program": "Powerlifting",
+      "score": 50
+    },
+    {
+      "goal": "Hypertrophy",
+      "method": "Functional Training",
+      "program": "Functional Training",
+      "score": 50
+    },
+    {
+      "goal": "Hypertrophy",
+      "method": "Speed & Agility Ladder Work",
+      "program": "Speed & Agility Program",
+      "score": 50
+    },
+    {
+      "goal": "Fat Loss",
+      "method": "Functional Training",
+      "program": "Functional Training",
+      "score": 50
+    },
+    {
+      "goal": "Conditioning",
+      "method": "Powerlifting",
+      "program": "Powerlifting",
+      "score": 50
+    },
+    {
+      "goal": "Conditioning",
+      "method": "Functional Training",
+      "program": "Functional Training",
+      "score": 50
+    },
+    {
+      "goal": "Conditioning",
+      "method": "Plyometrics",
+      "program": "Plyometric Power Program",
+      "score": 50
+    },
+    {
+      "goal": "Conditioning",
+      "method": "Speed & Agility Ladder Work",
+      "program": "Speed & Agility Program",
+      "score": 50
+    },
+    {
+      "goal": "Body Recomposition",
+      "method": "Powerlifting",
+      "program": "Powerlifting",
+      "score": 50
+    },
+    {
+      "goal": "Body Recomposition",
+      "method": "Functional Training",
+      "program": "Functional Training",
+      "score": 50
+    },
+    {
+      "goal": "Body Recomposition",
+      "method": "Speed & Agility Ladder Work",
+      "program": "Speed & Agility Program",
+      "score": 50
+    },
+    {
+      "goal": "Hyrox",
+      "method": "Functional Training",
+      "program": "Functional Training",
+      "score": 50
+    },
+    {
+      "goal": "Hyrox",
+      "method": "Speed & Agility Ladder Work",
+      "program": "Speed & Agility Program",
+      "score": 50
+    },
+    {
+      "goal": "CrossFit",
+      "method": "Functional Training",
+      "program": "Functional Training",
+      "score": 50
+    },
+    {
+      "goal": "CrossFit",
+      "method": "Speed & Agility Ladder Work",
+      "program": "Speed & Agility Program",
+      "score": 50
+    },
+    {
+      "goal": "Running (5K, 10K, Half Marathon)",
+      "method": "Speed & Agility Ladder Work",
+      "program": "Speed & Agility Program",
+      "score": 50
+    },
+    {
+      "goal": "Rugby",
+      "method": "Functional Training",
+      "program": "Functional Training",
+      "score": 50
+    },
+    {
+      "goal": "Soccer",
+      "method": "Powerlifting",
+      "program": "Powerlifting",
+      "score": 50
+    },
+    {
+      "goal": "Soccer",
+      "method": "Functional Training",
+      "program": "Functional Training",
+      "score": 50
+    },
+    {
+      "goal": "Soccer",
+      "method": "Plyometrics",
+      "program": "Plyometric Power Program",
+      "score": 50
+    },
+    {
+      "goal": "Basketball",
+      "method": "Powerlifting",
+      "program": "Powerlifting",
+      "score": 50
+    },
+    {
+      "goal": "Basketball",
+      "method": "Functional Training",
+      "program": "Functional Training",
+      "score": 50
+    },
+    {
+      "goal": "Basketball",
+      "method": "Plyometrics",
+      "program": "Plyometric Power Program",
+      "score": 50
+    },
+    {
+      "goal": "Combat Sports (Boxing, MMA, Judo, Wrestling)",
+      "method": "Powerlifting",
+      "program": "Powerlifting",
+      "score": 50
+    },
+    {
+      "goal": "Combat Sports (Boxing, MMA, Judo, Wrestling)",
+      "method": "Functional Training",
+      "program": "Functional Training",
+      "score": 50
+    },
+    {
+      "goal": "Combat Sports (Boxing, MMA, Judo, Wrestling)",
+      "method": "Plyometrics",
+      "program": "Plyometric Power Program",
+      "score": 50
+    },
+    {
+      "goal": "Combat Sports (Boxing, MMA, Judo, Wrestling)",
+      "method": "Speed & Agility Ladder Work",
+      "program": "Speed & Agility Program",
+      "score": 50
+    },
+    {
+      "goal": "Tag Rugby",
+      "method": "Functional Training",
+      "program": "Functional Training",
+      "score": 50
+    },
+    {
+      "goal": "American Football",
+      "method": "Speed & Agility Ladder Work",
+      "program": "Speed & Agility Program",
+      "score": 50
+    },
+    {
+      "goal": "Swimming",
+      "method": "Powerlifting",
+      "program": "Powerlifting",
+      "score": 50
+    },
+    {
+      "goal": "Swimming",
+      "method": "Speed & Agility Ladder Work",
+      "program": "Speed & Agility Program",
+      "score": 50
+    },
+    {
+      "goal": "Cycling",
+      "method": "Powerlifting",
+      "program": "Powerlifting",
+      "score": 50
+    },
+    {
+      "goal": "Cycling",
+      "method": "Speed & Agility Ladder Work",
+      "program": "Speed & Agility Program",
+      "score": 50
+    },
+    {
+      "goal": "Tennis",
+      "method": "Powerlifting",
+      "program": "Powerlifting",
+      "score": 50
+    },
+    {
+      "goal": "Tennis",
+      "method": "Functional Training",
+      "program": "Functional Training",
+      "score": 50
+    },
+    {
+      "goal": "Golf",
+      "method": "Powerlifting",
+      "program": "Powerlifting",
+      "score": 50
+    },
+    {
+      "goal": "Golf",
+      "method": "Functional Training",
+      "program": "Functional Training",
+      "score": 50
+    },
+    {
+      "goal": "Golf",
+      "method": "Speed & Agility Ladder Work",
+      "program": "Speed & Agility Program",
+      "score": 50
+    },
+    {
+      "goal": "Rowing",
+      "method": "Powerlifting",
+      "program": "Powerlifting",
+      "score": 50
+    },
+    {
+      "goal": "Rowing",
+      "method": "Functional Training",
+      "program": "Functional Training",
+      "score": 50
+    },
+    {
+      "goal": "Rowing",
+      "method": "Speed & Agility Ladder Work",
+      "program": "Speed & Agility Program",
+      "score": 50
+    },
+    {
+      "goal": "Volleyball",
+      "method": "Powerlifting",
+      "program": "Powerlifting",
+      "score": 50
+    },
+    {
+      "goal": "Volleyball",
+      "method": "Functional Training",
+      "program": "Functional Training",
+      "score": 50
+    },
+    {
+      "goal": "Hockey",
+      "method": "Powerlifting",
+      "program": "Powerlifting",
+      "score": 50
+    },
+    {
+      "goal": "Hockey",
+      "method": "Functional Training",
+      "program": "Functional Training",
+      "score": 50
+    },
+    {
+      "goal": "Hockey",
+      "method": "Plyometrics",
+      "program": "Plyometric Power Program",
+      "score": 50
+    },
+    {
+      "goal": "Senior Fitness",
+      "method": "Functional Training",
+      "program": "Functional Training",
+      "score": 50
+    },
+    {
+      "goal": "Seasonal Goals (Summer Shred, Winter Bulk)",
+      "method": "Powerlifting",
+      "program": "Powerlifting",
+      "score": 50
+    },
+    {
+      "goal": "Seasonal Goals (Summer Shred, Winter Bulk)",
+      "method": "Functional Training",
+      "program": "Functional Training",
+      "score": 50
+    },
+    {
+      "goal": "Seasonal Goals (Summer Shred, Winter Bulk)",
+      "method": "Speed & Agility Ladder Work",
+      "program": "Speed & Agility Program",
+      "score": 50
+    },
+    {
+      "goal": "Hybrid Programs (Strength + Conditioning, Fat Loss + Performance)",
+      "method": "German Volume Training (10x10)",
+      "program": "German Volume Training (10x10)",
+      "score": 50
+    },
+    {
+      "goal": "Hybrid Programs (Strength + Conditioning, Fat Loss + Performance)",
+      "method": "Powerlifting",
+      "program": "Powerlifting",
+      "score": 50
+    },
+    {
+      "goal": "Hybrid Programs (Strength + Conditioning, Fat Loss + Performance)",
+      "method": "Functional Training",
+      "program": "Functional Training",
+      "score": 50
+    },
+    {
+      "goal": "Hybrid Programs (Strength + Conditioning, Fat Loss + Performance)",
+      "method": "Speed & Agility Ladder Work",
+      "program": "Speed & Agility Program",
+      "score": 50
+    },
+    {
+      "goal": "Mind-Body (Yoga, Pilates, Breathwork)",
+      "method": "Yoga",
+      "program": "Stress Reduction Flow",
+      "score": 50
+    },
+    {
+      "goal": "Stress Reduction",
+      "method": "Yoga",
+      "program": "Stress Reduction Flow",
+      "score": 49
+    },
+    {
+      "goal": "American Football",
+      "method": "Olympic Lifts",
+      "program": "American Football",
+      "score": 48
+    },
+    {
+      "goal": "American Football",
+      "method": "Olympic Lifts",
+      "program": "Olympic Weightlifting",
+      "score": 48
+    },
+    {
+      "goal": "American Football",
+      "method": "Plyometrics",
+      "program": "American Football",
+      "score": 48
+    },
+    {
+      "goal": "Swimming",
+      "method": "Interval Training",
+      "program": "Endurance Build",
+      "score": 48
+    },
+    {
+      "goal": "Cycling",
+      "method": "Interval Training",
+      "program": "Endurance Build",
+      "score": 48
+    },
+    {
+      "goal": "Hockey",
+      "method": "Speed & Agility Ladder Work",
+      "program": "Hockey Conditioning",
+      "score": 48
+    },
+    {
+      "goal": "Fat Loss",
+      "method": "Circuits",
+      "program": "Fat Loss Circuit",
+      "score": 47
+    },
+    {
+      "goal": "Fat Loss",
+      "method": "Circuit Conditioning",
+      "program": "Fat Loss Circuit",
+      "score": 47
+    },
+    {
+      "goal": "Conditioning",
+      "method": "EMOM (Every Minute on the Minute)",
+      "program": "Conditioning Flow",
+      "score": 47
+    },
+    {
+      "goal": "Conditioning",
+      "method": "AMRAP (As Many Reps As Possible)",
+      "program": "Conditioning Flow",
+      "score": 47
+    },
+    {
+      "goal": "Swimming",
+      "method": "Interval Training",
+      "program": "Swimming Endurance",
+      "score": 47
+    },
+    {
+      "goal": "Stress Reduction",
+      "method": "Meditation & Movement",
+      "program": "Stress Reduction Flow",
+      "score": 47
+    }
+  ],
+  "canonicalLists": {
+    "Primary_Muscle": [
+      "Abs",
+      "Adductors",
+      "Back",
+      "Biceps",
+      "Calves",
+      "Chest",
+      "Core",
+      "Full Body",
+      "Glutes",
+      "Grip",
+      "Hamstrings",
+      "Legs",
+      "Lower Back",
+      "Lower Chest",
+      "Obliques",
+      "Posterior Chain",
+      "Quads",
+      "Rear Delts",
+      "Rotator Cuff",
+      "Serratus",
+      "Shins",
+      "Shoulder Mobility",
+      "Shoulders",
+      "Spinal Flexibility",
+      "Spine Mobility",
+      "Traps",
+      "Triceps",
+      "Upper Chest"
+    ],
+    "Secondary_Muscle": [
+      "Adductors",
+      "Biceps",
+      "Cardio",
+      "Chest",
+      "Core",
+      "Forearms",
+      "Full Body",
+      "Glutes",
+      "Grip",
+      "Hamstrings",
+      "Legs",
+      "Lower Back",
+      "Mobility",
+      "NA",
+      "Obliques",
+      "Power",
+      "Serratus",
+      "Shoulders",
+      "Traps",
+      "Triceps",
+      "Upper Back"
+    ],
+    "Equipment": [
+      "Ab Wheel",
+      "Atlas Stone",
+      "Axle Bar",
+      "Band/Stick",
+      "Barbell",
+      "Barbell/Dumbbells",
+      "Barbell/EZ",
+      "Battle Ropes",
+      "Belt Squat",
+      "Bodyweight",
+      "Bodyweight/Barbell",
+      "Bodyweight/Dumbbell",
+      "Bodyweight/Sissy",
+      "Cable",
+      "Cable/Dumbbell",
+      "Cable/Machine",
+      "Dumbbell",
+      "Dumbbell/Barbell",
+      "Dumbbell/Cable",
+      "Dumbbell/KB",
+      "Dumbbells",
+      "Dumbbells/Barbell",
+      "GHD",
+      "Hack Squat",
+      "Hyperextension",
+      "Keg",
+      "Kettlebell",
+      "Leg Curl",
+      "Leg Extension",
+      "Leg Press",
+      "Log",
+      "Machine",
+      "Machine/Bodyweight",
+      "Machine/Cable",
+      "Machine/Partner",
+      "Med Ball",
+      "Plyo Box",
+      "Pull-Up Bar",
+      "Resistance Band",
+      "Reverse Hyper",
+      "Sandbag",
+      "Sled",
+      "Sledgehammer",
+      "T-Bar",
+      "Tire",
+      "Trap Bar"
+    ],
+    "Difficulty": [
+      "Advanced",
+      "Beginner",
+      "Intermediate"
+    ],
+    "Type": [
+      "Compound",
+      "Isolation",
+      "Isometric",
+      "Olympic",
+      "Plyo"
+    ],
+    "Program_Category": [
+      "Aesthetic",
+      "Cardio",
+      "Performance",
+      "Recovery",
+      "Strength"
+    ],
+    "Split": [
+      "Active Play / Recovery",
+      "Active Recovery / Cross-Train",
+      "Active Recovery / Mobility",
+      "Active Recovery / Technique",
+      "Active Recovery & Movement Prep",
+      "Aerobic Capacity",
+      "Aerobic Endurance",
+      "Agility & Change of Direction",
+      "Agility & Court Movement",
+      "Agility & Footwork",
+      "Anaerobic Capacity",
+      "Anaerobic Conditioning",
+      "Anaerobic Power",
+      "Athletic Development",
+      "Back & Biceps",
+      "Balance & Stability",
+      "Bench & Accessory",
+      "Bike (Long Endurance)",
+      "Bike (Tempo/Intervals)",
+      "Breathwork & Meditation",
+      "Bro Split",
+      "Chest & Triceps",
+      "Circuit",
+      "Conditioning (Court Sprints)",
+      "Conditioning (Game Simulation)",
+      "Conditioning (Match Simulation)",
+      "Conditioning (Metcon)",
+      "Conditioning (Repeat Efforts)",
+      "Conditioning (Repeat Sprints)",
+      "Conditioning / Active Recovery",
+      "Conditioning & Contact Prep",
+      "Conditioning + Core",
+      "Conjugate",
+      "Core & Pelvic Floor Restoration",
+      "Core & Recovery",
+      "Core Stability & Posture",
+      "Cross-Training / Active Recovery",
+      "Cross-Training or Rest",
+      "Deadlift & Accessory",
+      "Desk-Break Strength Circuit",
+      "Easy Run",
+      "Easy Run or Recovery",
+      "Endurance (Long Slow)",
+      "Endurance Ride (Zone 2)",
+      "Fartlek / Mixed Pace",
+      "Flexibility & Light Cardio",
+      "Flow",
+      "Full Body",
+      "Full Body A",
+      "Full Body B",
+      "Full Body Circuit",
+      "Full Body Metabolic",
+      "Full Body Power",
+      "Full Body Strength",
+      "Full Body Strength + Core",
+      "Full Body Yoga / Flow",
+      "Functional Strength",
+      "Game Simulation / Fitness Test",
+      "Gentle Movement & Breath",
+      "Gymnastics & Skill",
+      "HIIT/Strength",
+      "Hill Repeats / Strength",
+      "Hypertrophy (Bodybuilding)",
+      "Intervals (HIIT)",
+      "Intervals (VO2 Max)",
+      "Isolation",
+      "Joint-Specific Prehab A",
+      "Joint-Specific Prehab B",
+      "Legs",
+      "Legs (Hamstrings/Glutes) + Arms",
+      "Legs (Heavy)",
+      "Legs (Quads/Glutes/Calves)",
+      "Legs (Volume) + Arms",
+      "Long Endurance + Strength",
+      "Long Metcon (Endurance)",
+      "Long Ride or Race Simulation",
+      "Long Run",
+      "Long Slow Distance",
+      "Low-Impact Cardio & Mobility",
+      "Lower Body (Glute/Ham)",
+      "Lower Body + Steady State",
+      "Lower Body Mobility Flow",
+      "Lower Body Power & COD",
+      "Lower Body Power & Skating Specific",
+      "Lower Body Power & Speed",
+      "Lower Body Strength & Stability",
+      "Lower Body Strength + Cardio",
+      "Lower Hypertrophy (Volume)",
+      "Lower Strength (Heavy)",
+      "Maximal Strength (Lower)",
+      "Maximal Strength (Upper)",
+      "Metabolic Conditioning",
+      "Metcon (Short & Intense)",
+      "Mid-Week Medium Run",
+      "Mindful Movement / Tai Chi",
+      "Mixed Modal Conditioning",
+      "Mobility & Light Strength",
+      "Mobility & Posture Correction",
+      "Movement Fundamentals",
+      "Movement Screening & Correctives",
+      "Nature Walk / Light Cardio",
+      "Olympic Lifting",
+      "Overhead Press & Accessory",
+      "Peaking",
+      "Pilates Mat / Reformer",
+      "Position-Specific / Recovery",
+      "Power / Speed / Agility",
+      "Power / Speed Intervals",
+      "Power & Speed",
+      "Prehab",
+      "Pull (Back/Biceps/Rear Delts)",
+      "Pull (Heavy)",
+      "Pull (Volume)",
+      "Pull (Width/Thickness)",
+      "Pull Hypertrophy",
+      "Push (Chest/Shoulders/Triceps)",
+      "Push (Heavy)",
+      "Push (Volume)",
+      "Push Hypertrophy",
+      "Push/Pull",
+      "Push/Pull/Legs",
+      "Recovery & Mobility",
+      "Recovery & Restoration",
+      "Recovery Run or Cross-Train",
+      "Recovery Spin",
+      "Recovery Swim or Dryland",
+      "Rest or Active Recovery",
+      "Rest or Light Swim/Spin",
+      "Rotational Power & Core",
+      "Rotational Power & Mobility",
+      "Rowing & Sled Push Intervals",
+      "Run (Easy/Recovery)",
+      "Run (Long/Tempo)",
+      "Running & Ski Erg",
+      "Shoulders & Arms",
+      "Skill Work + Sparring",
+      "Skill-Specific Strength",
+      "Speed & Agility",
+      "Speed & Agility Foundation",
+      "Speed & Power",
+      "Speed Intervals",
+      "Speed Work / Intervals",
+      "Split",
+      "Sport Specific",
+      "Sport-Specific Conditioning",
+      "Sport-Specific Skills",
+      "Squat & Accessory",
+      "Squat/Bench/Dead",
+      "Steady State (UT2)",
+      "Strength (Heavy Compound)",
+      "Strength & Power",
+      "Strength & Power (Heavy)",
+      "Strength Focus (Squat/Press)",
+      "Strength-Cardio Hybrid A",
+      "Strength-Cardio Hybrid B",
+      "Strength-Endurance",
+      "Stress-Relief & Team Building",
+      "Stroke-Specific Training",
+      "Swim (Speed/Threshold)",
+      "Swim Technique + Endurance",
+      "Targeted Rehab A",
+      "Targeted Rehab B",
+      "Technique & Drills",
+      "Tempo / Sweet Spot",
+      "Tempo / Threshold",
+      "Tempo Run",
+      "Threshold / Tempo",
+      "Threshold / UT1",
+      "Triathlon",
+      "Upper Body & Core Stability",
+      "Upper Body & Grip",
+      "Upper Body & Shoulder Health",
+      "Upper Body + HIIT",
+      "Upper Body Hypertrophy",
+      "Upper Body Mobility Flow",
+      "Upper Body Strength + Metcon",
+      "Upper Hypertrophy (Volume)",
+      "Upper Strength (Heavy)",
+      "Upper/Lower",
+      "Upper/Lower Hybrid",
+      "Vertical Power & Lower Body",
+      "Vinyasa Yoga Flow",
+      "Weak Point / Pump",
+      "Weakness / Accessory / Recovery",
+      "Weakness / Recovery / Sport-Specific",
+      "Yin / Restorative Yoga"
+    ],
+    "Focus": [
+      "Athletic",
+      "Bodybuilding",
+      "Endurance",
+      "Fat Loss",
+      "Hypertrophy",
+      "Mobility",
+      "Powerlifting",
+      "Rehab",
+      "Strength"
+    ],
+    "Equipment_Needed": [
+      "Bodyweight",
+      "Dumbbells Only",
+      "Full Gym",
+      "Full Gym + Cables",
+      "Minimal"
+    ],
+    "Primary_Goals": [
+      "Active Recovery Sessions",
+      "American Football",
+      "AMRAP (As Many Reps As Possible)",
+      "Basketball",
+      "Basketball Strength",
+      "Block Periodization",
+      "Body Recomposition",
+      "Body Recomposition Circuit",
+      "Breathwork",
+      "Bro Split (Chest/Back/Legs/Arms/Shoulders)",
+      "Build Muscle",
+      "Circuit Conditioning",
+      "Circuits",
+      "Cluster Sets",
+      "Combat Sports",
+      "Combat Sports (Boxing, MMA, Judo, Wrestling)",
+      "Combat Sports Conditioning",
+      "Conditioning",
+      "Conditioning Flow",
+      "Corporate Wellness",
+      "Corporate Wellness Program",
+      "CrossFit",
+      "CrossFit WOD",
+      "Custom",
+      "Cycling",
+      "Cycling Power",
+      "Drop Sets",
+      "EMOM (Every Minute on the Minute)",
+      "Endurance",
+      "Endurance Build",
+      "Escalating Density Training",
+      "Fartlek Training",
+      "Fat Loss",
+      "Fat Loss Circuit",
+      "Full Body Split",
+      "Functional Training",
+      "GBC (German Body Composition)",
+      "General Fitness",
+      "German Volume Training (10x10)",
+      "Giant Sets",
+      "Golf",
+      "Golf Strength & Mobility",
+      "HIIT",
+      "Hockey",
+      "Hockey Conditioning",
+      "Hybrid Programs",
+      "Hybrid Programs (Strength + Conditioning, Fat Loss + Performance)",
+      "Hybrid Training (Strength + Conditioning, Fat Loss + Performance)",
+      "Hypertrophy",
+      "Hyrox",
+      "Hyrox Prep",
+      "Injury Rehab",
+      "Interval Training",
+      "Linear Periodization",
+      "Lose Weight",
+      "Marathon",
+      "Marathon Training",
+      "Meditation & Movement",
+      "Mind-Body (Yoga, Pilates, Breathwork)",
+      "Mind-Body (Yoga/Pilates/Breathwork)",
+      "Mind‑Body (Yoga, Pilates, Breathwork)",
+      "Mobility & Flexibility",
+      "Mobility Flow",
+      "Muscle Gain Split",
+      "Olympic Lifts",
+      "Olympic Weightlifting",
+      "Pilates",
+      "Plyometric Power Program",
+      "Plyometrics",
+      "Postpartum Fitness",
+      "Postpartum Fitness Program",
+      "Powerlifting",
+      "Prehab / Rehab",
+      "Progressive Overload",
+      "Push Pull Legs (PPL)",
+      "Pyramid Sets",
+      "Rest-Pause",
+      "Rowing",
+      "Rowing Conditioning",
+      "Rugby",
+      "Rugby Conditioning",
+      "Running (5K, 10K, Half Marathon)",
+      "Running (5K/10K/Half)",
+      "Running Plan (5K, 10K, Half Marathon)",
+      "Seasonal Goal Program (Summer Shred, Winter Bulk)",
+      "Seasonal Goals (Bulk)",
+      "Seasonal Goals (Shred)",
+      "Seasonal Goals (Summer Shred, Winter Bulk)",
+      "Senior Fitness",
+      "Skill Work (Agility, Speed, Coordination)",
+      "Soccer",
+      "Soccer Performance",
+      "Speed & Agility Ladder Work",
+      "Speed & Agility Program",
+      "Sport-Specific Drills",
+      "Sports Performance",
+      "Sprint Intervals",
+      "Starting Strength",
+      "Straight Sets",
+      "Strength",
+      "Stress Reduction",
+      "Stress Reduction Flow",
+      "Stretching Protocols",
+      "StrongLifts 5x5",
+      "Supersets",
+      "Swimming",
+      "Swimming Endurance",
+      "Tabata",
+      "Tag Rugby",
+      "Tempo Training",
+      "Tennis",
+      "Tennis Agility",
+      "Time Under Tension (TUT)",
+      "Triathlon",
+      "Triathlon Base",
+      "Trisets",
+      "Upper/Lower Split",
+      "Volleyball",
+      "Volleyball Performance",
+      "Wave Loading",
+      "Yoga",
+      "Youth Development",
+      "Youth Training"
+    ],
+    "Training_Methods": [
+      "Active Recovery Sessions",
+      "AMRAP (As Many Reps As Possible)",
+      "Block Periodization",
+      "Breathwork",
+      "Circuit Conditioning",
+      "Circuits",
+      "Cluster Sets",
+      "Drop Sets",
+      "EMOM (Every Minute on the Minute)",
+      "Escalating Density Training",
+      "Fartlek Training",
+      "Functional Training",
+      "German Volume Training (10x10)",
+      "Giant Sets",
+      "HIIT",
+      "Interval Training",
+      "Linear Periodization",
+      "Meditation & Movement",
+      "Mobility Flow",
+      "Olympic Lifts",
+      "Pilates",
+      "Plyometrics",
+      "Powerlifting",
+      "Progressive Overload",
+      "Pyramid Sets",
+      "Rest-Pause",
+      "Rest‑Pause",
+      "Skill Work (Agility, Speed, Coordination)",
+      "Speed & Agility Ladder Work",
+      "Sport-Specific Drills",
+      "Sport‑Specific Drills",
+      "Sprint Intervals",
+      "Straight Sets",
+      "Stretching Protocols",
+      "Supersets",
+      "Tabata",
+      "Tempo Training",
+      "Time Under Tension (TUT)",
+      "Trisets",
+      "Wave Loading",
+      "Yoga"
+    ],
+    "Matching_Programs": [
+      "American Football",
+      "Basketball Strength",
+      "Body Recomposition Circuit",
+      "Bro Split (Chest/Back/Legs/Arms/Shoulders)",
+      "Combat Sports Conditioning",
+      "Conditioning Flow",
+      "Corporate Wellness Program",
+      "CrossFit WOD",
+      "Custom",
+      "Cycling Power",
+      "Endurance Build",
+      "Fat Loss Circuit",
+      "Full Body Split",
+      "Functional Training",
+      "GBC (German Body Composition)",
+      "General Fitness",
+      "German Volume Training (10x10)",
+      "Golf Strength & Mobility",
+      "HIIT",
+      "Hockey Conditioning",
+      "Hybrid Training (Strength + Conditioning, Fat Loss + Performance)",
+      "Hyrox Prep",
+      "Marathon Training",
+      "Mobility & Flexibility",
+      "Muscle Gain Split",
+      "Olympic Weightlifting",
+      "Plyometric Power Program",
+      "Postpartum Fitness Program",
+      "Powerlifting",
+      "Prehab / Rehab",
+      "Push Pull Legs (PPL)",
+      "Rowing Conditioning",
+      "Rugby Conditioning",
+      "Running Plan (5K, 10K, Half Marathon)",
+      "Seasonal Goal Program (Summer Shred, Winter Bulk)",
+      "Senior Fitness",
+      "Soccer Performance",
+      "Speed & Agility Program",
+      "Starting Strength",
+      "Stress Reduction Flow",
+      "StrongLifts 5x5",
+      "Swimming Endurance",
+      "Tag Rugby",
+      "Tennis Agility",
+      "Triathlon Base",
+      "Upper/Lower Split",
+      "Volleyball Performance",
+      "Youth Development"
+    ],
+    "Status": [
+      "Active",
+      "Archived",
+      "Draft"
+    ]
+  },
+  "equipmentCompatibility": {
+    "Full Gym": [
+      "Full Gym",
+      "Full Gym + Cables",
+      "Barbell",
+      "Cable",
+      "Machine",
+      "Dumbbell",
+      "Dumbbells",
+      "Kettlebell",
+      "Bodyweight"
+    ],
+    "Dumbbells Only": [
+      "Dumbbells Only",
+      "Dumbbell",
+      "Dumbbells",
+      "Bodyweight"
+    ],
+    "Minimal": [
+      "Minimal",
+      "Bodyweight",
+      "Resistance Band"
+    ],
+    "Bodyweight": [
+      "Bodyweight"
+    ]
+  },
+  "experienceMethodPreference": {
+    "Beginner": [
+      "Straight Sets",
+      "StrongLifts 5x5",
+      "Full Body",
+      "Starting Strength"
+    ],
+    "Intermediate": [
+      "Upper/Lower",
+      "Push/Pull/Legs",
+      "Supersets",
+      "Hypertrophy"
+    ],
+    "Advanced": [
+      "German Volume Training",
+      "Conjugate",
+      "Triphasic",
+      "Block Periodization"
+    ]
+  },
+  "scoringWeights": {
+    "goal": 0.3,
+    "days": 0.25,
+    "experience": 0.2,
+    "equipment": 0.15,
+    "time": 0.1
+  }
+}
