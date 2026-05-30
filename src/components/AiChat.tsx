@@ -46,7 +46,7 @@ interface QuickAction {
   label: string
   icon: React.ElementType
   symbol: string
-  path?: string
+  topic: string
 }
 
 type Theme = 'dark' | 'light'
@@ -81,39 +81,114 @@ const SLASH_COMMANDS: { cmd: string; desc: string; path?: string }[] = [
 ]
 
 const TONE_STYLES: Record<string, { greeting: string; closing: string }> = {
-  professional: {
-    greeting: 'Dear',
-    closing: 'Best regards,',
-  },
-  friendly: {
-    greeting: 'Hey',
-    closing: 'See you soon!',
-  },
-  coach: {
-    greeting: "Let's go",
-    closing: 'Crush it! 💪',
-  },
+  professional: { greeting: 'Dear', closing: 'Best regards,' },
+  friendly: { greeting: 'Hey', closing: 'See you soon!' },
+  coach: { greeting: "Let's go", closing: 'Crush it! 💪' },
 }
 
 const quickActions: QuickAction[] = [
-  { label: 'Create program', icon: Dumbbell, symbol: '⌘P', path: '/programs/create' },
-  { label: 'Add client', icon: Users, symbol: '⌘C', path: '/clients' },
-  { label: 'Schedule', icon: CalendarDays, symbol: '⌘S', path: '/calendar' },
-  { label: 'Exercises', icon: BookOpen, symbol: '⌘E', path: '/exercises' },
-  { label: 'Nutrition', icon: Apple, symbol: '⌘N', path: '/nutrition' },
-  { label: 'Progress', icon: Camera, symbol: '⌘T', path: '/photos' },
-  { label: 'Dashboard', icon: LayoutDashboard, symbol: '⌘D', path: '/dashboard' },
-  { label: 'Settings', icon: Settings, symbol: '⌘,', path: '/settings' },
+  { label: 'Create program', icon: Dumbbell, symbol: '⌘P', topic: 'create_program' },
+  { label: 'Add client', icon: Users, symbol: '⌘C', topic: 'add_client' },
+  { label: 'Schedule', icon: CalendarDays, symbol: '⌘S', topic: 'schedule' },
+  { label: 'Exercises', icon: BookOpen, symbol: '⌘E', topic: 'exercise' },
+  { label: 'Nutrition', icon: Apple, symbol: '⌘N', topic: 'nutrition' },
+  { label: 'Progress', icon: Camera, symbol: '⌘T', topic: 'progress' },
+  { label: 'Dashboard', icon: LayoutDashboard, symbol: '⌘D', topic: 'dashboard' },
+  { label: 'Settings', icon: Settings, symbol: '⌘,', topic: 'settings' },
 ]
+
+/* ═══════════════════════════════════════════════════════
+   CONVERSATION FLOWS
+   Each topic is an array of response generators.
+   The step index advances with each user reply.
+   ═══════════════════════════════════════════════════════ */
+const CONVERSATION_FLOWS: Record<string, ((_input: string, _step: number) => { text: string; done: boolean })[]> = {
+  create_program: [
+    () => ({ text: "I'd love to help you build a program! 💪 Are you creating this for a **specific client** or as a **general template**?", done: false }),
+    (input) => {
+      const forClient = input.toLowerCase().includes('client') || input.toLowerCase().includes('specific')
+      const base = forClient
+        ? "Perfect! A personalized program is the best way to get results."
+        : "Great! Templates save so much time — you can customize them later for any client."
+      return { text: `${base} What's the primary goal — **strength**, **muscle building**, **fat loss**, or **endurance**?`, done: false }
+    },
+    (input) => {
+      const goal = input.toLowerCase().includes('strength') ? 'strength'
+        : input.toLowerCase().includes('muscle') ? 'muscle building'
+        : input.toLowerCase().includes('fat') ? 'fat loss'
+        : input.toLowerCase().includes('endurance') ? 'endurance'
+        : 'their goal'
+      return { text: `Excellent! ${goal.charAt(0).toUpperCase() + goal.slice(1)} is a solid focus. How many **weeks** should this program run?`, done: false }
+    },
+    () => ({ text: "And how many **days per week** will they train? (e.g., 3, 4, or 5 days)", done: false }),
+    () => ({ text: `Perfect! I have everything I need. You're all set to build something amazing. 💪\n\n{{link:Click here to open the Program Creator|/programs/create}}`, done: true }),
+  ],
+
+  add_client: [
+    () => ({ text: "Let's get your new client set up! 🎉 I'm excited to welcome them to your roster. What's their **name**?", done: false }),
+    (input) => ({ text: `Welcome, ${input.split(' ')[0]}! What's their **primary fitness goal** — fat loss, muscle building, strength, or general fitness?`, done: false }),
+    (input) => {
+      const goal = input.toLowerCase().includes('fat') ? 'fat loss'
+        : input.toLowerCase().includes('muscle') ? 'muscle building'
+        : input.toLowerCase().includes('strength') ? 'strength'
+        : 'fitness'
+      return { text: `${goal.charAt(0).toUpperCase() + goal.slice(1)} — excellent goal! Ready to add them? {{link:Click here to open the Client Form|/clients}} and I'll guide you through the 4-step setup. 🎯`, done: true }
+    },
+  ],
+
+  schedule: [
+    () => ({ text: "Let's get a session on the books! 📅 Who is this session for? (Just tell me their first name)", done: false }),
+    (_input) => ({ text: `Great! What type of session — **training**, **assessment**, or **check-in**?`, done: false }),
+    () => ({ text: "When would you like to schedule it? (e.g., **tomorrow at 5pm** or **Monday at 9am**)", done: false }),
+    () => ({ text: `Got it — I'll have that slot ready! 📆\n\n{{link:Click here to open the Calendar|/calendar}} where you can confirm and finalize the booking.`, done: true }),
+  ],
+
+  exercise: [
+    () => ({ text: "Looking for the perfect exercise? 🔍 What **muscle group** are you targeting today?", done: false }),
+    (input) => {
+      const muscle = input.toLowerCase().includes('chest') ? 'chest'
+        : input.toLowerCase().includes('back') ? 'back'
+        : input.toLowerCase().includes('leg') || input.toLowerCase().includes('quad') ? 'legs'
+        : input.toLowerCase().includes('shoulder') ? 'shoulders'
+        : input.toLowerCase().includes('arm') || input.toLowerCase().includes('bicep') || input.toLowerCase().includes('tricep') ? 'arms'
+        : 'that muscle group'
+      return { text: `${muscle.charAt(0).toUpperCase() + muscle.slice(1)} — nice choice! Are you looking for **compound movements** (multi-joint) or **isolation exercises** (single muscle)?`, done: false }
+    },
+    () => ({ text: `Excellent! {{link:Click here to browse the Exercise Library|/exercises}} — filter by your preferences and find the perfect movements for your program. 🏋️`, done: true }),
+  ],
+
+  nutrition: [
+    () => ({ text: "Nutrition is where results are truly made! 🍎 Are you **logging meals**, **checking macros**, or **reviewing a meal plan**?", done: false }),
+    () => ({ text: "Smart approach! Which **client** would you like to review nutrition data for?", done: false }),
+    () => ({ text: `Got it! {{link:Click here to open the Nutrition page|/nutrition}} where you can review their latest macro breakdown, meal logs, and dietary adherence. Keep them on track! 📊`, done: true }),
+  ],
+
+  progress: [
+    () => ({ text: "Let's see how your clients are doing! 📸 Progress tracking is one of the most motivating tools we have. Which **client** would you like to check progress for?", done: false }),
+    (input) => {
+      const name = input.split(' ')[0]
+      return { text: `${name} has been putting in great work! {{link:Click here to view their progress|/photos}} — you can compare latest photos, measurements, and stats with their starting point. Keep celebrating those wins! 🎉`, done: true }
+    },
+  ],
+
+  dashboard: [
+    () => ({ text: "Your dashboard is your command center! 📊 What are you looking for — **today's schedule**, **client alerts**, **revenue overview**, or **upcoming sessions**?", done: false }),
+    () => ({ text: `Let me pull that up for you! {{link:Click here to view your Dashboard|/dashboard}} — everything you need is right there at a glance.`, done: true }),
+  ],
+
+  settings: [
+    () => ({ text: "Let's get your setup just right! ⚙️ What would you like to adjust — **theme**, **notifications**, or your **profile**?", done: false }),
+    () => ({ text: `Easy fix! {{link:Click here to open Settings|/settings}} — your changes will be saved automatically. Let me know if you need help with anything else!`, done: true }),
+  ],
+}
 
 /* ═══════════════════════════════════════════════════════
    COMMAND PARSER
    ═══════════════════════════════════════════════════════ */
-function parseCommand(input: string): ParsedCommand | null {
-  const trimmed = input.trim()
+function parseCommand(rawInput: string): ParsedCommand | null {
+  const trimmed = rawInput.trim()
   if (!trimmed.startsWith('@')) return null
 
-  // Remove @ and split by /
   const withoutAt = trimmed.slice(1)
   const parts = withoutAt.split('/').filter(Boolean)
   if (parts.length < 2) return null
@@ -155,7 +230,6 @@ function resolveDate(dateStr: string): string {
     return t.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'short' })
   }
 
-  // DD/MM/YY or DD/MM/YYYY
   const match = d.match(/(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{2,4})/)
   if (match) {
     const [, day, month, year] = match
@@ -190,39 +264,24 @@ function generateCommandMessage(cmd: ParsedCommand): string {
   const note = params.note || ''
   const style = TONE_STYLES[tone] || TONE_STYLES.friendly
 
-  const dateTimeStr = formattedTime
-    ? `${resolvedDate} at ${formattedTime}`
-    : resolvedDate
-
+  const dateTimeStr = formattedTime ? `${resolvedDate} at ${formattedTime}` : resolvedDate
   const locationStr = location ? ` at ${location}` : ''
   const noteStr = note ? ` ${note.charAt(0).toUpperCase() + note.slice(1)}.` : ''
 
   const messages: Record<string, string> = {
     session_reminder: `${style.greeting} ${clientName}${emoji ? ' ' + emoji : ''}, just a reminder of our session on ${dateTimeStr}${locationStr}.${noteStr} ${style.closing}`,
-
     session_cancel: `${style.greeting} ${clientName}${emoji ? ' ' + emoji : ''}, I wanted to let you know that our session on ${dateTimeStr}${locationStr} has been cancelled.${noteStr} We'll reschedule soon.`,
-
     session_reschedule: `${style.greeting} ${clientName}${emoji ? ' ' + emoji : ''}, our session has been moved to ${dateTimeStr}${locationStr}.${noteStr} Let me know if this works for you!`,
-
     session_confirm: `${style.greeting} ${clientName}${emoji ? ' ' + emoji : ''}, confirming our session on ${dateTimeStr}${locationStr}.${noteStr} Looking forward to it!`,
-
     progress_update: `${style.greeting} ${clientName}${emoji ? ' ' + emoji : ''}, here's your progress update for ${resolvedDate}.${noteStr} Keep up the great work!`,
-
     check_in: `Hey ${clientName}${emoji ? ' ' + emoji : ''}! How are you feeling today? Ready to crush your session${formattedTime ? ' at ' + formattedTime : ''}?${noteStr}`,
-
     nutrition_reminder: `Hi ${clientName}${emoji ? ' ' + emoji : ''}, don't forget to stay hydrated and prep your meals for ${resolvedDate}.${noteStr} Nutrition is key!`,
-
     auto_reply: `Auto-reply enabled for ${clientName}. I'll automatically confirm session requests and send reminders.${location ? ' Location set to ' + location + '.' : ''}`,
-
     repeat: `Recurring reminder set for ${clientName}: ${params.repeat || 'weekly'} check-ins starting ${resolvedDate}.${noteStr}`,
-
     cancel_all: `All upcoming sessions for ${clientName} have been cancelled.${noteStr} Please reach out to reschedule.`,
   }
 
-  return (
-    messages[action] ||
-    `${style.greeting} ${clientName}${emoji ? ' ' + emoji : ''}, message regarding ${action} on ${dateTimeStr}${locationStr}.${noteStr}`
-  )
+  return messages[action] || `${style.greeting} ${clientName}${emoji ? ' ' + emoji : ''}, message regarding ${action} on ${dateTimeStr}${locationStr}.${noteStr}`
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -238,8 +297,8 @@ function playNotificationSound(enabled: boolean) {
     osc.connect(gain)
     gain.connect(audioCtx.destination)
     osc.type = 'sine'
-    osc.frequency.setValueAtTime(523.25, audioCtx.currentTime) // C5
-    osc.frequency.exponentialRampToValueAtTime(659.25, audioCtx.currentTime + 0.1) // E5
+    osc.frequency.setValueAtTime(523.25, audioCtx.currentTime)
+    osc.frequency.exponentialRampToValueAtTime(659.25, audioCtx.currentTime + 0.1)
     gain.gain.setValueAtTime(0.08, audioCtx.currentTime)
     gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.3)
     osc.start(audioCtx.currentTime)
@@ -250,10 +309,10 @@ function playNotificationSound(enabled: boolean) {
 }
 
 /* ═══════════════════════════════════════════════════════
-   KNOWLEDGE BASE (with link markup)
+   KNOWLEDGE BASE
    ═══════════════════════════════════════════════════════ */
-function getKnowledgeResponse(input: string): string | null {
-  const q = input.toLowerCase()
+function getKnowledgeResponse(rawInput: string): string | null {
+  const q = rawInput.toLowerCase()
 
   const knowledge: { keywords: string[]; response: string }[] = [
     {
@@ -329,7 +388,6 @@ function LinkableMessage({
   onNavigate: (path: string) => void
 }) {
   const parts: React.ReactNode[] = []
-  let remaining = content
   let key = 0
 
   const linkRegex = /\{\{link:([^|]+)\|([^}]+)\}\}/g
@@ -338,19 +396,17 @@ function LinkableMessage({
 
   while ((match = linkRegex.exec(content)) !== null) {
     if (match.index > lastIndex) {
-      parts.push(
-        <PlainText key={key++} text={remaining.slice(lastIndex, match.index)} />
-      )
+      parts.push(<PlainText key={key++} text={content.slice(lastIndex, match.index)} />)
     }
     const [, text, path] = match
     parts.push(
       <button
         key={key++}
         onClick={() => onNavigate(path)}
-        className="inline-flex items-center gap-0.5 text-[#00AEEF] hover:text-[#33BEF2] hover:underline font-medium transition-colors"
+        className="inline-flex items-center gap-0.5 text-[#00AEEF] hover:text-[#33BEF2] hover:underline font-semibold transition-colors"
       >
         {text}
-        <ArrowRight size={11} className="inline" />
+        <ArrowRight size={11} />
       </button>
     )
     lastIndex = linkRegex.lastIndex
@@ -375,16 +431,10 @@ function PlainText({ text }: { text: string }) {
           {line.includes('**') ? (
             <>
               {line.split('**').map((part, j) =>
-                j % 2 === 1 ? (
-                  <strong key={j} className="font-semibold">{part}</strong>
-                ) : (
-                  part
-                )
+                j % 2 === 1 ? <strong key={j} className="font-semibold">{part}</strong> : part
               )}
             </>
-          ) : (
-            line
-          )}
+          ) : line}
           {i < arr.length - 1 && <br />}
         </span>
       ))}
@@ -420,6 +470,8 @@ export default function AiChat() {
     } catch {}
     return { x: 0, y: 0 }
   })
+  const [activeTopic, setActiveTopic] = useState<string | null>(null)
+  const [topicStep, setTopicStep] = useState(0)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -497,11 +549,49 @@ export default function AiChat() {
     inputRef.current?.focus()
   }, [input])
 
+  /* Topic-based conversational response */
+  const getTopicResponse = useCallback((topic: string, step: number, userInput: string): { text: string; done: boolean } | null => {
+    const flow = CONVERSATION_FLOWS[topic]
+    if (!flow || step >= flow.length) return null
+    return flow[step](userInput, step)
+  }, [])
+
+  const startTopic = useCallback((topic: string) => {
+    setActiveTopic(topic)
+    setTopicStep(0)
+    setIsTyping(true)
+
+    const flow = CONVERSATION_FLOWS[topic]
+    if (flow && flow.length > 0) {
+      const first = flow[0]('', 0)
+      setTimeout(() => {
+        setIsTyping(false)
+        setMessages((prev) => [
+          ...prev,
+          { id: Date.now().toString(), role: 'assistant', content: first.text },
+        ])
+      }, 600)
+    }
+  }, [])
+
   const handleSend = useCallback((text: string) => {
     if (!text.trim()) return
     setShowAutocomplete(false)
-
     const trimmed = text.trim()
+
+    /* Cancel topic if user sends a command or says cancel/stop/done */
+    const cancelWords = ['cancel', 'stop', 'done', 'exit', 'quit', 'nevermind', 'back']
+    if (activeTopic && cancelWords.some((w) => trimmed.toLowerCase().includes(w))) {
+      setActiveTopic(null)
+      setTopicStep(0)
+      setMessages((prev) => [
+        ...prev,
+        { id: Date.now().toString(), role: 'user', content: trimmed },
+        { id: (Date.now() + 1).toString(), role: 'assistant', content: "No problem! Let me know if you'd like help with anything else. 😊" },
+      ])
+      setInput('')
+      return
+    }
 
     /* Handle slash commands */
     if (trimmed.startsWith('/')) {
@@ -553,6 +643,27 @@ export default function AiChat() {
       return
     }
 
+    /* Topic-based conversation */
+    if (activeTopic) {
+      const response = getTopicResponse(activeTopic, topicStep, trimmed)
+      if (response) {
+        setMessages((prev) => [...prev, { id: Date.now().toString(), role: 'user', content: trimmed }])
+        setInput('')
+        setIsTyping(true)
+        setTopicStep((s) => s + 1)
+
+        setTimeout(() => {
+          setIsTyping(false)
+          setMessages((prev) => [...prev, { id: (Date.now() + 1).toString(), role: 'assistant', content: response.text }])
+          if (response.done) {
+            setActiveTopic(null)
+            setTopicStep(0)
+          }
+        }, 700)
+        return
+      }
+    }
+
     /* Regular knowledge query */
     const userMsg: ChatMessage = {
       id: Date.now().toString(),
@@ -576,9 +687,11 @@ export default function AiChat() {
       }
       setMessages((prev) => [...prev, assistantMsg])
     }, knowledge ? 700 : 1100)
-  }, [navigate])
+  }, [activeTopic, topicStep, getTopicResponse, navigate])
 
   const clearChat = useCallback(() => {
+    setActiveTopic(null)
+    setTopicStep(0)
     setMessages([
       {
         id: 'welcome',
@@ -590,7 +703,7 @@ export default function AiChat() {
 
   const isDark = theme === 'dark'
 
-  /* Theme-aware colours — solid, no glassmorphism */
+  /* Theme-aware colours */
   const panelBg = isDark ? 'bg-[#141414] border-[#2A2A2A]' : 'bg-white border-[#E2E8F0]'
   const headerBg = isDark ? 'bg-[#0F0F0F]' : 'bg-[#F8FAFC]'
   const headerBorder = isDark ? 'border-[#2A2A2A]' : 'border-[#E2E8F0]'
@@ -794,14 +907,7 @@ export default function AiChat() {
                     {quickActions.map((hint) => (
                       <button
                         key={hint.label}
-                        onClick={() => {
-                          if (hint.path) {
-                            navigate(hint.path)
-                            setIsOpen(false)
-                          } else {
-                            handleSend(hint.label)
-                          }
-                        }}
+                        onClick={() => startTopic(hint.topic)}
                         className={cn(
                           'flex items-center gap-1.5 text-[11px] px-3 py-1.5 rounded-full border transition-colors duration-200',
                           quickBg
@@ -809,9 +915,6 @@ export default function AiChat() {
                       >
                         <hint.icon size={12} />
                         {hint.label}
-                        <span className={cn('text-[9px] px-1 py-0 rounded bg-[#00AEEF]/10 text-[#00AEEF] font-mono', isDark ? 'border border-[#00AEEF]/20' : '')}>
-                          {hint.symbol}
-                        </span>
                       </button>
                     ))}
                   </div>
