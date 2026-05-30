@@ -376,14 +376,14 @@ function PhaseProgress({ phases }: { phases: ProgramData['phases'] }) {
             >
               {phase.name}
             </span>
-            <span className="text-[#555] text-[10px]">{phase.weeks}w</span>
+            <span className="text-[#A0A0A0] text-[10px]">{phase.weeks}w</span>
             {idx < activePhases.length - 1 && (
-              <ChevronRight size={10} className="text-[#3A3A3A]" />
+              <ChevronRight size={10} className="text-[#6B7280]" />
             )}
           </div>
         ))}
       </div>
-      <div className="ml-auto text-[10px] text-[#555]">Total: {totalWeeks}w</div>
+      <div className="ml-auto text-[10px] text-[#A0A0A0]">Total: {totalWeeks}w</div>
     </div>
   );
 }
@@ -695,7 +695,7 @@ export default function ProgramBuilderPage() {
 
       {/* Day Method Banner */}
       {currentDayInfo && (
-        <div className="flex items-center gap-3 mb-4 px-4 py-2.5 rounded-lg bg-gradient-to-r from-[#1A1A1A] to-[#141414] border border-[#2A2A2A]/50">
+        <div className="flex items-center gap-3 mb-4 px-4 py-2.5 rounded-lg bg-[#141414] border border-[#2A2A2A]/50">
           <div className="flex items-center gap-2">
             <Calendar size={14} className="text-[#00AEEF]" />
             <span className="text-[#F0F0F0] text-sm font-medium">
@@ -704,7 +704,7 @@ export default function ProgramBuilderPage() {
           </div>
           <div className="w-px h-4 bg-[#2A2A2A]" />
           <MethodBadge method={currentDayInfo.method} />
-          <div className="ml-auto text-[10px] text-[#555]">
+          <div className="ml-auto text-[10px] text-[#A0A0A0]">
             {currentDayInfo.exercises.length} exercises · {currentDayInfo.exercises.reduce((s, e) => s + e.sets, 0)} sets
           </div>
         </div>
