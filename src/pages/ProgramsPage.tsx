@@ -19,8 +19,8 @@ import {
   Trophy,
   Clock,
   User,
-
   X,
+  Sparkles,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import type { SavedProgram } from '@/types';
@@ -587,6 +587,14 @@ export default function ProgramsPage() {
           </p>
         </div>
         <div className="flex items-center gap-2">
+          <Button
+            onClick={() => navigate('/programs/match')}
+            size="sm"
+            className="bg-gradient-to-r from-[#22C55E] to-[#00AEEF] text-white font-semibold mr-2"
+          >
+            <Sparkles size={16} className="mr-1.5" />
+            Smart Match
+          </Button>
           <Button
             onClick={() => navigate('/programs/create')}
             size="sm"

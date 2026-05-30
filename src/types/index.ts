@@ -152,3 +152,49 @@ export interface SavedProgram {
   updatedAt: string;
   data: ProgramData;
 }
+
+// ── Program Matcher Types ──
+
+export interface ClientPreferences {
+  goal: string;
+  daysPerWeek: number;
+  experience: string;
+  equipment: string;
+  timePerSession: number;
+  limitations?: string[];
+}
+
+export interface MatchBreakdown {
+  goalScore: number;
+  daysScore: number;
+  experienceScore: number;
+  equipmentScore: number;
+  timeScore: number;
+  bonusScore: number;
+}
+
+export interface MatchResult {
+  program: SavedProgram;
+  score: number;
+  maxScore: number;
+  percentage: number;
+  breakdown: MatchBreakdown;
+  exactDayMatch: boolean;
+}
+
+export interface MatchingRules {
+  version: string;
+  generatedAt: string;
+  goalMethodMatrix: Array<{ goal: string; method: string; score: number }>;
+  goalProgramPipelines: Array<{ goal: string; method: string; program: string; score: number }>;
+  canonicalLists: Record<string, string[]>;
+  equipmentCompatibility: Record<string, string[]>;
+  experienceMethodPreference: Record<string, string[]>;
+  scoringWeights: {
+    goal: number;
+    days: number;
+    experience: number;
+    equipment: number;
+    time: number;
+  };
+}

@@ -15,6 +15,7 @@ import SettingsPage from './pages/SettingsPage'
 import PhotosPage from './pages/PhotosPage'
 import ExercisesPage from './pages/ExercisesPage'
 import ProgramBuilderPage from './pages/ProgramBuilderPage'
+import ProgramMatcherPage from './pages/ProgramMatcherPage'
 import PlannedFeaturesPage from './pages/PlannedFeaturesPage'
 
 export default function App() {
@@ -35,6 +36,7 @@ export default function App() {
       <Route path="/photos" element={<Layout><PhotosPage /></Layout>} />
       <Route path="/exercises" element={<Layout><ExercisesPage /></Layout>} />
       <Route path="/programs/session/:programId" element={<Layout><ProgramBuilderPage /></Layout>} />
+      <Route path="/programs/match" element={<Layout><ProgramMatcherPage /></Layout>} />
       <Route path="/roadmap" element={<Layout><PlannedFeaturesPage /></Layout>} />
     </Routes>
   )
