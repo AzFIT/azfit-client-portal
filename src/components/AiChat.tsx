@@ -17,7 +17,6 @@ import {
   Settings,
   BookOpen,
   LayoutDashboard,
-  Terminal,
   Volume2,
   VolumeX,
   Command,
@@ -68,16 +67,17 @@ const CLIENTS: Record<string, string> = {
 }
 
 const SLASH_COMMANDS: { cmd: string; desc: string; path?: string }[] = [
-  { cmd: '/program', desc: 'Go to Program Library', path: '/programs' },
-  { cmd: '/create', desc: 'Open Program Creator', path: '/programs/create' },
-  { cmd: '/client', desc: 'View Clients', path: '/clients' },
-  { cmd: '/calendar', desc: 'Open Calendar', path: '/calendar' },
-  { cmd: '/exercise', desc: 'Browse Exercise Library', path: '/exercises' },
-  { cmd: '/nutrition', desc: 'Log Nutrition', path: '/nutrition' },
-  { cmd: '/photo', desc: 'Track Progress Photos', path: '/photos' },
-  { cmd: '/setting', desc: 'Open Settings', path: '/settings' },
-  { cmd: '/dashboard', desc: 'Go to Dashboard', path: '/dashboard' },
-  { cmd: '/help', desc: 'Show command help' },
+  { cmd: '/program', desc: 'Program Library', path: '/programs' },
+  { cmd: '/create', desc: 'Program Creator', path: '/programs/create' },
+  { cmd: '/client', desc: 'Clients', path: '/clients' },
+  { cmd: '/calendar', desc: 'Calendar', path: '/calendar' },
+  { cmd: '/exercise', desc: 'Exercise Library', path: '/exercises' },
+  { cmd: '/nutrition', desc: 'Nutrition', path: '/nutrition' },
+  { cmd: '/photo', desc: 'Progress Photos', path: '/photos' },
+  { cmd: '/dashboard', desc: 'Dashboard', path: '/dashboard' },
+  { cmd: '/setting', desc: 'Settings', path: '/settings' },
+  { cmd: '/sample', desc: 'Show a sample command' },
+  { cmd: '/help', desc: 'Show all commands' },
 ]
 
 const TONE_STYLES: Record<string, { greeting: string; closing: string }> = {
@@ -405,7 +405,7 @@ export default function AiChat() {
     {
       id: 'welcome',
       role: 'assistant',
-      content: "Hello! I'm your AzFIT AI assistant. I can help you with programs, clients, scheduling, exercises, and more.\n\nTry typing a command like:\n@azzi/session_reminder/tomorrow/1730/location:OnePT/tone:friendly\n\nOr use the quick actions below.",
+      content: "Hello! I'm your AzFIT AI assistant. Ask me anything or use the quick actions below.",
     },
   ])
   const [input, setInput] = useState('')
@@ -505,11 +505,28 @@ export default function AiChat() {
         return
       }
       if (trimmed === '/help') {
-        const helpText = SLASH_COMMANDS.map((c) => `${c.cmd} — ${c.desc}`).join('\n')
+        const navCommands = SLASH_COMMANDS.filter((c) => c.path).map((c) => `${c.cmd} → ${c.desc}`).join('\n')
+        const otherCommands = SLASH_COMMANDS.filter((c) => !c.path && c.cmd !== '/help').map((c) => `${c.cmd} → ${c.desc}`).join('\n')
         setMessages((prev) => [
           ...prev,
           { id: Date.now().toString(), role: 'user', content: trimmed },
-          { id: (Date.now() + 1).toString(), role: 'assistant', content: `Available commands:\n\n${helpText}\n\nYou can also use @client/action/date/time/params for messaging.` },
+          { id: (Date.now() + 1).toString(), role: 'assistant', content: `**Navigation**\n${navCommands}\n\n**Other**\n${otherCommands}\n\n**Client commands**\n@client/action/date/time/params\nExample: @azzi/session_reminder/tomorrow/1730` },
+        ])
+        setInput('')
+        return
+      }
+      if (trimmed === '/sample') {
+        const samples = [
+          '@azzi/session_reminder/tomorrow/1730',
+          '@john/session_cancel/31/05/26/1600/location:OnePT',
+          '@emma/progress_update/week/emoji:💪/tone:coach',
+          '@sarah/check_in/today/emoji:🔥/note:bring water bottle',
+        ]
+        const sample = samples[Math.floor(Math.random() * samples.length)]
+        setMessages((prev) => [
+          ...prev,
+          { id: Date.now().toString(), role: 'user', content: trimmed },
+          { id: (Date.now() + 1).toString(), role: 'assistant', content: `Here's a sample command you can copy and modify:\n\n**${sample}**\n\nType it in the input box and press Enter to see the generated message.` },
         ])
         setInput('')
         return
@@ -559,7 +576,7 @@ export default function AiChat() {
       {
         id: 'welcome',
         role: 'assistant',
-        content: "Hello! I'm your AzFIT AI assistant. How can I help you today?",
+        content: "Hello! I'm your AzFIT AI assistant. Ask me anything or use the quick actions below.",
       },
     ])
   }, [])
@@ -721,7 +738,7 @@ export default function AiChat() {
                   </div>
                   <div
                     className={cn(
-                      'max-w-[78%] px-3.5 py-2.5 rounded-2xl text-sm leading-relaxed border',
+                      'max-w-[78%] px-3.5 py-2.5 rounded-2xl text-sm leading-relaxed border break-words whitespace-pre-wrap',
                       msg.role === 'assistant' ? msgBgAssistant : msgBgUser,
                       msg.role === 'user' ? 'rounded-br-md' : 'rounded-bl-md',
                       msg.isCommandOutput && cmdOutputBg
@@ -779,12 +796,6 @@ export default function AiChat() {
                         </span>
                       </button>
                     ))}
-                  </div>
-                  <div className={cn('text-[10px] px-3 py-2 rounded-lg border', isDark ? 'bg-[#1A1A1A] border-[#2A2A2A] text-[#6B6B6B]' : 'bg-[#F8FAFC] border-[#E2E8F0] text-[#94A3B8]')}>
-                    <span className="flex items-center gap-1 mb-1 font-medium text-[#00AEEF]">
-                      <Terminal size={10} /> Command mode
-                    </span>
-                    Try: <code className={isDark ? 'text-[#A0A0A0]' : 'text-[#64748B]'}>@azzi/session_reminder/tomorrow/1730</code>
                   </div>
                 </div>
               )}
