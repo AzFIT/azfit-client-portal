@@ -147,18 +147,18 @@ function SessionsCard() {
     <MetricCard delay={0}>
       <div className="flex items-center justify-between">
         <div className="flex-1 min-w-0">
-          <p className="text-[#A0A0A0] text-xs font-medium mb-3">Sessions This Week</p>
+          <p className="text-xs font-medium mb-3" style={{ color: '#FFFFFF' }}>Sessions This Week</p>
           <div className="flex items-baseline gap-2 mb-1">
-            <span className="text-2xl font-bold text-[#F0F0F0]" style={{ fontFamily: '"Space Mono", monospace' }}>
+            <span className="text-2xl font-bold" style={{ fontFamily: '"Space Mono", monospace', color: '#FFFFFF' }}>
               {attended}/{booked}
             </span>
-            <span className="text-xs text-[#22C55E] font-medium">+{diff} vs last week</span>
+            <span className="text-xs font-medium" style={{ color: '#22C55E' }}>+{diff} vs last week</span>
           </div>
-          <p className="text-[#6B6B6B] text-[11px]">{booked} booked this week</p>
+          <p className="text-[11px]" style={{ color: 'rgba(255,255,255,0.6)' }}>{booked} booked this week</p>
         </div>
         <CircularProgress percentage={percentage} color="#22C55E" size={72} strokeWidth={6}>
           <div className="text-center">
-            <span className="text-sm font-bold text-[#F0F0F0]" style={{ fontFamily: '"Space Mono", monospace' }}>
+            <span className="text-sm font-bold" style={{ fontFamily: '"Space Mono", monospace', color: '#FFFFFF' }}>
               {percentage}%
             </span>
           </div>
@@ -182,23 +182,23 @@ function ActiveClientsCard() {
     <MetricCard delay={0.08}>
       <div className="flex items-center justify-between">
         <div className="flex-1 min-w-0">
-          <p className="text-[#A0A0A0] text-xs font-medium mb-3">Active Clients</p>
+          <p className="text-xs font-medium mb-3" style={{ color: '#FFFFFF' }}>Active Clients</p>
           <div className="flex items-baseline gap-2 mb-2">
-            <span className="text-2xl font-bold text-[#F0F0F0]" style={{ fontFamily: '"Space Mono", monospace' }}>
+            <span className="text-2xl font-bold" style={{ fontFamily: '"Space Mono", monospace', color: '#FFFFFF' }}>
               {active}/{total}
             </span>
           </div>
           <div className="space-y-0.5">
-            <p className="text-[#6B6B6B] text-[11px]">{active} seen within 2 weeks</p>
-            <p className="text-[#6B6B6B] text-[11px]">{semiActive} semi-active (2–4 wks)</p>
+            <p className="text-[11px]" style={{ color: 'rgba(255,255,255,0.6)' }}>{active} seen within 2 weeks</p>
+            <p className="text-[11px]" style={{ color: 'rgba(255,255,255,0.6)' }}>{semiActive} semi-active (2–4 wks)</p>
             {needAttention > 0 && (
-              <p className="text-[#EF4444] text-[11px] font-medium">{needAttention} require attention (&gt;1 month)</p>
+              <p className="text-[11px] font-medium" style={{ color: '#EF4444' }}>{needAttention} require attention (&gt;1 month)</p>
             )}
           </div>
         </div>
         <CircularProgress percentage={percentage} color="#8B5CF6" size={72} strokeWidth={6}>
           <div className="text-center">
-            <span className="text-sm font-bold text-[#F0F0F0]" style={{ fontFamily: '"Space Mono", monospace' }}>
+            <span className="text-sm font-bold" style={{ fontFamily: '"Space Mono", monospace', color: '#FFFFFF' }}>
               {percentage}%
             </span>
           </div>
@@ -220,18 +220,18 @@ function SignupsCard() {
     <MetricCard delay={0.16}>
       <div className="flex items-center justify-between">
         <div className="flex-1 min-w-0">
-          <p className="text-[#A0A0A0] text-xs font-medium mb-3">New Signups</p>
+          <p className="text-xs font-medium mb-3" style={{ color: '#FFFFFF' }}>New Signups</p>
           <div className="flex items-baseline gap-2 mb-1">
-            <span className="text-2xl font-bold text-[#F0F0F0]" style={{ fontFamily: '"Space Mono", monospace' }}>
+            <span className="text-2xl font-bold" style={{ fontFamily: '"Space Mono", monospace', color: '#FFFFFF' }}>
               {current}
             </span>
-            <span className="text-xs text-[#F97316] font-medium">/ {goal} goal</span>
+            <span className="text-xs font-medium" style={{ color: '#F97316' }}>/ {goal} goal</span>
           </div>
-          <p className="text-[#6B6B6B] text-[11px]">{current} new signups this month</p>
+          <p className="text-[11px]" style={{ color: 'rgba(255,255,255,0.6)' }}>{current} new signups this month</p>
         </div>
         <CircularProgress percentage={percentage} color="#F97316" size={72} strokeWidth={6}>
           <div className="text-center">
-            <span className="text-sm font-bold text-[#F0F0F0]" style={{ fontFamily: '"Space Mono", monospace' }}>
+            <span className="text-sm font-bold" style={{ fontFamily: '"Space Mono", monospace', color: '#FFFFFF' }}>
               {percentage}%
             </span>
           </div>
@@ -260,7 +260,7 @@ function RevenueCard() {
       <div className="flex items-center justify-between">
         <div className="flex-1 min-w-0">
           <div className="flex items-center justify-between mb-3">
-            <p className="text-[#A0A0A0] text-xs font-medium">Weekly Revenue</p>
+            <p className="text-xs font-medium" style={{ color: '#FFFFFF' }}>Weekly Revenue</p>
             <button
               onClick={() => setRevealed(v => !v)}
               className="text-[#6B6B6B] hover:text-[#00AEEF] transition-colors"
@@ -271,17 +271,17 @@ function RevenueCard() {
           </div>
           <div className="flex items-baseline gap-2 mb-1">
             <span
-              className="text-2xl font-bold text-[#F0F0F0] transition-all"
-              style={{ fontFamily: '"Space Mono", monospace', filter: revealed ? 'none' : 'blur(6px)' }}
+              className="text-2xl font-bold transition-all"
+              style={{ fontFamily: '"Space Mono", monospace', color: '#FFFFFF', filter: revealed ? 'none' : 'blur(6px)' }}
             >
               {formatCurrency(revenue)}
             </span>
           </div>
-          <p className="text-[#22C55E] text-[11px] font-medium">+{percentage}% vs last month</p>
+          <p className="text-[11px] font-medium" style={{ color: '#22C55E' }}>+{percentage}% vs last month</p>
         </div>
         <CircularProgress percentage={goalPct} color="#00AEEF" size={72} strokeWidth={6}>
           <div className="text-center">
-            <span className="text-sm font-bold text-[#F0F0F0]" style={{ fontFamily: '"Space Mono", monospace' }}>
+            <span className="text-sm font-bold" style={{ fontFamily: '"Space Mono", monospace', color: '#FFFFFF' }}>
               {goalPct}%
             </span>
           </div>
