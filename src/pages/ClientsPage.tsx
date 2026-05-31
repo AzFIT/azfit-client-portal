@@ -372,10 +372,12 @@ function FormTextArea({ label, field, placeholder, rows = 3, form, update }: {
 function ClientFormModal({
   open,
   onClose,
+  onSave,
   initialClient,
 }: {
   open: boolean
   onClose: () => void
+  onSave: (client: Client) => void
   initialClient?: Client | null
 }) {
   const isEdit = !!initialClient
@@ -404,6 +406,41 @@ function ClientFormModal({
   }
 
   const handleSubmit = () => {
+    const client: Client = {
+      id: initialClient?.id || crypto.randomUUID(),
+      clientId: initialClient?.clientId || '',
+      name: form.name || '',
+      email: form.email || '',
+      phone: form.phone || '',
+      avatar: form.avatar || './avatar-placeholder.png',
+      dob: form.dob || '',
+      age: form.age || 0,
+      sex: form.sex || 'Female',
+      status: form.status || 'Active',
+      weight: form.weight || 0,
+      bodyFat: form.bodyFat || 0,
+      goal: form.goal || '',
+      program: form.program || '',
+      sessionsCompleted: form.sessionsCompleted || 0,
+      startDate: form.startDate || new Date().toISOString().split('T')[0],
+      nextSession: form.nextSession || '',
+      medicalConditions: form.medicalConditions || '',
+      injuries: form.injuries || '',
+      medications: form.medications || '',
+      activityLevel: form.activityLevel || '',
+      sleepHours: form.sleepHours || '',
+      stressLevel: form.stressLevel || '',
+      occupation: form.occupation || '',
+      trainingExperience: form.trainingExperience || '',
+      trainingDaysPerWeek: form.trainingDaysPerWeek || '',
+      preferredTime: form.preferredTime || '',
+      equipmentAccess: form.equipmentAccess || '',
+      notes: form.notes || '',
+      fatLossKilos: form.fatLossKilos || '',
+      fatLossDeadline: form.fatLossDeadline || '',
+      fatLossWhy: form.fatLossWhy || '',
+    }
+    onSave(client)
     onClose()
   }
 
@@ -568,13 +605,44 @@ function ClientFormModal({
 }
 
 // ── Main Page ──────────────────────────────────────────
+const CLIENTS_STORAGE_KEY = 'azfit-clients'
+
+function loadClients(): Client[] {
+  try {
+    const raw = localStorage.getItem(CLIENTS_STORAGE_KEY)
+    if (raw) return JSON.parse(raw)
+  } catch { /* ignore */ }
+  return DEMO_CLIENTS
+}
+
+function saveClients(clients: Client[]) {
+  localStorage.setItem(CLIENTS_STORAGE_KEY, JSON.stringify(clients))
+}
+
+function generateClientId(clients: Client[]): string {
+  const nums = clients
+    .map(c => {
+      const m = c.clientId.match(/(\d+)/)
+      return m ? parseInt(m[1], 10) : 0
+    })
+    .filter(n => !isNaN(n))
+  const max = nums.length > 0 ? Math.max(...nums) : 0
+  const next = max + 1
+  return `#CLT-${String(next).padStart(4, '0')}`
+}
+
 export default function ClientsPage() {
-  const [clients, setClients] = useState<Client[]>(DEMO_CLIENTS)
+  const [clients, setClients] = useState<Client[]>(loadClients)
   const [searchQuery, setSearchQuery] = useState('')
   const [statusFilter, setStatusFilter] = useState<string>('')
   const [showForm, setShowForm] = useState(false)
   const [editingClient, setEditingClient] = useState<Client | null>(null)
   const location = useLocation()
+
+  /* Persist clients to localStorage on every change */
+  useEffect(() => {
+    saveClients(clients)
+  }, [clients])
 
   /* Auto-open questionnaire when navigated from FAB "Add Client" */
   useEffect(() => {
@@ -749,6 +817,14 @@ export default function ClientsPage() {
       <ClientFormModal
         open={showForm}
         onClose={() => setShowForm(false)}
+        onSave={(client) => {
+          if (editingClient) {
+            setClients(prev => prev.map(c => c.id === client.id ? client : c))
+          } else {
+            const newClient = { ...client, clientId: generateClientId(clients) }
+            setClients(prev => [newClient, ...prev])
+          }
+        }}
         initialClient={editingClient}
       />
     </motion.div>
