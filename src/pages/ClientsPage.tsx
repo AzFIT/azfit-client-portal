@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   Search, Plus, User, Activity,
@@ -259,6 +259,116 @@ const TIME_OPTIONS = ['Early Morning (05:00-07:00)', 'Morning (06:00-09:00)', 'A
 const EQUIPMENT_OPTIONS = ['Home gym', 'Full gym', 'Bodyweight only', 'Full gym + sports facility']
 const GOAL_OPTIONS = ['Fat Loss', 'Muscle Gain', 'Strength', 'General Fitness', 'Athletic Performance', 'Rehabilitation']
 
+const FORM_STEPS = [
+  { num: 1, label: 'Personal Info' },
+  { num: 2, label: 'Health & Lifestyle' },
+  { num: 3, label: 'Fitness Profile' },
+  { num: 4, label: 'Review' },
+]
+
+function calculateAge(dob: string): number {
+  if (!dob) return 0
+  const birth = new Date(dob)
+  const today = new Date()
+  let age = today.getFullYear() - birth.getFullYear()
+  const monthDiff = today.getMonth() - birth.getMonth()
+  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+    age--
+  }
+  return age
+}
+
+/* ── Extracted form components (module-level to prevent re-mount on every keystroke) ── */
+
+function FormStepIndicator({ step }: { step: number }) {
+  return (
+    <div className="flex items-center gap-2 mb-6">
+      {FORM_STEPS.map((s, i) => (
+        <div key={s.num} className="flex items-center gap-2">
+          <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-semibold transition-colors ${
+            step >= s.num ? 'bg-[#00AEEF] text-white' : 'bg-[#2A2A2A] text-[#6B6B6B]'
+          }`}>
+            {s.num}
+          </div>
+          <span className={`text-xs hidden sm:block ${step >= s.num ? 'text-[#F0F0F0]' : 'text-[#6B6B6B]'}`}>
+            {s.label}
+          </span>
+          {i < FORM_STEPS.length - 1 && <div className="w-4 h-[1px] bg-[#2A2A2A]" />}
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function FormInput({ label, field, type = 'text', placeholder = '', required = false, form, update }: {
+  label: string
+  field: keyof Client
+  type?: string
+  placeholder?: string
+  required?: boolean
+  form: Partial<Client>
+  update: (field: keyof Client, value: string | number) => void
+}) {
+  return (
+    <div>
+      <label className="text-xs text-[#A0A0A0] mb-1 block">
+        {label} {required && <span className="text-[#EF4444]">*</span>}
+      </label>
+      <input
+        type={type}
+        value={(form[field] as string) || ''}
+        onChange={(e) => update(field, e.target.value)}
+        placeholder={placeholder}
+        className="w-full h-10 bg-[#1A1A1A] border border-[#2A2A2A] rounded-lg px-3 text-[#F0F0F0] text-sm placeholder:text-[#3A3A3A] focus:outline-none focus:border-[#00AEEF] transition-colors"
+      />
+    </div>
+  )
+}
+
+function FormSelect({ label, field, options, form, update }: {
+  label: string
+  field: keyof Client
+  options: string[]
+  form: Partial<Client>
+  update: (field: keyof Client, value: string | number) => void
+}) {
+  return (
+    <div>
+      <label className="text-xs text-[#A0A0A0] mb-1 block">{label}</label>
+      <select
+        value={(form[field] as string) || ''}
+        onChange={(e) => update(field, e.target.value)}
+        className="w-full h-10 bg-[#1A1A1A] border border-[#2A2A2A] rounded-lg px-3 text-[#F0F0F0] text-sm focus:outline-none focus:border-[#00AEEF] transition-colors"
+      >
+        <option value="" className="bg-[#1A1A1A]">Select...</option>
+        {options.map(o => <option key={o} value={o} className="bg-[#1A1A1A]">{o}</option>)}
+      </select>
+    </div>
+  )
+}
+
+function FormTextArea({ label, field, placeholder, rows = 3, form, update }: {
+  label: string
+  field: keyof Client
+  placeholder?: string
+  rows?: number
+  form: Partial<Client>
+  update: (field: keyof Client, value: string | number) => void
+}) {
+  return (
+    <div>
+      <label className="text-xs text-[#A0A0A0] mb-1 block">{label}</label>
+      <textarea
+        rows={rows}
+        value={(form[field] as string) || ''}
+        onChange={(e) => update(field, e.target.value)}
+        placeholder={placeholder}
+        className="w-full bg-[#1A1A1A] border border-[#2A2A2A] rounded-lg px-3 py-2 text-[#F0F0F0] text-sm placeholder:text-[#3A3A3A] resize-none focus:outline-none focus:border-[#00AEEF] transition-colors"
+      />
+    </div>
+  )
+}
+
 function ClientFormModal({
   open,
   onClose,
@@ -276,18 +386,6 @@ function ClientFormModal({
     avatar: './avatar-placeholder.png',
     startDate: new Date().toISOString().split('T')[0],
   })
-
-  const calculateAge = (dob: string): number => {
-    if (!dob) return 0
-    const birth = new Date(dob)
-    const today = new Date()
-    let age = today.getFullYear() - birth.getFullYear()
-    const monthDiff = today.getMonth() - birth.getMonth()
-    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
-      age--
-    }
-    return age
-  }
 
   useEffect(() => {
     if (initialClient) {
@@ -309,79 +407,6 @@ function ClientFormModal({
     onClose()
   }
 
-  const steps = [
-    { num: 1, label: 'Personal Info' },
-    { num: 2, label: 'Health & Lifestyle' },
-    { num: 3, label: 'Fitness Profile' },
-    { num: 4, label: 'Review' },
-  ]
-
-  const StepIndicator = () => (
-    <div className="flex items-center gap-2 mb-6">
-      {steps.map((s, i) => (
-        <div key={s.num} className="flex items-center gap-2">
-          <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-semibold transition-colors ${
-            step >= s.num ? 'bg-[#00AEEF] text-white' : 'bg-[#2A2A2A] text-[#6B6B6B]'
-          }`}>
-            {s.num}
-          </div>
-          <span className={`text-xs hidden sm:block ${step >= s.num ? 'text-[#F0F0F0]' : 'text-[#6B6B6B]'}`}>
-            {s.label}
-          </span>
-          {i < steps.length - 1 && <div className="w-4 h-[1px] bg-[#2A2A2A]" />}
-        </div>
-      ))}
-    </div>
-  )
-
-  const Input = ({ label, field, type = 'text', placeholder = '', required = false }: {
-    label: string
-    field: keyof Client
-    type?: string
-    placeholder?: string
-    required?: boolean
-  }) => (
-    <div>
-      <label className="text-xs text-[#A0A0A0] mb-1 block">
-        {label} {required && <span className="text-[#EF4444]">*</span>}
-      </label>
-      <input
-        type={type}
-        value={(form[field] as string) || ''}
-        onChange={(e) => update(field, e.target.value)}
-        placeholder={placeholder}
-        className="w-full h-10 bg-[#1A1A1A] border border-[#2A2A2A] rounded-lg px-3 text-[#F0F0F0] text-sm placeholder:text-[#3A3A3A] focus:outline-none focus:border-[#00AEEF] transition-colors"
-      />
-    </div>
-  )
-
-  const SelectField = ({ label, field, options }: { label: string; field: keyof Client; options: string[] }) => (
-    <div>
-      <label className="text-xs text-[#A0A0A0] mb-1 block">{label}</label>
-      <select
-        value={(form[field] as string) || ''}
-        onChange={(e) => update(field, e.target.value)}
-        className="w-full h-10 bg-[#1A1A1A] border border-[#2A2A2A] rounded-lg px-3 text-[#F0F0F0] text-sm focus:outline-none focus:border-[#00AEEF] transition-colors"
-      >
-        <option value="" className="bg-[#1A1A1A]">Select...</option>
-        {options.map(o => <option key={o} value={o} className="bg-[#1A1A1A]">{o}</option>)}
-      </select>
-    </div>
-  )
-
-  const TextArea = ({ label, field, placeholder, rows = 3 }: { label: string; field: keyof Client; placeholder?: string; rows?: number }) => (
-    <div>
-      <label className="text-xs text-[#A0A0A0] mb-1 block">{label}</label>
-      <textarea
-        rows={rows}
-        value={(form[field] as string) || ''}
-        onChange={(e) => update(field, e.target.value)}
-        placeholder={placeholder}
-        className="w-full bg-[#1A1A1A] border border-[#2A2A2A] rounded-lg px-3 py-2 text-[#F0F0F0] text-sm placeholder:text-[#3A3A3A] resize-none focus:outline-none focus:border-[#00AEEF] transition-colors"
-      />
-    </div>
-  )
-
   return (
     <Dialog open={open} onOpenChange={(o) => !o && onClose()}>
       <DialogContent className="bg-[#141414] border-[#2A2A2A] text-[#F0F0F0] max-w-2xl max-h-[90vh] overflow-y-auto">
@@ -391,17 +416,17 @@ function ClientFormModal({
           </DialogTitle>
         </DialogHeader>
 
-        <StepIndicator />
+        <FormStepIndicator step={step} />
 
         <div className="space-y-4 mt-2">
           {step === 1 && (
             <>
               <div className="grid grid-cols-2 gap-3">
-                <Input label="Full Name" field="name" placeholder="John Doe" required />
-                <Input label="Email" field="email" type="email" placeholder="john@email.com" />
+                <FormInput label="Full Name" field="name" placeholder="John Doe" required form={form} update={update} />
+                <FormInput label="Email" field="email" type="email" placeholder="john@email.com" form={form} update={update} />
               </div>
               <div className="grid grid-cols-2 gap-3">
-                <Input label="Phone" field="phone" placeholder="+852 9123 4567" />
+                <FormInput label="Phone" field="phone" placeholder="+852 9123 4567" form={form} update={update} />
                 <div>
                   <label className="text-xs text-[#A0A0A0] mb-1 block">Date of Birth</label>
                   <input
@@ -422,10 +447,10 @@ function ClientFormModal({
                     {form.dob ? calculateAge(form.dob) : <span className="text-[#3A3A3A]">Auto-calculated from DOB</span>}
                   </div>
                 </div>
-                <SelectField label="Gender" field="sex" options={['Male', 'Female', 'Other']} />
+                <FormSelect label="Gender" field="sex" options={['Male', 'Female', 'Other']} form={form} update={update} />
               </div>
-              <Input label="Start Date" field="startDate" type="date" />
-              <SelectField label="Primary Goal" field="goal" options={GOAL_OPTIONS} />
+              <FormInput label="Start Date" field="startDate" type="date" form={form} update={update} />
+              <FormSelect label="Primary Goal" field="goal" options={GOAL_OPTIONS} form={form} update={update} />
 
               {/* Conditional Fat Loss fields */}
               {form.goal === 'Fat Loss' && (
@@ -437,10 +462,10 @@ function ClientFormModal({
                 >
                   <p className="text-xs text-[#00AEEF] font-medium uppercase tracking-wider">Fat Loss Details</p>
                   <div className="grid grid-cols-2 gap-3">
-                    <Input label="How many kilos would you like to lose?" field="fatLossKilos" type="number" placeholder="e.g. 10" />
-                    <Input label="By when would you like to achieve this?" field="fatLossDeadline" type="date" />
+                    <FormInput label="How many kilos would you like to lose?" field="fatLossKilos" type="number" placeholder="e.g. 10" form={form} update={update} />
+                    <FormInput label="By when would you like to achieve this?" field="fatLossDeadline" type="date" form={form} update={update} />
                   </div>
-                  <TextArea label="Why did you choose this goal?" field="fatLossWhy" placeholder="Tell us your motivation..." rows={3} />
+                  <FormTextArea label="Why did you choose this goal?" field="fatLossWhy" placeholder="Tell us your motivation..." rows={3} form={form} update={update} />
                 </motion.div>
               )}
             </>
@@ -448,25 +473,25 @@ function ClientFormModal({
 
           {step === 2 && (
             <>
-              <TextArea label="Medical Conditions" field="medicalConditions" placeholder="List any medical conditions..." />
-              <TextArea label="Past / Current Injuries" field="injuries" placeholder="Describe any injuries..." />
-              <TextArea label="Current Medications" field="medications" placeholder="List any medications..." />
+              <FormTextArea label="Medical Conditions" field="medicalConditions" placeholder="List any medical conditions..." form={form} update={update} />
+              <FormTextArea label="Past / Current Injuries" field="injuries" placeholder="Describe any injuries..." form={form} update={update} />
+              <FormTextArea label="Current Medications" field="medications" placeholder="List any medications..." form={form} update={update} />
               <div className="grid grid-cols-3 gap-3">
-                <SelectField label="Activity Level" field="activityLevel" options={ACTIVITY_LEVELS} />
-                <SelectField label="Sleep (hours)" field="sleepHours" options={SLEEP_OPTIONS} />
-                <SelectField label="Stress Level" field="stressLevel" options={STRESS_OPTIONS} />
+                <FormSelect label="Activity Level" field="activityLevel" options={ACTIVITY_LEVELS} form={form} update={update} />
+                <FormSelect label="Sleep (hours)" field="sleepHours" options={SLEEP_OPTIONS} form={form} update={update} />
+                <FormSelect label="Stress Level" field="stressLevel" options={STRESS_OPTIONS} form={form} update={update} />
               </div>
-              <Input label="Occupation" field="occupation" placeholder="Software Engineer" />
+              <FormInput label="Occupation" field="occupation" placeholder="Software Engineer" form={form} update={update} />
             </>
           )}
 
           {step === 3 && (
             <>
-              <SelectField label="Training Experience" field="trainingExperience" options={EXPERIENCE_OPTIONS} />
-              <SelectField label="Training Days/Week" field="trainingDaysPerWeek" options={TRAINING_DAYS} />
-              <SelectField label="Preferred Training Time" field="preferredTime" options={TIME_OPTIONS} />
-              <SelectField label="Equipment Access" field="equipmentAccess" options={EQUIPMENT_OPTIONS} />
-              <TextArea label="Additional Notes" field="notes" placeholder="Any other relevant information..." rows={4} />
+              <FormSelect label="Training Experience" field="trainingExperience" options={EXPERIENCE_OPTIONS} form={form} update={update} />
+              <FormSelect label="Training Days/Week" field="trainingDaysPerWeek" options={TRAINING_DAYS} form={form} update={update} />
+              <FormSelect label="Preferred Training Time" field="preferredTime" options={TIME_OPTIONS} form={form} update={update} />
+              <FormSelect label="Equipment Access" field="equipmentAccess" options={EQUIPMENT_OPTIONS} form={form} update={update} />
+              <FormTextArea label="Additional Notes" field="notes" placeholder="Any other relevant information..." rows={4} form={form} update={update} />
             </>
           )}
 
@@ -549,6 +574,16 @@ export default function ClientsPage() {
   const [statusFilter, setStatusFilter] = useState<string>('')
   const [showForm, setShowForm] = useState(false)
   const [editingClient, setEditingClient] = useState<Client | null>(null)
+  const location = useLocation()
+
+  /* Auto-open questionnaire when navigated from FAB "Add Client" */
+  useEffect(() => {
+    if (location.state?.openQuestionnaire) {
+      setEditingClient(null)
+      setShowForm(true)
+      window.history.replaceState({}, document.title)
+    }
+  }, [location.state])
 
   const filtered = useMemo(() => {
     let result = clients

@@ -437,7 +437,7 @@ export default function DashboardPage() {
 
   const fabActions = [
     { label: 'New Session', icon: CalendarPlus, action: () => navigate('/calendar') },
-    { label: 'Add Client', icon: UserPlus, action: () => navigate('/clients/0') },
+    { label: 'Add Client', icon: UserPlus, action: () => navigate('/clients', { state: { openQuestionnaire: true } }) },
     { label: 'Create Program', icon: Dumbbell, action: () => navigate('/programs/new') },
     { label: 'Send Message', icon: MessageSquare, action: () => setFabOpen(false) },
   ]
