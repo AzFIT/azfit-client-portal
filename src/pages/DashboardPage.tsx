@@ -2,9 +2,6 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
-  DollarSign,
-  Users,
-  CalendarCheck,
   UserPlus,
   Plus,
   CalendarPlus,
@@ -18,12 +15,9 @@ import {
   ChevronRight,
   Search,
   ChevronDown,
+  Eye,
+  EyeOff,
 } from 'lucide-react'
-import {
-  AreaChart,
-  Area,
-  ResponsiveContainer,
-} from 'recharts'
 import { Link } from 'react-router-dom'
 
 /* ------------------------------------------------------------------ */
@@ -36,19 +30,6 @@ const easeOut = [0.16, 1, 0.3, 1] as [number, number, number, number]
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */
 /* ------------------------------------------------------------------ */
-interface KpiCardProps {
-  icon: React.ReactNode
-  iconBg: string
-  label: string
-  value: string
-  change: string
-  changeType: 'positive' | 'negative' | 'neutral'
-  period: string
-  sparklineData: { v: number }[]
-  sparklineColor: string
-  delay: number
-}
-
 interface SessionItem {
   time: string
   client: string
@@ -76,25 +57,243 @@ interface ClientData {
 }
 
 /* ------------------------------------------------------------------ */
+/*  Circular Progress Ring (conic-gradient style)                     */
+/* ------------------------------------------------------------------ */
+function CircularProgress({
+  percentage,
+  color,
+  size = 80,
+  strokeWidth = 8,
+  children,
+}: {
+  percentage: number
+  color: string
+  size?: number
+  strokeWidth?: number
+  children?: React.ReactNode
+}) {
+  const radius = (size - strokeWidth) / 2
+  const circumference = 2 * Math.PI * radius
+  const offset = circumference - (percentage / 100) * circumference
+
+  return (
+    <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
+      <svg width={size} height={size} className="-rotate-90">
+        {/* Background track */}
+        <circle
+          cx={size / 2}
+          cy={size / 2}
+          r={radius}
+          fill="none"
+          stroke="#2A2A2A"
+          strokeWidth={strokeWidth}
+        />
+        {/* Progress arc */}
+        <circle
+          cx={size / 2}
+          cy={size / 2}
+          r={radius}
+          fill="none"
+          stroke={color}
+          strokeWidth={strokeWidth}
+          strokeDasharray={circumference}
+          strokeDashoffset={offset}
+          strokeLinecap="round"
+          style={{ transition: 'stroke-dashoffset 1s ease-out' }}
+        />
+      </svg>
+      <div className="absolute inset-0 flex items-center justify-center">{children}</div>
+    </div>
+  )
+}
+
+/* ------------------------------------------------------------------ */
+/*  Metric Card Base                                                   */
+/* ------------------------------------------------------------------ */
+function MetricCard({
+  children,
+  delay = 0,
+}: {
+  children: React.ReactNode
+  delay?: number
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay, ease: easeOut }}
+      whileHover={{ y: -2, transition: { duration: 0.2 } }}
+      className="rounded-xl border border-[#2A2A2A] p-5 relative overflow-hidden group hover:border-[rgba(0,174,239,0.2)] hover:shadow-[0_4px_24px_rgba(0,174,239,0.08)] transition-all duration-200"
+      style={{
+        background: 'linear-gradient(135deg, rgba(0,174,239,0.08) 0%, rgba(139,92,246,0.04) 100%), #141414',
+      }}
+    >
+      {children}
+    </motion.div>
+  )
+}
+
+/* ------------------------------------------------------------------ */
+/*  Card 1 — Sessions This Week                                        */
+/* ------------------------------------------------------------------ */
+function SessionsCard() {
+  const booked = 14
+  const attended = 12
+  const lastWeek = 11
+  const percentage = Math.round((attended / booked) * 100)
+  const diff = booked - lastWeek
+
+  return (
+    <MetricCard delay={0}>
+      <div className="flex items-center justify-between">
+        <div className="flex-1 min-w-0">
+          <p className="text-[#A0A0A0] text-xs font-medium mb-3">Sessions This Week</p>
+          <div className="flex items-baseline gap-2 mb-1">
+            <span className="text-2xl font-bold text-[#F0F0F0]" style={{ fontFamily: '"Space Mono", monospace' }}>
+              {attended}/{booked}
+            </span>
+            <span className="text-xs text-[#22C55E] font-medium">+{diff} vs last week</span>
+          </div>
+          <p className="text-[#6B6B6B] text-[11px]">{booked} booked this week</p>
+        </div>
+        <CircularProgress percentage={percentage} color="#22C55E" size={72} strokeWidth={6}>
+          <div className="text-center">
+            <span className="text-sm font-bold text-[#F0F0F0]" style={{ fontFamily: '"Space Mono", monospace' }}>
+              {percentage}%
+            </span>
+          </div>
+        </CircularProgress>
+      </div>
+    </MetricCard>
+  )
+}
+
+/* ------------------------------------------------------------------ */
+/*  Card 2 — Active Clients                                            */
+/* ------------------------------------------------------------------ */
+function ActiveClientsCard() {
+  const total = 24
+  const active = 18      // seen within 2 weeks
+  const semiActive = 4   // not seen in 2-4 weeks
+  const needAttention = 2 // not seen in >1 month
+  const percentage = Math.round((active / total) * 100)
+
+  return (
+    <MetricCard delay={0.08}>
+      <div className="flex items-center justify-between">
+        <div className="flex-1 min-w-0">
+          <p className="text-[#A0A0A0] text-xs font-medium mb-3">Active Clients</p>
+          <div className="flex items-baseline gap-2 mb-2">
+            <span className="text-2xl font-bold text-[#F0F0F0]" style={{ fontFamily: '"Space Mono", monospace' }}>
+              {active}/{total}
+            </span>
+          </div>
+          <div className="space-y-0.5">
+            <p className="text-[#6B6B6B] text-[11px]">{active} seen within 2 weeks</p>
+            <p className="text-[#6B6B6B] text-[11px]">{semiActive} semi-active (2–4 wks)</p>
+            {needAttention > 0 && (
+              <p className="text-[#EF4444] text-[11px] font-medium">{needAttention} require attention (&gt;1 month)</p>
+            )}
+          </div>
+        </div>
+        <CircularProgress percentage={percentage} color="#8B5CF6" size={72} strokeWidth={6}>
+          <div className="text-center">
+            <span className="text-sm font-bold text-[#F0F0F0]" style={{ fontFamily: '"Space Mono", monospace' }}>
+              {percentage}%
+            </span>
+          </div>
+        </CircularProgress>
+      </div>
+    </MetricCard>
+  )
+}
+
+/* ------------------------------------------------------------------ */
+/*  Card 3 — Total New Signups                                         */
+/* ------------------------------------------------------------------ */
+function SignupsCard() {
+  const current = 3
+  const goal = 8
+  const percentage = Math.round((current / goal) * 100)
+
+  return (
+    <MetricCard delay={0.16}>
+      <div className="flex items-center justify-between">
+        <div className="flex-1 min-w-0">
+          <p className="text-[#A0A0A0] text-xs font-medium mb-3">New Signups</p>
+          <div className="flex items-baseline gap-2 mb-1">
+            <span className="text-2xl font-bold text-[#F0F0F0]" style={{ fontFamily: '"Space Mono", monospace' }}>
+              {current}
+            </span>
+            <span className="text-xs text-[#F97316] font-medium">/ {goal} goal</span>
+          </div>
+          <p className="text-[#6B6B6B] text-[11px]">{current} new signups this month</p>
+        </div>
+        <CircularProgress percentage={percentage} color="#F97316" size={72} strokeWidth={6}>
+          <div className="text-center">
+            <span className="text-sm font-bold text-[#F0F0F0]" style={{ fontFamily: '"Space Mono", monospace' }}>
+              {percentage}%
+            </span>
+          </div>
+        </CircularProgress>
+      </div>
+    </MetricCard>
+  )
+}
+
+/* ------------------------------------------------------------------ */
+/*  Card 4 — Weekly Revenue                                            */
+/* ------------------------------------------------------------------ */
+function RevenueCard() {
+  const [revealed, setRevealed] = useState(false)
+  const revenue = 48650
+  const lastMonth = 43400
+  const percentage = Math.round(((revenue - lastMonth) / lastMonth) * 100)
+  const goal = 60000
+  const goalPct = Math.round((revenue / goal) * 100)
+
+  const formatCurrency = (n: number) =>
+    '$' + n.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
+
+  return (
+    <MetricCard delay={0.24}>
+      <div className="flex items-center justify-between">
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center justify-between mb-3">
+            <p className="text-[#A0A0A0] text-xs font-medium">Weekly Revenue</p>
+            <button
+              onClick={() => setRevealed(v => !v)}
+              className="text-[#6B6B6B] hover:text-[#00AEEF] transition-colors"
+              title={revealed ? 'Hide' : 'Reveal'}
+            >
+              {revealed ? <Eye size={14} /> : <EyeOff size={14} />}
+            </button>
+          </div>
+          <div className="flex items-baseline gap-2 mb-1">
+            <span
+              className="text-2xl font-bold text-[#F0F0F0] transition-all"
+              style={{ fontFamily: '"Space Mono", monospace', filter: revealed ? 'none' : 'blur(6px)' }}
+            >
+              {formatCurrency(revenue)}
+            </span>
+          </div>
+          <p className="text-[#22C55E] text-[11px] font-medium">+{percentage}% vs last month</p>
+        </div>
+        <CircularProgress percentage={goalPct} color="#00AEEF" size={72} strokeWidth={6}>
+          <div className="text-center">
+            <span className="text-sm font-bold text-[#F0F0F0]" style={{ fontFamily: '"Space Mono", monospace' }}>
+              {goalPct}%
+            </span>
+          </div>
+        </CircularProgress>
+      </div>
+    </MetricCard>
+  )
+}
+
+/* ------------------------------------------------------------------ */
 /*  Sample Data                                                        */
 /* ------------------------------------------------------------------ */
-const revenueSparkline = [
-  { v: 42 }, { v: 44 }, { v: 43 }, { v: 46 }, { v: 48 },
-  { v: 47 }, { v: 50 }, { v: 48 }, { v: 52 }, { v: 49 }, { v: 51 }, { v: 48.25 },
-]
-const clientsSparkline = [
-  { v: 18 }, { v: 19 }, { v: 19 }, { v: 20 }, { v: 21 },
-  { v: 21 }, { v: 22 }, { v: 22 }, { v: 23 }, { v: 23 }, { v: 24 }, { v: 24 },
-]
-const sessionsSparkline = [
-  { v: 12 }, { v: 13 }, { v: 14 }, { v: 13 }, { v: 15 },
-  { v: 14 }, { v: 16 }, { v: 15 }, { v: 17 }, { v: 16 }, { v: 18 }, { v: 18 },
-]
-const signupsSparkline = [
-  { v: 3 }, { v: 4 }, { v: 3 }, { v: 5 }, { v: 4 },
-  { v: 6 }, { v: 5 }, { v: 7 }, { v: 6 }, { v: 8 }, { v: 7 }, { v: 7 },
-]
-
 const todaySessions: SessionItem[] = [
   { time: '07:00', client: 'Michael T.', type: 'Strength', duration: '60 min', status: 'completed', color: '#00AEEF' },
   { time: '09:00', client: 'Sarah L.', type: 'Hypertrophy', duration: '90 min', status: 'in-progress', color: '#8B5CF6' },
@@ -126,96 +325,6 @@ const clientList: ClientData[] = [
   { id: 11, name: 'Stephanie Yau', weight: '68.9 kg', bodyFat: '23.5%', sessions: 10, status: 'warning', lastSession: '08/01/2025' },
   { id: 12, name: 'Chris Chan', weight: '88.6 kg', bodyFat: '20.2%', sessions: 6, status: 'alert', lastSession: '03/01/2025' },
 ]
-
-/* ------------------------------------------------------------------ */
-/*  SparklineChart sub-component                                       */
-/* ------------------------------------------------------------------ */
-function SparklineChart({ data, color }: { data: { v: number }[]; color: string }) {
-  return (
-    <div className="w-[120px] h-[40px]">
-      <ResponsiveContainer width="100%" height="100%">
-        <AreaChart data={data} margin={{ top: 2, right: 2, bottom: 2, left: 2 }}>
-          <defs>
-            <linearGradient id={`grad-${color.replace('#', '')}`} x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor={color} stopOpacity={0.2} />
-              <stop offset="100%" stopColor={color} stopOpacity={0} />
-            </linearGradient>
-          </defs>
-          <Area
-            type="monotone"
-            dataKey="v"
-            stroke={color}
-            strokeWidth={2}
-            fill={`url(#grad-${color.replace('#', '')})`}
-            isAnimationActive={true}
-            animationDuration={1000}
-          />
-        </AreaChart>
-      </ResponsiveContainer>
-    </div>
-  )
-}
-
-/* ------------------------------------------------------------------ */
-/*  KPI Card                                                           */
-/* ------------------------------------------------------------------ */
-function KpiCard({
-  icon,
-  iconBg,
-  label,
-  value,
-  change,
-  changeType,
-  period,
-  sparklineData,
-  sparklineColor,
-  delay,
-}: KpiCardProps) {
-  const changeColor =
-    changeType === 'positive'
-      ? 'text-[#22C55E] bg-[rgba(34,197,94,0.1)]'
-      : changeType === 'negative'
-        ? 'text-[#EF4444] bg-[rgba(239,68,68,0.1)]'
-        : 'text-[#6B6B6B] bg-[rgba(107,107,107,0.1)]'
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay, ease: easeOut }}
-      whileHover={{ y: -2, transition: { duration: 0.2 } }}
-      className="rounded-xl border border-[#2A2A2A] p-6 min-h-[140px] flex flex-col justify-between relative overflow-hidden group hover:border-[rgba(0,174,239,0.2)] hover:shadow-[0_4px_24px_rgba(0,174,239,0.08)] transition-all duration-200"
-      style={{
-        background: 'linear-gradient(135deg, rgba(0,174,239,0.08) 0%, rgba(139,92,246,0.04) 100%), #141414',
-      }}
-    >
-      <div className="flex items-start justify-between" style={{ color: '#F0F0F0' }}>
-        <div className="flex items-center gap-4">
-          <div
-            className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0"
-            style={{ backgroundColor: iconBg }}
-          >
-            {icon}
-          </div>
-          <div>
-            <p style={{ color: '#A0A0A0' }} className="text-xs font-medium mb-0.5">{label}</p>
-            <p className="text-2xl font-bold tracking-tight" style={{ fontFamily: '"Space Mono", monospace', color: '#F0F0F0' }}>
-              {value}
-            </p>
-          </div>
-        </div>
-        <SparklineChart data={sparklineData} color={sparklineColor} />
-      </div>
-
-      <div className="flex items-center gap-2 mt-3">
-        <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold ${changeColor}`}>
-          {change}
-        </span>
-        <span style={{ color: '#A0A0A0' }} className="text-xs">{period}</span>
-      </div>
-    </motion.div>
-  )
-}
 
 /* ------------------------------------------------------------------ */
 /*  Status Badge                                                       */
@@ -341,57 +450,13 @@ export default function DashboardPage() {
       className="space-y-8"
     >
       {/* ============================================================ */}
-      {/*  KPI CARDS ROW                                               */}
+      {/*  KPI CARDS ROW — 4 cols desktop, 2×2 mobile                  */}
       {/* ============================================================ */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 lg:gap-6">
-        <KpiCard
-          icon={<DollarSign size={22} className="text-[#00AEEF]" />}
-          iconBg="rgba(0,174,239,0.1)"
-          label="Total Revenue"
-          value="$48,650"
-          change="+12%"
-          changeType="positive"
-          period="vs last month"
-          sparklineData={revenueSparkline}
-          sparklineColor="#00AEEF"
-          delay={0}
-        />
-        <KpiCard
-          icon={<Users size={22} className="text-[#8B5CF6]" />}
-          iconBg="rgba(139,92,246,0.1)"
-          label="Active Clients"
-          value="24"
-          change="+2"
-          changeType="positive"
-          period="this month"
-          sparklineData={clientsSparkline}
-          sparklineColor="#8B5CF6"
-          delay={0.08}
-        />
-        <KpiCard
-          icon={<CalendarCheck size={22} className="text-[#22C55E]" />}
-          iconBg="rgba(34,197,94,0.1)"
-          label="Sessions This Week"
-          value="18"
-          change="+4"
-          changeType="positive"
-          period="vs last week"
-          sparklineData={sessionsSparkline}
-          sparklineColor="#22C55E"
-          delay={0.16}
-        />
-        <KpiCard
-          icon={<UserPlus size={22} className="text-[#F97316]" />}
-          iconBg="rgba(249,115,22,0.1)"
-          label="New Signups"
-          value="3"
-          change="-1"
-          changeType="negative"
-          period="this month"
-          sparklineData={signupsSparkline}
-          sparklineColor="#F97316"
-          delay={0.24}
-        />
+      <div className="grid grid-cols-2 xl:grid-cols-4 gap-4">
+        <SessionsCard />
+        <ActiveClientsCard />
+        <SignupsCard />
+        <RevenueCard />
       </div>
 
       {/* ============================================================ */}
