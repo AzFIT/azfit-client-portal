@@ -76,6 +76,66 @@ export interface WorkoutSession {
   startTime?: Date;
 }
 
+// ── Completed Session History (Phase 5) ──
+
+export interface LoggedSet {
+  setNumber: number;
+  load: number;
+  reps: number;
+  rpe: number;
+  completed: boolean;
+  restSeconds: number;
+  type: SetType;
+}
+
+export interface LoggedExercise {
+  exerciseId: string;
+  exerciseName: string;
+  targetSets: number;
+  targetReps: string;
+  sets: LoggedSet[];
+  notes: string;
+  completed: boolean;
+  substituted?: boolean;
+  originalExerciseId?: string;
+}
+
+export interface SavedSession {
+  id: string;
+  coachId: string;
+  clientId?: string;
+  clientName?: string;
+  programId?: string;
+  programName?: string;
+  dayName?: string;
+  dayOfWeek?: string;
+  phaseName?: string;
+  exercises: LoggedExercise[];
+  startTime: string;
+  endTime?: string;
+  durationMinutes: number;
+  totalVolume: number;
+  totalSets: number;
+  completedSets: number;
+  avgRpe: number;
+  coachNotes: string;
+  status: 'in-progress' | 'completed' | 'cancelled';
+  createdAt: string;
+}
+
+export interface PersonalRecord {
+  id: string;
+  coachId: string;
+  clientId: string;
+  exerciseId: string;
+  exerciseName: string;
+  load: number;
+  reps: number;
+  estimated1rm: number;
+  sessionId?: string;
+  achievedAt: string;
+}
+
 export interface LiftRecord {
   val: string;
   date: string;

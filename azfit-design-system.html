@@ -1,0 +1,1463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AzFIT Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ========== ROOT / TOKENS ========== */
+html {
+  --azfit-cyan: #00AEEF;
+  --azfit-cyan-light: #22D3EE;
+  --azfit-cyan-dark: #0095CC;
+  --azfit-navy: #0B1120;
+  --navy-light: #151D2E;
+  --navy-lighter: #1E2940;
+  --bg-primary: #F8FAFC;
+  --bg-card: #FFFFFF;
+  --bg-elevated: #F1F5F9;
+  --border-default: #E2E8F0;
+  --border-focus: #00AEEF;
+  --text-primary: #0F172A;
+  --text-secondary: #64748B;
+  --text-muted: #94A3B8;
+  --success: #22C55E;
+  --warning: #F59E0B;
+  --error: #EF4444;
+  --phase-accumulation: #8B5CF6;
+  --phase-intensification: #F59E0B;
+  --phase-realization: #22C55E;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+  --shadow-glow: 0 0 20px rgba(0,174,239,0.3);
+  --radius-card: 12px;
+  --radius-input: 8px;
+  --radius-pill: 9999px;
+  --transition-fast: 150ms ease;
+  --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 500ms ease;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --header-height: 56px;
+  --sidebar-width: 260px;
+}
+html[data-theme="dark"] {
+  --bg-primary: #0B1120;
+  --bg-card: #151D2E;
+  --bg-elevated: #1E2940;
+  --border-default: #2A3A50;
+  --border-focus: #00AEEF;
+  --text-primary: #F1F5F9;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.2);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.25);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,0.35);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-family: var(--font); background: var(--bg-primary); color: var(--text-primary); transition: background-color var(--transition-base), color var(--transition-base); -webkit-font-smoothing: antialiased; }
+body { min-height: 100vh; }
+
+/* ========== LAYOUT ========== */
+.topbar { position: fixed; inset: 0 0 auto 0; height: var(--header-height); background: var(--bg-card); border-bottom: 1px solid var(--border-default); display: flex; align-items: center; justify-content: space-between; padding: 0 20px; z-index: 100; transition: background var(--transition-base), border-color var(--transition-base); }
+.topbar-left, .topbar-right { display: flex; align-items: center; gap: 12px; }
+.logo-icon { width: 36px; height: 36px; border-radius: 50%; background: var(--azfit-cyan); display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 16px; flex-shrink: 0; }
+.topbar-title { font-weight: 700; font-size: 15px; color: var(--text-primary); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; border: none; cursor: pointer; font-family: inherit; font-weight: 600; font-size: 13px; transition: all var(--transition-fast); }
+.btn-sm { height: 32px; padding: 0 12px; border-radius: var(--radius-pill); }
+.btn-md { height: 40px; padding: 0 16px; border-radius: var(--radius-pill); }
+.btn-lg { height: 48px; padding: 0 24px; border-radius: var(--radius-pill); font-size: 14px; }
+.btn-primary { background: var(--azfit-cyan); color: #fff; }
+.btn-primary:hover { background: var(--azfit-cyan-dark); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+.btn-secondary { background: transparent; color: var(--text-primary); border: 1.5px solid var(--border-default); }
+.btn-secondary:hover { border-color: var(--azfit-cyan); color: var(--azfit-cyan); }
+.btn-ghost { background: transparent; color: var(--text-secondary); border: none; }
+.btn-ghost:hover { color: var(--azfit-cyan); }
+.btn-danger { background: var(--error); color: #fff; }
+.btn-danger:hover { background: #DC2626; transform: translateY(-1px); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; }
+
+.sidebar { position: fixed; inset: var(--header-height) auto 0 0; width: var(--sidebar-width); background: var(--bg-card); border-right: 1px solid var(--border-default); overflow-y: auto; z-index: 90; padding: 16px 0; transition: background var(--transition-base), border-color var(--transition-base); }
+.sidebar-section { margin-bottom: 8px; }
+.sidebar-label { padding: 8px 20px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); }
+.sidebar-link { display: block; padding: 8px 20px 8px 28px; font-size: 13px; color: var(--text-secondary); text-decoration: none; border-left: 3px solid transparent; transition: all var(--transition-fast); cursor: pointer; }
+.sidebar-link:hover, .sidebar-link.active { color: var(--azfit-cyan); background: rgba(0,174,239,0.06); border-left-color: var(--azfit-cyan); }
+
+.main { margin-left: var(--sidebar-width); padding-top: var(--header-height); }
+.section { padding: 48px 40px; max-width: 1100px; }
+.section-title { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+.section-desc { font-size: 14px; color: var(--text-secondary); margin-bottom: 32px; }
+
+/* Mobile */
+.mobile-toggle { display: none; background: none; border: none; color: var(--text-primary); cursor: pointer; }
+@media (max-width: 768px) {
+  .sidebar { transform: translateX(-100%); transition: transform var(--transition-base); }
+  .sidebar.open { transform: translateX(0); }
+  .main { margin-left: 0; }
+  .mobile-toggle { display: inline-flex; }
+  .section { padding: 32px 20px; }
+}
+
+/* ========== HERO ========== */
+.hero { background: linear-gradient(135deg, #0B1120 0%, #0F172A 40%, #0B2A4A 70%, #00AEEF 180%); color: white; padding: 80px 40px 60px; margin: 0; max-width: none; }
+.hero h1 { font-size: 32px; font-weight: 800; margin-bottom: 8px; }
+.hero p { font-size: 16px; opacity: 0.6; max-width: 640px; margin-bottom: 32px; }
+.hero-stats { display: flex; gap: 40px; margin-bottom: 32px; }
+.hero-stat .num { font-size: 28px; font-weight: 800; }
+.hero-stat .lbl { font-size: 12px; opacity: 0.6; text-transform: uppercase; letter-spacing: 0.06em; }
+.hero-buttons { display: flex; gap: 12px; }
+.hero .btn-secondary { color: #fff; border-color: rgba(255,255,255,0.3); }
+.hero .btn-secondary:hover { border-color: #fff; color: #fff; background: rgba(255,255,255,0.08); }
+
+/* ========== TOKENS TABLE ========== */
+.tokens-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.tokens-table th { text-align: left; padding: 10px 12px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); border-bottom: 1px solid var(--border-default); }
+.tokens-table td { padding: 10px 12px; border-bottom: 1px solid var(--border-default); color: var(--text-secondary); }
+.token-name { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 12px; color: var(--text-primary); }
+.swatch { width: 24px; height: 24px; border-radius: 6px; display: inline-block; border: 1px solid var(--border-default); }
+.copy-btn { background: transparent; border: 1px solid var(--border-default); color: var(--text-secondary); padding: 4px 10px; border-radius: 6px; font-size: 11px; cursor: pointer; }
+.copy-btn:hover { border-color: var(--azfit-cyan); color: var(--azfit-cyan); }
+
+/* ========== COLOR PALETTE ========== */
+.palette-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 16px; }
+.swatch-card { text-align: center; }
+.swatch-square { width: 100%; aspect-ratio: 1; border-radius: 8px; border: 1px solid var(--border-default); cursor: pointer; position: relative; }
+.swatch-hex { font-size: 11px; color: var(--text-muted); margin-top: 6px; font-family: ui-monospace, monospace; }
+.swatch-tooltip { position: absolute; inset: 0; display: grid; place-items: center; background: rgba(0,0,0,0.7); color: #fff; font-size: 11px; border-radius: 8px; opacity: 0; transition: opacity var(--transition-fast); pointer-events: none; }
+.swatch-square:hover .swatch-tooltip { opacity: 1; }
+
+/* ========== TYPOGRAPHY ========== */
+.type-sample { margin-bottom: 24px; }
+.type-sample .text { color: var(--text-primary); margin-bottom: 4px; }
+.type-sample .meta { font-size: 12px; color: var(--text-muted); font-family: ui-monospace, monospace; }
+
+/* ========== SHADOWS ========== */
+.shadow-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; }
+.shadow-card { background: var(--bg-card); border: 1px solid var(--border-default); border-radius: var(--radius-card); padding: 24px; text-align: center; transition: all var(--transition-base); }
+.shadow-card:hover { transform: translateY(-2px); }
+.shadow-label { font-size: 12px; color: var(--text-muted); margin-top: 12px; }
+
+/* ========== BUTTONS DEMO ========== */
+.btn-grid { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 16px; }
+
+/* ========== SELECTION CARDS ========== */
+.sel-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; }
+.sel-card { background: var(--bg-card); border: 1px solid var(--border-default); border-radius: var(--radius-card); padding: 20px; text-align: center; cursor: pointer; position: relative; transition: all var(--transition-base); user-select: none; }
+.sel-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.sel-card.selected { border-color: var(--azfit-cyan); box-shadow: 0 0 0 2px rgba(0,174,239,0.15), var(--shadow-md); }
+.sel-card .check { position: absolute; top: 8px; right: 8px; width: 22px; height: 22px; background: var(--azfit-cyan); color: #fff; border-radius: 50%; display: grid; place-items: center; font-size: 12px; transform: scale(0); transition: transform 200ms cubic-bezier(0.34,1.56,0.64,1); }
+.sel-card.selected .check { transform: scale(1); }
+.sel-card .accent-top { position: absolute; top: 0; left: 12px; right: 12px; height: 4px; border-radius: 0 0 4px 4px; }
+.sel-card .accent-left { position: absolute; top: 12px; bottom: 12px; left: 0; width: 4px; border-radius: 0 4px 4px 0; }
+.sel-icon { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; font-size: 20px; margin: 0 auto 12px; }
+.sel-title { font-weight: 700; font-size: 14px; margin-bottom: 4px; }
+.sel-desc { font-size: 12px; color: var(--text-muted); line-height: 1.4; }
+
+/* ========== FORMS ========== */
+.form-group { margin-bottom: 20px; }
+.form-label { display: block; font-size: 12px; font-weight: 600; color: var(--text-secondary); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em; }
+.form-input { width: 100%; height: 40px; padding: 0 12px; background: var(--bg-card); border: 1.5px solid var(--border-default); border-radius: var(--radius-input); color: var(--text-primary); font-family: inherit; font-size: 14px; transition: all var(--transition-fast); }
+.form-input:focus { outline: none; border-color: var(--border-focus); box-shadow: 0 0 0 3px rgba(0,174,239,0.15); }
+.form-input::placeholder { color: var(--text-muted); }
+.form-input.error { border-color: var(--error); }
+textarea.form-input { height: auto; min-height: 80px; padding: 10px 12px; resize: vertical; }
+.select-wrap { position: relative; }
+.select-wrap::after { content: ""; position: absolute; right: 12px; top: 50%; transform: translateY(-50%); width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent; border-top: 5px solid var(--text-muted); pointer-events: none; }
+select.form-input { appearance: none; padding-right: 28px; }
+
+/* Custom checkbox / radio / toggle */
+.checkbox-wrap, .radio-wrap, .toggle-wrap { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+.checkbox-box { width: 18px; height: 18px; border: 1.5px solid var(--border-default); border-radius: 4px; display: grid; place-items: center; transition: all var(--transition-fast); flex-shrink: 0; }
+.checkbox-wrap input:checked + .checkbox-box { background: var(--azfit-cyan); border-color: var(--azfit-cyan); }
+.checkbox-wrap input:checked + .checkbox-box svg { display: block; }
+.checkbox-box svg { display: none; width: 12px; height: 12px; color: #fff; }
+.checkbox-wrap input { position: absolute; opacity: 0; width: 0; height: 0; }
+.radio-circle { width: 16px; height: 16px; border: 1.5px solid var(--border-default); border-radius: 50%; display: grid; place-items: center; transition: all var(--transition-fast); flex-shrink: 0; }
+.radio-wrap input:checked + .radio-circle { border-color: var(--azfit-cyan); }
+.radio-wrap input:checked + .radio-circle::after { content: ""; width: 8px; height: 8px; background: var(--azfit-cyan); border-radius: 50%; }
+.radio-wrap input { position: absolute; opacity: 0; width: 0; height: 0; }
+.toggle-track { width: 44px; height: 24px; border-radius: 9999px; background: var(--border-default); position: relative; transition: background var(--transition-fast); flex-shrink: 0; }
+.toggle-thumb { width: 18px; height: 18px; background: #fff; border-radius: 50%; position: absolute; top: 3px; left: 3px; box-shadow: var(--shadow-sm); transition: transform var(--transition-fast); }
+.toggle-wrap input:checked + .toggle-track { background: var(--azfit-cyan); }
+.toggle-wrap input:checked + .toggle-track .toggle-thumb { transform: translateX(20px); }
+.toggle-wrap input { position: absolute; opacity: 0; width: 0; height: 0; }
+
+/* Range slider */
+input[type=range] { -webkit-appearance: none; width: 100%; height: 6px; border-radius: 9999px; background: var(--border-default); outline: none; }
+input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; background: var(--azfit-cyan); border: 2px solid #fff; box-shadow: var(--shadow-sm); cursor: pointer; transition: transform var(--transition-fast); }
+input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.1); }
+input[type=range]::-moz-range-thumb { width: 20px; height: 20px; border-radius: 50%; background: var(--azfit-cyan); border: 2px solid #fff; box-shadow: var(--shadow-sm); cursor: pointer; }
+
+/* ========== PROGRESS ========== */
+.progress-bar-bg { height: 4px; border-radius: 9999px; background: var(--bg-elevated); overflow: hidden; }
+.progress-bar-fill { height: 100%; border-radius: 9999px; background: linear-gradient(90deg, var(--azfit-cyan), var(--azfit-cyan-light)); width: 0%; transition: width 400ms ease-in-out; }
+.step-dots { display: flex; gap: 8px; }
+.step-dot { width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--border-default); transition: all var(--transition-fast); }
+.step-dot.current { background: var(--azfit-cyan); border-color: var(--azfit-cyan); box-shadow: 0 0 8px rgba(0,174,239,0.4); }
+.step-dot.completed { background: var(--success); border-color: var(--success); }
+.phase-timeline { display: flex; height: 8px; border-radius: 9999px; overflow: hidden; }
+.phase-seg { height: 100%; }
+
+/* ========== STAT CARDS ========== */
+.stat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px; }
+.stat-card { background: var(--bg-card); border: 1px solid var(--border-default); border-radius: var(--radius-card); padding: 20px; transition: all var(--transition-base); }
+.stat-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.stat-icon { width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center; font-size: 16px; margin-bottom: 12px; }
+.stat-label { font-size: 12px; color: var(--text-muted); margin-bottom: 4px; }
+.stat-value { font-size: 24px; font-weight: 800; color: var(--text-primary); }
+.stat-delta { display: inline-block; margin-top: 6px; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 9999px; }
+
+/* ========== PHASE CARDS ========== */
+.phase-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+.phase-card { background: var(--bg-card); border: 1px solid var(--border-default); border-radius: var(--radius-card); padding: 24px; position: relative; cursor: pointer; transition: all var(--transition-base); }
+.phase-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.phase-card.selected { border-width: 2px; }
+.phase-card .check { position: absolute; top: 12px; right: 12px; width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; color: #fff; font-size: 12px; transform: scale(0); transition: transform 200ms cubic-bezier(0.34,1.56,0.64,1); }
+.phase-card.selected .check { transform: scale(1); }
+.phase-badge { display: inline-block; padding: 4px 10px; border-radius: 9999px; font-size: 11px; font-weight: 700; margin-bottom: 12px; }
+.phase-icon { width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; font-size: 22px; margin-bottom: 16px; }
+.phase-title { font-size: 18px; font-weight: 800; margin-bottom: 8px; }
+.phase-desc { font-size: 13px; color: var(--text-secondary); margin-bottom: 16px; }
+.phase-detail { font-size: 12px; color: var(--text-muted); }
+
+/* ========== SPLIT CARDS ========== */
+.split-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; }
+@media (max-width: 768px) { .split-grid { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 480px) { .split-grid { grid-template-columns: repeat(2, 1fr); } }
+.split-card { background: var(--bg-card); border: 1px solid var(--border-default); border-radius: 10px; padding: 14px; text-align: center; transition: all var(--transition-base); }
+.split-card.training { border-color: var(--azfit-cyan); background: rgba(0,174,239,0.06); }
+.split-card.rest { border-style: dashed; }
+.split-day { font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px; }
+.split-type { font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+.split-tags { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; margin-bottom: 6px; }
+.split-tag { font-size: 10px; padding: 2px 6px; border-radius: 9999px; background: var(--bg-elevated); color: var(--text-secondary); }
+.split-count { font-size: 11px; color: var(--text-muted); }
+.split-summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 20px; }
+.split-sum-item { text-align: center; padding: 16px; background: var(--bg-card); border: 1px solid var(--border-default); border-radius: var(--radius-card); }
+.split-sum-val { font-size: 20px; font-weight: 800; }
+.split-sum-lbl { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+
+/* ========== DAY TOGGLES ========== */
+.day-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; margin-bottom: 16px; }
+.day-card { padding: 16px 8px; border-radius: 10px; text-align: center; cursor: pointer; border: 1px solid var(--border-default); background: var(--bg-card); transition: all var(--transition-fast); user-select: none; }
+.day-card.training { background: var(--azfit-cyan); color: #fff; border-color: var(--azfit-cyan); box-shadow: var(--shadow-md); }
+.day-card.rest { color: var(--text-muted); }
+.day-card .day-name { font-size: 12px; font-weight: 700; text-transform: uppercase; }
+
+/* ========== TOAST ========== */
+#toast-container { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; gap: 8px; z-index: 200; pointer-events: none; }
+.toast { pointer-events: auto; background: var(--azfit-navy); color: #fff; padding: 12px 20px; border-radius: 10px; font-size: 13px; border-left: 4px solid var(--azfit-cyan); box-shadow: var(--shadow-lg); display: flex; align-items: center; gap: 10px; animation: toastIn 400ms ease; }
+.toast.success { border-left-color: var(--success); }
+.toast.error { border-left-color: var(--error); }
+@keyframes toastIn { from { transform: translateY(100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+@keyframes toastOut { to { transform: translateY(20px); opacity: 0; } }
+
+/* ========== ASCII ========== */
+.ascii-box { background: var(--azfit-navy); color: #cbd5e1; padding: 24px; border-radius: var(--radius-card); overflow-x: auto; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 12px; line-height: 1.6; }
+.ascii-box .cyan { color: var(--azfit-cyan); }
+.ascii-box .gray { color: #64748B; }
+
+/* ========== WIZARD FLOW ========== */
+.flow-steps { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.flow-step { display: flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 9999px; font-size: 12px; font-weight: 600; border: 1px solid var(--border-default); background: var(--bg-card); }
+.flow-step.completed { background: rgba(34,197,94,0.1); border-color: var(--success); color: var(--success); }
+.flow-step.current { background: rgba(0,174,239,0.1); border-color: var(--azfit-cyan); color: var(--azfit-cyan); box-shadow: 0 0 12px rgba(0,174,239,0.15); }
+.flow-arrow { color: var(--text-muted); font-size: 14px; }
+
+/* ========== ANIMATIONS ========== */
+.anim-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+.anim-card { background: var(--bg-card); border: 1px solid var(--border-default); border-radius: var(--radius-card); padding: 20px; }
+.anim-stage { height: 120px; display: grid; place-items: center; background: var(--bg-primary); border-radius: 10px; margin-bottom: 16px; position: relative; overflow: hidden; }
+.anim-target { width: 60px; height: 60px; background: var(--azfit-cyan); border-radius: 10px; }
+.anim-spec { font-size: 12px; color: var(--text-secondary); margin-bottom: 8px; }
+.anim-spec table { width: 100%; border-collapse: collapse; }
+.anim-spec th { text-align: left; padding: 4px 6px; font-size: 10px; text-transform: uppercase; color: var(--text-muted); border-bottom: 1px solid var(--border-default); }
+.anim-spec td { padding: 4px 6px; border-bottom: 1px solid var(--border-default); font-family: ui-monospace, monospace; font-size: 11px; }
+.anim-trigger { margin-top: 8px; }
+
+/* ========== LIVE WIZARD DEMO ========== */
+.wizard-box { border: 1px solid var(--border-default); border-radius: var(--radius-card); overflow: hidden; background: var(--bg-card); }
+.wizard-header { padding: 16px 20px; border-bottom: 1px solid var(--border-default); }
+.wizard-body { padding: 24px; min-height: 280px; }
+.wizard-footer { padding: 16px 20px; border-top: 1px solid var(--border-default); display: flex; justify-content: space-between; }
+.wizard-step-content { animation: fadeIn 300ms ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateX(10px); } to { opacity: 1; transform: translateX(0); } }
+
+/* ========== PLAYGROUND ========== */
+.play-row { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; margin-bottom: 20px; padding: 16px; background: var(--bg-primary); border-radius: 10px; border: 1px solid var(--border-default); }
+.play-label { font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--text-muted); width: 100%; margin-bottom: 4px; }
+
+/* ========== RESPONSIVE MOCKUPS ========== */
+.mock-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+.mock-frame { background: var(--bg-card); border: 1px solid var(--border-default); border-radius: var(--radius-card); padding: 16px; }
+.mock-screen { background: var(--bg-primary); border: 1px solid var(--border-default); border-radius: 8px; overflow: hidden; height: 160px; position: relative; }
+.mock-header { height: 16px; background: var(--bg-card); border-bottom: 1px solid var(--border-default); display: flex; align-items: center; padding: 0 6px; gap: 3px; }
+.mock-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--border-default); }
+.mock-sidebar-mini { position: absolute; left: 0; top: 16px; bottom: 0; width: 28px; background: var(--bg-card); border-right: 1px solid var(--border-default); }
+.mock-content { position: absolute; left: 28px; top: 16px; right: 0; bottom: 0; padding: 6px; display: grid; gap: 4px; grid-template-columns: 1fr 1fr; }
+.mock-card-mini { background: var(--bg-card); border: 1px solid var(--border-default); border-radius: 4px; }
+.mock-single { grid-template-columns: 1fr; }
+.mock-hamburger { position: absolute; left: 6px; top: 20px; width: 10px; height: 6px; display: flex; flex-direction: column; justify-content: space-between; }
+.mock-hamburger span { height: 1px; background: var(--text-muted); border-radius: 1px; }
+.mock-title { font-size: 12px; font-weight: 700; margin-top: 10px; }
+.mock-desc { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+
+/* ========== CODE BLOCKS ========== */
+.code-block { background: #0F172A; color: #E2E8F0; padding: 16px; border-radius: 10px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 12px; line-height: 1.6; overflow-x: auto; margin-top: 12px; }
+.code-block .kw { color: #C084FC; }
+.code-block .prop { color: #7DD3FC; }
+.code-block .val { color: #86EFAC; }
+.code-block .sel { color: #FDBA74; }
+.code-toggle { background: transparent; border: 1px solid var(--border-default); color: var(--text-secondary); padding: 6px 12px; border-radius: 6px; font-size: 12px; cursor: pointer; margin-top: 12px; }
+.code-toggle:hover { color: var(--azfit-cyan); border-color: var(--azfit-cyan); }
+
+/* ========== UTILITIES ========== */
+.mb-8 { margin-bottom: 8px; }
+.mb-16 { margin-bottom: 16px; }
+.mb-24 { margin-bottom: 24px; }
+.mt-16 { margin-top: 16px; }
+.flex { display: flex; }
+.gap-8 { gap: 8px; }
+.gap-12 { gap: 12px; }
+.wrap { flex-wrap: wrap; }
+.items-center { align-items: center; }
+
+/* Phase card selected border */
+.phase-card.selected { border-color: var(--accent, var(--azfit-cyan)); }
+
+/* Success pop */
+@keyframes successPop {
+  0% { transform: scale(0); }
+  70% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+/* Confetti */
+.confetti-piece { position: absolute; width: 8px; height: 8px; animation: confettiFall 3s ease-out forwards; }
+@keyframes confettiFall { 0% { transform: translateY(0) rotate(0deg); opacity: 1; } 100% { transform: translateY(120px) rotate(720deg); opacity: 0; } }
+
+/* FAB */
+.fab { width: 56px; height: 56px; border-radius: 50%; background: var(--azfit-cyan); color: #fff; display: grid; place-items: center; font-size: 24px; border: none; cursor: pointer; box-shadow: var(--shadow-md); transition: all var(--transition-fast); }
+.fab:hover { transform: scale(1.05); box-shadow: var(--shadow-lg); }
+.fab-pulse { animation: fabPulse 1.5s infinite; }
+@keyframes fabPulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(0,174,239,0.4); } 50% { box-shadow: 0 0 0 12px rgba(0,174,239,0); } }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-default); border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+</style>
+</head>
+<body>
+
+<!-- Top Bar -->
+<header class="topbar">
+  <div class="topbar-left">
+    <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+    </button>
+    <div class="logo-icon">A</div>
+    <span class="topbar-title">AzFIT Design System</span>
+  </div>
+  <div class="topbar-right">
+    <button class="btn btn-ghost btn-sm" id="themeBtn" aria-label="Toggle theme">
+      <svg id="sunIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      <svg id="moonIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+    <button class="btn btn-secondary btn-sm" id="copyTokensBtn">Copy Tokens</button>
+  </div>
+</header>
+
+<!-- Sidebar -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-section"><div class="sidebar-label">Overview</div>
+    <a class="sidebar-link" href="#cover">Cover / Hero</a>
+    <a class="sidebar-link" href="#tokens">Design Tokens</a>
+    <a class="sidebar-link" href="#palette">Color Palette</a>
+    <a class="sidebar-link" href="#typography">Typography</a>
+    <a class="sidebar-link" href="#shadows">Shadows & Effects</a>
+  </div>
+  <div class="sidebar-section"><div class="sidebar-label">Components</div>
+    <a class="sidebar-link" href="#buttons">Buttons</a>
+    <a class="sidebar-link" href="#selection">Selection Cards</a>
+    <a class="sidebar-link" href="#forms">Form Elements</a>
+    <a class="sidebar-link" href="#dropdowns">Dropdowns</a>
+    <a class="sidebar-link" href="#toggles">Toggles & Switches</a>
+    <a class="sidebar-link" href="#checks">Checkboxes & Radios</a>
+    <a class="sidebar-link" href="#progress">Progress Bars</a>
+    <a class="sidebar-link" href="#statcards">Stat Cards</a>
+    <a class="sidebar-link" href="#phasecards">Phase Cards</a>
+    <a class="sidebar-link" href="#splitcards">Split Cards</a>
+    <a class="sidebar-link" href="#fab">FAB</a>
+    <a class="sidebar-link" href="#toasts">Toast Notifications</a>
+  </div>
+  <div class="sidebar-section"><div class="sidebar-label">Layout</div>
+    <a class="sidebar-link" href="#ascii">ASCII Wireframe</a>
+    <a class="sidebar-link" href="#wizardflow">Wizard Flow</a>
+    <a class="sidebar-link" href="#grid">Grid System</a>
+    <a class="sidebar-link" href="#responsive">Responsive Breakpoints</a>
+  </div>
+  <div class="sidebar-section"><div class="sidebar-label">Interactions</div>
+    <a class="sidebar-link" href="#animations">Animation Library</a>
+    <a class="sidebar-link" href="#hover">Hover States</a>
+    <a class="sidebar-link" href="#transitions">Transitions</a>
+    <a class="sidebar-link" href="#micro">Micro-interactions</a>
+  </div>
+  <div class="sidebar-section"><div class="sidebar-label">Prototype</div>
+    <a class="sidebar-link" href="#livewizard">Live Wizard Demo</a>
+    <a class="sidebar-link" href="#playground">Component Playground</a>
+  </div>
+</nav>
+<div id="sidebarOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.3);z-index:85" onclick="document.getElementById('sidebar').classList.remove('open');this.style.display='none'"></div>
+
+<!-- Main -->
+<main class="main">
+
+<!-- Section 1: Cover / Hero -->
+<section class="section hero" id="cover">
+  <h1>AzFIT Design System</h1>
+  <p>Visual language, component library, and interaction patterns for the AzFIT Coach OS</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="num">42+</div><div class="lbl">Components</div></div>
+    <div class="hero-stat"><div class="num">8-Step</div><div class="lbl">Wizard Flow</div></div>
+    <div class="hero-stat"><div class="num">2</div><div class="lbl">Themes</div></div>
+  </div>
+  <div class="hero-buttons">
+    <a href="#buttons" class="btn btn-primary btn-md">Explore Components</a>
+    <a href="#livewizard" class="btn btn-secondary btn-md">View Wizard</a>
+  </div>
+</section>
+
+<!-- Section 2: Design Tokens -->
+<section class="section" id="tokens">
+  <h2 class="section-title">Design Tokens</h2>
+  <p class="section-desc">The canonical values that power every component in the system.</p>
+  <div style="overflow-x:auto">
+    <table class="tokens-table" id="tokensTable">
+      <thead><tr><th>Token</th><th>Value</th><th>Preview</th><th></th></tr></thead>
+      <tbody>
+        <tr><td class="token-name">--azfit-cyan</td><td>#00AEEF</td><td><span class="swatch" style="background:#00AEEF"></span></td><td><button class="copy-btn" data-copy="var(--azfit-cyan)">Copy</button></td></tr>
+        <tr><td class="token-name">--azfit-cyan-light</td><td>#22D3EE</td><td><span class="swatch" style="background:#22D3EE"></span></td><td><button class="copy-btn" data-copy="var(--azfit-cyan-light)">Copy</button></td></tr>
+        <tr><td class="token-name">--azfit-cyan-dark</td><td>#0095CC</td><td><span class="swatch" style="background:#0095CC"></span></td><td><button class="copy-btn" data-copy="var(--azfit-cyan-dark)">Copy</button></td></tr>
+        <tr><td class="token-name">--azfit-navy</td><td>#0B1120</td><td><span class="swatch" style="background:#0B1120"></span></td><td><button class="copy-btn" data-copy="var(--azfit-navy)">Copy</button></td></tr>
+        <tr><td class="token-name">--navy-light</td><td>#151D2E</td><td><span class="swatch" style="background:#151D2E"></span></td><td><button class="copy-btn" data-copy="var(--navy-light)">Copy</button></td></tr>
+        <tr><td class="token-name">--navy-lighter</td><td>#1E2940</td><td><span class="swatch" style="background:#1E2940"></span></td><td><button class="copy-btn" data-copy="var(--navy-lighter)">Copy</button></td></tr>
+        <tr><td class="token-name">--bg-primary</td><td>Light: #F8FAFC / Dark: #0B1120</td><td><span class="swatch" id="swatch-bg-primary" style="background:var(--bg-primary);border-color:var(--border-default)"></span></td><td><button class="copy-btn" data-copy="var(--bg-primary)">Copy</button></td></tr>
+        <tr><td class="token-name">--bg-card</td><td>Light: #FFFFFF / Dark: #151D2E</td><td><span class="swatch" id="swatch-bg-card" style="background:var(--bg-card);border-color:var(--border-default)"></span></td><td><button class="copy-btn" data-copy="var(--bg-card)">Copy</button></td></tr>
+        <tr><td class="token-name">--bg-elevated</td><td>Light: #F1F5F9 / Dark: #1E2940</td><td><span class="swatch" id="swatch-bg-elevated" style="background:var(--bg-elevated);border-color:var(--border-default)"></span></td><td><button class="copy-btn" data-copy="var(--bg-elevated)">Copy</button></td></tr>
+        <tr><td class="token-name">--border-default</td><td>Light: #E2E8F0 / Dark: #2A3A50</td><td><span class="swatch" id="swatch-border" style="background:var(--border-default)"></span></td><td><button class="copy-btn" data-copy="var(--border-default)">Copy</button></td></tr>
+        <tr><td class="token-name">--border-focus</td><td>#00AEEF</td><td><span class="swatch" style="background:#00AEEF"></span></td><td><button class="copy-btn" data-copy="var(--border-focus)">Copy</button></td></tr>
+        <tr><td class="token-name">--text-primary</td><td>Light: #0F172A / Dark: #F1F5F9</td><td><span class="swatch" id="swatch-text-primary" style="background:var(--text-primary)"></span></td><td><button class="copy-btn" data-copy="var(--text-primary)">Copy</button></td></tr>
+        <tr><td class="token-name">--text-secondary</td><td>Light: #64748B / Dark: #94A3B8</td><td><span class="swatch" id="swatch-text-secondary" style="background:var(--text-secondary)"></span></td><td><button class="copy-btn" data-copy="var(--text-secondary)">Copy</button></td></tr>
+        <tr><td class="token-name">--text-muted</td><td>Light: #94A3B8 / Dark: #64748B</td><td><span class="swatch" id="swatch-text-muted" style="background:var(--text-muted)"></span></td><td><button class="copy-btn" data-copy="var(--text-muted)">Copy</button></td></tr>
+        <tr><td class="token-name">--success</td><td>#22C55E</td><td><span class="swatch" style="background:#22C55E"></span></td><td><button class="copy-btn" data-copy="var(--success)">Copy</button></td></tr>
+        <tr><td class="token-name">--warning</td><td>#F59E0B</td><td><span class="swatch" style="background:#F59E0B"></span></td><td><button class="copy-btn" data-copy="var(--warning)">Copy</button></td></tr>
+        <tr><td class="token-name">--error</td><td>#EF4444</td><td><span class="swatch" style="background:#EF4444"></span></td><td><button class="copy-btn" data-copy="var(--error)">Copy</button></td></tr>
+        <tr><td class="token-name">--phase-accumulation</td><td>#8B5CF6</td><td><span class="swatch" style="background:#8B5CF6"></span></td><td><button class="copy-btn" data-copy="var(--phase-accumulation)">Copy</button></td></tr>
+        <tr><td class="token-name">--phase-intensification</td><td>#F59E0B</td><td><span class="swatch" style="background:#F59E0B"></span></td><td><button class="copy-btn" data-copy="var(--phase-intensification)">Copy</button></td></tr>
+        <tr><td class="token-name">--phase-realization</td><td>#22C55E</td><td><span class="swatch" style="background:#22C55E"></span></td><td><button class="copy-btn" data-copy="var(--phase-realization)">Copy</button></td></tr>
+        <tr><td class="token-name">--shadow-sm</td><td>0 1px 2px rgba(0,0,0,0.05)</td><td><span class="swatch" style="box-shadow:0 1px 2px rgba(0,0,0,0.05);background:var(--bg-card)"></span></td><td><button class="copy-btn" data-copy="var(--shadow-sm)">Copy</button></td></tr>
+        <tr><td class="token-name">--shadow-md</td><td>0 4px 12px rgba(0,0,0,0.08)</td><td><span class="swatch" style="box-shadow:0 4px 12px rgba(0,0,0,0.08);background:var(--bg-card)"></span></td><td><button class="copy-btn" data-copy="var(--shadow-md)">Copy</button></td></tr>
+        <tr><td class="token-name">--shadow-lg</td><td>0 8px 24px rgba(0,0,0,0.12)</td><td><span class="swatch" style="box-shadow:0 8px 24px rgba(0,0,0,0.12);background:var(--bg-card)"></span></td><td><button class="copy-btn" data-copy="var(--shadow-lg)">Copy</button></td></tr>
+        <tr><td class="token-name">--shadow-glow</td><td>0 0 20px rgba(0,174,239,0.3)</td><td><span class="swatch" style="box-shadow:0 0 20px rgba(0,174,239,0.3);background:var(--bg-card)"></span></td><td><button class="copy-btn" data-copy="var(--shadow-glow)">Copy</button></td></tr>
+        <tr><td class="token-name">--radius-card</td><td>12px</td><td><span class="swatch" style="border-radius:12px;background:var(--azfit-cyan)"></span></td><td><button class="copy-btn" data-copy="var(--radius-card)">Copy</button></td></tr>
+        <tr><td class="token-name">--radius-input</td><td>8px</td><td><span class="swatch" style="border-radius:8px;background:var(--azfit-cyan)"></span></td><td><button class="copy-btn" data-copy="var(--radius-input)">Copy</button></td></tr>
+        <tr><td class="token-name">--radius-pill</td><td>9999px</td><td><span class="swatch" style="border-radius:9999px;background:var(--azfit-cyan)"></span></td><td><button class="copy-btn" data-copy="var(--radius-pill)">Copy</button></td></tr>
+        <tr><td class="token-name">--transition-fast</td><td>150ms ease</td><td></td><td><button class="copy-btn" data-copy="var(--transition-fast)">Copy</button></td></tr>
+        <tr><td class="token-name">--transition-base</td><td>300ms cubic-bezier(0.4, 0, 0.2, 1)</td><td></td><td><button class="copy-btn" data-copy="var(--transition-base)">Copy</button></td></tr>
+        <tr><td class="token-name">--transition-slow</td><td>500ms ease</td><td></td><td><button class="copy-btn" data-copy="var(--transition-slow)">Copy</button></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <button class="code-toggle" onclick="toggleCode(this)">Show CSS</button>
+  <div class="code-block" style="display:none">
+<span class="sel">:root</span> {<br>
+&nbsp;&nbsp;<span class="prop">--azfit-cyan</span>: <span class="val">#00AEEF</span>;<br>
+&nbsp;&nbsp;<span class="prop">--azfit-cyan-light</span>: <span class="val">#22D3EE</span>;<br>
+&nbsp;&nbsp;<span class="prop">--radius-card</span>: <span class="val">12px</span>;<br>
+&nbsp;&nbsp;<span class="prop">--transition-base</span>: <span class="val">300ms cubic-bezier(0.4, 0, 0.2, 1)</span>;<br>
+}
+  </div>
+</section>
+
+<!-- Section 3: Color Palette -->
+<section class="section" id="palette">
+  <h2 class="section-title">Color Palette</h2>
+  <p class="section-desc">Every color in the system. Click to copy hex.</p>
+  <div style="margin-bottom:24px"><strong style="font-size:12px;text-transform:uppercase;color:var(--text-muted)">Brand</strong></div>
+  <div class="palette-grid">
+    <div class="swatch-card"><div class="swatch-square" style="background:#00AEEF" data-hex="#00AEEF"><div class="swatch-tooltip">#00AEEF</div></div><div class="swatch-hex">Cyan</div></div>
+    <div class="swatch-card"><div class="swatch-square" style="background:#22D3EE" data-hex="#22D3EE"><div class="swatch-tooltip">#22D3EE</div></div><div class="swatch-hex">Cyan Light</div></div>
+    <div class="swatch-card"><div class="swatch-square" style="background:#0095CC" data-hex="#0095CC"><div class="swatch-tooltip">#0095CC</div></div><div class="swatch-hex">Cyan Dark</div></div>
+    <div class="swatch-card"><div class="swatch-square" style="background:#0B1120" data-hex="#0B1120"><div class="swatch-tooltip">#0B1120</div></div><div class="swatch-hex">Navy</div></div>
+  </div>
+  <div style="margin:24px 0 12px"><strong style="font-size:12px;text-transform:uppercase;color:var(--text-muted)">Phases</strong></div>
+  <div class="palette-grid">
+    <div class="swatch-card"><div class="swatch-square" style="background:#8B5CF6" data-hex="#8B5CF6"><div class="swatch-tooltip">#8B5CF6</div></div><div class="swatch-hex">Accumulation</div></div>
+    <div class="swatch-card"><div class="swatch-square" style="background:#F59E0B" data-hex="#F59E0B"><div class="swatch-tooltip">#F59E0B</div></div><div class="swatch-hex">Intensification</div></div>
+    <div class="swatch-card"><div class="swatch-square" style="background:#22C55E" data-hex="#22C55E"><div class="swatch-tooltip">#22C55E</div></div><div class="swatch-hex">Realization</div></div>
+  </div>
+  <div style="margin:24px 0 12px"><strong style="font-size:12px;text-transform:uppercase;color:var(--text-muted)">Semantics</strong></div>
+  <div class="palette-grid">
+    <div class="swatch-card"><div class="swatch-square" style="background:#22C55E" data-hex="#22C55E"><div class="swatch-tooltip">#22C55E</div></div><div class="swatch-hex">Success</div></div>
+    <div class="swatch-card"><div class="swatch-square" style="background:#F59E0B" data-hex="#F59E0B"><div class="swatch-tooltip">#F59E0B</div></div><div class="swatch-hex">Warning</div></div>
+    <div class="swatch-card"><div class="swatch-square" style="background:#EF4444" data-hex="#EF4444"><div class="swatch-tooltip">#EF4444</div></div><div class="swatch-hex">Error</div></div>
+  </div>
+  <div style="margin:24px 0 12px"><strong style="font-size:12px;text-transform:uppercase;color:var(--text-muted)">Neutrals</strong></div>
+  <div class="palette-grid">
+    <div class="swatch-card"><div class="swatch-square" style="background:#FFFFFF;border:1px solid #E2E8F0" data-hex="#FFFFFF"><div class="swatch-tooltip">#FFFFFF</div></div><div class="swatch-hex">White</div></div>
+    <div class="swatch-card"><div class="swatch-square" style="background:#F8FAFC;border:1px solid #E2E8F0" data-hex="#F8FAFC"><div class="swatch-tooltip">#F8FAFC</div></div><div class="swatch-hex">Slate 50</div></div>
+    <div class="swatch-card"><div class="swatch-square" style="background:#F1F5F9" data-hex="#F1F5F9"><div class="swatch-tooltip">#F1F5F9</div></div><div class="swatch-hex">Slate 100</div></div>
+    <div class="swatch-card"><div class="swatch-square" style="background:#E2E8F0" data-hex="#E2E8F0"><div class="swatch-tooltip">#E2E8F0</div></div><div class="swatch-hex">Slate 200</div></div>
+    <div class="swatch-card"><div class="swatch-square" style="background:#CBD5E1" data-hex="#CBD5E1"><div class="swatch-tooltip">#CBD5E1</div></div><div class="swatch-hex">Slate 300</div></div>
+    <div class="swatch-card"><div class="swatch-square" style="background:#94A3B8" data-hex="#94A3B8"><div class="swatch-tooltip">#94A3B8</div></div><div class="swatch-hex">Slate 400</div></div>
+    <div class="swatch-card"><div class="swatch-square" style="background:#64748B" data-hex="#64748B"><div class="swatch-tooltip">#64748B</div></div><div class="swatch-hex">Slate 500</div></div>
+    <div class="swatch-card"><div class="swatch-square" style="background:#475569" data-hex="#475569"><div class="swatch-tooltip">#475569</div></div><div class="swatch-hex">Slate 600</div></div>
+    <div class="swatch-card"><div class="swatch-square" style="background:#334155" data-hex="#334155"><div class="swatch-tooltip">#334155</div></div><div class="swatch-hex">Slate 700</div></div>
+    <div class="swatch-card"><div class="swatch-square" style="background:#1E293B" data-hex="#1E293B"><div class="swatch-tooltip">#1E293B</div></div><div class="swatch-hex">Slate 800</div></div>
+    <div class="swatch-card"><div class="swatch-square" style="background:#0F172A" data-hex="#0F172A"><div class="swatch-tooltip">#0F172A</div></div><div class="swatch-hex">Slate 900</div></div>
+    <div class="swatch-card"><div class="swatch-square" style="background:#020617" data-hex="#020617"><div class="swatch-tooltip">#020617</div></div><div class="swatch-hex">Slate 950</div></div>
+  </div>
+</section>
+
+<!-- Section 4: Typography -->
+<section class="section" id="typography">
+  <h2 class="section-title">Typography</h2>
+  <p class="section-desc">Inter font family at every weight used in the system.</p>
+  <div class="type-sample"><div class="text" style="font-size:48px;font-weight:800;line-height:1.1">The quick brown fox jumps over the lazy dog</div><div class="meta">Display — 48px / 800</div></div>
+  <div class="type-sample"><div class="text" style="font-size:32px;font-weight:700;line-height:1.2">The quick brown fox jumps over the lazy dog</div><div class="meta">H1 — 32px / 700</div></div>
+  <div class="type-sample"><div class="text" style="font-size:28px;font-weight:700;line-height:1.2">The quick brown fox jumps over the lazy dog</div><div class="meta">H2 — 28px / 700</div></div>
+  <div class="type-sample"><div class="text" style="font-size:20px;font-weight:700;line-height:1.3">The quick brown fox jumps over the lazy dog</div><div class="meta">H3 — 20px / 700</div></div>
+  <div class="type-sample"><div class="text" style="font-size:16px;font-weight:700;line-height:1.4">The quick brown fox jumps over the lazy dog</div><div class="meta">H4 — 16px / 700</div></div>
+  <div class="type-sample"><div class="text" style="font-size:14px;font-weight:400;line-height:1.5">The quick brown fox jumps over the lazy dog</div><div class="meta">Body — 14px / 400</div></div>
+  <div class="type-sample"><div class="text" style="font-size:13px;font-weight:400;line-height:1.5">The quick brown fox jumps over the lazy dog</div><div class="meta">Body Small — 13px / 400</div></div>
+  <div class="type-sample"><div class="text" style="font-size:12px;font-weight:500;line-height:1.5">The quick brown fox jumps over the lazy dog</div><div class="meta">Caption — 12px / 500</div></div>
+  <div class="type-sample"><div class="text" style="font-size:11px;font-weight:600;line-height:1.4;text-transform:uppercase;letter-spacing:0.08em">The quick brown fox jumps over the lazy dog</div><div class="meta">Label — 11px / 600 uppercase tracking-wide</div></div>
+</section>
+
+<!-- Section 5: Shadows & Effects -->
+<section class="section" id="shadows">
+  <h2 class="section-title">Shadows & Effects</h2>
+  <p class="section-desc">Elevation, glow, and atmospheric effects.</p>
+  <div class="shadow-grid">
+    <div class="shadow-card" style="box-shadow:var(--shadow-sm)"><div style="font-size:14px;font-weight:700">Shadow SM</div><div class="shadow-label">var(--shadow-sm)</div></div>
+    <div class="shadow-card" style="box-shadow:var(--shadow-md)"><div style="font-size:14px;font-weight:700">Shadow MD</div><div class="shadow-label">var(--shadow-md)</div></div>
+    <div class="shadow-card" style="box-shadow:var(--shadow-lg)"><div style="font-size:14px;font-weight:700">Shadow LG</div><div class="shadow-label">var(--shadow-lg)</div></div>
+    <div class="shadow-card" style="box-shadow:var(--shadow-glow)"><div style="font-size:14px;font-weight:700">Shadow Glow</div><div class="shadow-label">var(--shadow-glow)</div></div>
+  </div>
+  <div style="margin-top:24px;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px">
+    <div style="padding:24px;border-radius:var(--radius-card);border:1px solid var(--border-default);background:rgba(0,174,239,0.06);backdrop-filter:blur(8px)"><div style="font-weight:700;margin-bottom:4px">Backdrop Blur</div><div style="font-size:12px;color:var(--text-muted)">backdrop-filter: blur(8px)</div></div>
+    <div style="padding:24px;border-radius:var(--radius-card);border:1px solid var(--border-default);background:linear-gradient(135deg,var(--azfit-cyan),var(--azfit-cyan-light));color:#fff"><div style="font-weight:700;margin-bottom:4px">Gradient Overlay</div><div style="font-size:12px;opacity:0.8">linear-gradient(135deg, cyan, cyan-light)</div></div>
+    <div style="padding:24px;border-radius:var(--radius-card);border:1px solid var(--border-default);background:var(--bg-card);box-shadow:var(--shadow-glow)"><div style="font-weight:700;margin-bottom:4px">Pulse Glow</div><div style="font-size:12px;color:var(--text-muted)">Animated box-shadow</div></div>
+    <div style="padding:24px;border-radius:var(--radius-card);border:2px solid var(--border-focus);background:var(--bg-card);box-shadow:0 0 0 4px rgba(0,174,239,0.1)"><div style="font-weight:700;margin-bottom:4px">Focus Ring</div><div style="font-size:12px;color:var(--text-muted)">3px spread ring</div></div>
+  </div>
+</section>
+
+
+<!-- Section 6: Buttons -->
+<section class="section" id="buttons">
+  <h2 class="section-title">Buttons</h2>
+  <p class="section-desc">All button variants and sizes.</p>
+  <div style="margin-bottom:8px;font-size:12px;font-weight:700;text-transform:uppercase;color:var(--text-muted)">Variants</div>
+  <div class="btn-grid">
+    <button class="btn btn-primary btn-md">Primary</button>
+    <button class="btn btn-secondary btn-md">Secondary</button>
+    <button class="btn btn-ghost btn-md">Ghost</button>
+    <button class="btn btn-danger btn-md">Danger</button>
+  </div>
+  <div style="margin:16px 0 8px;font-size:12px;font-weight:700;text-transform:uppercase;color:var(--text-muted)">Sizes</div>
+  <div class="btn-grid">
+    <button class="btn btn-primary btn-sm">Small</button>
+    <button class="btn btn-primary btn-md">Default</button>
+    <button class="btn btn-primary btn-lg">Large</button>
+  </div>
+  <div style="margin:16px 0 8px;font-size:12px;font-weight:700;text-transform:uppercase;color:var(--text-muted)">States</div>
+  <div class="btn-grid">
+    <button class="btn btn-primary btn-md" disabled>Disabled</button>
+    <button class="btn btn-secondary btn-md" disabled>Disabled</button>
+  </div>
+  <button class="code-toggle" onclick="toggleCode(this)">Show CSS</button>
+  <div class="code-block" style="display:none">
+<span class="sel">.btn-primary</span> {<br>
+&nbsp;&nbsp;<span class="prop">background</span>: <span class="val">var(--azfit-cyan)</span>;<br>
+&nbsp;&nbsp;<span class="prop">color</span>: <span class="val">#fff</span>;<br>
+&nbsp;&nbsp;<span class="prop">border-radius</span>: <span class="val">9999px</span>;<br>
+}<br>
+<span class="sel">.btn-primary:hover</span> {<br>
+&nbsp;&nbsp;<span class="prop">background</span>: <span class="val">var(--azfit-cyan-dark)</span>;<br>
+&nbsp;&nbsp;<span class="prop">transform</span>: <span class="val">translateY(-1px)</span>;<br>
+}
+  </div>
+</section>
+
+<!-- Section 7: Selection Cards -->
+<section class="section" id="selection">
+  <h2 class="section-title">Selection Cards</h2>
+  <p class="section-desc">Click to toggle selection. The core wizard interaction pattern.</p>
+  <div style="margin-bottom:12px;font-size:12px;font-weight:700;text-transform:uppercase;color:var(--text-muted)">Goal Cards</div>
+  <div class="sel-grid">
+    <div class="sel-card" onclick="toggleSel(this)">
+      <div class="accent-top" style="background:var(--azfit-cyan)"></div>
+      <div class="check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="sel-icon" style="background:rgba(0,174,239,0.1)">🔥</div>
+      <div class="sel-title">Lose Weight</div>
+      <div class="sel-desc">Calorie deficit & cardio focus</div>
+    </div>
+    <div class="sel-card" onclick="toggleSel(this)">
+      <div class="accent-top" style="background:var(--success)"></div>
+      <div class="check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="sel-icon" style="background:rgba(34,197,94,0.1)">💪</div>
+      <div class="sel-title">Build Muscle</div>
+      <div class="sel-desc">Hypertrophy & progressive overload</div>
+    </div>
+    <div class="sel-card" onclick="toggleSel(this)">
+      <div class="accent-top" style="background:var(--phase-accumulation)"></div>
+      <div class="check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="sel-icon" style="background:rgba(139,92,246,0.1)">🏋️</div>
+      <div class="sel-title">Strength</div>
+      <div class="sel-desc">Low reps, heavy loads</div>
+    </div>
+    <div class="sel-card" onclick="toggleSel(this)">
+      <div class="accent-top" style="background:var(--warning)"></div>
+      <div class="check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="sel-icon" style="background:rgba(245,158,11,0.1)">🏃</div>
+      <div class="sel-title">Endurance</div>
+      <div class="sel-desc">High volume, short rest</div>
+    </div>
+    <div class="sel-card" onclick="toggleSel(this)">
+      <div class="accent-top" style="background:var(--text-muted)"></div>
+      <div class="check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="sel-icon" style="background:rgba(148,163,184,0.1)">🎯</div>
+      <div class="sel-title">General Fitness</div>
+      <div class="sel-desc">Balanced mix of everything</div>
+    </div>
+  </div>
+  <div style="margin:24px 0 12px;font-size:12px;font-weight:700;text-transform:uppercase;color:var(--text-muted)">Method Cards</div>
+  <div class="sel-grid">
+    <div class="sel-card" onclick="toggleSel(this)"><div class="check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="sel-title">Straight Sets</div><div class="sel-desc">Standard sets with rest</div></div>
+    <div class="sel-card" onclick="toggleSel(this)"><div class="check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="sel-title">Supersets</div><div class="sel-desc">Two exercises back-to-back</div></div>
+    <div class="sel-card" onclick="toggleSel(this)"><div class="check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="sel-title">Trisets</div><div class="sel-desc">Three exercises in a row</div></div>
+    <div class="sel-card" onclick="toggleSel(this)"><div class="check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="sel-title">Dropsets</div><div class="sel-desc">Drop weight, keep going</div></div>
+    <div class="sel-card" onclick="toggleSel(this)"><div class="check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="sel-title">Circuit</div><div class="sel-desc">Continuous movement loop</div></div>
+  </div>
+</section>
+
+<!-- Section 8: Form Elements -->
+<section class="section" id="forms">
+  <h2 class="section-title">Form Elements</h2>
+  <p class="section-desc">All inputs are fully interactive.</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px">
+    <div>
+      <div class="form-group"><label class="form-label">Text Input</label><input type="text" class="form-input" placeholder="Enter your name"></div>
+      <div class="form-group"><label class="form-label">Focus State</label><input type="text" class="form-input" value="Focused input" style="border-color:var(--border-focus);box-shadow:0 0 0 3px rgba(0,174,239,0.15)"></div>
+      <div class="form-group"><label class="form-label">Error State</label><input type="text" class="form-input error" value="Invalid value"></div>
+      <div class="form-group"><label class="form-label">Textarea</label><textarea class="form-input" placeholder="Enter description..."></textarea></div>
+    </div>
+    <div>
+      <div class="form-group"><label class="form-label">Select</label><div class="select-wrap"><select class="form-input"><option>Beginner</option><option>Intermediate</option><option>Advanced</option></select></div></div>
+      <div class="form-group"><label class="form-label">Range Slider</label><input type="range" min="0" max="100" value="65"></div>
+      <div class="form-group">
+        <label class="form-label">Toggle Switch</label>
+        <label class="toggle-wrap"><input type="checkbox" checked><div class="toggle-track"><div class="toggle-thumb"></div></div><span style="font-size:13px;color:var(--text-secondary)">Notifications enabled</span></label>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Section 9: Toggles & Switches (merged into forms but own anchor) -->
+<section class="section" id="toggles">
+  <h2 class="section-title">Toggles & Switches</h2>
+  <p class="section-desc">Binary state controls.</p>
+  <div style="display:flex;flex-wrap:wrap;gap:24px;align-items:center">
+    <label class="toggle-wrap"><input type="checkbox"><div class="toggle-track"><div class="toggle-thumb"></div></div><span style="font-size:13px;color:var(--text-secondary)">Off</span></label>
+    <label class="toggle-wrap"><input type="checkbox" checked><div class="toggle-track"><div class="toggle-thumb"></div></div><span style="font-size:13px;color:var(--text-secondary)">On</span></label>
+    <label class="toggle-wrap"><input type="checkbox" checked disabled><div class="toggle-track"><div class="toggle-thumb"></div></div><span style="font-size:13px;color:var(--text-muted)">Disabled</span></label>
+  </div>
+</section>
+
+<!-- Section 9b: Checkboxes & Radios -->
+<section class="section" id="checks">
+  <h2 class="section-title">Checkboxes & Radios</h2>
+  <p class="section-desc">Custom styled controls with animations.</p>
+  <div style="display:flex;flex-wrap:wrap;gap:32px">
+    <div>
+      <div style="margin-bottom:8px;font-size:12px;font-weight:700;text-transform:uppercase;color:var(--text-muted)">Checkboxes</div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <label class="checkbox-wrap"><input type="checkbox" checked><div class="checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span style="font-size:13px;color:var(--text-secondary)">Strength training</span></label>
+        <label class="checkbox-wrap"><input type="checkbox"><div class="checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span style="font-size:13px;color:var(--text-secondary)">Cardio</span></label>
+        <label class="checkbox-wrap"><input type="checkbox"><div class="checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span style="font-size:13px;color:var(--text-secondary)">Mobility</span></label>
+      </div>
+    </div>
+    <div>
+      <div style="margin-bottom:8px;font-size:12px;font-weight:700;text-transform:uppercase;color:var(--text-muted)">Radio Buttons</div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <label class="radio-wrap"><input type="radio" name="demo-radio" checked><div class="radio-circle"></div><span style="font-size:13px;color:var(--text-secondary)">Male</span></label>
+        <label class="radio-wrap"><input type="radio" name="demo-radio"><div class="radio-circle"></div><span style="font-size:13px;color:var(--text-secondary)">Female</span></label>
+        <label class="radio-wrap"><input type="radio" name="demo-radio"><div class="radio-circle"></div><span style="font-size:13px;color:var(--text-secondary)">Other</span></label>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Section 10: Progress Bars -->
+<section class="section" id="progress">
+  <h2 class="section-title">Progress Bars</h2>
+  <p class="section-desc">Animated progress indicators.</p>
+  <div style="margin-bottom:24px">
+    <div style="display:flex;justify-content:space-between;margin-bottom:8px"><span style="font-size:12px;font-weight:700;text-transform:uppercase;color:var(--text-muted)">Wizard Progress</span><span id="progLabel" style="font-size:12px;color:var(--text-secondary)">0%</span></div>
+    <div class="progress-bar-bg"><div class="progress-bar-fill" id="progFill"></div></div>
+    <div class="flex gap-12 mt-16">
+      <button class="btn btn-primary btn-sm" onclick="setProg(25)">25%</button>
+      <button class="btn btn-primary btn-sm" onclick="setProg(50)">50%</button>
+      <button class="btn btn-primary btn-sm" onclick="setProg(75)">75%</button>
+      <button class="btn btn-primary btn-sm" onclick="setProg(100)">100%</button>
+      <button class="btn btn-secondary btn-sm" onclick="setProg(0)">Reset</button>
+    </div>
+  </div>
+  <div style="margin-bottom:24px">
+    <div style="font-size:12px;font-weight:700;text-transform:uppercase;color:var(--text-muted);margin-bottom:12px">Step Indicators</div>
+    <div class="step-dots">
+      <div class="step-dot completed"></div>
+      <div class="step-dot completed"></div>
+      <div class="step-dot current"></div>
+      <div class="step-dot"></div>
+      <div class="step-dot"></div>
+      <div class="step-dot"></div>
+      <div class="step-dot"></div>
+      <div class="step-dot"></div>
+    </div>
+  </div>
+  <div>
+    <div style="font-size:12px;font-weight:700;text-transform:uppercase;color:var(--text-muted);margin-bottom:12px">Phase Timeline</div>
+    <div class="phase-timeline">
+      <div class="phase-seg" style="width:40%;background:var(--phase-accumulation)"></div>
+      <div class="phase-seg" style="width:35%;background:var(--phase-intensification)"></div>
+      <div class="phase-seg" style="width:25%;background:var(--phase-realization)"></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;margin-top:8px;font-size:11px;color:var(--text-muted)">
+      <span><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--phase-accumulation);margin-right:4px"></span>Accumulation 40%</span>
+      <span><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--phase-intensification);margin-right:4px"></span>Intensification 35%</span>
+      <span><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--phase-realization);margin-right:4px"></span>Realization 25%</span>
+    </div>
+  </div>
+</section>
+
+<!-- Section 10b: Stat Cards -->
+<section class="section" id="statcards">
+  <h2 class="section-title">Stat Cards</h2>
+  <p class="section-desc">Metric display patterns.</p>
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="stat-icon" style="background:rgba(0,174,239,0.1);color:var(--azfit-cyan)">👥</div>
+      <div class="stat-label">Active Clients</div>
+      <div class="stat-value">48</div>
+      <span class="stat-delta" style="background:rgba(34,197,94,0.1);color:var(--success)">+3 this week</span>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon" style="background:rgba(245,158,11,0.1);color:var(--warning)">🏋️</div>
+      <div class="stat-label">Workouts This Week</div>
+      <div class="stat-value">127</div>
+      <span class="stat-delta" style="background:rgba(34,197,94,0.1);color:var(--success)">+12% vs last</span>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon" style="background:rgba(34,197,94,0.1);color:var(--success)">📊</div>
+      <div class="stat-label">Avg Compliance</div>
+      <div class="stat-value">87%</div>
+      <span class="stat-delta" style="background:rgba(239,68,68,0.1);color:var(--error)">-2% vs last</span>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon" style="background:rgba(139,92,246,0.1);color:var(--phase-accumulation)">⏱️</div>
+      <div class="stat-label">Duration</div>
+      <div class="stat-value">52m</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon" style="background:rgba(0,174,239,0.1);color:var(--azfit-cyan)">📅</div>
+      <div class="stat-label">Frequency</div>
+      <div class="stat-value">4.2x</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon" style="background:rgba(245,158,11,0.1);color:var(--warning)">⚡</div>
+      <div class="stat-label">Volume</div>
+      <div class="stat-value">12,450</div>
+      <span class="stat-delta" style="background:rgba(34,197,94,0.1);color:var(--success)">+8% vs last</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- Section 11: Phase Cards -->
+<section class="section" id="phasecards">
+  <h2 class="section-title">Phase Cards</h2>
+  <p class="section-desc">Periodization phases with selection.</p>
+  <div class="phase-grid">
+    <div class="sel-card phase-card" onclick="toggleSel(this)" style="--accent:var(--phase-accumulation)">
+      <div class="accent-left" style="background:var(--phase-accumulation)"></div>
+      <div class="check" style="background:var(--phase-accumulation)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="phase-badge" style="background:rgba(139,92,246,0.1);color:var(--phase-accumulation)">Weeks 1-4</div>
+      <div class="phase-icon" style="background:rgba(139,92,246,0.1)">📈</div>
+      <div class="phase-title" style="color:var(--phase-accumulation)">Accumulation</div>
+      <div class="phase-desc">High volume, moderate intensity to build work capacity.</div>
+      <div class="phase-detail">4 sets x 12 reps @ 65% 1RM</div>
+    </div>
+    <div class="sel-card phase-card" onclick="toggleSel(this)" style="--accent:var(--phase-intensification)">
+      <div class="accent-left" style="background:var(--phase-intensification)"></div>
+      <div class="check" style="background:var(--phase-intensification)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="phase-badge" style="background:rgba(245,158,11,0.1);color:var(--phase-intensification)">Weeks 5-8</div>
+      <div class="phase-icon" style="background:rgba(245,158,11,0.1)">🔥</div>
+      <div class="phase-title" style="color:var(--phase-intensification)">Intensification</div>
+      <div class="phase-desc">Moderate volume, high intensity to build strength.</div>
+      <div class="phase-detail">3 sets x 8 reps @ 78% 1RM</div>
+    </div>
+    <div class="sel-card phase-card" onclick="toggleSel(this)" style="--accent:var(--phase-realization)">
+      <div class="accent-left" style="background:var(--phase-realization)"></div>
+      <div class="check" style="background:var(--phase-realization)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="phase-badge" style="background:rgba(34,197,94,0.1);color:var(--phase-realization)">Weeks 9-12</div>
+      <div class="phase-icon" style="background:rgba(34,197,94,0.1)">🏆</div>
+      <div class="phase-title" style="color:var(--phase-realization)">Realization</div>
+      <div class="phase-desc">Low volume, peak intensity for max performance.</div>
+      <div class="phase-detail">2 sets x 5 reps @ 90% 1RM</div>
+    </div>
+  </div>
+  <div style="margin-top:24px">
+    <div style="font-size:12px;font-weight:700;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px">Phase Timeline Bar</div>
+    <div class="phase-timeline" style="height:12px;border-radius:8px">
+      <div class="phase-seg" style="width:33.3%;background:var(--phase-accumulation);border-radius:8px 0 0 8px"></div>
+      <div class="phase-seg" style="width:33.3%;background:var(--phase-intensification)"></div>
+      <div class="phase-seg" style="width:33.4%;background:var(--phase-realization);border-radius:0 8px 8px 0"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Section 12: Split Cards -->
+<section class="section" id="splitcards">
+  <h2 class="section-title">Split Cards</h2>
+  <p class="section-desc">Weekly training split overview.</p>
+  <div class="split-grid">
+    <div class="split-card training">
+      <div class="split-day">Mon</div>
+      <div class="split-type" style="color:var(--azfit-cyan)">Push</div>
+      <div class="split-tags"><span class="split-tag">Chest</span><span class="split-tag">Shoulders</span><span class="split-tag">Triceps</span></div>
+      <div class="split-count">6 exercises</div>
+    </div>
+    <div class="split-card training">
+      <div class="split-day">Tue</div>
+      <div class="split-type" style="color:var(--azfit-cyan)">Pull</div>
+      <div class="split-tags"><span class="split-tag">Back</span><span class="split-tag">Biceps</span></div>
+      <div class="split-count">5 exercises</div>
+    </div>
+    <div class="split-card rest">
+      <div class="split-day">Wed</div>
+      <div class="split-type" style="color:var(--text-muted)">Rest</div>
+      <div class="split-tags"></div>
+      <div class="split-count">Recovery</div>
+    </div>
+    <div class="split-card training">
+      <div class="split-day">Thu</div>
+      <div class="split-type" style="color:var(--azfit-cyan)">Legs</div>
+      <div class="split-tags"><span class="split-tag">Quads</span><span class="split-tag">Hamstrings</span><span class="split-tag">Calves</span></div>
+      <div class="split-count">7 exercises</div>
+    </div>
+    <div class="split-card training">
+      <div class="split-day">Fri</div>
+      <div class="split-type" style="color:var(--azfit-cyan)">Upper</div>
+      <div class="split-tags"><span class="split-tag">Chest</span><span class="split-tag">Back</span></div>
+      <div class="split-count">6 exercises</div>
+    </div>
+    <div class="split-card rest">
+      <div class="split-day">Sat</div>
+      <div class="split-type" style="color:var(--text-muted)">Rest</div>
+      <div class="split-tags"></div>
+      <div class="split-count">Recovery</div>
+    </div>
+    <div class="split-card rest">
+      <div class="split-day">Sun</div>
+      <div class="split-type" style="color:var(--text-muted)">Rest</div>
+      <div class="split-tags"></div>
+      <div class="split-count">Recovery</div>
+    </div>
+  </div>
+  <div class="split-summary">
+    <div class="split-sum-item"><div class="split-sum-val">24</div><div class="split-sum-lbl">Total Exercises</div></div>
+    <div class="split-sum-item"><div class="split-sum-val">4</div><div class="split-sum-lbl">Training Days</div></div>
+    <div class="split-sum-item"><div class="split-sum-val">~5h</div><div class="split-sum-lbl">Est. Time / Week</div></div>
+  </div>
+</section>
+
+<!-- Section 13: Day Toggles -->
+<section class="section" id="daytoggles">
+  <h2 class="section-title">Day Toggles</h2>
+  <p class="section-desc">Interactive 7-day selector. Click to toggle training/rest.</p>
+  <div class="day-grid" id="dayGrid">
+    <div class="day-card training" data-day="Mon" onclick="toggleDay(this)"><div class="day-name">Mon</div></div>
+    <div class="day-card training" data-day="Tue" onclick="toggleDay(this)"><div class="day-name">Tue</div></div>
+    <div class="day-card rest" data-day="Wed" onclick="toggleDay(this)"><div class="day-name">Wed</div></div>
+    <div class="day-card training" data-day="Thu" onclick="toggleDay(this)"><div class="day-name">Thu</div></div>
+    <div class="day-card training" data-day="Fri" onclick="toggleDay(this)"><div class="day-name">Fri</div></div>
+    <div class="day-card rest" data-day="Sat" onclick="toggleDay(this)"><div class="day-name">Sat</div></div>
+    <div class="day-card rest" data-day="Sun" onclick="toggleDay(this)"><div class="day-name">Sun</div></div>
+  </div>
+  <div style="display:flex;align-items:center;gap:16px">
+    <span id="dayCounter" style="font-size:14px;color:var(--text-secondary)">4 training days selected</span>
+    <button class="fab fab-pulse" style="width:40px;height:40px;font-size:18px" onclick="addTrainingDay()">+</button>
+  </div>
+</section>
+
+<!-- Section 14: Toast Notifications -->
+<section class="section" id="toasts">
+  <h2 class="section-title">Toast Notifications</h2>
+  <p class="section-desc">Trigger toasts to see them in action.</p>
+  <div class="btn-grid">
+    <button class="btn btn-primary btn-sm" onclick="showToast('Program saved successfully','success')">Success Toast</button>
+    <button class="btn btn-danger btn-sm" onclick="showToast('Failed to save program','error')">Error Toast</button>
+    <button class="btn btn-secondary btn-sm" onclick="showToast('New client assigned to you','info')">Info Toast</button>
+  </div>
+</section>
+
+<!-- Section 14b: FAB -->
+<section class="section" id="fab">
+  <h2 class="section-title">FAB (Floating Action Button)</h2>
+  <p class="section-desc">Primary action button with pulse glow.</p>
+  <div style="position:relative;height:120px;background:var(--bg-elevated);border-radius:var(--radius-card);border:1px solid var(--border-default);overflow:hidden">
+    <div style="position:absolute;bottom:16px;right:16px">
+      <button class="fab fab-pulse">+</button>
+    </div>
+  </div>
+</section>
+
+<!-- Section 15: ASCII Wireframe -->
+<section class="section" id="ascii">
+  <h2 class="section-title">ASCII Wireframe</h2>
+  <p class="section-desc">Complete layout map in ASCII art.</p>
+  <div class="ascii-box">
+<span class="cyan">+--------------------------------------------------------------------------------+</span>
+<span class="cyan">|</span> NAV BAR: [Logo] [Dashboard] [Programs] [Clients] [Settings] [Help]             <span class="cyan">|</span>
+<span class="cyan">+--------------------------------------------------------------------------------+</span>
+<span class="cyan">|</span> <span class="gray">PROGRAM CREATOR WIZARD</span>                                                         <span class="cyan">|</span>
+<span class="cyan">|--------------------------------------------------------------------------------|</span>
+<span class="cyan">|</span> STEP 1: Primary Goal Selection                                                 <span class="cyan">|</span>
+<span class="cyan">|</span> [CARD] Lose Weight | Build Muscle | Strength | Endurance | Fitness             <span class="cyan">|</span>
+<span class="cyan">|--------------------------------------------------------------------------------|</span>
+<span class="cyan">|</span> STEP 2: Training Method                                                        <span class="cyan">|</span>
+<span class="cyan">|</span> [CARD] Straight Sets | Supersets | Trisets | Dropsets | Circuit                <span class="cyan">|</span>
+<span class="cyan">|--------------------------------------------------------------------------------|</span>
+<span class="cyan">|</span> STEP 3: Program Template                                                       <span class="cyan">|</span>
+<span class="cyan">|</span> [CARD] GBC | HIIT | GVT | PPL | Full Body | Custom                             <span class="cyan">|</span>
+<span class="cyan">|--------------------------------------------------------------------------------|</span>
+<span class="cyan">|</span> STEP 4: Client Profile                                                         <span class="cyan">|</span>
+<span class="cyan">|</span> [FORM] Name | Experience | Equipment | Session Duration                        <span class="cyan">|</span>
+<span class="cyan">|--------------------------------------------------------------------------------|</span>
+<span class="cyan">|</span> STEP 5: Periodization Phase                                                    <span class="cyan">|</span>
+<span class="cyan">|</span> [CARD] Accumulation | Intensification | Realization                            <span class="cyan">|</span>
+<span class="cyan">|--------------------------------------------------------------------------------|</span>
+<span class="cyan">|</span> STEP 6: Weekly Split                                                           <span class="cyan">|</span>
+<span class="cyan">|</span> [TOGGLE] Mon Tue Wed Thu Fri Sat Sun                                           <span class="cyan">|</span>
+<span class="cyan">|--------------------------------------------------------------------------------|</span>
+<span class="cyan">|</span> STEP 7: Program Preview                                                        <span class="cyan">|</span>
+<span class="cyan">|</span> [STAT] Exercises | Days | Duration | Intensity | Volume                        <span class="cyan">|</span>
+<span class="cyan">|--------------------------------------------------------------------------------|</span>
+<span class="cyan">|</span> STEP 8: Generate & Save                                                        <span class="cyan">|</span>
+<span class="cyan">|</span> [BUTTON] Generate Program | [BUTTON] Save Draft | [BUTTON] Assign Client       <span class="cyan">|</span>
+<span class="cyan">+--------------------------------------------------------------------------------+</span>
+<span class="cyan">|</span> FOOTER: <span class="gray">Progress Bar [##########----------] 70% Complete</span>                       <span class="cyan">|</span>
+<span class="cyan">+--------------------------------------------------------------------------------+</span>
+  </div>
+  <div style="margin-top:12px;font-size:12px;color:var(--text-muted)">
+    <strong>Legend:</strong> [CARD] = Selection card &nbsp;|&nbsp; [FORM] = Input group &nbsp;|&nbsp; [FAB] = Floating action button &nbsp;|&nbsp; [BUTTON] = Action button &nbsp;|&nbsp; [TOGGLE] = Day selector &nbsp;|&nbsp; [STAT] = Metric card
+  </div>
+</section>
+
+<!-- Section 16: Wizard Flow -->
+<section class="section" id="wizardflow">
+  <h2 class="section-title">Wizard Flow</h2>
+  <p class="section-desc">The complete 8-step program creator map.</p>
+  <div class="flow-steps" id="flowSteps">
+    <div class="flow-step completed"><span>🎯</span> Goal</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step completed"><span>⚙️</span> Method</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step current"><span>📋</span> Program</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><span>👤</span> Profile</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><span>📈</span> Phase</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><span>📅</span> Days</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><span>👁️</span> Preview</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><span>✅</span> Done</div>
+  </div>
+</section>
+
+
+<!-- Section 17: Animation Library -->
+<section class="section" id="animations">
+  <h2 class="section-title">Animation Library</h2>
+  <p class="section-desc">Live demos, specs, and CSS for every animation.</p>
+  <div class="anim-grid">
+    <div class="anim-card">
+      <div class="anim-stage"><div class="anim-target" id="anim-card-hover" style="cursor:pointer" onmouseenter="this.style.transform='scale(1.05)';this.style.boxShadow='var(--shadow-lg)'" onmouseleave="this.style.transform='scale(1)';this.style.boxShadow='none'">Hover</div></div>
+      <div style="font-weight:700;margin-bottom:8px">Card Hover</div>
+      <div class="anim-spec"><table><tr><th>Property</th><th>From</th><th>To</th><th>Dur</th><th>Easing</th></tr><tr><td>transform</td><td>scale(1)</td><td>scale(1.05)</td><td>300ms</td><td>cubic-bezier(0.4,0,0.2,1)</td></tr></table></div>
+      <button class="code-toggle" onclick="toggleCode(this)">Show CSS</button>
+      <div class="code-block" style="display:none"><span class="sel">.card:hover</span> {<br>&nbsp;&nbsp;<span class="prop">transform</span>: <span class="val">scale(1.05)</span>;<br>&nbsp;&nbsp;<span class="prop">box-shadow</span>: <span class="val">var(--shadow-lg)</span>;<br>}</div>
+    </div>
+    <div class="anim-card">
+      <div class="anim-stage"><button class="btn btn-primary btn-sm" id="anim-btn-hover" onmouseenter="this.style.background='var(--azfit-cyan-dark)';this.style.transform='translateY(-1px)'" onmouseleave="this.style.background='var(--azfit-cyan)';this.style.transform='translateY(0)'">Button</button></div>
+      <div style="font-weight:700;margin-bottom:8px">Button Hover</div>
+      <div class="anim-spec"><table><tr><th>Property</th><th>From</th><th>To</th><th>Dur</th><th>Easing</th></tr><tr><td>background</td><td>#00AEEF</td><td>#0095CC</td><td>200ms</td><td>ease</td></tr><tr><td>transform</td><td>translateY(0)</td><td>translateY(-1px)</td><td>200ms</td><td>ease</td></tr></table></div>
+    </div>
+    <div class="anim-card">
+      <div class="anim-stage"><div class="anim-target" id="anim-slide" style="transition:all 400ms ease">Slide</div></div>
+      <div style="font-weight:700;margin-bottom:8px">Step Transition</div>
+      <div class="anim-spec"><table><tr><th>Property</th><th>From</th><th>To</th><th>Dur</th><th>Easing</th></tr><tr><td>opacity</td><td>0</td><td>1</td><td>400ms</td><td>ease</td></tr><tr><td>transform</td><td>translateX(30px)</td><td>translateX(0)</td><td>400ms</td><td>ease</td></tr></table></div>
+      <button class="btn btn-secondary btn-sm anim-trigger" onclick="const el=document.getElementById('anim-slide');el.style.opacity='0';el.style.transform='translateX(30px)';setTimeout(()=>{el.style.opacity='1';el.style.transform='translateX(0)'},50)">Trigger</button>
+    </div>
+    <div class="anim-card">
+      <div class="anim-stage" style="position:relative"><div id="anim-check" style="width:28px;height:28px;background:var(--azfit-cyan);border-radius:50%;display:grid;place-items:center;color:#fff;font-size:14px;transform:scale(0);transition:transform 200ms cubic-bezier(0.34,1.56,0.64,1)">✓</div></div>
+      <div style="font-weight:700;margin-bottom:8px">Check Badge Pop</div>
+      <div class="anim-spec"><table><tr><th>Property</th><th>From</th><th>To</th><th>Dur</th><th>Easing</th></tr><tr><td>transform</td><td>scale(0)</td><td>scale(1)</td><td>200ms</td><td>cubic-bezier(0.34,1.56,0.64,1)</td></tr></table></div>
+      <button class="btn btn-secondary btn-sm anim-trigger" onclick="const c=document.getElementById('anim-check');c.style.transform='scale(1)';setTimeout(()=>c.style.transform='scale(0)',1200)">Trigger</button>
+    </div>
+    <div class="anim-card">
+      <div class="anim-stage"><div id="anim-checkbounce" style="width:24px;height:24px;background:var(--azfit-cyan);border-radius:4px;display:grid;place-items:center;color:#fff;font-size:12px;transition:transform 300ms ease">✓</div></div>
+      <div style="font-weight:700;margin-bottom:8px">Checkbox Bounce</div>
+      <div class="anim-spec"><table><tr><th>Property</th><th>From</th><th>To</th><th>Dur</th><th>Easing</th></tr><tr><td>transform</td><td>scale(1)</td><td>scale(1.2)→scale(1)</td><td>300ms</td><td>ease</td></tr></table></div>
+      <button class="btn btn-secondary btn-sm anim-trigger" onclick="const cb=document.getElementById('anim-checkbounce');cb.style.transform='scale(1.2)';setTimeout(()=>cb.style.transform='scale(1)',300)">Trigger</button>
+    </div>
+    <div class="anim-card">
+      <div class="anim-stage"><div style="width:200px;height:6px;background:var(--bg-elevated);border-radius:9999px;overflow:hidden"><div id="anim-prog" style="height:100%;background:linear-gradient(90deg,var(--azfit-cyan),var(--azfit-cyan-light));width:0%;transition:width 400ms ease-in-out"></div></div></div>
+      <div style="font-weight:700;margin-bottom:8px">Progress Fill</div>
+      <div class="anim-spec"><table><tr><th>Property</th><th>From</th><th>To</th><th>Dur</th><th>Easing</th></tr><tr><td>width</td><td>0%</td><td>100%</td><td>400ms</td><td>ease-in-out</td></tr></table></div>
+      <button class="btn btn-secondary btn-sm anim-trigger" onclick="const p=document.getElementById('anim-prog');p.style.width='0%';setTimeout(()=>p.style.width='85%',50)">Trigger</button>
+    </div>
+    <div class="anim-card">
+      <div class="anim-stage" style="position:relative;overflow:visible"><div id="anim-toast" style="position:absolute;bottom:0;background:var(--azfit-navy);color:#fff;padding:8px 16px;border-radius:8px;font-size:12px;border-left:3px solid var(--azfit-cyan);transform:translateY(120%);transition:transform 400ms ease">Toast message</div></div>
+      <div style="font-weight:700;margin-bottom:8px">Toast Slide Up</div>
+      <div class="anim-spec"><table><tr><th>Property</th><th>From</th><th>To</th><th>Dur</th><th>Easing</th></tr><tr><td>transform</td><td>translateY(100%)</td><td>translateY(0)</td><td>400ms</td><td>ease</td></tr></table></div>
+      <button class="btn btn-secondary btn-sm anim-trigger" onclick="const t=document.getElementById('anim-toast');t.style.transform='translateY(0)';setTimeout(()=>t.style.transform='translateY(120%)',1500)">Trigger</button>
+    </div>
+    <div class="anim-card">
+      <div class="anim-stage"><div class="anim-target" style="border-radius:50%;animation:fabPulse 1.5s infinite">Pulse</div></div>
+      <div style="font-weight:700;margin-bottom:8px">FAB Pulse</div>
+      <div class="anim-spec"><table><tr><th>Property</th><th>From</th><th>To</th><th>Dur</th><th>Easing</th></tr><tr><td>box-shadow</td><td>0 0 0 0 rgba(0,174,239,0.4)</td><td>0 0 0 12px rgba(0,174,239,0)</td><td>1.5s</td><td>infinite</td></tr></table></div>
+    </div>
+    <div class="anim-card">
+      <div class="anim-stage" style="position:relative" id="anim-confetti-stage"><button class="btn btn-primary btn-sm" onclick="triggerConfetti(this.parentElement)">Burst</button></div>
+      <div style="font-weight:700;margin-bottom:8px">Confetti Burst</div>
+      <div class="anim-spec"><table><tr><th>Property</th><th>From</th><th>To</th><th>Dur</th><th>Easing</th></tr><tr><td>transform</td><td>translateY(0) rotate(0)</td><td>translateY(120px) rotate(720deg)</td><td>3s</td><td>ease-out</td></tr><tr><td>opacity</td><td>1</td><td>0</td><td>3s</td><td>ease-out</td></tr></table></div>
+    </div>
+    <div class="anim-card">
+      <div class="anim-stage"><div id="anim-success" style="width:40px;height:40px;background:var(--success);border-radius:50%;display:grid;place-items:center;color:#fff;font-size:18px;transform:scale(0);transition:transform 500ms cubic-bezier(0.34,1.56,0.64,1)">✓</div></div>
+      <div style="font-weight:700;margin-bottom:8px">Success Check Pop</div>
+      <div class="anim-spec"><table><tr><th>Property</th><th>From</th><th>To</th><th>Dur</th><th>Easing</th></tr><tr><td>transform</td><td>scale(0)</td><td>scale(1.2)→scale(1)</td><td>500ms</td><td>cubic-bezier(0.34,1.56,0.64,1)</td></tr></table></div>
+      <button class="btn btn-secondary btn-sm anim-trigger" onclick="const s=document.getElementById('anim-success');s.style.transform='scale(1.2)';setTimeout(()=>s.style.transform='scale(1)',250);setTimeout(()=>s.style.transform='scale(0)',1500)">Trigger</button>
+    </div>
+    <div class="anim-card">
+      <div class="anim-stage" style="position:relative"><div id="anim-dropdown" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) translateY(-8px);opacity:0;background:var(--bg-card);border:1px solid var(--border-default);border-radius:8px;padding:8px 16px;font-size:12px;box-shadow:var(--shadow-md);transition:all 250ms ease">Dropdown item</div></div>
+      <div style="font-weight:700;margin-bottom:8px">Dropdown Open</div>
+      <div class="anim-spec"><table><tr><th>Property</th><th>From</th><th>To</th><th>Dur</th><th>Easing</th></tr><tr><td>opacity</td><td>0</td><td>1</td><td>250ms</td><td>ease</td></tr><tr><td>transform</td><td>translateY(-8px)</td><td>translateY(0)</td><td>250ms</td><td>ease</td></tr></table></div>
+      <button class="btn btn-secondary btn-sm anim-trigger" onclick="const d=document.getElementById('anim-dropdown');d.style.opacity='1';d.style.transform='translate(-50%,-50%) translateY(0)';setTimeout(()=>{d.style.opacity='0';d.style.transform='translate(-50%,-50%) translateY(-8px)'},1200)">Trigger</button>
+    </div>
+    <div class="anim-card">
+      <div class="anim-stage"><div id="anim-glow" style="width:60px;height:60px;background:var(--bg-card);border:1px solid var(--border-default);border-radius:10px;transition:all 150ms ease;cursor:pointer" onclick="this.style.borderColor='var(--azfit-cyan)';this.style.boxShadow='0 0 0 4px rgba(0,174,239,0.15)';setTimeout(()=>{this.style.borderColor='var(--border-default)';this.style.boxShadow='none'},800)">Click</div></div>
+      <div style="font-weight:700;margin-bottom:8px">Card Selection Glow</div>
+      <div class="anim-spec"><table><tr><th>Property</th><th>From</th><th>To</th><th>Dur</th><th>Easing</th></tr><tr><td>border-color</td><td>var(--border-default)</td><td>var(--azfit-cyan)</td><td>150ms</td><td>ease</td></tr><tr><td>box-shadow</td><td>none</td><td>0 0 0 4px rgba(0,174,239,0.15)</td><td>150ms</td><td>ease</td></tr></table></div>
+    </div>
+  </div>
+</section>
+
+<!-- Section 18: Live Wizard Demo -->
+<section class="section" id="livewizard">
+  <h2 class="section-title">Live Wizard Demo</h2>
+  <p class="section-desc">A fully functional 8-step wizard miniature.</p>
+  <div class="wizard-box">
+    <div class="wizard-header">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+        <div style="font-size:13px;font-weight:700">Program Creator</div>
+        <div style="margin-left:auto;font-size:12px;color:var(--text-muted)">Step <span id="wizStepNum">1</span> of 8</div>
+      </div>
+      <div class="progress-bar-bg"><div class="progress-bar-fill" id="wizProg" style="width:12.5%"></div></div>
+      <div class="step-dots" style="margin-top:10px;justify-content:center">
+        <div class="step-dot current" id="wizDot0"></div>
+        <div class="step-dot" id="wizDot1"></div>
+        <div class="step-dot" id="wizDot2"></div>
+        <div class="step-dot" id="wizDot3"></div>
+        <div class="step-dot" id="wizDot4"></div>
+        <div class="step-dot" id="wizDot5"></div>
+        <div class="step-dot" id="wizDot6"></div>
+        <div class="step-dot" id="wizDot7"></div>
+      </div>
+    </div>
+    <div class="wizard-body" id="wizBody">
+      <!-- Step 1: Goal -->
+      <div class="wizard-step-content" id="wizStep0">
+        <div style="font-size:16px;font-weight:700;margin-bottom:16px">Select Primary Goal</div>
+        <div class="sel-grid" style="grid-template-columns:repeat(auto-fill,minmax(140px,1fr))">
+          <div class="sel-card" onclick="toggleSel(this)"><div class="check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="sel-icon" style="background:rgba(0,174,239,0.1)">🔥</div><div class="sel-title">Lose Weight</div></div>
+          <div class="sel-card" onclick="toggleSel(this)"><div class="check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="sel-icon" style="background:rgba(34,197,94,0.1)">💪</div><div class="sel-title">Build Muscle</div></div>
+          <div class="sel-card" onclick="toggleSel(this)"><div class="check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="sel-icon" style="background:rgba(139,92,246,0.1)">🏋️</div><div class="sel-title">Strength</div></div>
+          <div class="sel-card" onclick="toggleSel(this)"><div class="check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="sel-icon" style="background:rgba(245,158,11,0.1)">🏃</div><div class="sel-title">Endurance</div></div>
+          <div class="sel-card" onclick="toggleSel(this)"><div class="check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="sel-icon" style="background:rgba(148,163,184,0.1)">🎯</div><div class="sel-title">General Fitness</div></div>
+        </div>
+      </div>
+      <!-- Step 2: Method -->
+      <div class="wizard-step-content" id="wizStep1" style="display:none">
+        <div style="font-size:16px;font-weight:700;margin-bottom:16px">Select Training Method</div>
+        <div class="sel-grid" style="grid-template-columns:repeat(auto-fill,minmax(140px,1fr))">
+          <div class="sel-card" onclick="toggleSel(this)"><div class="check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="sel-title">Straight Sets</div><div class="sel-desc">Standard rest between</div></div>
+          <div class="sel-card" onclick="toggleSel(this)"><div class="check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="sel-title">Supersets</div><div class="sel-desc">Two exercises paired</div></div>
+          <div class="sel-card" onclick="toggleSel(this)"><div class="check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="sel-title">Trisets</div><div class="sel-desc">Three in a row</div></div>
+          <div class="sel-card" onclick="toggleSel(this)"><div class="check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="sel-title">Dropsets</div><div class="sel-desc">Strip weight, continue</div></div>
+          <div class="sel-card" onclick="toggleSel(this)"><div class="check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="sel-title">Circuit</div><div class="sel-desc">Continuous loop</div></div>
+        </div>
+      </div>
+      <!-- Step 3: Program -->
+      <div class="wizard-step-content" id="wizStep2" style="display:none">
+        <div style="font-size:16px;font-weight:700;margin-bottom:16px">Choose Program Template</div>
+        <div class="sel-grid" style="grid-template-columns:repeat(auto-fill,minmax(140px,1fr))">
+          <div class="sel-card" onclick="toggleSel(this)"><div class="accent-top" style="background:var(--azfit-cyan)"></div><div class="check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="sel-title">GBC</div><div class="sel-desc">German Body Comp</div></div>
+          <div class="sel-card" onclick="toggleSel(this)"><div class="accent-top" style="background:var(--error)"></div><div class="check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="sel-title">HIIT</div><div class="sel-desc">High intensity intervals</div></div>
+          <div class="sel-card" onclick="toggleSel(this)"><div class="accent-top" style="background:var(--phase-accumulation)"></div><div class="check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="sel-title">GVT</div><div class="sel-desc">German Volume Training</div></div>
+          <div class="sel-card" onclick="toggleSel(this)"><div class="accent-top" style="background:var(--warning)"></div><div class="check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="sel-title">PPL</div><div class="sel-desc">Push Pull Legs</div></div>
+          <div class="sel-card" onclick="toggleSel(this)"><div class="accent-top" style="background:var(--success)"></div><div class="check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="sel-title">Full Body</div><div class="sel-desc">Whole body each session</div></div>
+          <div class="sel-card" onclick="toggleSel(this)"><div class="accent-top" style="background:var(--text-muted)"></div><div class="check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="sel-title">Custom</div><div class="sel-desc">Build your own</div></div>
+        </div>
+      </div>
+      <!-- Step 4: Profile -->
+      <div class="wizard-step-content" id="wizStep3" style="display:none">
+        <div style="font-size:16px;font-weight:700;margin-bottom:16px">Client Profile</div>
+        <div style="display:grid;gap:12px;max-width:400px">
+          <div class="form-group"><label class="form-label">Client Name</label><input type="text" class="form-input" placeholder="e.g. John Doe"></div>
+          <div class="form-group"><label class="form-label">Experience Level</label><div class="select-wrap"><select class="form-input"><option>Beginner</option><option>Intermediate</option><option>Advanced</option></select></div></div>
+          <div class="form-group"><label class="form-label">Equipment Access</label><div class="select-wrap"><select class="form-input"><option>Full Gym</option><option>Dumbbells Only</option><option>Bodyweight</option></select></div></div>
+          <div class="form-group"><label class="form-label">Session Time</label><div class="select-wrap"><select class="form-input"><option>30 min</option><option>45 min</option><option>60 min</option><option>90 min</option></select></div></div>
+        </div>
+      </div>
+      <!-- Step 5: Phase -->
+      <div class="wizard-step-content" id="wizStep4" style="display:none">
+        <div style="font-size:16px;font-weight:700;margin-bottom:16px">Select Periodization Phase</div>
+        <div class="phase-grid" style="grid-template-columns:repeat(auto-fit,minmax(180px,1fr))">
+          <div class="sel-card phase-card" onclick="toggleSel(this)"><div class="accent-left" style="background:var(--phase-accumulation)"></div><div class="check" style="background:var(--phase-accumulation)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="phase-badge" style="background:rgba(139,92,246,0.1);color:var(--phase-accumulation)">Weeks 1-4</div><div class="phase-title" style="color:var(--phase-accumulation)">Accumulation</div><div class="phase-desc">High volume, moderate intensity</div></div>
+          <div class="sel-card phase-card" onclick="toggleSel(this)"><div class="accent-left" style="background:var(--phase-intensification)"></div><div class="check" style="background:var(--phase-intensification)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="phase-badge" style="background:rgba(245,158,11,0.1);color:var(--phase-intensification)">Weeks 5-8</div><div class="phase-title" style="color:var(--phase-intensification)">Intensification</div><div class="phase-desc">Moderate volume, high intensity</div></div>
+          <div class="sel-card phase-card" onclick="toggleSel(this)"><div class="accent-left" style="background:var(--phase-realization)"></div><div class="check" style="background:var(--phase-realization)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="phase-badge" style="background:rgba(34,197,94,0.1);color:var(--phase-realization)">Weeks 9-12</div><div class="phase-title" style="color:var(--phase-realization)">Realization</div><div class="phase-desc">Low volume, peak intensity</div></div>
+        </div>
+      </div>
+      <!-- Step 6: Days -->
+      <div class="wizard-step-content" id="wizStep5" style="display:none">
+        <div style="font-size:16px;font-weight:700;margin-bottom:16px">Select Training Days</div>
+        <div class="day-grid" id="wizDayGrid">
+          <div class="day-card training" onclick="toggleDay(this)"><div class="day-name">Mon</div></div>
+          <div class="day-card training" onclick="toggleDay(this)"><div class="day-name">Tue</div></div>
+          <div class="day-card rest" onclick="toggleDay(this)"><div class="day-name">Wed</div></div>
+          <div class="day-card training" onclick="toggleDay(this)"><div class="day-name">Thu</div></div>
+          <div class="day-card training" onclick="toggleDay(this)"><div class="day-name">Fri</div></div>
+          <div class="day-card rest" onclick="toggleDay(this)"><div class="day-name">Sat</div></div>
+          <div class="day-card rest" onclick="toggleDay(this)"><div class="day-name">Sun</div></div>
+        </div>
+      </div>
+      <!-- Step 7: Preview -->
+      <div class="wizard-step-content" id="wizStep6" style="display:none">
+        <div style="font-size:16px;font-weight:700;margin-bottom:16px">Program Preview</div>
+        <div class="stat-grid" style="grid-template-columns:repeat(auto-fill,minmax(120px,1fr));margin-bottom:20px">
+          <div class="stat-card"><div class="stat-value">24</div><div class="stat-label">Exercises</div></div>
+          <div class="stat-card"><div class="stat-value">4</div><div class="stat-label">Days / Week</div></div>
+          <div class="stat-card"><div class="stat-value">60m</div><div class="stat-label">Duration</div></div>
+          <div class="stat-card"><div class="stat-value">Med</div><div class="stat-label">Intensity</div></div>
+          <div class="stat-card"><div class="stat-value">High</div><div class="stat-label">Volume</div></div>
+        </div>
+        <div class="form-group"><label class="form-label">Intensity</label><input type="range" min="1" max="10" value="6"></div>
+        <div class="form-group"><label class="form-label">Volume</label><input type="range" min="1" max="10" value="8"></div>
+      </div>
+      <!-- Step 8: Done -->
+      <div class="wizard-step-content" id="wizStep7" style="display:none;text-align:center">
+        <div id="wizConfetti" style="position:relative;height:100px;margin-bottom:16px">
+          <div style="width:64px;height:64px;background:var(--success);border-radius:50%;display:grid;place-items:center;margin:0 auto;color:#fff;font-size:28px;animation:successPop 500ms cubic-bezier(0.34,1.56,0.64,1)">✓</div>
+        </div>
+        <div style="font-size:20px;font-weight:800;margin-bottom:8px">Program Generated!</div>
+        <div style="font-size:13px;color:var(--text-muted);margin-bottom:24px">Your custom program is ready to assign.</div>
+        <div class="btn-grid" style="justify-content:center">
+          <button class="btn btn-secondary btn-md">Edit</button>
+          <button class="btn btn-secondary btn-md">Print</button>
+          <button class="btn btn-primary btn-md">Assign</button>
+          <button class="btn btn-ghost btn-md">Save</button>
+        </div>
+        <div style="margin-top:24px;padding:16px;background:var(--bg-primary);border-radius:10px;border:1px solid var(--border-default)">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px">Weekly Structure</div>
+          <div class="split-grid" style="grid-template-columns:repeat(7,1fr)">
+            <div class="split-card training" style="padding:8px"><div class="split-day" style="font-size:10px">Mon</div><div class="split-type" style="font-size:11px;color:var(--azfit-cyan)">Push</div></div>
+            <div class="split-card training" style="padding:8px"><div class="split-day" style="font-size:10px">Tue</div><div class="split-type" style="font-size:11px;color:var(--azfit-cyan)">Pull</div></div>
+            <div class="split-card rest" style="padding:8px"><div class="split-day" style="font-size:10px">Wed</div><div class="split-type" style="font-size:11px;color:var(--text-muted)">Rest</div></div>
+            <div class="split-card training" style="padding:8px"><div class="split-day" style="font-size:10px">Thu</div><div class="split-type" style="font-size:11px;color:var(--azfit-cyan)">Legs</div></div>
+            <div class="split-card training" style="padding:8px"><div class="split-day" style="font-size:10px">Fri</div><div class="split-type" style="font-size:11px;color:var(--azfit-cyan)">Upper</div></div>
+            <div class="split-card rest" style="padding:8px"><div class="split-day" style="font-size:10px">Sat</div><div class="split-type" style="font-size:11px;color:var(--text-muted)">Rest</div></div>
+            <div class="split-card rest" style="padding:8px"><div class="split-day" style="font-size:10px">Sun</div><div class="split-type" style="font-size:11px;color:var(--text-muted)">Rest</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="wizard-footer">
+      <button class="btn btn-secondary btn-md" id="wizBack" onclick="wizNav(-1)" disabled>Back</button>
+      <button class="btn btn-primary btn-md" id="wizNext" onclick="wizNav(1)">Next</button>
+    </div>
+  </div>
+</section>
+
+<!-- Section 19: Component Playground -->
+<section class="section" id="playground">
+  <h2 class="section-title">Component Playground</h2>
+  <p class="section-desc">Free-form interaction area.</p>
+  <div class="play-row">
+    <div class="play-label">Selection Cards</div>
+    <div class="sel-card" onclick="toggleSel(this)" style="width:140px;padding:16px">
+      <div class="check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="sel-title">Goal A</div>
+    </div>
+    <div class="sel-card" onclick="toggleSel(this)" style="width:140px;padding:16px">
+      <div class="check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="sel-title">Goal B</div>
+    </div>
+    <div class="sel-card" onclick="toggleSel(this)" style="width:140px;padding:16px">
+      <div class="check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="sel-title">Goal C</div>
+    </div>
+  </div>
+  <div class="play-row">
+    <div class="play-label">Buttons</div>
+    <button class="btn btn-primary btn-sm">Primary</button>
+    <button class="btn btn-secondary btn-sm">Secondary</button>
+    <button class="btn btn-ghost btn-sm">Ghost</button>
+    <button class="btn btn-danger btn-sm">Danger</button>
+  </div>
+  <div class="play-row">
+    <div class="play-label">Progress</div>
+    <div style="flex:1;max-width:300px"><div class="progress-bar-bg"><div class="progress-bar-fill" id="playProg" style="width:45%"></div></div></div>
+    <button class="btn btn-secondary btn-sm" onclick="document.getElementById('playProg').style.width='85%'">Animate</button>
+    <button class="btn btn-secondary btn-sm" onclick="document.getElementById('playProg').style.width='0%'">Reset</button>
+  </div>
+  <div class="play-row">
+    <div class="play-label">Toast</div>
+    <button class="btn btn-secondary btn-sm" onclick="showToast('Playground toast triggered!','info')">Trigger Toast</button>
+  </div>
+  <div class="play-row">
+    <div class="play-label">FAB</div>
+    <button class="fab fab-pulse" style="width:44px;height:44px;font-size:20px">+</button>
+  </div>
+</section>
+
+<!-- Section 20: Responsive Breakpoints -->
+<section class="section" id="responsive">
+  <h2 class="section-title">Responsive Breakpoints</h2>
+  <p class="section-desc">Layout behavior across device sizes.</p>
+  <div class="mock-grid">
+    <div class="mock-frame">
+      <div class="mock-screen">
+        <div class="mock-header"><div class="mock-dot"></div><div class="mock-dot"></div><div class="mock-dot"></div></div>
+        <div class="mock-sidebar-mini"></div>
+        <div class="mock-content">
+          <div class="mock-card-mini"></div><div class="mock-card-mini"></div>
+          <div class="mock-card-mini"></div><div class="mock-card-mini"></div>
+        </div>
+      </div>
+      <div class="mock-title">Desktop (>1024px)</div>
+      <div class="mock-desc">Full sidebar, multi-column grids</div>
+    </div>
+    <div class="mock-frame">
+      <div class="mock-screen">
+        <div class="mock-header"><div class="mock-dot"></div><div class="mock-dot"></div><div class="mock-dot"></div></div>
+        <div class="mock-content mock-single" style="left:0;padding:8px;display:grid;grid-template-columns:1fr 1fr;gap:6px">
+          <div class="mock-card-mini"></div><div class="mock-card-mini"></div>
+          <div class="mock-card-mini"></div><div class="mock-card-mini"></div>
+        </div>
+      </div>
+      <div class="mock-title">Tablet (768-1023px)</div>
+      <div class="mock-desc">Sidebar hidden, 2-column grids</div>
+    </div>
+    <div class="mock-frame">
+      <div class="mock-screen">
+        <div class="mock-header"><div class="mock-dot"></div><div class="mock-dot"></div><div class="mock-dot"></div></div>
+        <div class="mock-hamburger"><span></span><span></span><span></span></div>
+        <div class="mock-content mock-single" style="left:0;padding:8px;display:grid;grid-template-columns:1fr;gap:6px">
+          <div class="mock-card-mini"></div><div class="mock-card-mini"></div>
+        </div>
+      </div>
+      <div class="mock-title">Mobile (&lt;768px)</div>
+      <div class="mock-desc">Single column, hamburger menu</div>
+    </div>
+  </div>
+</section>
+
+<!-- Extra anchor targets for sidebar completeness -->
+<section class="section" id="dropdowns" style="padding-top:24px"><h2 class="section-title">Dropdowns</h2><p class="section-desc">Custom select styling demonstrated in Form Elements above. Dropdown menus animate with opacity and translateY.</p></section>
+<section class="section" id="hover" style="padding-top:24px"><h2 class="section-title">Hover States</h2><p class="section-desc">All hover states are demonstrated within their respective component sections. Cards lift, buttons darken, links change color.</p></section>
+<section class="section" id="transitions" style="padding-top:24px"><h2 class="section-title">Transitions</h2><p class="section-desc">Global transition tokens: fast (150ms), base (300ms), slow (500ms). Applied to colors, transforms, shadows, and opacity.</p></section>
+<section class="section" id="micro" style="padding-top:24px"><h2 class="section-title">Micro-interactions</h2><p class="section-desc">Small delightful details: check badge pop, checkbox bounce, FAB pulse, toast slide, progress fill. See Animation Library for specs.</p></section>
+<section class="section" id="grid" style="padding-top:24px"><h2 class="section-title">Grid System</h2><p class="section-desc">Layout uses CSS Grid and Flexbox. Selection cards use auto-fill minmax(160px,1fr). Stats use similar responsive grids. All spacing follows 4px base unit.</p></section>
+
+</main>
+
+<!-- Toast Container -->
+<div id="toast-container"></div>
+
+
+<script>
+// Theme
+const html = document.documentElement;
+const themeBtn = document.getElementById('themeBtn');
+const sunIcon = document.getElementById('sunIcon');
+const moonIcon = document.getElementById('moonIcon');
+let dark = false;
+
+themeBtn.addEventListener('click', () => {
+  dark = !dark;
+  if (dark) { html.setAttribute('data-theme', 'dark'); sunIcon.style.display='none'; moonIcon.style.display='inline'; }
+  else { html.removeAttribute('data-theme'); sunIcon.style.display='inline'; moonIcon.style.display='none'; }
+});
+
+// Mobile sidebar
+const mobileToggle = document.getElementById('mobileToggle');
+const sidebar = document.getElementById('sidebar');
+mobileToggle.addEventListener('click', () => { sidebar.classList.toggle('open'); document.getElementById('sidebarOverlay').style.display = sidebar.classList.contains('open') ? 'block' : 'none'; });
+
+// Close sidebar on link click (mobile)
+document.querySelectorAll('.sidebar-link').forEach(link => {
+  link.addEventListener('click', () => { if (window.innerWidth <= 768) { sidebar.classList.remove('open'); document.getElementById('sidebarOverlay').style.display='none'; } });
+});
+
+// Scroll spy
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.sidebar-link');
+function onScroll() {
+  const scrollY = window.scrollY + 80;
+  sections.forEach(sec => {
+    const top = sec.offsetTop;
+    const height = sec.offsetHeight;
+    const id = sec.getAttribute('id');
+    if (scrollY >= top && scrollY < top + height) {
+      navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+    }
+  });
+}
+window.addEventListener('scroll', onScroll);
+
+// Copy to clipboard
+function copyText(text) {
+  navigator.clipboard.writeText(text).then(() => showToast('Copied: ' + text, 'success'));
+}
+document.querySelectorAll('.copy-btn').forEach(btn => {
+  btn.addEventListener('click', () => copyText(btn.dataset.copy));
+});
+document.getElementById('copyTokensBtn').addEventListener('click', () => {
+  const vars = Array.from(document.querySelectorAll('.token-name')).map(el => 'var(' + el.textContent + ')').join('\n');
+  navigator.clipboard.writeText(vars).then(() => showToast('All tokens copied!', 'success'));
+});
+
+// Color swatches copy
+document.querySelectorAll('.swatch-square').forEach(sq => {
+  sq.addEventListener('click', () => copyText(sq.dataset.hex));
+});
+
+// Toggle selection cards
+function toggleSel(card) {
+  card.classList.toggle('selected');
+}
+
+// Progress bar
+function setProg(pct) {
+  document.getElementById('progFill').style.width = pct + '%';
+  document.getElementById('progLabel').textContent = pct + '%';
+}
+
+// Day toggles
+function toggleDay(card) {
+  card.classList.toggle('training');
+  card.classList.toggle('rest');
+  updateDayCounter();
+}
+function updateDayCounter() {
+  const grid = document.getElementById('dayGrid');
+  if (!grid) return;
+  const count = grid.querySelectorAll('.day-card.training').length;
+  document.getElementById('dayCounter').textContent = count + ' training day' + (count !== 1 ? 's' : '') + ' selected';
+}
+function addTrainingDay() {
+  const grid = document.getElementById('dayGrid');
+  const next = grid.querySelector('.day-card.rest');
+  if (next) { next.classList.remove('rest'); next.classList.add('training'); updateDayCounter(); }
+}
+
+// Toast
+let toastQueue = [];
+function showToast(message, type='info') {
+  const container = document.getElementById('toast-container');
+  if (container.children.length >= 3) return;
+  const toast = document.createElement('div');
+  toast.className = 'toast ' + type;
+  let icon = 'ℹ️';
+  if (type === 'success') icon = '✓';
+  if (type === 'error') icon = '✕';
+  toast.innerHTML = '<span style="font-weight:700">' + icon + '</span> ' + message;
+  container.appendChild(toast);
+  setTimeout(() => { toast.style.animation = 'toastOut 300ms ease forwards'; setTimeout(() => toast.remove(), 300); }, 3000);
+}
+
+// Confetti
+function triggerConfetti(container) {
+  const colors = ['#00AEEF','#22D3EE','#22C55E','#F59E0B','#8B5CF6','#EF4444'];
+  for (let i = 0; i < 24; i++) {
+    const piece = document.createElement('div');
+    piece.className = 'confetti-piece';
+    piece.style.left = (20 + Math.random() * 60) + '%';
+    piece.style.top = '10px';
+    piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+    piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+    piece.style.animationDelay = (Math.random() * 0.5) + 's';
+    piece.style.animationDuration = (2 + Math.random()) + 's';
+    container.appendChild(piece);
+    setTimeout(() => piece.remove(), 3500);
+  }
+}
+
+// Code toggle
+function toggleCode(btn) {
+  const block = btn.nextElementSibling;
+  const show = block.style.display === 'none';
+  block.style.display = show ? 'block' : 'none';
+  btn.textContent = show ? 'Hide CSS' : 'Show CSS';
+}
+
+// Wizard
+let wizStep = 0;
+const wizTotal = 8;
+function wizNav(dir) {
+  const newStep = wizStep + dir;
+  if (newStep < 0 || newStep >= wizTotal) return;
+  document.getElementById('wizStep' + wizStep).style.display = 'none';
+  wizStep = newStep;
+  document.getElementById('wizStep' + wizStep).style.display = 'block';
+  document.getElementById('wizStepNum').textContent = wizStep + 1;
+  document.getElementById('wizProg').style.width = ((wizStep + 1) / wizTotal * 100) + '%';
+  document.getElementById('wizBack').disabled = wizStep === 0;
+  const nextBtn = document.getElementById('wizNext');
+  if (wizStep === wizTotal - 1) { nextBtn.textContent = 'Done'; nextBtn.onclick = () => showToast('Wizard complete!', 'success'); }
+  else if (wizStep === wizTotal - 2) { nextBtn.textContent = 'Generate'; nextBtn.onclick = () => wizNav(1); }
+  else { nextBtn.textContent = 'Next'; nextBtn.onclick = () => wizNav(1); }
+  for (let i = 0; i < wizTotal; i++) {
+    const dot = document.getElementById('wizDot' + i);
+    dot.className = 'step-dot' + (i < wizStep ? ' completed' : i === wizStep ? ' current' : '');
+  }
+  if (wizStep === wizTotal - 1) {
+    setTimeout(() => triggerConfetti(document.getElementById('wizConfetti')), 300);
+  }
+}
+
+// Init
+onScroll();
+</script>
+</body>
+</html>

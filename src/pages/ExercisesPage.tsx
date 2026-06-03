@@ -104,11 +104,11 @@ function FilterDropdown({
         onClick={() => setOpen(!open)}
         className={cn(
           "flex items-center gap-2 px-3 py-2 rounded-lg text-sm border transition-colors min-w-[140px]",
-          "bg-white dark:bg-[#141414] border-[#E2E8F0] dark:border-[#2A2A2A] text-[#0F172A] dark:text-[#F0F0F0]",
+          "bg-white dark:bg-gray-50 dark:bg-[#141414] border-[#E2E8F0] dark:border-gray-200 dark:border-[#2A2A2A] text-[#0F172A] dark:text-gray-900 dark:text-[#F0F0F0]",
           "hover:border-[#00AEEF] dark:hover:border-[#00AEEF]"
         )}
       >
-        <span className="text-[#94A3B8] dark:text-[#6B6B6B] text-xs">{label}</span>
+        <span className="text-gray-500 dark:text-[#94A3B8] text-xs">{label}</span>
         <span className="font-medium truncate">{value}</span>
         <ChevronDown size={14} className={cn("ml-auto transition-transform", open && "rotate-180")} />
       </button>
@@ -121,7 +121,7 @@ function FilterDropdown({
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -4 }}
               transition={{ duration: 0.15 }}
-              className="absolute top-full left-0 mt-1 w-full min-w-[160px] bg-white dark:bg-[#1A1A1A] border border-[#E2E8F0] dark:border-[#2A2A2A] rounded-lg shadow-lg z-50 py-1 max-h-60 overflow-y-auto"
+              className="absolute top-full left-0 mt-1 w-full min-w-[160px] bg-white dark:bg-gray-100 dark:bg-[#1A1A1A] border border-[#E2E8F0] dark:border-gray-200 dark:border-[#2A2A2A] rounded-lg shadow-lg z-50 py-1 max-h-60 overflow-y-auto"
             >
               <button
                 onClick={() => { onChange('All'); setOpen(false) }}
@@ -129,7 +129,7 @@ function FilterDropdown({
                   "w-full text-left px-3 py-1.5 text-sm transition-colors",
                   value === 'All'
                     ? "bg-[#00AEEF]/10 text-[#00AEEF]"
-                    : "text-[#0F172A] dark:text-[#F0F0F0] hover:bg-[#F1F5F9] dark:hover:bg-[#242424]"
+                    : "text-[#0F172A] dark:text-gray-900 dark:text-[#F0F0F0] hover:bg-[#F1F5F9] dark:hover:bg-gray-200 dark:hover:bg-[#242424]"
                 )}
               >
                 All
@@ -142,7 +142,7 @@ function FilterDropdown({
                     "w-full text-left px-3 py-1.5 text-sm transition-colors",
                     value === opt
                       ? "bg-[#00AEEF]/10 text-[#00AEEF]"
-                      : "text-[#0F172A] dark:text-[#F0F0F0] hover:bg-[#F1F5F9] dark:hover:bg-[#242424]"
+                      : "text-[#0F172A] dark:text-gray-900 dark:text-[#F0F0F0] hover:bg-[#F1F5F9] dark:hover:bg-gray-200 dark:hover:bg-[#242424]"
                   )}
                 >
                   {opt}
@@ -183,7 +183,7 @@ function ExerciseCard({
       transition={{ duration: 0.35, delay: index * 0.02, ease: [0.16, 1, 0.3, 1] }}
       layout
       className={cn(
-        "bg-white dark:bg-[#141414] border border-[#E2E8F0] dark:border-[#2A2A2A] rounded-xl overflow-hidden",
+        "bg-white dark:bg-gray-50 dark:bg-[#141414] border border-[#E2E8F0] dark:border-gray-200 dark:border-[#2A2A2A] rounded-xl overflow-hidden",
         "flex flex-col transition-all duration-200 hover:shadow-lg dark:hover:shadow-[0_8px_24px_rgba(0,174,239,0.08)]"
       )}
     >
@@ -197,7 +197,7 @@ function ExerciseCard({
             loading="lazy"
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center bg-[#1A1A1A]">
+          <div className="w-full h-full flex items-center justify-center bg-gray-100 dark:bg-[#1A1A1A]">
             <Dumbbell size={32} className="text-[#3A3A3A]" />
           </div>
         )}
@@ -210,7 +210,7 @@ function ExerciseCard({
 
       {/* Content */}
       <div className="p-4 flex flex-col flex-1">
-        <h3 className="text-[#0F172A] dark:text-[#F0F0F0] font-semibold text-sm mb-2.5">
+        <h3 className="text-[#0F172A] dark:text-gray-900 dark:text-[#F0F0F0] font-semibold text-sm mb-2.5">
           {exercise.Name}
         </h3>
 
@@ -240,13 +240,13 @@ function ExerciseCard({
         </div>
 
         {/* Equipment */}
-        <div className="flex items-center gap-1.5 text-[#94A3B8] dark:text-[#6B6B6B] mb-2">
+        <div className="flex items-center gap-1.5 text-gray-500 dark:text-[#94A3B8] mb-2">
           <Dumbbell size={12} />
           <span className="text-[11px]">{exercise.Equipment}</span>
         </div>
 
         {/* Description */}
-        <p className="text-[#64748B] dark:text-[#A0A0A0] text-xs leading-relaxed mb-2 flex-1">
+        <p className="text-[#64748B] dark:text-gray-500 dark:text-[#A0A0A0] text-xs leading-relaxed mb-2 flex-1">
           {showFullDesc ? exercise.Description : exercise.Description.slice(0, 80)}
           {descTooLong && !showFullDesc && '...'}
         </p>
@@ -264,7 +264,7 @@ function ExerciseCard({
           onClick={() => setShowSafety(!showSafety)}
           className={cn(
             "flex items-center gap-1.5 text-xs font-medium transition-colors mt-auto",
-            showSafety ? "text-amber-500" : "text-[#94A3B8] dark:text-[#6B6B6B] hover:text-amber-500"
+            showSafety ? "text-amber-500" : "text-gray-500 dark:text-[#94A3B8] hover:text-amber-500"
           )}
         >
           <AlertTriangle size={12} />
@@ -311,18 +311,18 @@ function VideoModal({ exercise, onClose }: { exercise: Exercise | null; onClose:
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
           transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-          className="bg-white dark:bg-[#141414] border border-[#E2E8F0] dark:border-[#2A2A2A] rounded-xl overflow-hidden w-full max-w-3xl shadow-2xl"
+          className="bg-white dark:bg-gray-50 dark:bg-[#141414] border border-[#E2E8F0] dark:border-gray-200 dark:border-[#2A2A2A] rounded-xl overflow-hidden w-full max-w-3xl shadow-2xl"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Header */}
-          <div className="flex items-center justify-between px-4 py-3 border-b border-[#E2E8F0] dark:border-[#2A2A2A]">
+          <div className="flex items-center justify-between px-4 py-3 border-b border-[#E2E8F0] dark:border-gray-200 dark:border-[#2A2A2A]">
             <div>
-              <h3 className="text-[#0F172A] dark:text-[#F0F0F0] font-semibold text-sm">{exercise.Name}</h3>
-              <p className="text-[#94A3B8] dark:text-[#6B6B6B] text-xs">{exercise.MuscleGroup} &middot; {exercise.Difficulty}</p>
+              <h3 className="text-[#0F172A] dark:text-gray-900 dark:text-[#F0F0F0] font-semibold text-sm">{exercise.Name}</h3>
+              <p className="text-gray-500 dark:text-[#94A3B8] text-xs">{exercise.MuscleGroup} &middot; {exercise.Difficulty}</p>
             </div>
             <button
               onClick={onClose}
-              className="p-1.5 rounded-lg text-[#94A3B8] dark:text-[#6B6B6B] hover:text-[#0F172A] dark:hover:text-[#F0F0F0] hover:bg-[#F1F5F9] dark:hover:bg-[#242424] transition-colors"
+              className="p-1.5 rounded-lg text-gray-500 dark:text-[#94A3B8] hover:text-[#0F172A] dark:hover:text-gray-900 dark:hover:text-[#F0F0F0] hover:bg-[#F1F5F9] dark:hover:bg-gray-200 dark:hover:bg-[#242424] transition-colors"
             >
               <X size={18} />
             </button>
@@ -339,7 +339,7 @@ function VideoModal({ exercise, onClose }: { exercise: Exercise | null; onClose:
                 allowFullScreen
               />
             ) : (
-              <div className="w-full h-full flex items-center justify-center text-[#6B6B6B]">
+              <div className="w-full h-full flex items-center justify-center text-gray-400 dark:text-[#6B6B6B]">
                 Video not available
               </div>
             )}
@@ -348,14 +348,14 @@ function VideoModal({ exercise, onClose }: { exercise: Exercise | null; onClose:
           {/* Info */}
           <div className="p-4 space-y-2">
             <div className="flex flex-wrap gap-2">
-              <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-[#F1F5F9] dark:bg-[#1A1A1A] text-[#64748B] dark:text-[#A0A0A0] border border-[#E2E8F0] dark:border-[#2A2A2A]">
+              <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-[#F1F5F9] dark:bg-gray-100 dark:bg-[#1A1A1A] text-[#64748B] dark:text-gray-500 dark:text-[#A0A0A0] border border-[#E2E8F0] dark:border-gray-200 dark:border-[#2A2A2A]">
                 {exercise.Equipment}
               </span>
-              <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-[#F1F5F9] dark:bg-[#1A1A1A] text-[#64748B] dark:text-[#A0A0A0] border border-[#E2E8F0] dark:border-[#2A2A2A]">
+              <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-[#F1F5F9] dark:bg-gray-100 dark:bg-[#1A1A1A] text-[#64748B] dark:text-gray-500 dark:text-[#A0A0A0] border border-[#E2E8F0] dark:border-gray-200 dark:border-[#2A2A2A]">
                 {exercise.Type}
               </span>
             </div>
-            <p className="text-[#64748B] dark:text-[#A0A0A0] text-xs leading-relaxed">
+            <p className="text-[#64748B] dark:text-gray-500 dark:text-[#A0A0A0] text-xs leading-relaxed">
               {exercise.Description}
             </p>
           </div>
@@ -447,8 +447,8 @@ export default function ExercisesPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-bold text-[#0F172A] dark:text-[#F0F0F0]">Exercise Library</h2>
-          <p className="text-sm text-[#94A3B8] dark:text-[#6B6B6B] mt-0.5">
+          <h2 className="text-2xl font-bold text-[#0F172A] dark:text-gray-900 dark:text-[#F0F0F0]">Exercise Library</h2>
+          <p className="text-sm text-gray-500 dark:text-[#94A3B8] mt-0.5">
             {filtered.length} of {exercises.length} exercises
           </p>
         </div>
@@ -458,7 +458,7 @@ export default function ExercisesPage() {
       <div className="space-y-3">
         {/* Search */}
         <div className="relative">
-          <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#94A3B8] dark:text-[#6B6B6B]" />
+          <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 dark:text-[#94A3B8]" />
           <input
             type="text"
             placeholder="Search exercises..."
@@ -466,8 +466,8 @@ export default function ExercisesPage() {
             onChange={(e) => setSearchQuery(e.target.value)}
             className={cn(
               "w-full pl-9 pr-4 py-2.5 rounded-lg text-sm border outline-none transition-colors",
-              "bg-white dark:bg-[#141414] border-[#E2E8F0] dark:border-[#2A2A2A]",
-              "text-[#0F172A] dark:text-[#F0F0F0]",
+              "bg-white dark:bg-gray-50 dark:bg-[#141414] border-[#E2E8F0] dark:border-gray-200 dark:border-[#2A2A2A]",
+              "text-[#0F172A] dark:text-gray-900 dark:text-[#F0F0F0]",
               "focus:border-[#00AEEF] dark:focus:border-[#00AEEF]"
             )}
           />
@@ -475,7 +475,7 @@ export default function ExercisesPage() {
 
         {/* Filter Row */}
         <div className="flex flex-wrap items-center gap-2">
-          <Filter size={14} className="text-[#94A3B8] dark:text-[#6B6B6B] mr-1" />
+          <Filter size={14} className="text-gray-500 dark:text-[#94A3B8] mr-1" />
           <FilterDropdown label="Muscle" value={muscleFilter} options={muscleOptions} onChange={setMuscleFilter} />
           <FilterDropdown label="Equipment" value={equipmentFilter} options={equipmentOptions} onChange={setEquipmentFilter} />
           <FilterDropdown label="Difficulty" value={difficultyFilter} options={difficultyOptions} onChange={setDifficultyFilter} />
@@ -495,24 +495,24 @@ export default function ExercisesPage() {
       {loading ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
           {Array.from({ length: 8 }).map((_, i) => (
-            <div key={i} className="bg-white dark:bg-[#141414] border border-[#E2E8F0] dark:border-[#2A2A2A] rounded-xl overflow-hidden animate-pulse">
-              <div className="aspect-video bg-[#1A1A1A]" />
+            <div key={i} className="bg-white dark:bg-gray-50 dark:bg-[#141414] border border-[#E2E8F0] dark:border-gray-200 dark:border-[#2A2A2A] rounded-xl overflow-hidden animate-pulse">
+              <div className="aspect-video bg-gray-100 dark:bg-[#1A1A1A]" />
               <div className="p-4 space-y-2">
-                <div className="h-3 bg-[#1A1A1A] rounded w-3/4" />
+                <div className="h-3 bg-gray-100 dark:bg-[#1A1A1A] rounded w-3/4" />
                 <div className="flex gap-1">
-                  <div className="h-4 bg-[#1A1A1A] rounded w-12" />
-                  <div className="h-4 bg-[#1A1A1A] rounded w-10" />
+                  <div className="h-4 bg-gray-100 dark:bg-[#1A1A1A] rounded w-12" />
+                  <div className="h-4 bg-gray-100 dark:bg-[#1A1A1A] rounded w-10" />
                 </div>
-                <div className="h-2 bg-[#1A1A1A] rounded w-full" />
+                <div className="h-2 bg-gray-100 dark:bg-[#1A1A1A] rounded w-full" />
               </div>
             </div>
           ))}
         </div>
       ) : filtered.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-24">
-          <Search size={48} className="text-[#94A3B8] dark:text-[#6B6B6B] mb-4 opacity-50" />
-          <h3 className="text-[#0F172A] dark:text-[#F0F0F0] font-semibold text-base mb-1">No exercises found</h3>
-          <p className="text-[#94A3B8] dark:text-[#6B6B6B] text-sm mb-4">Try adjusting your search or filters</p>
+          <Search size={48} className="text-gray-500 dark:text-[#94A3B8] mb-4 opacity-50" />
+          <h3 className="text-[#0F172A] dark:text-gray-900 dark:text-[#F0F0F0] font-semibold text-base mb-1">No exercises found</h3>
+          <p className="text-gray-500 dark:text-[#94A3B8] text-sm mb-4">Try adjusting your search or filters</p>
           <button
             onClick={clearFilters}
             className="border border-[#00AEEF] text-[#00AEEF] hover:bg-[rgba(0,174,239,0.1)] font-medium px-4 py-2 rounded-lg text-sm transition-colors"

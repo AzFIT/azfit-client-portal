@@ -101,26 +101,26 @@ function PhaseCard({ phase, index }: { phase: typeof phases[0]; index: number })
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.1, duration: 0.4 }}
     >
-      <Card className="bg-[#141414] border-[#2A2A2A] hover:border-[#00AEEF]/40 transition-all duration-300 h-full group">
+      <Card className="bg-gray-50 dark:bg-[#141414] border-gray-200 dark:border-[#2A2A2A] hover:border-[#00AEEF]/40 transition-all duration-300 h-full group">
         <CardContent className="p-5">
           <div className="flex items-start justify-between mb-3">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-[#1A1A1A] border border-[#2A2A2A] flex items-center justify-center group-hover:border-[#00AEEF]/40 transition-colors">
+              <div className="w-10 h-10 rounded-lg bg-gray-100 dark:bg-[#1A1A1A] border border-gray-200 dark:border-[#2A2A2A] flex items-center justify-center group-hover:border-[#00AEEF]/40 transition-colors">
                 <Icon size={20} className="text-[#00AEEF]" />
               </div>
               <div>
-                <span className="text-xs text-[#6B6B6B] font-medium uppercase tracking-wider">{phase.phase}</span>
-                <h3 className="text-[#F0F0F0] font-semibold text-sm">{phase.title}</h3>
+                <span className="text-xs text-gray-400 dark:text-[#6B6B6B] font-medium uppercase tracking-wider">{phase.phase}</span>
+                <h3 className="text-gray-900 dark:text-[#F0F0F0] font-semibold text-sm">{phase.title}</h3>
               </div>
             </div>
-            <span className="text-xs bg-[#1A1A1A] text-[#6B6B6B] px-2 py-0.5 rounded-full border border-[#2A2A2A]">
+            <span className="text-xs bg-gray-100 dark:bg-[#1A1A1A] text-gray-400 dark:text-[#6B6B6B] px-2 py-0.5 rounded-full border border-gray-200 dark:border-[#2A2A2A]">
               Planned
             </span>
           </div>
-          <p className="text-[#A0A0A0] text-sm mb-3 leading-relaxed">{phase.description}</p>
+          <p className="text-gray-500 dark:text-[#A0A0A0] text-sm mb-3 leading-relaxed">{phase.description}</p>
           <div className="space-y-1.5">
             {phase.features.map((f) => (
-              <div key={f} className="flex items-center gap-2 text-xs text-[#6B6B6B]">
+              <div key={f} className="flex items-center gap-2 text-xs text-gray-400 dark:text-[#6B6B6B]">
                 <Lock size={10} />
                 <span>{f}</span>
               </div>
@@ -139,12 +139,12 @@ export default function PlannedFeaturesPage() {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold text-[#F0F0F0] font-[Playfair_Display]">Planned Features</h1>
-        <p className="text-[#6B6B6B] text-sm mt-1">Option B Balanced roadmap — features coming in future releases</p>
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-[#F0F0F0] font-[Playfair_Display]">Planned Features</h1>
+        <p className="text-gray-400 dark:text-[#6B6B6B] text-sm mt-1">Option B Balanced roadmap — features coming in future releases</p>
       </div>
 
       {/* Tab Switcher */}
-      <div className="flex gap-1 bg-[#141414] p-1 rounded-lg border border-[#2A2A2A] w-fit">
+      <div className="flex gap-1 bg-gray-50 dark:bg-[#141414] p-1 rounded-lg border border-gray-200 dark:border-[#2A2A2A] w-fit">
         {[
           { key: 'roadmap' as const, label: 'Phase Roadmap (9-14)' },
           { key: 'nutrition' as const, label: 'Nutrition Enhanced' },
@@ -154,8 +154,8 @@ export default function PlannedFeaturesPage() {
             onClick={() => setActiveTab(t.key)}
             className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
               activeTab === t.key
-                ? 'bg-[#1A1A1A] text-[#F0F0F0] border border-[#2A2A2A]'
-                : 'text-[#6B6B6B] hover:text-[#A0A0A0]'
+                ? 'bg-gray-100 dark:bg-[#1A1A1A] text-gray-900 dark:text-[#F0F0F0] border border-gray-200 dark:border-[#2A2A2A]'
+                : 'text-gray-400 dark:text-[#6B6B6B] hover:text-gray-500 dark:hover:text-[#A0A0A0]'
             }`}
           >
             {t.label}
@@ -183,9 +183,9 @@ export default function PlannedFeaturesPage() {
           animate={{ opacity: 1 }}
           className="space-y-4"
         >
-          <div className="bg-[#141414] border border-[#2A2A2A] rounded-xl p-5">
-            <h2 className="text-lg font-semibold text-[#F0F0F0] mb-2">TDEE Calculator Enhancement</h2>
-            <p className="text-[#A0A0A0] text-sm mb-4">
+          <div className="bg-gray-50 dark:bg-[#141414] border border-gray-200 dark:border-[#2A2A2A] rounded-xl p-5">
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-[#F0F0F0] mb-2">TDEE Calculator Enhancement</h2>
+            <p className="text-gray-500 dark:text-[#A0A0A0] text-sm mb-4">
               Enhanced TDEE engine with Mifflin-St Jeor + Katch-McArdle formulas, 
               macro split algorithm with safety guardrails, carb cycling, and refeed day options.
             </p>
@@ -196,9 +196,9 @@ export default function PlannedFeaturesPage() {
                 'Carb Cycling',
                 'Refeed Day Protocol',
               ].map((f) => (
-                <div key={f} className="bg-[#1A1A1A] border border-[#2A2A2A] rounded-lg p-3 text-center">
+                <div key={f} className="bg-gray-100 dark:bg-[#1A1A1A] border border-gray-200 dark:border-[#2A2A2A] rounded-lg p-3 text-center">
                   <Star size={16} className="text-[#00AEEF] mx-auto mb-1" />
-                  <span className="text-xs text-[#A0A0A0]">{f}</span>
+                  <span className="text-xs text-gray-500 dark:text-[#A0A0A0]">{f}</span>
                 </div>
               ))}
             </div>
@@ -212,15 +212,15 @@ export default function PlannedFeaturesPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.1 }}
               >
-                <Card className="bg-[#141414] border-[#2A2A2A] h-full">
+                <Card className="bg-gray-50 dark:bg-[#141414] border-gray-200 dark:border-[#2A2A2A] h-full">
                   <CardContent className="p-5">
                     <div className="flex items-center gap-3 mb-2">
-                      <div className="w-8 h-8 rounded-lg bg-[#1A1A1A] border border-[#2A2A2A] flex items-center justify-center">
+                      <div className="w-8 h-8 rounded-lg bg-gray-100 dark:bg-[#1A1A1A] border border-gray-200 dark:border-[#2A2A2A] flex items-center justify-center">
                         <Star size={16} className="text-[#EAB308]" />
                       </div>
-                      <h3 className="text-[#F0F0F0] font-semibold text-sm">{f.title}</h3>
+                      <h3 className="text-gray-900 dark:text-[#F0F0F0] font-semibold text-sm">{f.title}</h3>
                     </div>
-                    <p className="text-[#A0A0A0] text-sm">{f.description}</p>
+                    <p className="text-gray-500 dark:text-[#A0A0A0] text-sm">{f.description}</p>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -230,8 +230,8 @@ export default function PlannedFeaturesPage() {
       )}
 
       {/* Timeline */}
-      <div className="bg-[#141414] border border-[#2A2A2A] rounded-xl p-5">
-        <h2 className="text-lg font-semibold text-[#F0F0F0] mb-4 flex items-center gap-2">
+      <div className="bg-gray-50 dark:bg-[#141414] border border-gray-200 dark:border-[#2A2A2A] rounded-xl p-5">
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-[#F0F0F0] mb-4 flex items-center gap-2">
           <Clock size={18} className="text-[#00AEEF]" />
           Implementation Timeline
         </h2>
@@ -251,8 +251,8 @@ export default function PlannedFeaturesPage() {
                 className="w-2.5 h-2.5 rounded-full flex-shrink-0"
                 style={{ backgroundColor: item.color }}
               />
-              <span className="text-xs text-[#6B6B6B] w-16">{item.phase}</span>
-              <span className="text-sm text-[#F0F0F0]">{item.label}</span>
+              <span className="text-xs text-gray-400 dark:text-[#6B6B6B] w-16">{item.phase}</span>
+              <span className="text-sm text-gray-900 dark:text-[#F0F0F0]">{item.label}</span>
               <span
                 className="text-xs px-2 py-0.5 rounded-full ml-auto"
                 style={{

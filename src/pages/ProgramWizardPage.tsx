@@ -348,23 +348,23 @@ function Step1Goal({
     <div className="max-w-[900px] mx-auto">
       <div className="text-center mb-10">
         <h2
-          className="text-[#F0F0F0] text-3xl md:text-4xl font-semibold mb-3 tracking-tight"
+          className="text-gray-900 dark:text-[#F0F0F0] text-3xl md:text-4xl font-semibold mb-3 tracking-tight"
           style={{ fontFamily: 'Playfair Display, Georgia, serif' }}
         >
           What&apos;s the primary goal?
         </h2>
-        <p className="text-[#A0A0A0] text-sm md:text-base">
+        <p className="text-gray-500 dark:text-[#A0A0A0] text-sm md:text-base">
           This determines exercise selection, volume, and progression strategy.
         </p>
       </div>
 
       {/* Quick select */}
       <div className="flex items-center justify-center gap-3 mb-8">
-        <span className="text-[#6B6B6B] text-sm">Quick select:</span>
+        <span className="text-gray-400 dark:text-[#6B6B6B] text-sm">Quick select:</span>
         <select
           value={selectedGoal}
           onChange={(e) => onSelect(e.target.value)}
-          className="bg-[#1A1A1A] border border-[#2A2A2A] text-[#F0F0F0] text-sm px-4 py-2 rounded-lg focus:border-[#00AEEF] outline-none"
+          className="bg-gray-100 dark:bg-[#1A1A1A] border border-gray-200 dark:border-[#2A2A2A] text-gray-900 dark:text-[#F0F0F0] text-sm px-4 py-2 rounded-lg focus:border-[#00AEEF] outline-none"
         >
           <option value="">Choose a goal...</option>
           {GOAL_CARDS.map((g) => (
@@ -386,10 +386,10 @@ function Step1Goal({
               transition={{ duration: 0.4, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
               onClick={() => onSelect(goal.id)}
               className={cn(
-                'relative text-left bg-[#141414] border-2 rounded-2xl p-8 min-h-[180px] transition-all duration-200',
+                'relative text-left bg-gray-50 dark:bg-[#141414] border-2 rounded-2xl p-8 min-h-[180px] transition-all duration-200',
                 selected
-                  ? 'border-[#00AEEF] bg-[rgba(0,174,239,0.08)] shadow-[0_0_20px_rgba(0,174,239,0.15)]'
-                  : 'border-[#2A2A2A] hover:border-[rgba(0,174,239,0.3)] hover:-translate-y-0.5'
+                  ? 'border-[#00AEEF] bg-cyan-50 dark:bg-[rgba(0,174,239,0.08)] shadow-[0_0_20px_rgba(0,174,239,0.15)]'
+                  : 'border-gray-200 dark:border-[#2A2A2A] hover:border-[rgba(0,174,239,0.3)] hover:-translate-y-0.5'
               )}
             >
               {selected && (
@@ -408,11 +408,11 @@ function Step1Goal({
               >
                 <Icon size={28} style={{ color: goal.gradient.includes('8B5CF6') ? '#8B5CF6' : goal.gradient.includes('F97316') ? '#F97316' : goal.gradient.includes('00AEEF') ? '#00AEEF' : goal.gradient.includes('22C55E') ? '#22C55E' : goal.gradient.includes('EAB308') ? '#EAB308' : '#C0C0C0' }} />
               </div>
-              <h3 className="text-[#F0F0F0] font-semibold text-lg mb-1">{goal.label}</h3>
-              <p className="text-[#A0A0A0] text-xs mb-3">{goal.description}</p>
+              <h3 className="text-gray-900 dark:text-[#F0F0F0] font-semibold text-lg mb-1">{goal.label}</h3>
+              <p className="text-gray-500 dark:text-[#A0A0A0] text-xs mb-3">{goal.description}</p>
               <div className="flex flex-wrap gap-1">
                 {goal.methods.slice(0, 3).map((m) => (
-                  <span key={m} className="text-[10px] text-[#6B6B6B] bg-[#1A1A1A] px-2 py-0.5 rounded-full">{m}</span>
+                  <span key={m} className="text-[10px] text-gray-400 dark:text-[#6B6B6B] bg-gray-100 dark:bg-[#1A1A1A] px-2 py-0.5 rounded-full">{m}</span>
                 ))}
               </div>
             </motion.button>
@@ -465,10 +465,10 @@ function Step2Method({
   return (
     <div className="max-w-[1000px] mx-auto">
       <div className="text-center mb-8">
-        <h2 className="text-[#F0F0F0] text-3xl font-semibold mb-2" style={{ fontFamily: 'Playfair Display, Georgia, serif' }}>
+        <h2 className="text-gray-900 dark:text-[#F0F0F0] text-3xl font-semibold mb-2" style={{ fontFamily: 'Playfair Display, Georgia, serif' }}>
           Choose a training method
         </h2>
-        <p className="text-[#A0A0A0] text-sm">
+        <p className="text-gray-500 dark:text-[#A0A0A0] text-sm">
           Based on {GOAL_CARDS.find(g => g.id === selectedGoal)?.label || 'your'} goal — {filtered.length} methods available
         </p>
       </div>
@@ -477,13 +477,13 @@ function Step2Method({
       <div className="flex flex-wrap items-center justify-center gap-2 mb-6">
         <button
           onClick={() => setSortMode('match')}
-          className={cn('text-xs px-3 py-1.5 rounded-full border transition-colors', sortMode === 'match' ? 'border-[#00AEEF] bg-[rgba(0,174,239,0.1)] text-[#00AEEF]' : 'border-[#2A2A2A] text-[#A0A0A0] hover:border-[#3A3A3A]')}
+          className={cn('text-xs px-3 py-1.5 rounded-full border transition-colors', sortMode === 'match' ? 'border-[#00AEEF] bg-[rgba(0,174,239,0.1)] text-[#00AEEF]' : 'border-gray-200 dark:border-[#2A2A2A] text-gray-500 dark:text-[#A0A0A0] hover:border-[#3A3A3A]')}
         >
           Recommended
         </button>
         <button
           onClick={() => setSortMode('popular')}
-          className={cn('text-xs px-3 py-1.5 rounded-full border transition-colors', sortMode === 'popular' ? 'border-[#00AEEF] bg-[rgba(0,174,239,0.1)] text-[#00AEEF]' : 'border-[#2A2A2A] text-[#A0A0A0] hover:border-[#3A3A3A]')}
+          className={cn('text-xs px-3 py-1.5 rounded-full border transition-colors', sortMode === 'popular' ? 'border-[#00AEEF] bg-[rgba(0,174,239,0.1)] text-[#00AEEF]' : 'border-gray-200 dark:border-[#2A2A2A] text-gray-500 dark:text-[#A0A0A0] hover:border-[#3A3A3A]')}
         >
           A-Z
         </button>
@@ -491,7 +491,7 @@ function Step2Method({
         <select
           value={filterExp}
           onChange={(e) => setFilterExp(e.target.value)}
-          className="bg-[#1A1A1A] border border-[#2A2A2A] text-[#A0A0A0] text-xs px-3 py-1.5 rounded-full outline-none focus:border-[#00AEEF]"
+          className="bg-gray-100 dark:bg-[#1A1A1A] border border-gray-200 dark:border-[#2A2A2A] text-gray-500 dark:text-[#A0A0A0] text-xs px-3 py-1.5 rounded-full outline-none focus:border-[#00AEEF]"
         >
           <option value="">All Levels</option>
           <option value="Beginner">Beginner</option>
@@ -501,7 +501,7 @@ function Step2Method({
         <select
           value={filterEquip}
           onChange={(e) => setFilterEquip(e.target.value)}
-          className="bg-[#1A1A1A] border border-[#2A2A2A] text-[#A0A0A0] text-xs px-3 py-1.5 rounded-full outline-none focus:border-[#00AEEF]"
+          className="bg-gray-100 dark:bg-[#1A1A1A] border border-gray-200 dark:border-[#2A2A2A] text-gray-500 dark:text-[#A0A0A0] text-xs px-3 py-1.5 rounded-full outline-none focus:border-[#00AEEF]"
         >
           <option value="">All Equipment</option>
           <option value="Barbell">Barbell</option>
@@ -526,10 +526,10 @@ function Step2Method({
               transition={{ duration: 0.3, delay: Math.min(i * 0.05, 0.5), ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
               onClick={() => onSelect(method)}
               className={cn(
-                'relative text-left bg-[#141414] border rounded-xl p-6 transition-all duration-200 w-full',
+                'relative text-left bg-gray-50 dark:bg-[#141414] border rounded-xl p-6 transition-all duration-200 w-full',
                 selected
                   ? 'border-[#00AEEF] bg-[rgba(0,174,239,0.05)] shadow-[0_0_16px_rgba(0,174,239,0.1)]'
-                  : 'border-[#2A2A2A] hover:border-[rgba(0,174,239,0.3)]'
+                  : 'border-gray-200 dark:border-[#2A2A2A] hover:border-[rgba(0,174,239,0.3)]'
               )}
             >
               {isBest && (
@@ -545,7 +545,7 @@ function Step2Method({
               )}
               <div className="flex items-start justify-between gap-4">
                 <div className="flex-1 min-w-0">
-                  <h3 className="text-[#F0F0F0] font-semibold text-base mb-1">{method.Name}</h3>
+                  <h3 className="text-gray-900 dark:text-[#F0F0F0] font-semibold text-base mb-1">{method.Name}</h3>
                   <div className="flex flex-wrap gap-1.5 mb-2">
                     <span
                       className="text-[10px] font-semibold px-2 py-0.5 rounded-full"
@@ -553,25 +553,25 @@ function Step2Method({
                     >
                       {method.Goal}
                     </span>
-                    <span className="text-[10px] text-[#6B6B6B] bg-[#1A1A1A] px-2 py-0.5 rounded-full">{method.Category}</span>
+                    <span className="text-[10px] text-gray-400 dark:text-[#6B6B6B] bg-gray-100 dark:bg-[#1A1A1A] px-2 py-0.5 rounded-full">{method.Category}</span>
                   </div>
-                  <p className="text-[#A0A0A0] text-xs leading-relaxed mb-3 line-clamp-2">{method.Structure}</p>
+                  <p className="text-gray-500 dark:text-[#A0A0A0] text-xs leading-relaxed mb-3 line-clamp-2">{method.Structure}</p>
                   <div className="flex flex-wrap gap-1">
                     {method.Equipment.split(',').slice(0, 3).map((eq) => (
-                      <span key={eq} className="text-[10px] text-[#6B6B6B] border border-[#2A2A2A] px-1.5 py-0.5 rounded">{eq.trim()}</span>
+                      <span key={eq} className="text-[10px] text-gray-400 dark:text-[#6B6B6B] border border-gray-200 dark:border-[#2A2A2A] px-1.5 py-0.5 rounded">{eq.trim()}</span>
                     ))}
                   </div>
                 </div>
                 <div className="flex-shrink-0 space-y-2 text-right">
-                  <div className="flex items-center gap-1.5 text-[#A0A0A0] justify-end">
+                  <div className="flex items-center gap-1.5 text-gray-500 dark:text-[#A0A0A0] justify-end">
                     <Clock size={12} />
                     <span className="text-xs font-medium">{method.Duration} wk</span>
                   </div>
-                  <div className="flex items-center gap-1.5 text-[#A0A0A0] justify-end">
+                  <div className="flex items-center gap-1.5 text-gray-500 dark:text-[#A0A0A0] justify-end">
                     <Calendar size={12} />
                     <span className="text-xs font-medium">{method.Frequency}x/wk</span>
                   </div>
-                  <div className="flex items-center gap-1.5 text-[#A0A0A0] justify-end">
+                  <div className="flex items-center gap-1.5 text-gray-500 dark:text-[#A0A0A0] justify-end">
                     <BarChart3 size={12} />
                     <span className="text-xs font-medium">{method.TargetAudience}</span>
                   </div>
@@ -638,7 +638,7 @@ function Step3Context({
           >
             <div className={cn('absolute top-0.5 w-5 h-5 bg-white rounded-full transition-transform duration-200', hasClient ? 'translate-x-[22px]' : 'translate-x-0.5')} />
           </button>
-          <span className="text-[#A0A0A0] text-sm">{hasClient ? 'Assigning to client' : 'Create as template'}</span>
+          <span className="text-gray-500 dark:text-[#A0A0A0] text-sm">{hasClient ? 'Assigning to client' : 'Create as template'}</span>
         </div>
         {hasClient && (
           <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} className="overflow-hidden">
@@ -647,7 +647,7 @@ function Step3Context({
               placeholder="Search client..."
               value={context.clientId}
               onChange={(e) => onChange({ ...context, clientId: e.target.value })}
-              className="w-full bg-[#1A1A1A] border border-[#2A2A2A] focus:border-[#00AEEF] text-[#F0F0F0] text-sm px-4 py-2.5 rounded-xl outline-none transition-colors"
+              className="w-full bg-gray-100 dark:bg-[#1A1A1A] border border-gray-200 dark:border-[#2A2A2A] focus:border-[#00AEEF] text-gray-900 dark:text-[#F0F0F0] text-sm px-4 py-2.5 rounded-xl outline-none transition-colors"
             />
           </motion.div>
         )}
@@ -663,7 +663,7 @@ function Step3Context({
               'text-xs font-semibold px-3 py-2.5 rounded-xl border transition-all duration-200',
               context.experience === exp
                 ? 'border-[#00AEEF] bg-[rgba(0,174,239,0.1)] text-[#00AEEF]'
-                : 'border-[#2A2A2A] bg-[#141414] text-[#A0A0A0] hover:border-[#3A3A3A]'
+                : 'border-gray-200 dark:border-[#2A2A2A] bg-gray-50 dark:bg-[#141414] text-gray-500 dark:text-[#A0A0A0] hover:border-[#3A3A3A]'
             )}
           >
             {exp}
@@ -682,7 +682,7 @@ function Step3Context({
                 'text-xs font-semibold px-3 py-2 rounded-xl border transition-all duration-200 min-w-[72px]',
                 context.availableDays.includes(day)
                   ? 'border-[#00AEEF] bg-[#00AEEF] text-white'
-                  : 'border-[#2A2A2A] bg-[#141414] text-[#6B6B6B] hover:border-[#3A3A3A]'
+                  : 'border-gray-200 dark:border-[#2A2A2A] bg-gray-50 dark:bg-[#141414] text-gray-400 dark:text-[#6B6B6B] hover:border-[#3A3A3A]'
               )}
             >
               {day.slice(0, 3)}
@@ -707,7 +707,7 @@ function Step3Context({
               'text-xs font-semibold px-4 py-2.5 rounded-xl border transition-all duration-200',
               context.sessionDuration === dur
                 ? 'border-[#00AEEF] bg-[rgba(0,174,239,0.1)] text-[#00AEEF]'
-                : 'border-[#2A2A2A] bg-[#141414] text-[#A0A0A0] hover:border-[#3A3A3A]'
+                : 'border-gray-200 dark:border-[#2A2A2A] bg-gray-50 dark:bg-[#141414] text-gray-500 dark:text-[#A0A0A0] hover:border-[#3A3A3A]'
             )}
           >
             {dur}
@@ -727,7 +727,7 @@ function Step3Context({
                 ? lim === 'None'
                   ? 'border-[#22C55E] bg-[rgba(34,197,94,0.1)] text-[#22C55E]'
                   : 'border-[#EAB308] bg-[rgba(234,179,8,0.1)] text-[#EAB308]'
-                : 'border-[#2A2A2A] bg-[#141414] text-[#6B6B6B] hover:border-[#3A3A3A]'
+                : 'border-gray-200 dark:border-[#2A2A2A] bg-gray-50 dark:bg-[#141414] text-gray-400 dark:text-[#6B6B6B] hover:border-[#3A3A3A]'
             )}
           >
             {lim}
@@ -745,7 +745,7 @@ function Step3Context({
               'text-xs font-semibold px-3 py-2 rounded-xl border transition-all duration-200',
               context.equipment.includes(eq)
                 ? 'border-[#00AEEF] bg-[rgba(0,174,239,0.1)] text-[#00AEEF]'
-                : 'border-[#2A2A2A] bg-[#141414] text-[#6B6B6B] hover:border-[#3A3A3A]'
+                : 'border-gray-200 dark:border-[#2A2A2A] bg-gray-50 dark:bg-[#141414] text-gray-400 dark:text-[#6B6B6B] hover:border-[#3A3A3A]'
             )}
           >
             {eq}
@@ -758,10 +758,10 @@ function Step3Context({
   return (
     <div className="max-w-[700px] mx-auto">
       <div className="text-center mb-8">
-        <h2 className="text-[#F0F0F0] text-3xl font-semibold mb-2" style={{ fontFamily: 'Playfair Display, Georgia, serif' }}>
+        <h2 className="text-gray-900 dark:text-[#F0F0F0] text-3xl font-semibold mb-2" style={{ fontFamily: 'Playfair Display, Georgia, serif' }}>
           Set the context
         </h2>
-        <p className="text-[#A0A0A0] text-sm">Tailor the program to your client&apos;s needs</p>
+        <p className="text-gray-500 dark:text-[#A0A0A0] text-sm">Tailor the program to your client&apos;s needs</p>
       </div>
 
       <div className="space-y-6">
@@ -772,7 +772,7 @@ function Step3Context({
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.35, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
           >
-            <label className="block text-[#F0F0F0] text-sm font-semibold mb-2">{field.label}</label>
+            <label className="block text-gray-900 dark:text-[#F0F0F0] text-sm font-semibold mb-2">{field.label}</label>
             {field.content}
           </motion.div>
         ))}
@@ -827,10 +827,10 @@ function Step4Phases({
   return (
     <div className="max-w-[900px] mx-auto">
       <div className="text-center mb-8">
-        <h2 className="text-[#F0F0F0] text-3xl font-semibold mb-2" style={{ fontFamily: 'Playfair Display, Georgia, serif' }}>
+        <h2 className="text-gray-900 dark:text-[#F0F0F0] text-3xl font-semibold mb-2" style={{ fontFamily: 'Playfair Display, Georgia, serif' }}>
           Configure phases
         </h2>
-        <p className="text-[#A0A0A0] text-sm">{phases.length} phases — {totalWeeks} weeks total</p>
+        <p className="text-gray-500 dark:text-[#A0A0A0] text-sm">{phases.length} phases — {totalWeeks} weeks total</p>
       </div>
 
       {/* Timeline */}
@@ -864,41 +864,41 @@ function Step4Phases({
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
               transition={{ duration: 0.3, ease: [0.175, 0.885, 0.32, 1.275] as [number, number, number, number] }}
-              className="bg-[#141414] border border-[#2A2A2A] rounded-xl p-5 relative"
+              className="bg-gray-50 dark:bg-[#141414] border border-gray-200 dark:border-[#2A2A2A] rounded-xl p-5 relative"
               style={{ borderLeftWidth: 4, borderLeftColor: colors[i % colors.length] }}
             >
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 <div>
-                  <label className="block text-[#6B6B6B] text-xs mb-1">Phase Name</label>
+                  <label className="block text-gray-400 dark:text-[#6B6B6B] text-xs mb-1">Phase Name</label>
                   <input
                     value={phase.name}
                     onChange={(e) => updatePhase(phase.id, { name: e.target.value })}
-                    className="w-full bg-[#1A1A1A] border border-[#2A2A2A] focus:border-[#00AEEF] text-[#F0F0F0] text-sm px-3 py-2 rounded-lg outline-none"
+                    className="w-full bg-gray-100 dark:bg-[#1A1A1A] border border-gray-200 dark:border-[#2A2A2A] focus:border-[#00AEEF] text-gray-900 dark:text-[#F0F0F0] text-sm px-3 py-2 rounded-lg outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-[#6B6B6B] text-xs mb-1">Duration (weeks)</label>
+                  <label className="block text-gray-400 dark:text-[#6B6B6B] text-xs mb-1">Duration (weeks)</label>
                   <input
                     type="number"
                     min={1}
                     max={16}
                     value={phase.durationWeeks}
                     onChange={(e) => updatePhase(phase.id, { durationWeeks: Math.max(1, parseInt(e.target.value) || 1) })}
-                    className="w-full bg-[#1A1A1A] border border-[#2A2A2A] focus:border-[#00AEEF] text-[#F0F0F0] text-sm px-3 py-2 rounded-lg outline-none"
+                    className="w-full bg-gray-100 dark:bg-[#1A1A1A] border border-gray-200 dark:border-[#2A2A2A] focus:border-[#00AEEF] text-gray-900 dark:text-[#F0F0F0] text-sm px-3 py-2 rounded-lg outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-[#6B6B6B] text-xs mb-1">Focus</label>
+                  <label className="block text-gray-400 dark:text-[#6B6B6B] text-xs mb-1">Focus</label>
                   <select
                     value={phase.focus}
                     onChange={(e) => updatePhase(phase.id, { focus: e.target.value })}
-                    className="w-full bg-[#1A1A1A] border border-[#2A2A2A] focus:border-[#00AEEF] text-[#F0F0F0] text-sm px-3 py-2 rounded-lg outline-none"
+                    className="w-full bg-gray-100 dark:bg-[#1A1A1A] border border-gray-200 dark:border-[#2A2A2A] focus:border-[#00AEEF] text-gray-900 dark:text-[#F0F0F0] text-sm px-3 py-2 rounded-lg outline-none"
                   >
                     {PHASE_FOCUSES.map(f => <option key={f} value={f}>{f}</option>)}
                   </select>
                 </div>
                 <div>
-                  <label className="block text-[#6B6B6B] text-xs mb-1">Intensity Range (% 1RM)</label>
+                  <label className="block text-gray-400 dark:text-[#6B6B6B] text-xs mb-1">Intensity Range (% 1RM)</label>
                   <div className="flex items-center gap-2">
                     <input
                       type="number"
@@ -906,45 +906,45 @@ function Step4Phases({
                       max={100}
                       value={phase.intensityMin}
                       onChange={(e) => updatePhase(phase.id, { intensityMin: parseInt(e.target.value) || 0 })}
-                      className="w-16 bg-[#1A1A1A] border border-[#2A2A2A] focus:border-[#00AEEF] text-[#F0F0F0] text-sm px-2 py-2 rounded-lg outline-none text-center"
+                      className="w-16 bg-gray-100 dark:bg-[#1A1A1A] border border-gray-200 dark:border-[#2A2A2A] focus:border-[#00AEEF] text-gray-900 dark:text-[#F0F0F0] text-sm px-2 py-2 rounded-lg outline-none text-center"
                     />
-                    <span className="text-[#6B6B6B]">—</span>
+                    <span className="text-gray-400 dark:text-[#6B6B6B]">—</span>
                     <input
                       type="number"
                       min={30}
                       max={100}
                       value={phase.intensityMax}
                       onChange={(e) => updatePhase(phase.id, { intensityMax: parseInt(e.target.value) || 0 })}
-                      className="w-16 bg-[#1A1A1A] border border-[#2A2A2A] focus:border-[#00AEEF] text-[#F0F0F0] text-sm px-2 py-2 rounded-lg outline-none text-center"
+                      className="w-16 bg-gray-100 dark:bg-[#1A1A1A] border border-gray-200 dark:border-[#2A2A2A] focus:border-[#00AEEF] text-gray-900 dark:text-[#F0F0F0] text-sm px-2 py-2 rounded-lg outline-none text-center"
                     />
                   </div>
                 </div>
                 <div>
-                  <label className="block text-[#6B6B6B] text-xs mb-1">Volume</label>
+                  <label className="block text-gray-400 dark:text-[#6B6B6B] text-xs mb-1">Volume</label>
                   <select
                     value={phase.volume}
                     onChange={(e) => updatePhase(phase.id, { volume: e.target.value })}
-                    className="w-full bg-[#1A1A1A] border border-[#2A2A2A] focus:border-[#00AEEF] text-[#F0F0F0] text-sm px-3 py-2 rounded-lg outline-none"
+                    className="w-full bg-gray-100 dark:bg-[#1A1A1A] border border-gray-200 dark:border-[#2A2A2A] focus:border-[#00AEEF] text-gray-900 dark:text-[#F0F0F0] text-sm px-3 py-2 rounded-lg outline-none"
                   >
                     {VOLUME_OPTIONS.map(v => <option key={v} value={v}>{v}</option>)}
                   </select>
                 </div>
                 <div>
-                  <label className="block text-[#6B6B6B] text-xs mb-1">Rep Range</label>
+                  <label className="block text-gray-400 dark:text-[#6B6B6B] text-xs mb-1">Rep Range</label>
                   <input
                     value={phase.repRange}
                     onChange={(e) => updatePhase(phase.id, { repRange: e.target.value })}
-                    className="w-full bg-[#1A1A1A] border border-[#2A2A2A] focus:border-[#00AEEF] text-[#F0F0F0] text-sm px-3 py-2 rounded-lg outline-none"
+                    className="w-full bg-gray-100 dark:bg-[#1A1A1A] border border-gray-200 dark:border-[#2A2A2A] focus:border-[#00AEEF] text-gray-900 dark:text-[#F0F0F0] text-sm px-3 py-2 rounded-lg outline-none"
                   />
                 </div>
               </div>
 
               {/* Actions */}
-              <div className="flex items-center gap-2 mt-4 pt-3 border-t border-[#1F1F1F]">
+              <div className="flex items-center gap-2 mt-4 pt-3 border-t border-gray-200 dark:border-[#1F1F1F]">
                 <button
                   onClick={() => duplicatePhase(phase)}
                   disabled={phases.length >= 6}
-                  className="text-[#A0A0A0] hover:text-[#F0F0F0] text-xs flex items-center gap-1 px-2 py-1 rounded hover:bg-[#242424] transition-colors disabled:opacity-30"
+                  className="text-gray-500 dark:text-[#A0A0A0] hover:text-gray-900 dark:hover:text-[#F0F0F0] text-xs flex items-center gap-1 px-2 py-1 rounded hover:bg-gray-200 dark:hover:bg-[#242424] transition-colors disabled:opacity-30"
                 >
                   <Copy size={12} /> Duplicate
                 </button>
@@ -967,7 +967,7 @@ function Step4Phases({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           onClick={addPhase}
-          className="mt-4 w-full flex items-center justify-center gap-2 border-2 border-dashed border-[#2A2A2A] hover:border-[#00AEEF] text-[#6B6B6B] hover:text-[#00AEEF] text-sm font-semibold py-3 rounded-xl transition-colors"
+          className="mt-4 w-full flex items-center justify-center gap-2 border-2 border-dashed border-gray-200 dark:border-[#2A2A2A] hover:border-[#00AEEF] text-gray-400 dark:text-[#6B6B6B] hover:text-[#00AEEF] text-sm font-semibold py-3 rounded-xl transition-colors"
         >
           <Plus size={16} /> Add Phase
         </motion.button>
@@ -1055,10 +1055,10 @@ function Step5Split({
   return (
     <div className="max-w-[1200px] mx-auto">
       <div className="text-center mb-8">
-        <h2 className="text-[#F0F0F0] text-3xl font-semibold mb-2" style={{ fontFamily: 'Playfair Display, Georgia, serif' }}>
+        <h2 className="text-gray-900 dark:text-[#F0F0F0] text-3xl font-semibold mb-2" style={{ fontFamily: 'Playfair Display, Georgia, serif' }}>
           Design your weekly split
         </h2>
-        <p className="text-[#A0A0A0] text-sm">
+        <p className="text-gray-500 dark:text-[#A0A0A0] text-sm">
           {weeklySplit.filter(d => !d.isRest).length} training days configured
         </p>
       </div>
@@ -1073,21 +1073,21 @@ function Step5Split({
               'relative rounded-xl p-3 text-center transition-all duration-200 border',
               selectedDay === i
                 ? day.isRest
-                  ? 'border-[#2A2A2A] bg-[#1A1A1A]'
-                  : 'border-[#00AEEF] bg-[rgba(0,174,239,0.08)]'
+                  ? 'border-gray-200 dark:border-[#2A2A2A] bg-gray-100 dark:bg-[#1A1A1A]'
+                  : 'border-[#00AEEF] bg-cyan-50 dark:bg-[rgba(0,174,239,0.08)]'
                 : day.isRest
-                  ? 'border-dashed border-[#2A2A2A] bg-[#0A0A0A]'
-                  : 'border-[#2A2A2A] bg-[#141414] hover:border-[#3A3A3A]'
+                  ? 'border-dashed border-gray-200 dark:border-[#2A2A2A] bg-[#0A0A0A]'
+                  : 'border-gray-200 dark:border-[#2A2A2A] bg-gray-50 dark:bg-[#141414] hover:border-[#3A3A3A]'
             )}
           >
-            <p className={cn('text-xs font-semibold mb-1', day.isRest ? 'text-[#6B6B6B]' : 'text-[#F0F0F0]')}>
+            <p className={cn('text-xs font-semibold mb-1', day.isRest ? 'text-gray-400 dark:text-[#6B6B6B]' : 'text-gray-900 dark:text-[#F0F0F0]')}>
               {day.day.slice(0, 3)}
             </p>
-            <p className={cn('text-[10px]', day.isRest ? 'text-[#6B6B6B]' : 'text-[#00AEEF]')}>
+            <p className={cn('text-[10px]', day.isRest ? 'text-gray-400 dark:text-[#6B6B6B]' : 'text-[#00AEEF]')}>
               {day.isRest ? 'Rest' : (day.focus.length > 12 ? day.focus.slice(0, 10) + '...' : day.focus)}
             </p>
             {!day.isRest && (
-              <p className="text-[9px] text-[#6B6B6B] mt-0.5">{day.exercises.length} ex</p>
+              <p className="text-[9px] text-gray-400 dark:text-[#6B6B6B] mt-0.5">{day.exercises.length} ex</p>
             )}
             {selectedDay === i && (
               <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-6 h-0.5 bg-[#00AEEF] rounded-full" />
@@ -1102,16 +1102,16 @@ function Step5Split({
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.2 }}
-          className="bg-[#141414] border border-[#2A2A2A] rounded-xl p-6"
+          className="bg-gray-50 dark:bg-[#141414] border border-gray-200 dark:border-[#2A2A2A] rounded-xl p-6"
         >
           {/* Day Header */}
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h3 className="text-[#F0F0F0] font-semibold text-lg">
+              <h3 className="text-gray-900 dark:text-[#F0F0F0] font-semibold text-lg">
                 {currentDay.day} — {currentDay.isRest ? 'Rest Day' : currentDay.focus}
               </h3>
               {!currentDay.isRest && (
-                <p className="text-[#6B6B6B] text-xs mt-0.5">
+                <p className="text-gray-400 dark:text-[#6B6B6B] text-xs mt-0.5">
                   {currentDay.exercises.length} exercises{estimatedMinutes > 0 ? `, ~${Math.round(estimatedMinutes)} min estimated` : ''}
                 </p>
               )}
@@ -1121,7 +1121,7 @@ function Step5Split({
                 <select
                   value={currentDay.focus}
                   onChange={(e) => updateFocus(e.target.value)}
-                  className="bg-[#1A1A1A] border border-[#2A2A2A] text-[#A0A0A0] text-xs px-3 py-2 rounded-lg outline-none focus:border-[#00AEEF]"
+                  className="bg-gray-100 dark:bg-[#1A1A1A] border border-gray-200 dark:border-[#2A2A2A] text-gray-500 dark:text-[#A0A0A0] text-xs px-3 py-2 rounded-lg outline-none focus:border-[#00AEEF]"
                 >
                   {DAY_FOCUS_OPTIONS.map(f => <option key={f} value={f}>{f}</option>)}
                 </select>
@@ -1132,7 +1132,7 @@ function Step5Split({
                   'text-xs font-semibold px-3 py-2 rounded-lg border transition-colors',
                   currentDay.isRest
                     ? 'border-[#00AEEF] text-[#00AEEF] hover:bg-[rgba(0,174,239,0.1)]'
-                    : 'border-[#2A2A2A] text-[#6B6B6B] hover:border-[#3A3A3A]'
+                    : 'border-gray-200 dark:border-[#2A2A2A] text-gray-400 dark:text-[#6B6B6B] hover:border-[#3A3A3A]'
                 )}
               >
                 {currentDay.isRest ? 'Make Active' : 'Make Rest'}
@@ -1144,7 +1144,7 @@ function Step5Split({
           {!currentDay.isRest && (
             <div className="space-y-3">
               {currentDay.exercises.length === 0 ? (
-                <div className="text-center py-8 text-[#6B6B6B] text-sm">
+                <div className="text-center py-8 text-gray-400 dark:text-[#6B6B6B] text-sm">
                   <Dumbbell size={24} className="mx-auto mb-2 opacity-50" />
                   No exercises yet. Add exercises or use auto-populate.
                 </div>
@@ -1155,49 +1155,49 @@ function Step5Split({
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: idx * 0.03 }}
-                    className="flex items-center gap-3 bg-[#0A0A0A] border border-[#1F1F1F] rounded-lg p-3"
+                    className="flex items-center gap-3 bg-[#0A0A0A] border border-gray-200 dark:border-[#1F1F1F] rounded-lg p-3"
                   >
-                    <div className="text-[#6B6B6B] text-xs font-mono w-6 text-center">{idx + 1}</div>
+                    <div className="text-gray-400 dark:text-[#6B6B6B] text-xs font-mono w-6 text-center">{idx + 1}</div>
                     <GripVertical size={14} className="text-[#2A2A2A] flex-shrink-0" />
                     <input
                       placeholder="Exercise name"
                       value={ex.name}
                       onChange={(e) => updateExercise(ex.id, { name: e.target.value })}
-                      className="flex-1 min-w-0 bg-transparent text-[#F0F0F0] text-sm placeholder-[#6B6B6B] outline-none"
+                      className="flex-1 min-w-0 bg-transparent text-gray-900 dark:text-[#F0F0F0] text-sm placeholder-[#6B6B6B] outline-none"
                     />
                     <div className="flex items-center gap-2 flex-shrink-0">
                       <div className="flex items-center gap-1">
-                        <span className="text-[#6B6B6B] text-[10px]">Sets</span>
+                        <span className="text-gray-400 dark:text-[#6B6B6B] text-[10px]">Sets</span>
                         <input
                           type="number"
                           min={1}
                           max={10}
                           value={ex.sets}
                           onChange={(e) => updateExercise(ex.id, { sets: parseInt(e.target.value) || 1 })}
-                          className="w-10 bg-[#1A1A1A] border border-[#2A2A2A] text-[#F0F0F0] text-xs px-1 py-1 rounded text-center outline-none focus:border-[#00AEEF]"
+                          className="w-10 bg-gray-100 dark:bg-[#1A1A1A] border border-gray-200 dark:border-[#2A2A2A] text-gray-900 dark:text-[#F0F0F0] text-xs px-1 py-1 rounded text-center outline-none focus:border-[#00AEEF]"
                         />
                       </div>
                       <div className="flex items-center gap-1">
-                        <span className="text-[#6B6B6B] text-[10px]">Reps</span>
+                        <span className="text-gray-400 dark:text-[#6B6B6B] text-[10px]">Reps</span>
                         <input
                           value={ex.reps}
                           onChange={(e) => updateExercise(ex.id, { reps: e.target.value })}
-                          className="w-14 bg-[#1A1A1A] border border-[#2A2A2A] text-[#F0F0F0] text-xs px-1 py-1 rounded text-center outline-none focus:border-[#00AEEF]"
+                          className="w-14 bg-gray-100 dark:bg-[#1A1A1A] border border-gray-200 dark:border-[#2A2A2A] text-gray-900 dark:text-[#F0F0F0] text-xs px-1 py-1 rounded text-center outline-none focus:border-[#00AEEF]"
                         />
                       </div>
                       <div className="flex items-center gap-1">
-                        <span className="text-[#6B6B6B] text-[10px]">Rest</span>
+                        <span className="text-gray-400 dark:text-[#6B6B6B] text-[10px]">Rest</span>
                         <select
                           value={ex.rest}
                           onChange={(e) => updateExercise(ex.id, { rest: e.target.value })}
-                          className="w-16 bg-[#1A1A1A] border border-[#2A2A2A] text-[#F0F0F0] text-xs px-1 py-1 rounded outline-none"
+                          className="w-16 bg-gray-100 dark:bg-[#1A1A1A] border border-gray-200 dark:border-[#2A2A2A] text-gray-900 dark:text-[#F0F0F0] text-xs px-1 py-1 rounded outline-none"
                         >
                           {['30s', '60s', '90s', '120s', '180s'].map(r => <option key={r} value={r}>{r}</option>)}
                         </select>
                       </div>
                       <button
                         onClick={() => removeExercise(ex.id)}
-                        className="text-[#6B6B6B] hover:text-[#EF4444] p-1 transition-colors"
+                        className="text-gray-400 dark:text-[#6B6B6B] hover:text-[#EF4444] p-1 transition-colors"
                       >
                         <X size={14} />
                       </button>
@@ -1209,7 +1209,7 @@ function Step5Split({
               {/* Add Exercise */}
               <button
                 onClick={addExercise}
-                className="w-full flex items-center justify-center gap-2 border border-dashed border-[#2A2A2A] hover:border-[#00AEEF] text-[#6B6B6B] hover:text-[#00AEEF] text-xs font-semibold py-2.5 rounded-lg transition-colors"
+                className="w-full flex items-center justify-center gap-2 border border-dashed border-gray-200 dark:border-[#2A2A2A] hover:border-[#00AEEF] text-gray-400 dark:text-[#6B6B6B] hover:text-[#00AEEF] text-xs font-semibold py-2.5 rounded-lg transition-colors"
               >
                 <Plus size={14} /> Add Exercise
               </button>
@@ -1299,10 +1299,10 @@ function Step6Review({
   return (
     <div className="max-w-[1200px] mx-auto">
       <div className="text-center mb-8">
-        <h2 className="text-[#F0F0F0] text-3xl font-semibold mb-2" style={{ fontFamily: 'Playfair Display, Georgia, serif' }}>
+        <h2 className="text-gray-900 dark:text-[#F0F0F0] text-3xl font-semibold mb-2" style={{ fontFamily: 'Playfair Display, Georgia, serif' }}>
           Review exercises
         </h2>
-        <p className="text-[#A0A0A0] text-sm">
+        <p className="text-gray-500 dark:text-[#A0A0A0] text-sm">
           {totalExercises} exercises across {activeDays.length} training days — {totalSets} total sets/week
         </p>
       </div>
@@ -1316,19 +1316,19 @@ function Step6Review({
             const daySets = day.exercises.reduce((s, ex) => s + ex.sets, 0)
 
             return (
-              <div key={day.day} className="bg-[#141414] border border-[#2A2A2A] rounded-xl overflow-hidden">
+              <div key={day.day} className="bg-gray-50 dark:bg-[#141414] border border-gray-200 dark:border-[#2A2A2A] rounded-xl overflow-hidden">
                 {/* Accordion Header */}
                 <button
                   onClick={() => toggleDay(dayIdx)}
-                  className="w-full flex items-center justify-between px-5 py-4 hover:bg-[#1A1A1A] transition-colors"
+                  className="w-full flex items-center justify-between px-5 py-4 hover:bg-gray-100 dark:bg-[#1A1A1A] dark:hover:bg-[#242424] transition-colors"
                 >
                   <div className="flex items-center gap-3">
-                    <h3 className="text-[#F0F0F0] font-semibold text-base">{day.day} — {day.focus}</h3>
-                    <span className="text-[#6B6B6B] text-xs">{day.exercises.length} exercises</span>
-                    <span className="text-[#6B6B6B] text-xs">{daySets} sets</span>
+                    <h3 className="text-gray-900 dark:text-[#F0F0F0] font-semibold text-base">{day.day} — {day.focus}</h3>
+                    <span className="text-gray-400 dark:text-[#6B6B6B] text-xs">{day.exercises.length} exercises</span>
+                    <span className="text-gray-400 dark:text-[#6B6B6B] text-xs">{daySets} sets</span>
                   </div>
                   <motion.div animate={{ rotate: expanded ? 180 : 0 }} transition={{ duration: 0.2 }}>
-                    <ChevronRight size={16} className="text-[#6B6B6B] rotate-90" />
+                    <ChevronRight size={16} className="text-gray-400 dark:text-[#6B6B6B] rotate-90" />
                   </motion.div>
                 </button>
 
@@ -1344,14 +1344,14 @@ function Step6Review({
                     >
                       <div className="px-5 pb-4">
                         {day.exercises.length === 0 ? (
-                          <p className="text-[#6B6B6B] text-sm py-4 text-center">No exercises for this day</p>
+                          <p className="text-gray-400 dark:text-[#6B6B6B] text-sm py-4 text-center">No exercises for this day</p>
                         ) : (
                           <div className="overflow-x-auto">
                             <table className="w-full">
                               <thead>
-                                <tr className="border-b border-[#1F1F1F]">
+                                <tr className="border-b border-gray-200 dark:border-[#1F1F1F]">
                                   {['#', 'Exercise', 'Muscle', 'Sets', 'Reps', 'Rest', 'RPE', ''].map(h => (
-                                    <th key={h} className="text-left text-[#6B6B6B] text-[10px] font-semibold uppercase tracking-wider px-2 py-2">{h}</th>
+                                    <th key={h} className="text-left text-gray-400 dark:text-[#6B6B6B] text-[10px] font-semibold uppercase tracking-wider px-2 py-2">{h}</th>
                                   ))}
                                 </tr>
                               </thead>
@@ -1362,21 +1362,21 @@ function Step6Review({
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
                                     transition={{ delay: i * 0.03 }}
-                                    className="border-b border-[#1F1F1F] last:border-b-0 hover:bg-[#1A1A1A] transition-colors"
+                                    className="border-b border-gray-200 dark:border-[#1F1F1F] last:border-b-0 hover:bg-gray-100 dark:bg-[#1A1A1A] dark:hover:bg-[#242424] transition-colors"
                                   >
-                                    <td className="px-2 py-2.5 text-[#6B6B6B] text-xs font-mono">{i + 1}</td>
+                                    <td className="px-2 py-2.5 text-gray-400 dark:text-[#6B6B6B] text-xs font-mono">{i + 1}</td>
                                     <td className="px-2 py-2.5">
                                       <div>
-                                        <p className="text-[#F0F0F0] text-xs font-medium">{ex.name || '—'}</p>
+                                        <p className="text-gray-900 dark:text-[#F0F0F0] text-xs font-medium">{ex.name || '—'}</p>
                                         {ex.muscleGroup && (
-                                          <p className="text-[#6B6B6B] text-[10px]">{ex.muscleGroup}</p>
+                                          <p className="text-gray-400 dark:text-[#6B6B6B] text-[10px]">{ex.muscleGroup}</p>
                                         )}
                                       </div>
                                     </td>
-                                    <td className="px-2 py-2.5 text-[#A0A0A0] text-xs">{ex.muscleGroup || '—'}</td>
-                                    <td className="px-2 py-2.5 text-[#A0A0A0] text-xs font-mono">{ex.sets}</td>
-                                    <td className="px-2 py-2.5 text-[#A0A0A0] text-xs font-mono">{ex.reps}</td>
-                                    <td className="px-2 py-2.5 text-[#A0A0A0] text-xs font-mono">{ex.rest}</td>
+                                    <td className="px-2 py-2.5 text-gray-500 dark:text-[#A0A0A0] text-xs">{ex.muscleGroup || '—'}</td>
+                                    <td className="px-2 py-2.5 text-gray-500 dark:text-[#A0A0A0] text-xs font-mono">{ex.sets}</td>
+                                    <td className="px-2 py-2.5 text-gray-500 dark:text-[#A0A0A0] text-xs font-mono">{ex.reps}</td>
+                                    <td className="px-2 py-2.5 text-gray-500 dark:text-[#A0A0A0] text-xs font-mono">{ex.rest}</td>
                                     <td className="px-2 py-2.5">
                                       <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded-full bg-[rgba(0,174,239,0.1)] text-[#00AEEF]">
                                         {ex.rpe}
@@ -1386,7 +1386,7 @@ function Step6Review({
                                       <div className="flex items-center gap-1">
                                         <button
                                           onClick={() => setSwapModal({ dayIndex: dayIdx, exId: ex.id, currentName: ex.name })}
-                                          className="text-[#6B6B6B] hover:text-[#00AEEF] p-1 rounded transition-colors"
+                                          className="text-gray-400 dark:text-[#6B6B6B] hover:text-[#00AEEF] p-1 rounded transition-colors"
                                           title="Swap exercise"
                                         >
                                           <RefreshCw size={12} />
@@ -1410,36 +1410,36 @@ function Step6Review({
 
         {/* Summary Sidebar */}
         <div className="space-y-4">
-          <div className="bg-[#141414] border border-[#2A2A2A] rounded-xl p-5">
-            <h4 className="text-[#F0F0F0] font-semibold text-sm mb-4">Program Summary</h4>
+          <div className="bg-gray-50 dark:bg-[#141414] border border-gray-200 dark:border-[#2A2A2A] rounded-xl p-5">
+            <h4 className="text-gray-900 dark:text-[#F0F0F0] font-semibold text-sm mb-4">Program Summary</h4>
             <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <span className="text-[#6B6B6B] text-xs">Total Exercises</span>
-                <span className="text-[#F0F0F0] text-sm font-semibold font-mono">{totalExercises}</span>
+                <span className="text-gray-400 dark:text-[#6B6B6B] text-xs">Total Exercises</span>
+                <span className="text-gray-900 dark:text-[#F0F0F0] text-sm font-semibold font-mono">{totalExercises}</span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-[#6B6B6B] text-xs">Sets / Week</span>
-                <span className="text-[#F0F0F0] text-sm font-semibold font-mono">{totalSets}</span>
+                <span className="text-gray-400 dark:text-[#6B6B6B] text-xs">Sets / Week</span>
+                <span className="text-gray-900 dark:text-[#F0F0F0] text-sm font-semibold font-mono">{totalSets}</span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-[#6B6B6B] text-xs">Training Days</span>
-                <span className="text-[#F0F0F0] text-sm font-semibold font-mono">{activeDays.length}</span>
+                <span className="text-gray-400 dark:text-[#6B6B6B] text-xs">Training Days</span>
+                <span className="text-gray-900 dark:text-[#F0F0F0] text-sm font-semibold font-mono">{activeDays.length}</span>
               </div>
             </div>
           </div>
 
-          <div className="bg-[#141414] border border-[#2A2A2A] rounded-xl p-5">
-            <h4 className="text-[#F0F0F0] font-semibold text-sm mb-3">Muscle Distribution</h4>
+          <div className="bg-gray-50 dark:bg-[#141414] border border-gray-200 dark:border-[#2A2A2A] rounded-xl p-5">
+            <h4 className="text-gray-900 dark:text-[#F0F0F0] font-semibold text-sm mb-3">Muscle Distribution</h4>
             <div className="space-y-2">
               {muscleDist.slice(0, 8).map(([muscle, sets]) => {
                 const pct = totalSets > 0 ? (sets / totalSets) * 100 : 0
                 return (
                   <div key={muscle}>
                     <div className="flex items-center justify-between text-xs mb-0.5">
-                      <span className="text-[#A0A0A0] truncate">{muscle}</span>
-                      <span className="text-[#F0F0F0] font-mono">{sets}</span>
+                      <span className="text-gray-500 dark:text-[#A0A0A0] truncate">{muscle}</span>
+                      <span className="text-gray-900 dark:text-[#F0F0F0] font-mono">{sets}</span>
                     </div>
-                    <div className="h-1.5 bg-[#1A1A1A] rounded-full overflow-hidden">
+                    <div className="h-1.5 bg-gray-100 dark:bg-[#1A1A1A] rounded-full overflow-hidden">
                       <motion.div
                         initial={{ width: 0 }}
                         animate={{ width: `${pct}%` }}
@@ -1450,7 +1450,7 @@ function Step6Review({
                   </div>
                 )
               })}
-              {muscleDist.length === 0 && <p className="text-[#6B6B6B] text-xs">No exercises added</p>}
+              {muscleDist.length === 0 && <p className="text-gray-400 dark:text-[#6B6B6B] text-xs">No exercises added</p>}
             </div>
           </div>
         </div>
@@ -1472,35 +1472,35 @@ function Step6Review({
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.25, ease: [0.175, 0.885, 0.32, 1.275] as [number, number, number, number] }}
-              className="fixed inset-x-4 top-[10%] md:inset-x-auto md:left-1/2 md:-translate-x-1/2 md:w-[600px] md:max-w-[90vw] max-h-[80vh] bg-[#141414] border border-[#2A2A2A] rounded-2xl z-[201] flex flex-col shadow-[0_16px_48px_rgba(0,0,0,0.5)]"
+              className="fixed inset-x-4 top-[10%] md:inset-x-auto md:left-1/2 md:-translate-x-1/2 md:w-[600px] md:max-w-[90vw] max-h-[80vh] bg-gray-50 dark:bg-[#141414] border border-gray-200 dark:border-[#2A2A2A] rounded-2xl z-[201] flex flex-col shadow-[0_16px_48px_rgba(0,0,0,0.5)]"
             >
               {/* Modal Header */}
-              <div className="flex items-center justify-between px-6 py-4 border-b border-[#2A2A2A] flex-shrink-0">
+              <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-[#2A2A2A] flex-shrink-0">
                 <div>
-                  <h3 className="text-[#F0F0F0] font-semibold text-base">Swap Exercise</h3>
-                  <p className="text-[#6B6B6B] text-xs">Current: {swapModal.currentName || '—'}</p>
+                  <h3 className="text-gray-900 dark:text-[#F0F0F0] font-semibold text-base">Swap Exercise</h3>
+                  <p className="text-gray-400 dark:text-[#6B6B6B] text-xs">Current: {swapModal.currentName || '—'}</p>
                 </div>
-                <button onClick={() => setSwapModal(null)} className="text-[#6B6B6B] hover:text-[#F0F0F0] p-1 transition-colors">
+                <button onClick={() => setSwapModal(null)} className="text-gray-400 dark:text-[#6B6B6B] hover:text-gray-900 dark:hover:text-[#F0F0F0] p-1 transition-colors">
                   <X size={18} />
                 </button>
               </div>
 
               {/* Filters */}
-              <div className="px-6 py-3 border-b border-[#1F1F1F] flex items-center gap-2 flex-shrink-0">
-                <div className="flex-1 flex items-center bg-[#1A1A1A] border border-[#2A2A2A] rounded-lg px-3">
-                  <Search size={14} className="text-[#6B6B6B] flex-shrink-0" />
+              <div className="px-6 py-3 border-b border-gray-200 dark:border-[#1F1F1F] flex items-center gap-2 flex-shrink-0">
+                <div className="flex-1 flex items-center bg-gray-100 dark:bg-[#1A1A1A] border border-gray-200 dark:border-[#2A2A2A] rounded-lg px-3">
+                  <Search size={14} className="text-gray-400 dark:text-[#6B6B6B] flex-shrink-0" />
                   <input
                     placeholder="Search exercises..."
                     value={searchFilter}
                     onChange={(e) => setSearchFilter(e.target.value)}
-                    className="bg-transparent text-[#F0F0F0] text-sm placeholder-[#6B6B6B] px-2 py-2 w-full outline-none"
+                    className="bg-transparent text-gray-900 dark:text-[#F0F0F0] text-sm placeholder-[#6B6B6B] px-2 py-2 w-full outline-none"
                     autoFocus
                   />
                 </div>
                 <select
                   value={muscleFilter}
                   onChange={(e) => setMuscleFilter(e.target.value)}
-                  className="bg-[#1A1A1A] border border-[#2A2A2A] text-[#A0A0A0] text-xs px-2 py-2 rounded-lg outline-none"
+                  className="bg-gray-100 dark:bg-[#1A1A1A] border border-gray-200 dark:border-[#2A2A2A] text-gray-500 dark:text-[#A0A0A0] text-xs px-2 py-2 rounded-lg outline-none"
                 >
                   <option value="">All Muscles</option>
                   {muscleGroups.map(mg => <option key={mg} value={mg}>{mg}</option>)}
@@ -1513,17 +1513,17 @@ function Step6Review({
                   <button
                     key={ex.ExerciseID}
                     onClick={() => handleSwap(swapModal.dayIndex, swapModal.exId, ex)}
-                    className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[#1A1A1A] transition-colors text-left"
+                    className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-gray-100 dark:bg-[#1A1A1A] dark:hover:bg-[#242424] transition-colors text-left"
                   >
                     <div className="flex-1 min-w-0">
-                      <p className="text-[#F0F0F0] text-sm font-medium truncate">{ex.Name}</p>
-                      <p className="text-[#6B6B6B] text-[10px]">{ex.MuscleGroup} — {ex.Equipment} — {ex.Difficulty}</p>
+                      <p className="text-gray-900 dark:text-[#F0F0F0] text-sm font-medium truncate">{ex.Name}</p>
+                      <p className="text-gray-400 dark:text-[#6B6B6B] text-[10px]">{ex.MuscleGroup} — {ex.Equipment} — {ex.Difficulty}</p>
                     </div>
-                    <span className="text-[#6B6B6B] text-[10px] flex-shrink-0">{ex.Type}</span>
+                    <span className="text-gray-400 dark:text-[#6B6B6B] text-[10px] flex-shrink-0">{ex.Type}</span>
                   </button>
                 ))}
                 {filteredExercises.length === 0 && (
-                  <p className="text-center text-[#6B6B6B] text-sm py-8">No exercises match your filters</p>
+                  <p className="text-center text-gray-400 dark:text-[#6B6B6B] text-sm py-8">No exercises match your filters</p>
                 )}
               </div>
             </motion.div>
@@ -1569,19 +1569,19 @@ function Step7Preview({
   return (
     <div className="max-w-[1200px] mx-auto">
       <div className="text-center mb-8">
-        <h2 className="text-[#F0F0F0] text-3xl font-semibold mb-2" style={{ fontFamily: 'Playfair Display, Georgia, serif' }}>
+        <h2 className="text-gray-900 dark:text-[#F0F0F0] text-3xl font-semibold mb-2" style={{ fontFamily: 'Playfair Display, Georgia, serif' }}>
           Program Preview
         </h2>
       </div>
 
       {/* Program Name */}
       <div className="max-w-lg mx-auto mb-8">
-        <label className="block text-[#6B6B6B] text-xs mb-2 font-semibold uppercase tracking-wider">Program Name</label>
+        <label className="block text-gray-400 dark:text-[#6B6B6B] text-xs mb-2 font-semibold uppercase tracking-wider">Program Name</label>
         <input
           value={state.programName}
           onChange={(e) => onNameChange(e.target.value)}
           placeholder="e.g., Hypertrophy Phase 1"
-          className="w-full bg-[#1A1A1A] border border-[#2A2A2A] focus:border-[#00AEEF] text-[#F0F0F0] text-lg px-4 py-3 rounded-xl outline-none transition-colors"
+          className="w-full bg-gray-100 dark:bg-[#1A1A1A] border border-gray-200 dark:border-[#2A2A2A] focus:border-[#00AEEF] text-gray-900 dark:text-[#F0F0F0] text-lg px-4 py-3 rounded-xl outline-none transition-colors"
         />
       </div>
 
@@ -1598,22 +1598,22 @@ function Step7Preview({
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.08 }}
-            className="bg-[#141414] border border-[#2A2A2A] rounded-xl p-5"
+            className="bg-gray-50 dark:bg-[#141414] border border-gray-200 dark:border-[#2A2A2A] rounded-xl p-5"
           >
             <div className="flex items-center gap-2 mb-2">
               <card.icon size={16} className="text-[#00AEEF]" />
-              <span className="text-[#6B6B6B] text-xs">{card.label}</span>
+              <span className="text-gray-400 dark:text-[#6B6B6B] text-xs">{card.label}</span>
             </div>
-            <p className="text-[#F0F0F0] text-xl font-semibold font-mono">{card.value}</p>
-            <p className="text-[#6B6B6B] text-[10px] mt-0.5">{card.sub}</p>
+            <p className="text-gray-900 dark:text-[#F0F0F0] text-xl font-semibold font-mono">{card.value}</p>
+            <p className="text-gray-400 dark:text-[#6B6B6B] text-[10px] mt-0.5">{card.sub}</p>
           </motion.div>
         ))}
       </div>
 
       {/* Weekly Schedule Preview */}
-      <div className="bg-[#141414] border border-[#2A2A2A] rounded-xl p-6 mb-8">
+      <div className="bg-gray-50 dark:bg-[#141414] border border-gray-200 dark:border-[#2A2A2A] rounded-xl p-6 mb-8">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-[#F0F0F0] font-semibold text-base">Weekly Schedule</h3>
+          <h3 className="text-gray-900 dark:text-[#F0F0F0] font-semibold text-base">Weekly Schedule</h3>
           <button
             onClick={() => setWeekView(!weekView)}
             className="text-xs text-[#00AEEF] hover:underline"
@@ -1629,34 +1629,34 @@ function Step7Preview({
               className={cn(
                 'rounded-lg p-2 min-h-[80px] border',
                 day.isRest
-                  ? 'bg-[#0A0A0A] border-dashed border-[#1F1F1F]'
-                  : 'bg-[#1A1A1A] border-[#2A2A2A]'
+                  ? 'bg-[#0A0A0A] border-dashed border-gray-200 dark:border-[#1F1F1F]'
+                  : 'bg-gray-100 dark:bg-[#1A1A1A] border-gray-200 dark:border-[#2A2A2A]'
               )}
             >
-              <p className={cn('text-[10px] font-semibold mb-1', day.isRest ? 'text-[#6B6B6B]' : 'text-[#00AEEF]')}>
+              <p className={cn('text-[10px] font-semibold mb-1', day.isRest ? 'text-gray-400 dark:text-[#6B6B6B]' : 'text-[#00AEEF]')}>
                 {day.day.slice(0, 3)}
               </p>
               {!day.isRest && (
                 <div>
-                  <p className="text-[#F0F0F0] text-[10px] font-medium leading-tight truncate">{day.focus}</p>
+                  <p className="text-gray-900 dark:text-[#F0F0F0] text-[10px] font-medium leading-tight truncate">{day.focus}</p>
                   {weekView && day.exercises.slice(0, 3).map((ex, i) => (
-                    <p key={ex.id} className="text-[#6B6B6B] text-[9px] truncate mt-0.5">{i + 1}. {ex.name}</p>
+                    <p key={ex.id} className="text-gray-400 dark:text-[#6B6B6B] text-[9px] truncate mt-0.5">{i + 1}. {ex.name}</p>
                   ))}
                   {weekView && day.exercises.length > 3 && (
                     <p className="text-[#00AEEF] text-[9px]">+{day.exercises.length - 3} more</p>
                   )}
-                  {!weekView && <p className="text-[#6B6B6B] text-[9px]">{day.exercises.length} exercises</p>}
+                  {!weekView && <p className="text-gray-400 dark:text-[#6B6B6B] text-[9px]">{day.exercises.length} exercises</p>}
                 </div>
               )}
-              {day.isRest && <p className="text-[#6B6B6B] text-[9px]">Rest</p>}
+              {day.isRest && <p className="text-gray-400 dark:text-[#6B6B6B] text-[9px]">Rest</p>}
             </div>
           ))}
         </div>
       </div>
 
       {/* Phase Timeline */}
-      <div className="bg-[#141414] border border-[#2A2A2A] rounded-xl p-6 mb-8">
-        <h3 className="text-[#F0F0F0] font-semibold text-base mb-4">Phase Timeline</h3>
+      <div className="bg-gray-50 dark:bg-[#141414] border border-gray-200 dark:border-[#2A2A2A] rounded-xl p-6 mb-8">
+        <h3 className="text-gray-900 dark:text-[#F0F0F0] font-semibold text-base mb-4">Phase Timeline</h3>
         <div className="h-12 flex rounded-xl overflow-hidden">
           {state.phases.map((phase, i) => (
             <div
@@ -1670,10 +1670,10 @@ function Step7Preview({
               <span className="text-xs font-bold">{phase.name}</span>
               <span className="text-[9px] opacity-75">{phase.durationWeeks}w</span>
               {/* Tooltip */}
-              <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 bg-[#1A1A1A] border border-[#2A2A2A] rounded-lg px-3 py-2 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity z-10 whitespace-nowrap shadow-lg">
-                <p className="text-[#F0F0F0] text-xs font-semibold">{phase.name}</p>
-                <p className="text-[#A0A0A0] text-[10px]">{phase.focus} — {phase.intensityMin}-{phase.intensityMax}% 1RM</p>
-                <p className="text-[#6B6B6B] text-[10px]">{phase.repRange} reps — {phase.volume} volume</p>
+              <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 bg-gray-100 dark:bg-[#1A1A1A] border border-gray-200 dark:border-[#2A2A2A] rounded-lg px-3 py-2 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity z-10 whitespace-nowrap shadow-lg">
+                <p className="text-gray-900 dark:text-[#F0F0F0] text-xs font-semibold">{phase.name}</p>
+                <p className="text-gray-500 dark:text-[#A0A0A0] text-[10px]">{phase.focus} — {phase.intensityMin}-{phase.intensityMax}% 1RM</p>
+                <p className="text-gray-400 dark:text-[#6B6B6B] text-[10px]">{phase.repRange} reps — {phase.volume} volume</p>
               </div>
             </div>
           ))}
@@ -1682,8 +1682,8 @@ function Step7Preview({
 
       {/* Muscle Distribution */}
       {muscleDist.length > 0 && (
-        <div className="bg-[#141414] border border-[#2A2A2A] rounded-xl p-6 mb-8">
-          <h3 className="text-[#F0F0F0] font-semibold text-base mb-4">Muscle Group Distribution</h3>
+        <div className="bg-gray-50 dark:bg-[#141414] border border-gray-200 dark:border-[#2A2A2A] rounded-xl p-6 mb-8">
+          <h3 className="text-gray-900 dark:text-[#F0F0F0] font-semibold text-base mb-4">Muscle Group Distribution</h3>
           <div className="flex flex-wrap gap-3">
             {muscleDist.map(([muscle, sets], i) => (
               <div
@@ -1695,8 +1695,8 @@ function Step7Preview({
                 }}
               >
                 <div className="w-2 h-2 rounded-full" style={{ backgroundColor: colors[i % colors.length] }} />
-                <span className="text-[#F0F0F0] font-medium">{muscle}</span>
-                <span className="text-[#6B6B6B] font-mono">{sets}</span>
+                <span className="text-gray-900 dark:text-[#F0F0F0] font-medium">{muscle}</span>
+                <span className="text-gray-400 dark:text-[#6B6B6B] font-mono">{sets}</span>
               </div>
             ))}
           </div>
@@ -1704,14 +1704,14 @@ function Step7Preview({
       )}
 
       {/* Notes */}
-      <div className="bg-[#141414] border border-[#2A2A2A] rounded-xl p-6">
-        <label className="block text-[#6B6B6B] text-xs mb-2 font-semibold uppercase tracking-wider">Notes / Description</label>
+      <div className="bg-gray-50 dark:bg-[#141414] border border-gray-200 dark:border-[#2A2A2A] rounded-xl p-6">
+        <label className="block text-gray-400 dark:text-[#6B6B6B] text-xs mb-2 font-semibold uppercase tracking-wider">Notes / Description</label>
         <textarea
           value={state.description}
           onChange={(e) => onDescChange(e.target.value)}
           placeholder="Add any notes about this program..."
           rows={4}
-          className="w-full bg-[#1A1A1A] border border-[#2A2A2A] focus:border-[#00AEEF] text-[#F0F0F0] text-sm placeholder-[#6B6B6B] px-4 py-3 rounded-xl outline-none resize-none transition-colors"
+          className="w-full bg-gray-100 dark:bg-[#1A1A1A] border border-gray-200 dark:border-[#2A2A2A] focus:border-[#00AEEF] text-gray-900 dark:text-[#F0F0F0] text-sm placeholder-[#6B6B6B] px-4 py-3 rounded-xl outline-none resize-none transition-colors"
         />
       </div>
     </div>
@@ -1775,7 +1775,7 @@ function Step8Save({
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="text-[#F0F0F0] text-2xl font-semibold mb-2"
+          className="text-gray-900 dark:text-[#F0F0F0] text-2xl font-semibold mb-2"
         >
           Program Created!
         </motion.h2>
@@ -1783,7 +1783,7 @@ function Step8Save({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.7 }}
-          className="text-[#A0A0A0] text-sm"
+          className="text-gray-500 dark:text-[#A0A0A0] text-sm"
         >
           Redirecting to program library...
         </motion.p>
@@ -1794,22 +1794,22 @@ function Step8Save({
   return (
     <div className="max-w-[600px] mx-auto">
       <div className="text-center mb-8">
-        <h2 className="text-[#F0F0F0] text-3xl font-semibold mb-2" style={{ fontFamily: 'Playfair Display, Georgia, serif' }}>
+        <h2 className="text-gray-900 dark:text-[#F0F0F0] text-3xl font-semibold mb-2" style={{ fontFamily: 'Playfair Display, Georgia, serif' }}>
           Save &amp; Assign
         </h2>
-        <p className="text-[#A0A0A0] text-sm">Finalize your program</p>
+        <p className="text-gray-500 dark:text-[#A0A0A0] text-sm">Finalize your program</p>
       </div>
 
       {/* Program Info */}
-      <div className="bg-[#141414] border border-[#2A2A2A] rounded-xl p-5 mb-6">
-        <label className="block text-[#6B6B6B] text-xs mb-2 font-semibold uppercase tracking-wider">Program Name</label>
+      <div className="bg-gray-50 dark:bg-[#141414] border border-gray-200 dark:border-[#2A2A2A] rounded-xl p-5 mb-6">
+        <label className="block text-gray-400 dark:text-[#6B6B6B] text-xs mb-2 font-semibold uppercase tracking-wider">Program Name</label>
         <input
           value={state.programName}
           onChange={(e) => onNameChange(e.target.value)}
-          className="w-full bg-[#1A1A1A] border border-[#2A2A2A] focus:border-[#00AEEF] text-[#F0F0F0] text-base px-4 py-2.5 rounded-xl outline-none mb-4 transition-colors"
+          className="w-full bg-gray-100 dark:bg-[#1A1A1A] border border-gray-200 dark:border-[#2A2A2A] focus:border-[#00AEEF] text-gray-900 dark:text-[#F0F0F0] text-base px-4 py-2.5 rounded-xl outline-none mb-4 transition-colors"
         />
 
-        <label className="block text-[#6B6B6B] text-xs mb-2 font-semibold uppercase tracking-wider">Tags</label>
+        <label className="block text-gray-400 dark:text-[#6B6B6B] text-xs mb-2 font-semibold uppercase tracking-wider">Tags</label>
         <div className="flex flex-wrap gap-2 mb-4">
           {[
             GOAL_CARDS.find(g => g.id === state.selectedGoal)?.label,
@@ -1822,12 +1822,12 @@ function Step8Save({
           ))}
         </div>
 
-        <label className="block text-[#6B6B6B] text-xs mb-2 font-semibold uppercase tracking-wider">Description</label>
+        <label className="block text-gray-400 dark:text-[#6B6B6B] text-xs mb-2 font-semibold uppercase tracking-wider">Description</label>
         <textarea
           value={state.description}
           onChange={(e) => onDescChange(e.target.value)}
           rows={3}
-          className="w-full bg-[#1A1A1A] border border-[#2A2A2A] focus:border-[#00AEEF] text-[#F0F0F0] text-sm placeholder-[#6B6B6B] px-4 py-2.5 rounded-xl outline-none resize-none transition-colors"
+          className="w-full bg-gray-100 dark:bg-[#1A1A1A] border border-gray-200 dark:border-[#2A2A2A] focus:border-[#00AEEF] text-gray-900 dark:text-[#F0F0F0] text-sm placeholder-[#6B6B6B] px-4 py-2.5 rounded-xl outline-none resize-none transition-colors"
         />
       </div>
 
@@ -1838,16 +1838,16 @@ function Step8Save({
           whileHover={{ scale: 1.01 }}
           whileTap={{ scale: 0.99 }}
           onClick={() => setAssignOpen(!assignOpen)}
-          className="w-full bg-[#141414] border border-[#2A2A2A] hover:border-[#00AEEF] rounded-xl p-5 flex items-center gap-4 transition-colors text-left"
+          className="w-full bg-gray-50 dark:bg-[#141414] border border-gray-200 dark:border-[#2A2A2A] hover:border-[#00AEEF] rounded-xl p-5 flex items-center gap-4 transition-colors text-left"
         >
           <div className="w-12 h-12 bg-[rgba(0,174,239,0.1)] rounded-xl flex items-center justify-center flex-shrink-0">
             <UserPlus size={22} className="text-[#00AEEF]" />
           </div>
           <div className="flex-1 min-w-0">
-            <h4 className="text-[#F0F0F0] font-semibold text-sm">Assign to Client</h4>
-            <p className="text-[#6B6B6B] text-xs">Assign this program to a client immediately</p>
+            <h4 className="text-gray-900 dark:text-[#F0F0F0] font-semibold text-sm">Assign to Client</h4>
+            <p className="text-gray-400 dark:text-[#6B6B6B] text-xs">Assign this program to a client immediately</p>
           </div>
-          <ChevronRight size={16} className={cn('text-[#6B6B6B] transition-transform', assignOpen && 'rotate-90')} />
+          <ChevronRight size={16} className={cn('text-gray-400 dark:text-[#6B6B6B] transition-transform', assignOpen && 'rotate-90')} />
         </motion.button>
 
         <AnimatePresence>
@@ -1858,25 +1858,25 @@ function Step8Save({
               exit={{ height: 0, opacity: 0 }}
               className="overflow-hidden"
             >
-              <div className="bg-[#1A1A1A] border border-[#2A2A2A] rounded-xl p-4 space-y-3 mx-2">
+              <div className="bg-gray-100 dark:bg-[#1A1A1A] border border-gray-200 dark:border-[#2A2A2A] rounded-xl p-4 space-y-3 mx-2">
                 <div>
-                  <label className="block text-[#6B6B6B] text-xs mb-1">Select Client</label>
+                  <label className="block text-gray-400 dark:text-[#6B6B6B] text-xs mb-1">Select Client</label>
                   <input
                     placeholder="Search client..."
-                    className="w-full bg-[#141414] border border-[#2A2A2A] focus:border-[#00AEEF] text-[#F0F0F0] text-sm px-3 py-2 rounded-lg outline-none"
+                    className="w-full bg-gray-50 dark:bg-[#141414] border border-gray-200 dark:border-[#2A2A2A] focus:border-[#00AEEF] text-gray-900 dark:text-[#F0F0F0] text-sm px-3 py-2 rounded-lg outline-none"
                   />
                 </div>
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-[#6B6B6B] text-xs mb-1">Start Date</label>
+                    <label className="block text-gray-400 dark:text-[#6B6B6B] text-xs mb-1">Start Date</label>
                     <input
                       type="date"
-                      className="w-full bg-[#141414] border border-[#2A2A2A] focus:border-[#00AEEF] text-[#F0F0F0] text-sm px-3 py-2 rounded-lg outline-none"
+                      className="w-full bg-gray-50 dark:bg-[#141414] border border-gray-200 dark:border-[#2A2A2A] focus:border-[#00AEEF] text-gray-900 dark:text-[#F0F0F0] text-sm px-3 py-2 rounded-lg outline-none"
                     />
                   </div>
                   <div>
-                    <label className="block text-[#6B6B6B] text-xs mb-1">Starting Phase</label>
-                    <select className="w-full bg-[#141414] border border-[#2A2A2A] focus:border-[#00AEEF] text-[#F0F0F0] text-sm px-3 py-2 rounded-lg outline-none">
+                    <label className="block text-gray-400 dark:text-[#6B6B6B] text-xs mb-1">Starting Phase</label>
+                    <select className="w-full bg-gray-50 dark:bg-[#141414] border border-gray-200 dark:border-[#2A2A2A] focus:border-[#00AEEF] text-gray-900 dark:text-[#F0F0F0] text-sm px-3 py-2 rounded-lg outline-none">
                       {state.phases.map((p, i) => <option key={p.id} value={i}>Phase {i + 1}: {p.name}</option>)}
                     </select>
                   </div>
@@ -1891,16 +1891,16 @@ function Step8Save({
           whileHover={{ scale: 1.01 }}
           whileTap={{ scale: 0.99 }}
           onClick={handleSave}
-          className="w-full bg-[#141414] border border-[#2A2A2A] hover:border-[#22C55E] rounded-xl p-5 flex items-center gap-4 transition-colors text-left"
+          className="w-full bg-gray-50 dark:bg-[#141414] border border-gray-200 dark:border-[#2A2A2A] hover:border-[#22C55E] rounded-xl p-5 flex items-center gap-4 transition-colors text-left"
         >
           <div className="w-12 h-12 bg-[rgba(34,197,94,0.1)] rounded-xl flex items-center justify-center flex-shrink-0">
             <Save size={22} className="text-[#22C55E]" />
           </div>
           <div className="flex-1 min-w-0">
-            <h4 className="text-[#F0F0F0] font-semibold text-sm">Save to Library</h4>
-            <p className="text-[#6B6B6B] text-xs">Store as a template for future use</p>
+            <h4 className="text-gray-900 dark:text-[#F0F0F0] font-semibold text-sm">Save to Library</h4>
+            <p className="text-gray-400 dark:text-[#6B6B6B] text-xs">Store as a template for future use</p>
           </div>
-          <ChevronRight size={16} className="text-[#6B6B6B]" />
+          <ChevronRight size={16} className="text-gray-400 dark:text-[#6B6B6B]" />
         </motion.button>
 
         {/* Export PDF */}
@@ -1908,29 +1908,29 @@ function Step8Save({
           whileHover={{ scale: 1.01 }}
           whileTap={{ scale: 0.99 }}
           onClick={() => alert('PDF export coming soon!')}
-          className="w-full bg-[#141414] border border-[#2A2A2A] hover:border-[#F97316] rounded-xl p-5 flex items-center gap-4 transition-colors text-left"
+          className="w-full bg-gray-50 dark:bg-[#141414] border border-gray-200 dark:border-[#2A2A2A] hover:border-[#F97316] rounded-xl p-5 flex items-center gap-4 transition-colors text-left"
         >
           <div className="w-12 h-12 bg-[rgba(249,115,22,0.1)] rounded-xl flex items-center justify-center flex-shrink-0">
             <FileText size={22} className="text-[#F97316]" />
           </div>
           <div className="flex-1 min-w-0">
-            <h4 className="text-[#F0F0F0] font-semibold text-sm">Export PDF</h4>
-            <p className="text-[#6B6B6B] text-xs">Download a printable program sheet</p>
+            <h4 className="text-gray-900 dark:text-[#F0F0F0] font-semibold text-sm">Export PDF</h4>
+            <p className="text-gray-400 dark:text-[#6B6B6B] text-xs">Download a printable program sheet</p>
           </div>
-          <ChevronRight size={16} className="text-[#6B6B6B]" />
+          <ChevronRight size={16} className="text-gray-400 dark:text-[#6B6B6B]" />
         </motion.button>
       </div>
 
       {/* Summary */}
-      <div className="mt-6 bg-[#141414] border border-[#2A2A2A] rounded-xl p-5">
-        <h4 className="text-[#F0F0F0] font-semibold text-sm mb-3">Program Summary</h4>
+      <div className="mt-6 bg-gray-50 dark:bg-[#141414] border border-gray-200 dark:border-[#2A2A2A] rounded-xl p-5">
+        <h4 className="text-gray-900 dark:text-[#F0F0F0] font-semibold text-sm mb-3">Program Summary</h4>
         <div className="grid grid-cols-2 gap-2 text-xs">
-          <div className="flex justify-between"><span className="text-[#6B6B6B]">Goal:</span> <span className="text-[#A0A0A0]">{GOAL_CARDS.find(g => g.id === state.selectedGoal)?.label}</span></div>
-          <div className="flex justify-between"><span className="text-[#6B6B6B]">Method:</span> <span className="text-[#A0A0A0]">{state.selectedMethod?.Name}</span></div>
-          <div className="flex justify-between"><span className="text-[#6B6B6B]">Duration:</span> <span className="text-[#A0A0A0]">{totalWeeks} weeks</span></div>
-          <div className="flex justify-between"><span className="text-[#6B6B6B]">Frequency:</span> <span className="text-[#A0A0A0]">{activeDays.length}x/week</span></div>
-          <div className="flex justify-between"><span className="text-[#6B6B6B]">Phases:</span> <span className="text-[#A0A0A0]">{state.phases.length}</span></div>
-          <div className="flex justify-between"><span className="text-[#6B6B6B]">Exercises:</span> <span className="text-[#A0A0A0]">{activeDays.reduce((s, d) => s + d.exercises.length, 0)}</span></div>
+          <div className="flex justify-between"><span className="text-gray-400 dark:text-[#6B6B6B]">Goal:</span> <span className="text-gray-500 dark:text-[#A0A0A0]">{GOAL_CARDS.find(g => g.id === state.selectedGoal)?.label}</span></div>
+          <div className="flex justify-between"><span className="text-gray-400 dark:text-[#6B6B6B]">Method:</span> <span className="text-gray-500 dark:text-[#A0A0A0]">{state.selectedMethod?.Name}</span></div>
+          <div className="flex justify-between"><span className="text-gray-400 dark:text-[#6B6B6B]">Duration:</span> <span className="text-gray-500 dark:text-[#A0A0A0]">{totalWeeks} weeks</span></div>
+          <div className="flex justify-between"><span className="text-gray-400 dark:text-[#6B6B6B]">Frequency:</span> <span className="text-gray-500 dark:text-[#A0A0A0]">{activeDays.length}x/week</span></div>
+          <div className="flex justify-between"><span className="text-gray-400 dark:text-[#6B6B6B]">Phases:</span> <span className="text-gray-500 dark:text-[#A0A0A0]">{state.phases.length}</span></div>
+          <div className="flex justify-between"><span className="text-gray-400 dark:text-[#6B6B6B]">Exercises:</span> <span className="text-gray-500 dark:text-[#A0A0A0]">{activeDays.reduce((s, d) => s + d.exercises.length, 0)}</span></div>
         </div>
       </div>
     </div>
@@ -1949,7 +1949,7 @@ function StepIndicator({
   onStepClick: (step: number) => void
 }) {
   return (
-    <div className="bg-[#141414] border-b border-[#2A2A2A] px-4 md:px-8 py-5 overflow-x-auto">
+    <div className="bg-gray-50 dark:bg-[#141414] border-b border-gray-200 dark:border-[#2A2A2A] px-4 md:px-8 py-5 overflow-x-auto">
       <div className="flex items-center justify-between min-w-[600px] max-w-[900px] mx-auto">
         {STEP_NAMES.map((name, i) => {
           const stepNum = i + 1
@@ -1977,7 +1977,7 @@ function StepIndicator({
                       ? 'bg-[#00AEEF] border-[#00AEEF] text-white'
                       : current
                         ? 'bg-[#00AEEF] border-[#00AEEF] text-white shadow-[0_0_12px_rgba(0,174,239,0.3)]'
-                        : 'bg-[#1A1A1A] border-[#2A2A2A] text-[#6B6B6B]'
+                        : 'bg-gray-100 dark:bg-[#1A1A1A] border-gray-200 dark:border-[#2A2A2A] text-gray-400 dark:text-[#6B6B6B]'
                   )}
                 >
                   {completed ? <Check size={16} /> : stepNum}
@@ -1985,7 +1985,7 @@ function StepIndicator({
                 <span
                   className={cn(
                     'text-[10px] font-medium transition-colors hidden md:block',
-                    completed ? 'text-[#00AEEF]' : current ? 'text-[#F0F0F0]' : 'text-[#6B6B6B]'
+                    completed ? 'text-[#00AEEF]' : current ? 'text-gray-900 dark:text-[#F0F0F0]' : 'text-gray-400 dark:text-[#6B6B6B]'
                   )}
                 >
                   {name}
@@ -2240,14 +2240,14 @@ export default function ProgramWizardPage() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="fixed inset-x-4 top-1/3 md:left-1/2 md:-translate-x-1/2 md:w-[400px] bg-[#141414] border border-[#2A2A2A] rounded-2xl z-[201] p-6 shadow-[0_16px_48px_rgba(0,0,0,0.5)]"
+              className="fixed inset-x-4 top-1/3 md:left-1/2 md:-translate-x-1/2 md:w-[400px] bg-gray-50 dark:bg-[#141414] border border-gray-200 dark:border-[#2A2A2A] rounded-2xl z-[201] p-6 shadow-[0_16px_48px_rgba(0,0,0,0.5)]"
             >
-              <h3 className="text-[#F0F0F0] font-semibold text-lg mb-2">Resume Draft?</h3>
-              <p className="text-[#A0A0A0] text-sm mb-6">A saved draft was found. Would you like to resume where you left off?</p>
+              <h3 className="text-gray-900 dark:text-[#F0F0F0] font-semibold text-lg mb-2">Resume Draft?</h3>
+              <p className="text-gray-500 dark:text-[#A0A0A0] text-sm mb-6">A saved draft was found. Would you like to resume where you left off?</p>
               <div className="flex items-center gap-3 justify-end">
                 <button
                   onClick={() => { setShowDraftDialog(false); localStorage.removeItem(DRAFT_KEY) }}
-                  className="text-[#A0A0A0] hover:text-[#F0F0F0] text-sm px-4 py-2 rounded-lg hover:bg-[#242424] transition-colors"
+                  className="text-gray-500 dark:text-[#A0A0A0] hover:text-gray-900 dark:hover:text-[#F0F0F0] text-sm px-4 py-2 rounded-lg hover:bg-gray-200 dark:hover:bg-[#242424] transition-colors"
                 >
                   Start Fresh
                 </button>
@@ -2267,24 +2267,24 @@ export default function ProgramWizardPage() {
       <StepIndicator currentStep={currentStep} onStepClick={handleStepClick} />
 
       {/* Navigation Top Bar */}
-      <div className="flex items-center justify-between px-4 md:px-8 py-3 border-b border-[#1F1F1F]">
+      <div className="flex items-center justify-between px-4 md:px-8 py-3 border-b border-gray-200 dark:border-[#1F1F1F]">
         <div className="flex items-center gap-3">
           <button
             onClick={handleBack}
             disabled={currentStep === 1}
-            className="text-[#A0A0A0] hover:text-[#F0F0F0] disabled:opacity-30 disabled:cursor-not-allowed text-xs flex items-center gap-1 px-2 py-1.5 rounded-lg hover:bg-[#242424] transition-colors"
+            className="text-gray-500 dark:text-[#A0A0A0] hover:text-gray-900 dark:hover:text-[#F0F0F0] disabled:opacity-30 disabled:cursor-not-allowed text-xs flex items-center gap-1 px-2 py-1.5 rounded-lg hover:bg-gray-200 dark:hover:bg-[#242424] transition-colors"
           >
             <ChevronLeft size={14} /> Back
           </button>
           <button
             onClick={handleSaveDraft}
-            className="text-[#A0A0A0] hover:text-[#00AEEF] text-xs flex items-center gap-1 px-2 py-1.5 rounded-lg hover:bg-[#242424] transition-colors"
+            className="text-gray-500 dark:text-[#A0A0A0] hover:text-[#00AEEF] text-xs flex items-center gap-1 px-2 py-1.5 rounded-lg hover:bg-gray-200 dark:hover:bg-[#242424] transition-colors"
           >
             <Save size={12} /> Save Draft
           </button>
         </div>
         <div className="flex items-center gap-2">
-          <span className="text-[#6B6B6B] text-xs">Step {currentStep} of 8</span>
+          <span className="text-gray-400 dark:text-[#6B6B6B] text-xs">Step {currentStep} of 8</span>
           {autoSaveIndicator && (
             <motion.span
               initial={{ opacity: 0 }}
@@ -2298,7 +2298,7 @@ export default function ProgramWizardPage() {
         </div>
         <button
           onClick={() => navigate('/programs')}
-          className="text-[#A0A0A0] hover:text-[#EF4444] text-xs flex items-center gap-1 px-2 py-1.5 rounded-lg hover:bg-[rgba(239,68,68,0.1)] transition-colors"
+          className="text-gray-500 dark:text-[#A0A0A0] hover:text-[#EF4444] text-xs flex items-center gap-1 px-2 py-1.5 rounded-lg hover:bg-[rgba(239,68,68,0.1)] transition-colors"
         >
           <X size={12} /> Exit
         </button>
@@ -2382,13 +2382,13 @@ export default function ProgramWizardPage() {
       </div>
 
       {/* Bottom Navigation */}
-      <div className="sticky bottom-0 bg-[#141414]/95 backdrop-blur-sm border-t border-[#2A2A2A] px-4 md:px-8 py-4 z-10">
+      <div className="sticky bottom-0 bg-gray-50 dark:bg-[#141414]/95 backdrop-blur-sm border-t border-gray-200 dark:border-[#2A2A2A] px-4 md:px-8 py-4 z-10">
         <div className="flex items-center justify-between max-w-[1200px] mx-auto">
           <div className="flex items-center gap-3">
             <button
               onClick={handleBack}
               disabled={currentStep === 1}
-              className="text-[#A0A0A0] hover:text-[#F0F0F0] disabled:opacity-30 disabled:cursor-not-allowed text-sm flex items-center gap-1.5 px-4 py-2.5 rounded-xl hover:bg-[#242424] transition-colors"
+              className="text-gray-500 dark:text-[#A0A0A0] hover:text-gray-900 dark:hover:text-[#F0F0F0] disabled:opacity-30 disabled:cursor-not-allowed text-sm flex items-center gap-1.5 px-4 py-2.5 rounded-xl hover:bg-gray-200 dark:hover:bg-[#242424] transition-colors"
             >
               <ChevronLeft size={16} /> Back
             </button>
@@ -2400,7 +2400,7 @@ export default function ProgramWizardPage() {
             </button>
           </div>
 
-          <span className="text-[#6B6B6B] text-xs hidden sm:block">
+          <span className="text-gray-400 dark:text-[#6B6B6B] text-xs hidden sm:block">
             Step {currentStep} of 8
           </span>
 

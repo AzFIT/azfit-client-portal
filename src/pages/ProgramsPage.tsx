@@ -24,6 +24,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import type { SavedProgram } from '@/types';
+import SessionLauncher from '@/components/SessionLauncher';
 
 // ── Template Definitions ────────────────────────────────────────
 interface TemplateDef {
@@ -219,7 +220,7 @@ function TemplateFeatureCard({
       className={`relative flex-shrink-0 w-[180px] rounded-xl border p-4 text-left transition-all ${
         isActive
           ? `${template.bg} ${template.border} ring-1 ring-[${template.color}]/40`
-          : 'bg-[#141414] border-[#2A2A2A] hover:border-[#3A3A3A]'
+          : 'bg-gray-50 dark:bg-[#141414] border-gray-200 dark:border-[#2A2A2A] hover:border-[#3A3A3A]'
       }`}
     >
       <div className="flex items-center gap-2 mb-2">
@@ -229,7 +230,7 @@ function TemplateFeatureCard({
         >
           {template.icon}
         </div>
-        <span className="text-[#F0F0F0] font-semibold text-sm">{template.label}</span>
+        <span className="text-gray-900 dark:text-[#F0F0F0] font-semibold text-sm">{template.label}</span>
       </div>
       <p className="text-[#6B7280] text-[11px] leading-relaxed mb-2">{template.description}</p>
       <div className="flex items-center justify-between">
@@ -287,7 +288,7 @@ function ProgramCard({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -12 }}
       whileHover={{ y: -2 }}
-      className="group relative rounded-xl border border-[#2A2A2A] bg-[#141414] overflow-hidden hover:border-[#3A3A3A] transition-colors"
+      className="group relative rounded-xl border border-gray-200 dark:border-[#2A2A2A] bg-gray-50 dark:bg-[#141414] overflow-hidden hover:border-[#3A3A3A] transition-colors"
     >
       {/* Color banner */}
       <div className={`h-1.5 w-full bg-gradient-to-r ${goal.gradient}`} />
@@ -296,7 +297,7 @@ function ProgramCard({
         {/* Header */}
         <div className="flex items-start justify-between gap-2 mb-3">
           <div className="min-w-0">
-            <h3 className="text-[#F0F0F0] font-semibold text-sm truncate">
+            <h3 className="text-gray-900 dark:text-[#F0F0F0] font-semibold text-sm truncate">
               {d.programName || 'Untitled Program'}
             </h3>
             <div className="flex items-center gap-1.5 mt-1 flex-wrap">
@@ -312,12 +313,12 @@ function ProgramCard({
                 </span>
               )}
               {d.trainingMethod && (
-                <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#1A1A1A] text-[#A0A0A0] font-medium">
+                <span className="text-[10px] px-1.5 py-0.5 rounded bg-gray-100 dark:bg-[#1A1A1A] text-gray-500 dark:text-[#A0A0A0] font-medium">
                   {d.trainingMethod}
                 </span>
               )}
               {isReadOnly && (
-                <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#1A1A1A] text-[#6B7280] font-medium">
+                <span className="text-[10px] px-1.5 py-0.5 rounded bg-gray-100 dark:bg-[#1A1A1A] text-[#6B7280] font-medium">
                   Built-in
                 </span>
               )}
@@ -336,40 +337,40 @@ function ProgramCard({
 
         {/* Client Profile micro-bar */}
         {d.clientProfile && (
-          <div className="flex items-center gap-3 mb-3 px-2 py-1.5 rounded-lg bg-[#0A0A0A]/60 border border-[#1F1F1F]">
+          <div className="flex items-center gap-3 mb-3 px-2 py-1.5 rounded-lg bg-[#0A0A0A]/60 border border-gray-200 dark:border-[#1F1F1F]">
             <div className="flex items-center gap-1 text-[10px] text-[#6B7280]">
-              <User size={10} className="text-[#A0A0A0]" />
-              <span className="text-[#A0A0A0]">{d.clientProfile.experience}</span>
+              <User size={10} className="text-gray-500 dark:text-[#A0A0A0]" />
+              <span className="text-gray-500 dark:text-[#A0A0A0]">{d.clientProfile.experience}</span>
             </div>
             <div className="w-px h-3 bg-[#2A2A2A]" />
             <div className="flex items-center gap-1 text-[10px] text-[#6B7280]">
-              <Dumbbell size={10} className="text-[#A0A0A0]" />
-              <span className="text-[#A0A0A0]">{d.clientProfile.equipment}</span>
+              <Dumbbell size={10} className="text-gray-500 dark:text-[#A0A0A0]" />
+              <span className="text-gray-500 dark:text-[#A0A0A0]">{d.clientProfile.equipment}</span>
             </div>
             <div className="w-px h-3 bg-[#2A2A2A]" />
             <div className="flex items-center gap-1 text-[10px] text-[#6B7280]">
-              <Clock size={10} className="text-[#A0A0A0]" />
-              <span className="text-[#A0A0A0]">{d.clientProfile.timePerSession}m</span>
+              <Clock size={10} className="text-gray-500 dark:text-[#A0A0A0]" />
+              <span className="text-gray-500 dark:text-[#A0A0A0]">{d.clientProfile.timePerSession}m</span>
             </div>
           </div>
         )}
 
         {/* Stats grid */}
         <div className="grid grid-cols-4 gap-2 mb-3">
-          <div className="bg-[#0A0A0A] rounded-lg p-2 text-center border border-[#1F1F1F]">
-            <div className="text-[#F0F0F0] font-mono font-bold text-sm">{totalWeeks}w</div>
+          <div className="bg-[#0A0A0A] rounded-lg p-2 text-center border border-gray-200 dark:border-[#1F1F1F]">
+            <div className="text-gray-900 dark:text-[#F0F0F0] font-mono font-bold text-sm">{totalWeeks}w</div>
             <div className="text-[#666] text-[10px]">Duration</div>
           </div>
-          <div className="bg-[#0A0A0A] rounded-lg p-2 text-center border border-[#1F1F1F]">
+          <div className="bg-[#0A0A0A] rounded-lg p-2 text-center border border-gray-200 dark:border-[#1F1F1F]">
             <div className="text-[#00AEEF] font-mono font-bold text-sm">{activeDays}<span className="text-[#555] text-[10px]">/wk</span></div>
             <div className="text-[#666] text-[10px]">Days</div>
           </div>
-          <div className="bg-[#0A0A0A] rounded-lg p-2 text-center border border-[#1F1F1F]">
-            <div className="text-[#F0F0F0] font-mono font-bold text-sm">{totalExercises}</div>
+          <div className="bg-[#0A0A0A] rounded-lg p-2 text-center border border-gray-200 dark:border-[#1F1F1F]">
+            <div className="text-gray-900 dark:text-[#F0F0F0] font-mono font-bold text-sm">{totalExercises}</div>
             <div className="text-[#666] text-[10px]">Exercises</div>
           </div>
-          <div className="bg-[#0A0A0A] rounded-lg p-2 text-center border border-[#1F1F1F]">
-            <div className="text-[#F0F0F0] font-mono font-bold text-sm">{totalSets}</div>
+          <div className="bg-[#0A0A0A] rounded-lg p-2 text-center border border-gray-200 dark:border-[#1F1F1F]">
+            <div className="text-gray-900 dark:text-[#F0F0F0] font-mono font-bold text-sm">{totalSets}</div>
             <div className="text-[#666] text-[10px]">Sets</div>
           </div>
         </div>
@@ -378,9 +379,9 @@ function ProgramCard({
         <div className="mb-3">
           <div className="flex items-center justify-between text-[10px] mb-1">
             <span className="text-[#666]">Session Progress</span>
-            <span className="text-[#A0A0A0] font-mono">{progress.completedSets}/{progress.totalSets} sets</span>
+            <span className="text-gray-500 dark:text-[#A0A0A0] font-mono">{progress.completedSets}/{progress.totalSets} sets</span>
           </div>
-          <div className="h-1.5 bg-[#1A1A1A] rounded-full overflow-hidden">
+          <div className="h-1.5 bg-gray-100 dark:bg-[#1A1A1A] rounded-full overflow-hidden">
             <div
               className={`h-full rounded-full bg-gradient-to-r ${goal.gradient} transition-all duration-500`}
               style={{ width: `${Math.min(progressPct, 100)}%` }}
@@ -404,7 +405,7 @@ function ProgramCard({
         )}
 
         {/* Actions */}
-        <div className="flex items-center gap-2 pt-2 border-t border-[#1F1F1F]">
+        <div className="flex items-center gap-2 pt-2 border-t border-gray-200 dark:border-[#1F1F1F]">
           <Button
             onClick={onStart}
             size="sm"
@@ -417,14 +418,14 @@ function ProgramCard({
             <>
               <button
                 onClick={onEdit}
-                className="h-8 w-8 flex items-center justify-center rounded-lg border border-[#2A2A2A] text-[#A0A0A0] hover:text-[#00AEEF] hover:border-[#00AEEF]/30 transition-colors"
+                className="h-8 w-8 flex items-center justify-center rounded-lg border border-gray-200 dark:border-[#2A2A2A] text-gray-500 dark:text-[#A0A0A0] hover:text-[#00AEEF] hover:border-[#00AEEF]/30 transition-colors"
                 title="Edit"
               >
                 <Pencil size={13} />
               </button>
               <button
                 onClick={onDuplicate}
-                className="h-8 w-8 flex items-center justify-center rounded-lg border border-[#2A2A2A] text-[#A0A0A0] hover:text-[#8B5CF6] hover:border-[#8B5CF6]/30 transition-colors"
+                className="h-8 w-8 flex items-center justify-center rounded-lg border border-gray-200 dark:border-[#2A2A2A] text-gray-500 dark:text-[#A0A0A0] hover:text-[#8B5CF6] hover:border-[#8B5CF6]/30 transition-colors"
                 title="Duplicate"
               >
                 <Copy size={13} />
@@ -448,7 +449,7 @@ function EmptyState({ onCreate }: { onCreate: () => void }) {
       <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#00AEEF]/20 to-[#A855F7]/10 flex items-center justify-center mb-4 border border-[#00AEEF]/20">
         <Dumbbell size={28} className="text-[#00AEEF]" />
       </div>
-      <h3 className="text-[#F0F0F0] font-semibold text-lg mb-1">No Active Programs</h3>
+      <h3 className="text-gray-900 dark:text-[#F0F0F0] font-semibold text-lg mb-1">No Active Programs</h3>
       <p className="text-[#6B7280] text-sm max-w-sm mb-6">
         Create your first program using the All-in-One Program Creator and assign it to a client.
       </p>
@@ -468,6 +469,8 @@ export default function ProgramsPage() {
   const navigate = useNavigate();
   const [programs, setPrograms] = useState<SavedProgram[]>([]);
   const [dbPrograms, setDbPrograms] = useState<SavedProgram[]>([]);
+  const [launcherOpen, setLauncherOpen] = useState(false);
+  const [launcherProgramId, setLauncherProgramId] = useState<string>('');
   const [search, setSearch] = useState('');
   const [goalFilter, setGoalFilter] = useState('all');
   const [templateFilter, setTemplateFilter] = useState<string | null>(null);
@@ -523,8 +526,9 @@ export default function ProgramsPage() {
         }
       }
     }
-    navigate(`/programs/session/${id}`);
-  }, [navigate, dbPrograms]);
+    setLauncherProgramId(id);
+    setLauncherOpen(true);
+  }, [dbPrograms]);
 
   // Count programs per template
   const allPrograms = useMemo(() => [...programs, ...dbPrograms], [programs, dbPrograms]);
@@ -578,7 +582,7 @@ export default function ProgramsPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <div>
-          <h1 className="text-[#F0F0F0] text-xl font-semibold flex items-center gap-2">
+          <h1 className="text-gray-900 dark:text-[#F0F0F0] text-xl font-semibold flex items-center gap-2">
             <Dumbbell size={22} className="text-[#00AEEF]" />
             Active Programs
           </h1>
@@ -609,13 +613,13 @@ export default function ProgramsPage() {
       {/* Featured Templates */}
       <div className="mb-6">
         <div className="flex items-center justify-between mb-3">
-          <h2 className="text-[#A0A0A0] text-xs font-semibold uppercase tracking-wider">
+          <h2 className="text-gray-500 dark:text-[#A0A0A0] text-xs font-semibold uppercase tracking-wider">
             Program Templates
           </h2>
           {templateFilter && (
             <button
               onClick={() => setTemplateFilter(null)}
-              className="text-[10px] text-[#6B7280] hover:text-[#F0F0F0] flex items-center gap-1 transition-colors"
+              className="text-[10px] text-[#6B7280] hover:text-gray-900 dark:text-[#F0F0F0] flex items-center gap-1 transition-colors"
             >
               <X size={10} />
               Clear filter
@@ -644,7 +648,7 @@ export default function ProgramsPage() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search programs, clients, goals, templates..."
-            className="w-full h-10 pl-9 pr-4 rounded-lg bg-[#141414] border border-[#2A2A2A]/50 text-[#F0F0F0] text-sm placeholder:text-[#6B7280] focus:outline-none focus:border-[#00AEEF]/50"
+            className="w-full h-10 pl-9 pr-4 rounded-lg bg-gray-50 dark:bg-[#141414] border border-gray-200 dark:border-[#2A2A2A]/50 text-gray-900 dark:text-[#F0F0F0] text-sm placeholder:text-[#6B7280] focus:outline-none focus:border-[#00AEEF]/50"
           />
         </div>
         <button
@@ -652,7 +656,7 @@ export default function ProgramsPage() {
           className={`h-10 px-3 rounded-lg border text-sm flex items-center gap-2 transition-colors ${
             showFilters
               ? 'border-[#00AEEF] text-[#00AEEF] bg-[#00AEEF]/5'
-              : 'border-[#2A2A2A]/50 text-[#A0A0A0] hover:border-[#374151]'
+              : 'border-gray-200 dark:border-[#2A2A2A]/50 text-gray-500 dark:text-[#A0A0A0] hover:border-[#374151]'
           }`}
         >
           <SlidersHorizontal size={15} />
@@ -668,7 +672,7 @@ export default function ProgramsPage() {
             exit={{ height: 0, opacity: 0 }}
             className="overflow-hidden mb-6"
           >
-            <div className="flex flex-wrap items-center gap-3 p-3 rounded-xl bg-[#141414] border border-[#2A2A2A]/30">
+            <div className="flex flex-wrap items-center gap-3 p-3 rounded-xl bg-gray-50 dark:bg-[#141414] border border-gray-200 dark:border-[#2A2A2A]/30">
               <div className="flex items-center gap-2">
                 <span className="text-[#6B7280] text-xs font-medium">Goal:</span>
                 <div className="flex flex-wrap gap-1">
@@ -679,7 +683,7 @@ export default function ProgramsPage() {
                       className={`px-2.5 py-1 rounded-full text-[11px] font-medium border transition-all ${
                         goalFilter === g
                           ? 'border-[#00AEEF] bg-[#00AEEF]/10 text-[#00AEEF]'
-                          : 'border-[#2A2A2A]/50 text-[#6B7280] hover:border-[#374151]'
+                          : 'border-gray-200 dark:border-[#2A2A2A]/50 text-[#6B7280] hover:border-[#374151]'
                       }`}
                     >
                       {g === 'all' ? 'All' : getGoalLabel(g)}
@@ -698,7 +702,7 @@ export default function ProgramsPage() {
                       className={`px-2.5 py-1 rounded-full text-[11px] font-medium border transition-all ${
                         templateFilter === t.key
                           ? 'border-[#00AEEF] bg-[#00AEEF]/10 text-[#00AEEF]'
-                          : 'border-[#2A2A2A]/50 text-[#6B7280] hover:border-[#374151]'
+                          : 'border-gray-200 dark:border-[#2A2A2A]/50 text-[#6B7280] hover:border-[#374151]'
                       }`}
                     >
                       {t.label}
@@ -712,7 +716,7 @@ export default function ProgramsPage() {
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value as 'newest' | 'alpha')}
-                  className="h-8 px-2 rounded-lg bg-[#0A0A0A] border border-[#2A2A2A]/50 text-[#A0A0A0] text-xs focus:outline-none focus:border-[#00AEEF]/50"
+                  className="h-8 px-2 rounded-lg bg-[#0A0A0A] border border-gray-200 dark:border-[#2A2A2A]/50 text-gray-500 dark:text-[#A0A0A0] text-xs focus:outline-none focus:border-[#00AEEF]/50"
                 >
                   <option value="newest">Newest First</option>
                   <option value="alpha">Alphabetical</option>
@@ -760,6 +764,11 @@ export default function ProgramsPage() {
           </AnimatePresence>
         </motion.div>
       )}
+
+      <SessionLauncher
+        open={launcherOpen}
+        onClose={() => setLauncherOpen(false)}
+      />
     </div>
   );
 }

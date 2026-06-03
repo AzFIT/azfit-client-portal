@@ -1,0 +1,2545 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AzFIT Program Creator - Design Workflow</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ============================================
+   CSS VARIABLES & THEME SYSTEM
+   ============================================ */
+:root {
+  --primary: #00AEEF;
+  --primary-light: #22D3EE;
+  --navy: #0B1120;
+  --navy-light: #151D2E;
+  --navy-lighter: #1E2940;
+  --light-bg: #F8FAFC;
+  --card-bg: #FFFFFF;
+  --card-bg-dark: #151D2E;
+  --border-light: #E2E8F0;
+  --border-dark: #2A3A50;
+  --text-primary: #0F172A;
+  --text-secondary: #64748B;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+  --radius: 12px;
+  --radius-pill: 9999px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+
+[data-theme="dark"] {
+  --bg: var(--navy);
+  --card-bg: var(--navy-light);
+  --card-bg-elevated: var(--navy-lighter);
+  --text-primary: #F1F5F9;
+  --text-secondary: #94A3B8;
+  --border: var(--border-dark);
+  --nav-bg: var(--navy);
+  --input-bg: var(--navy-lighter);
+}
+
+[data-theme="light"] {
+  --bg: var(--light-bg);
+  --card-bg-elevated: #FFFFFF;
+  --text-primary: #0F172A;
+  --text-secondary: #64748B;
+  --border: var(--border-light);
+  --nav-bg: #FFFFFF;
+  --input-bg: #FFFFFF;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text-primary);
+  transition: background 0.3s, color 0.3s;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ============================================
+   NAVIGATION
+   ============================================ */
+.navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 56px;
+  background: var(--nav-bg);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  z-index: 1000;
+  transition: var(--transition);
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--text-primary);
+}
+
+.nav-logo {
+  width: 32px; height: 32px;
+  background: var(--primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 800;
+  font-size: 16px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 6px;
+  list-style: none;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  transition: var(--transition);
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--primary);
+  background: rgba(0,174,239,0.08);
+}
+
+.theme-toggle {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  color: var(--text-primary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  font-size: 18px;
+}
+
+.theme-toggle:hover { border-color: var(--primary); }
+
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* ============================================
+   SECTION LAYOUT
+   ============================================ */
+.section {
+  padding: 60px 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-header {
+  margin-bottom: 32px;
+}
+
+.section-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-primary);
+  position: relative;
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background: var(--primary);
+  border-radius: 2px;
+}
+
+.section-subtitle {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-top: 12px;
+}
+
+/* ============================================
+   CARDS
+   ============================================ */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  padding: 24px;
+  transition: var(--transition);
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 20px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: var(--transition);
+  height: 40px;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #0098D1;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,174,239,0.3);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1.5px solid var(--border);
+}
+
+.btn-secondary:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+}
+
+.btn-ghost:hover { color: var(--primary); }
+
+.btn-danger {
+  background: #EF4444;
+  color: white;
+}
+
+.btn-danger:hover { background: #DC2626; }
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ============================================
+   SECTION 1: ASCII WIREFRAME
+   ============================================ */
+.ascii-container {
+  background: var(--navy);
+  border-radius: var(--radius);
+  padding: 24px;
+  overflow-x: auto;
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  line-height: 1.7;
+  color: #94A3B8;
+  border: 1px solid var(--border-dark);
+}
+
+.ascii-container pre {
+  white-space: pre;
+  word-wrap: normal;
+  overflow-x: auto;
+}
+
+.ascii-accent { color: var(--primary); }
+.ascii-border { color: #475569; }
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-dark);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.legend-badge {
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  font-family: monospace;
+  background: var(--navy-lighter);
+  color: var(--primary);
+  border: 1px solid var(--border-dark);
+}
+
+/* ============================================
+   SECTION 2: WIZARD
+   ============================================ */
+.wizard-container {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+
+.wizard-header {
+  padding: 24px 32px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.wizard-progress-track {
+  width: 100%;
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.wizard-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary), var(--primary-light));
+  border-radius: 2px;
+  transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+  width: 12.5%;
+}
+
+.wizard-steps-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  padding: 0 0 16px;
+}
+
+.step-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  position: relative;
+}
+
+.step-indicator:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 14px;
+  right: -50%;
+  width: 100%;
+  height: 2px;
+  background: var(--border);
+  z-index: 0;
+}
+
+.step-indicator.completed:not(:last-child)::after,
+.step-indicator.current:not(:last-child)::after {
+  background: linear-gradient(90deg, var(--primary), var(--primary-light));
+}
+
+.step-circle {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  z-index: 1;
+  transition: var(--transition);
+  border: 2px solid var(--border);
+  background: var(--card-bg);
+  color: var(--text-secondary);
+}
+
+.step-indicator.completed .step-circle {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: white;
+}
+
+.step-indicator.current .step-circle {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: white;
+  box-shadow: 0 0 0 4px rgba(0,174,239,0.2);
+}
+
+.step-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.step-indicator.current .step-label {
+  color: var(--primary);
+}
+
+.step-indicator.completed .step-label {
+  color: var(--primary);
+}
+
+.wizard-body {
+  padding: 32px;
+  min-height: 420px;
+  position: relative;
+  overflow: hidden;
+}
+
+.wizard-step {
+  display: none;
+  animation: fadeIn 0.5s ease;
+}
+
+.wizard-step.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideOut {
+  from { opacity: 1; transform: translateX(0); }
+  to { opacity: 0; transform: translateX(-20px); }
+}
+
+.wizard-step.leaving {
+  animation: slideOut 0.5s ease forwards;
+}
+
+.wizard-footer {
+  padding: 20px 32px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+/* Selection Cards */
+.selectable-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.selectable-card {
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+  user-select: none;
+}
+
+.selectable-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary);
+}
+
+.selectable-card.selected {
+  border-color: var(--primary);
+  background: rgba(0,174,239,0.05);
+}
+
+.selectable-card .card-icon {
+  font-size: 32px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.selectable-card .card-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.selectable-card .card-desc {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.selectable-card .check-badge {
+  position: absolute;
+  top: 8px; right: 8px;
+  width: 22px; height: 22px;
+  background: var(--primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 12px;
+  opacity: 0;
+  transform: scale(0);
+  transition: var(--transition);
+}
+
+.selectable-card.selected .check-badge {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.selectable-card.top-accent {
+  border-top-width: 4px;
+  border-top-color: var(--accent-color, var(--primary));
+}
+
+.selectable-card.left-accent {
+  border-left-width: 4px;
+  border-left-color: var(--accent-color, var(--primary));
+}
+
+/* Two column form layout */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-family: var(--font);
+  font-size: 13px;
+  color: var(--text-primary);
+  background: var(--input-bg);
+  transition: var(--transition);
+  outline: none;
+}
+
+.form-control:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(0,174,239,0.1);
+}
+
+select.form-control {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2364748B' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 32px;
+}
+
+textarea.form-control {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* Checkbox group */
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--text-primary);
+  user-select: none;
+}
+
+.checkbox-item input[type="checkbox"] {
+  width: 18px; height: 18px;
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+
+/* Radio group */
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.radio-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--text-primary);
+  user-select: none;
+}
+
+.radio-item input[type="radio"] {
+  width: 18px; height: 18px;
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+
+/* Phase timeline */
+.phase-timeline {
+  margin-top: 24px;
+  padding: 20px;
+  background: var(--input-bg);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+
+.phase-timeline-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.timeline-bar {
+  width: 100%;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  overflow: hidden;
+  background: var(--border);
+}
+
+.timeline-segment {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+  color: white;
+  transition: width 0.5s ease;
+}
+
+/* Day toggle cards */
+.day-toggles {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.day-toggle {
+  padding: 16px 8px;
+  border-radius: var(--radius);
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transition);
+  border: 2px solid var(--border);
+  background: var(--card-bg);
+  user-select: none;
+}
+
+.day-toggle:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.day-toggle.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: white;
+  box-shadow: 0 4px 12px rgba(0,174,239,0.3);
+  transform: translateY(-2px);
+}
+
+.day-toggle .day-name {
+  font-size: 13px;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.day-toggle .day-sub {
+  font-size: 10px;
+  opacity: 0.7;
+}
+
+/* FAB */
+.fab {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: white;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(0,174,239,0.4);
+  z-index: 999;
+  transition: var(--transition);
+  animation: fabPulse 1.5s ease-in-out infinite;
+}
+
+.fab:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 24px rgba(0,174,239,0.5);
+}
+
+@keyframes fabPulse {
+  0%, 100% { box-shadow: 0 4px 16px rgba(0,174,239,0.4); }
+  50% { box-shadow: 0 4px 28px rgba(0,174,239,0.7); }
+}
+
+/* Stat cards */
+.stat-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.stat-card {
+  background: var(--input-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 16px;
+  text-align: center;
+  transition: var(--transition);
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.stat-card .stat-icon {
+  color: var(--primary);
+  font-size: 24px;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.stat-card .stat-label {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+.stat-card .stat-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* Sliders */
+.slider-group {
+  margin-top: 24px;
+}
+
+.slider-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+input[type="range"] {
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--border);
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--primary);
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,174,239,0.3);
+  border: 2px solid white;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--primary);
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,174,239,0.3);
+  border: 2px solid white;
+}
+
+/* Success check */
+.success-check {
+  text-align: center;
+  padding: 32px 0;
+}
+
+.success-check .check-icon {
+  font-size: 64px;
+  color: #22C55E;
+  margin-bottom: 16px;
+  display: inline-block;
+  animation: checkPop 0.5s ease;
+}
+
+@keyframes checkPop {
+  0% { transform: scale(0); }
+  80% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.success-check h3 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.success-check p {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+/* Weekly structure */
+.weekly-structure {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  margin: 24px 0;
+}
+
+.week-day-card {
+  padding: 12px 4px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid var(--border);
+  transition: var(--transition);
+}
+
+.week-day-card.training {
+  background: rgba(0,174,239,0.1);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.week-day-card.rest {
+  background: var(--input-bg);
+  color: var(--text-secondary);
+}
+
+/* Confetti */
+.confetti-container {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.confetti-piece {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  animation: confettiFall 3s ease-in forwards;
+}
+
+@keyframes confettiFall {
+  0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+}
+
+/* Toast */
+.toast-container {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10000;
+  pointer-events: none;
+}
+
+.toast {
+  background: var(--navy-light);
+  color: white;
+  padding: 14px 24px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  border-left: 4px solid var(--primary);
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  pointer-events: auto;
+  animation: toastSlideUp 0.4s ease;
+  min-width: 300px;
+}
+
+.toast.hiding {
+  animation: toastFadeOut 0.3s ease forwards;
+}
+
+@keyframes toastSlideUp {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes toastFadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+/* ============================================
+   SECTION 3: COMPONENT PLAYGROUND
+   ============================================ */
+.component-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.component-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  padding: 20px;
+  transition: var(--transition);
+}
+
+.component-card:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+.component-card-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ============================================
+   SECTION 4: FORM ELEMENTS
+   ============================================ */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.form-showcase {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  padding: 24px;
+}
+
+/* ============================================
+   SECTION 5: ANIMATIONS
+   ============================================ */
+.anim-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.anim-demo {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  gap: 16px;
+}
+
+.anim-spec {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  padding: 24px;
+  overflow-x: auto;
+}
+
+.spec-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.spec-table th {
+  text-align: left;
+  padding: 10px 12px;
+  color: var(--text-secondary);
+  font-weight: 600;
+  border-bottom: 1px solid var(--border);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.spec-table td {
+  padding: 10px 12px;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border);
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+}
+
+/* Animation demo elements */
+.demo-card-anim {
+  width: 180px;
+  height: 100px;
+  background: var(--input-bg);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), box-shadow 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+
+.demo-card-anim:hover {
+  transform: scale(1.05);
+  box-shadow: var(--shadow-lg);
+}
+
+.demo-btn-anim {
+  padding: 10px 24px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-pill);
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease-out, transform 0.2s ease-out;
+}
+
+.demo-btn-anim:hover {
+  background-color: #0098D1;
+  transform: translateY(-2px);
+}
+
+.demo-step-container {
+  position: relative;
+  width: 200px;
+  height: 120px;
+}
+
+.demo-step-card {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: var(--input-bg);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+  transition: opacity 0.5s cubic-bezier(0.4,0,0.2,1), transform 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+
+.demo-progress {
+  width: 100%;
+  max-width: 300px;
+  height: 8px;
+  background: var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.demo-progress-inner {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--primary), var(--primary-light));
+  border-radius: 4px;
+  transition: width 0.4s ease-in-out;
+}
+
+.demo-dropdown-wrap {
+  position: relative;
+  width: 200px;
+}
+
+.demo-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0; right: 0;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+  transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+  z-index: 10;
+}
+
+.demo-dropdown-menu.open {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.demo-dropdown-item {
+  padding: 10px 14px;
+  font-size: 13px;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.demo-dropdown-item:hover {
+  background: rgba(0,174,239,0.08);
+}
+
+.demo-fab {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: white;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fabPulse 1.5s ease-in-out infinite;
+}
+
+/* ============================================
+   SECTION 6: MOCKUP GALLERY
+   ============================================ */
+.mockup-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.mockup-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.mockup-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.mockup-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+  border-bottom: 1px solid var(--border);
+}
+
+.mockup-card-body {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mockup-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.mockup-badge {
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.mockup-badge.light {
+  background: #E0F2FE;
+  color: #0369A1;
+}
+
+.mockup-badge.dark {
+  background: var(--navy-lighter);
+  color: var(--primary-light);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 1199px) {
+  .component-grid { grid-template-columns: repeat(2, 1fr); }
+  .mockup-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 767px) {
+  .nav-links { display: none; }
+  .mobile-menu-btn { display: block; }
+  .component-grid { grid-template-columns: 1fr; }
+  .mockup-grid { grid-template-columns: 1fr; }
+  .form-grid { grid-template-columns: 1fr; }
+  .two-col { grid-template-columns: 1fr; }
+  .anim-row { grid-template-columns: 1fr; }
+  .day-toggles { grid-template-columns: repeat(4, 1fr); }
+  .weekly-structure { grid-template-columns: repeat(4, 1fr); }
+  .stat-cards { grid-template-columns: repeat(2, 1fr); }
+  .selectable-cards { grid-template-columns: 1fr; }
+  .section { padding: 40px 16px; }
+  .wizard-footer { flex-direction: column; }
+  .wizard-footer .btn { width: 100%; }
+}
+
+/* ============================================
+   UTILITY
+   ============================================ */
+.flex { display: flex; }
+.items-center { align-items: center; }
+.gap-2 { gap: 8px; }
+.gap-4 { gap: 16px; }
+.mb-4 { margin-bottom: 16px; }
+.mt-4 { margin-top: 16px; }
+.mt-6 { margin-top: 24px; }
+.text-center { text-align: center; }
+.hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<!-- ==================== NAVIGATION ==================== -->
+<nav class="navbar">
+  <div class="nav-brand">
+    <div class="nav-logo">A</div>
+    <span>AzFIT Program Creator</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#wireframe" class="nav-link">Wireframe</a></li>
+    <li><a href="#wizard" class="nav-link">Wizard</a></li>
+    <li><a href="#components" class="nav-link">Components</a></li>
+    <li><a href="#forms" class="nav-link">Forms</a></li>
+    <li><a href="#animations" class="nav-link">Animations</a></li>
+    <li><a href="#mockups" class="nav-link">Mockups</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <button class="theme-toggle" id="themeToggle" title="Toggle theme">
+      <span id="themeIcon">&#9788;</span>
+    </button>
+    <button class="mobile-menu-btn" id="mobileMenuBtn">&#9776;</button>
+  </div>
+</nav>
+
+<!-- Spacer for fixed nav -->
+<div style="height:56px;"></div>
+
+<!-- ==================== SECTION 1: ASCII WIREFRAME ==================== -->
+<section id="wireframe" class="section">
+  <div class="section-header">
+    <h2 class="section-title">ASCII Wireframe Layout</h2>
+    <p class="section-subtitle">Complete structural overview of the AzFIT Program Creator interface</p>
+  </div>
+  <div class="ascii-container">
+    <pre><span class="ascii-border">+--------------------------------------------------------------------------------+</span>
+<span class="ascii-border">|</span> <span class="ascii-accent">NAV BAR:</span> [Logo] [Dashboard] [Programs] [Clients] [Settings] [Help]             <span class="ascii-border">|</span>
+<span class="ascii-border">+--------------------------------------------------------------------------------+</span>
+<span class="ascii-border">|</span> <span class="ascii-accent">PROGRAM CREATOR WIZARD</span>                                                         <span class="ascii-border">|</span>
+<span class="ascii-border">|--------------------------------------------------------------------------------|</span>
+<span class="ascii-border">|</span> <span class="ascii-accent">STEP 1:</span> Primary Goal Selection                                                 <span class="ascii-border">|</span>
+<span class="ascii-border">|</span> [CARD] Lose Weight | Build Muscle | Strength | Endurance | Fitness             <span class="ascii-border">|</span>
+<span class="ascii-border">|--------------------------------------------------------------------------------|</span>
+<span class="ascii-border">|</span> <span class="ascii-accent">STEP 2:</span> Training Method                                                        <span class="ascii-border">|</span>
+<span class="ascii-border">|</span> [CARD] Straight Sets | Supersets | Trisets                                     <span class="ascii-border">|</span>
+<span class="ascii-border">|--------------------------------------------------------------------------------|</span>
+<span class="ascii-border">|</span> <span class="ascii-accent">STEP 3:</span> Matching Program                                                       <span class="ascii-border">|</span>
+<span class="ascii-border">|</span> [CARD] GBC | HIIT | Custom                                                     <span class="ascii-border">|</span>
+<span class="ascii-border">|--------------------------------------------------------------------------------|</span>
+<span class="ascii-border">|</span> <span class="ascii-accent">STEP 4:</span> Client Profile                                                         <span class="ascii-border">|</span>
+<span class="ascii-border">|</span> [FORM] Experience: [Dropdown] Beginner/Intermediate/Advanced                   <span class="ascii-border">|</span>
+<span class="ascii-border">|</span> [FORM] Equipment: [Dropdown] Full Gym/Dumbbells/Bodyweight/Minimal             <span class="ascii-border">|</span>
+<span class="ascii-border">|</span> [FORM] Time per Session: [Dropdown] 30/45/60/90 min                            <span class="ascii-border">|</span>
+<span class="ascii-border">|--------------------------------------------------------------------------------|</span>
+<span class="ascii-border">|</span> <span class="ascii-accent">STEP 5:</span> Phase Configuration                                                    <span class="ascii-border">|</span>
+<span class="ascii-border">|</span> [CARD] Accumulation | Intensification | Realization                            <span class="ascii-border">|</span>
+<span class="ascii-border">|--------------------------------------------------------------------------------|</span>
+<span class="ascii-border">|</span> <span class="ascii-accent">STEP 6:</span> Training Days                                                          <span class="ascii-border">|</span>
+<span class="ascii-border">|</span> [CARD] Mon | Tue | Wed | Thu | Fri | Sat | Sun                                 <span class="ascii-border">|</span>
+<span class="ascii-border">|</span> [FAB] + Add Day                                                                <span class="ascii-border">|</span>
+<span class="ascii-border">|--------------------------------------------------------------------------------|</span>
+<span class="ascii-border">|</span> <span class="ascii-accent">STEP 7:</span> Program Preview                                                        <span class="ascii-border">|</span>
+<span class="ascii-border">|</span> [CARD] Summary: Duration | Frequency | Volume | Equipment | Muscle Split       <span class="ascii-border">|</span>
+<span class="ascii-border">|--------------------------------------------------------------------------------|</span>
+<span class="ascii-border">|</span> <span class="ascii-accent">STEP 8:</span> Program Generated                                                      <span class="ascii-border">|</span>
+<span class="ascii-border">|</span> [CARD] Weekly Structure                                                        <span class="ascii-border">|</span>
+<span class="ascii-border">|</span> [BUTTON] Edit Details | Print | Assign | Save Program                          <span class="ascii-border">|</span>
+<span class="ascii-border">|--------------------------------------------------------------------------------|</span>
+<span class="ascii-border">|</span> <span class="ascii-accent">FOOTER:</span> Progress Bar [██████████░░░░░░░░░░] 70% Complete                      <span class="ascii-border">|</span>
+<span class="ascii-border">+--------------------------------------------------------------------------------+</span></pre>
+    <div class="legend">
+      <div class="legend-item"><span class="legend-badge">[CARD]</span> Selectable Card</div>
+      <div class="legend-item"><span class="legend-badge">[FORM]</span> Form Field</div>
+      <div class="legend-item"><span class="legend-badge">[FAB]</span> Floating Button</div>
+      <div class="legend-item"><span class="legend-badge">[BUTTON]</span> Action Button</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SECTION 2: INTERACTIVE WIZARD ==================== -->
+<section id="wizard" class="section">
+  <div class="section-header">
+    <h2 class="section-title">Interactive Wizard</h2>
+    <p class="section-subtitle">Experience the full 8-step program creation process. Navigate through each step, make selections, and see the wizard in action.</p>
+  </div>
+
+  <div class="wizard-container">
+    <!-- Wizard Header -->
+    <div class="wizard-header">
+      <div class="wizard-progress-track">
+        <div class="wizard-progress-fill" id="wizardProgressFill" style="width:12.5%"></div>
+      </div>
+      <div class="wizard-steps-row">
+        <div class="step-indicator current" data-step="1">
+          <div class="step-circle">1</div>
+          <span class="step-label">Goal</span>
+        </div>
+        <div class="step-indicator" data-step="2">
+          <div class="step-circle">2</div>
+          <span class="step-label">Method</span>
+        </div>
+        <div class="step-indicator" data-step="3">
+          <div class="step-circle">3</div>
+          <span class="step-label">Program</span>
+        </div>
+        <div class="step-indicator" data-step="4">
+          <div class="step-circle">4</div>
+          <span class="step-label">Profile</span>
+        </div>
+        <div class="step-indicator" data-step="5">
+          <div class="step-circle">5</div>
+          <span class="step-label">Phase</span>
+        </div>
+        <div class="step-indicator" data-step="6">
+          <div class="step-circle">6</div>
+          <span class="step-label">Days</span>
+        </div>
+        <div class="step-indicator" data-step="7">
+          <div class="step-circle">7</div>
+          <span class="step-label">Preview</span>
+        </div>
+        <div class="step-indicator" data-step="8">
+          <div class="step-circle">8</div>
+          <span class="step-label">Done</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Wizard Body -->
+    <div class="wizard-body" id="wizardBody">
+
+      <!-- STEP 1: Primary Goal -->
+      <div class="wizard-step active" data-step="1">
+        <h3 style="font-size:20px;font-weight:700;margin-bottom:8px;">Choose Your Primary Goal</h3>
+        <p style="font-size:14px;color:var(--text-secondary);margin-bottom:20px;">Select the main fitness objective for this program.</p>
+        <div class="selectable-cards">
+          <div class="selectable-card" data-goal="lose-weight" onclick="selectGoal(this)">
+            <span class="check-badge">&#10003;</span>
+            <span class="card-icon" style="color:#F97316;">&#128293;</span>
+            <div class="card-title">Lose Weight</div>
+            <div class="card-desc">Burn fat and reduce body weight with targeted training</div>
+          </div>
+          <div class="selectable-card" data-goal="build-muscle" onclick="selectGoal(this)">
+            <span class="check-badge">&#10003;</span>
+            <span class="card-icon" style="color:var(--primary);">&#127947;</span>
+            <div class="card-title">Build Muscle</div>
+            <div class="card-desc">Increase muscle mass with hypertrophy-focused workouts</div>
+          </div>
+          <div class="selectable-card" data-goal="strength" onclick="selectGoal(this)">
+            <span class="check-badge">&#10003;</span>
+            <span class="card-icon" style="color:#8B5CF6;">&#127942;</span>
+            <div class="card-title">Strength</div>
+            <div class="card-desc">Maximize strength gains with progressive overload</div>
+          </div>
+          <div class="selectable-card" data-goal="endurance" onclick="selectGoal(this)">
+            <span class="check-badge">&#10003;</span>
+            <span class="card-icon" style="color:#22C55E;">&#128170;</span>
+            <div class="card-title">Endurance</div>
+            <div class="card-desc">Improve cardiovascular and muscular endurance</div>
+          </div>
+          <div class="selectable-card" data-goal="fitness" onclick="selectGoal(this)">
+            <span class="check-badge">&#10003;</span>
+            <span class="card-icon" style="color:#F59E0B;">&#11088;</span>
+            <div class="card-title">General Fitness</div>
+            <div class="card-desc">Overall fitness improvement and well-being</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2: Training Method -->
+      <div class="wizard-step" data-step="2">
+        <h3 style="font-size:20px;font-weight:700;margin-bottom:8px;">Select Training Method</h3>
+        <p style="font-size:14px;color:var(--text-secondary);margin-bottom:20px;">Choose the training methodology that best fits your client's goals.</p>
+        <div class="selectable-cards">
+          <div class="selectable-card" data-method="straight" onclick="selectMethod(this)">
+            <span class="check-badge">&#10003;</span>
+            <span class="card-icon" style="color:var(--primary);">&#10148;</span>
+            <div class="card-title">Straight Sets</div>
+            <div class="card-desc">Traditional sets with rest between exercises</div>
+          </div>
+          <div class="selectable-card" data-method="supersets" onclick="selectMethod(this)">
+            <span class="check-badge">&#10003;</span>
+            <span class="card-icon" style="color:#8B5CF6;">&#8646;</span>
+            <div class="card-title">Supersets</div>
+            <div class="card-desc">Pair exercises back-to-back for efficiency</div>
+          </div>
+          <div class="selectable-card" data-method="trisets" onclick="selectMethod(this)">
+            <span class="check-badge">&#10003;</span>
+            <span class="card-icon" style="color:#F59E0B;">&#10153;</span>
+            <div class="card-title">Trisets</div>
+            <div class="card-desc">Three exercises performed in sequence</div>
+          </div>
+          <div class="selectable-card" data-method="dropsets" onclick="selectMethod(this)">
+            <span class="check-badge">&#10003;</span>
+            <span class="card-icon" style="color:#EF4444;">&#11015;</span>
+            <div class="card-title">Dropsets</div>
+            <div class="card-desc">Reduce weight and continue reps to failure</div>
+          </div>
+          <div class="selectable-card" data-method="circuit" onclick="selectMethod(this)">
+            <span class="check-badge">&#10003;</span>
+            <span class="card-icon" style="color:#22C55E;">&#9851;</span>
+            <div class="card-title">Circuit</div>
+            <div class="card-desc">Rotate through exercise stations continuously</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3: Matching Program -->
+      <div class="wizard-step" data-step="3">
+        <h3 style="font-size:20px;font-weight:700;margin-bottom:8px;">Choose a Program Template</h3>
+        <p style="font-size:14px;color:var(--text-secondary);margin-bottom:20px;">Pick from our curated templates or build from scratch.</p>
+        <div class="selectable-cards">
+          <div class="selectable-card top-accent" data-program="gbc" onclick="selectProgram(this)" style="--accent-color:#F97316;">
+            <span class="check-badge">&#10003;</span>
+            <span class="card-icon" style="color:#F97316;">&#128293;</span>
+            <div class="card-title">GBC</div>
+            <div class="card-desc">German Body Composition - Upper/Lower split, high volume</div>
+          </div>
+          <div class="selectable-card top-accent" data-program="hiit" onclick="selectProgram(this)" style="--accent-color:#EF4444;">
+            <span class="check-badge">&#10003;</span>
+            <span class="card-icon" style="color:#EF4444;">&#9889;</span>
+            <div class="card-title">HIIT</div>
+            <div class="card-desc">High Intensity Interval - Cardio-focused fat burning</div>
+          </div>
+          <div class="selectable-card top-accent" data-program="custom" onclick="selectProgram(this)" style="--accent-color:var(--primary);">
+            <span class="check-badge">&#10003;</span>
+            <span class="card-icon" style="color:var(--primary);">&#9998;</span>
+            <div class="card-title">Custom</div>
+            <div class="card-desc">Build Your Own - Start completely from scratch</div>
+          </div>
+          <div class="selectable-card top-accent" data-program="gvt" onclick="selectProgram(this)" style="--accent-color:#8B5CF6;">
+            <span class="check-badge">&#10003;</span>
+            <span class="card-icon" style="color:#8B5CF6;">&#9733;</span>
+            <div class="card-title">GVT</div>
+            <div class="card-desc">German Volume Training - Classic 10x10 protocol</div>
+          </div>
+          <div class="selectable-card top-accent" data-program="ppl" onclick="selectProgram(this)" style="--accent-color:#22C55E;">
+            <span class="check-badge">&#10003;</span>
+            <span class="card-icon" style="color:#22C55E;">&#8597;</span>
+            <div class="card-title">PPL</div>
+            <div class="card-desc">Push Pull Legs - 3-day classic bodybuilding split</div>
+          </div>
+          <div class="selectable-card top-accent" data-program="fullbody" onclick="selectProgram(this)" style="--accent-color:#F59E0B;">
+            <span class="check-badge">&#10003;</span>
+            <span class="card-icon" style="color:#F59E0B;">&#9734;</span>
+            <div class="card-title">Full Body</div>
+            <div class="card-desc">Total Body Training - 3x weekly full body sessions</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 4: Client Profile -->
+      <div class="wizard-step" data-step="4">
+        <h3 style="font-size:20px;font-weight:700;margin-bottom:8px;">Client Profile</h3>
+        <p style="font-size:14px;color:var(--text-secondary);margin-bottom:20px;">Enter client details and preferences to personalize the program.</p>
+        <div class="two-col">
+          <div>
+            <div class="form-group">
+              <label>Client Name</label>
+              <input type="text" class="form-control" placeholder="Enter client name..." id="clientName">
+            </div>
+            <div class="form-group">
+              <label>Experience Level</label>
+              <select class="form-control" id="experienceLevel">
+                <option value="">Select experience...</option>
+                <option>Beginner</option>
+                <option>Intermediate</option>
+                <option>Advanced</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Available Equipment</label>
+              <select class="form-control" id="equipment">
+                <option value="">Select equipment...</option>
+                <option>Full Gym</option>
+                <option>Dumbbells Only</option>
+                <option>Bodyweight</option>
+                <option>Minimal</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Time Per Session</label>
+              <select class="form-control" id="sessionTime">
+                <option value="">Select duration...</option>
+                <option>30 min</option>
+                <option>45 min</option>
+                <option>60 min</option>
+                <option>90 min</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <div class="form-group">
+              <label>Notes &amp; Considerations</label>
+              <textarea class="form-control" rows="4" placeholder="Injuries, preferences, goals..."></textarea>
+            </div>
+            <div class="form-group">
+              <label>Additional Options</label>
+              <div class="checkbox-group">
+                <label class="checkbox-item">
+                  <input type="checkbox" id="optWarmup"> Include Warm-up
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" id="optCooldown"> Include Cool-down
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" id="optRecovery"> Track Recovery
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" id="optTimer"> Enable Rest Timer
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 5: Phase Configuration -->
+      <div class="wizard-step" data-step="5">
+        <h3 style="font-size:20px;font-weight:700;margin-bottom:8px;">Configure Training Phases</h3>
+        <p style="font-size:14px;color:var(--text-secondary);margin-bottom:20px;">Select one or more training phases. Each phase targets different adaptations.</p>
+        <div class="selectable-cards" id="phaseCards">
+          <div class="selectable-card left-accent" data-phase="accumulation" onclick="togglePhase(this)" style="--accent-color:#8B5CF6;">
+            <span class="check-badge">&#10003;</span>
+            <span class="card-icon" style="color:#8B5CF6;">&#128200;</span>
+            <div class="card-title">Accumulation</div>
+            <div style="display:inline-block;padding:2px 10px;background:rgba(139,92,246,0.1);color:#8B5CF6;border-radius:999px;font-size:11px;font-weight:700;margin:6px 0;">Weeks 1-4</div>
+            <div class="card-desc">High volume, moderate intensity</div>
+            <div style="font-size:12px;color:var(--text-secondary);margin-top:4px;font-family:monospace;">4 sets x 12 reps</div>
+          </div>
+          <div class="selectable-card left-accent" data-phase="intensification" onclick="togglePhase(this)" style="--accent-color:#F59E0B;">
+            <span class="check-badge">&#10003;</span>
+            <span class="card-icon" style="color:#F59E0B;">&#9889;</span>
+            <div class="card-title">Intensification</div>
+            <div style="display:inline-block;padding:2px 10px;background:rgba(245,158,11,0.1);color:#F59E0B;border-radius:999px;font-size:11px;font-weight:700;margin:6px 0;">Weeks 5-8</div>
+            <div class="card-desc">Moderate volume, high intensity</div>
+            <div style="font-size:12px;color:var(--text-secondary);margin-top:4px;font-family:monospace;">3 sets x 8 reps</div>
+          </div>
+          <div class="selectable-card left-accent" data-phase="realization" onclick="togglePhase(this)" style="--accent-color:#22C55E;">
+            <span class="check-badge">&#10003;</span>
+            <span class="card-icon" style="color:#22C55E;">&#127941;</span>
+            <div class="card-title">Realization</div>
+            <div style="display:inline-block;padding:2px 10px;background:rgba(34,197,94,0.1);color:#22C55E;border-radius:999px;font-size:11px;font-weight:700;margin:6px 0;">Weeks 9-12</div>
+            <div class="card-desc">Low volume, peak intensity</div>
+            <div style="font-size:12px;color:var(--text-secondary);margin-top:4px;font-family:monospace;">2 sets x 5 reps</div>
+          </div>
+        </div>
+        <div class="phase-timeline">
+          <div class="phase-timeline-label">Phase Timeline</div>
+          <div class="timeline-bar" id="phaseTimeline">
+            <div class="timeline-segment" id="tl-accumulation" style="width:33.33%;background:#8B5CF6;">Accumulation</div>
+            <div class="timeline-segment" id="tl-intensification" style="width:33.33%;background:#F59E0B;">Intensification</div>
+            <div class="timeline-segment" id="tl-realization" style="width:33.34%;background:#22C55E;">Realization</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 6: Training Days -->
+      <div class="wizard-step" data-step="6">
+        <h3 style="font-size:20px;font-weight:700;margin-bottom:8px;">Select Training Days</h3>
+        <p style="font-size:14px;color:var(--text-secondary);margin-bottom:20px;">Click days to toggle training/rest. Active days are highlighted in cyan.</p>
+        <div class="day-toggles" id="dayToggles">
+          <div class="day-toggle active" data-day="Mon" onclick="toggleDay(this)">
+            <span class="day-name">Mon</span>
+            <span class="day-sub">Training</span>
+          </div>
+          <div class="day-toggle" data-day="Tue" onclick="toggleDay(this)">
+            <span class="day-name">Tue</span>
+            <span class="day-sub">Rest</span>
+          </div>
+          <div class="day-toggle active" data-day="Wed" onclick="toggleDay(this)">
+            <span class="day-name">Wed</span>
+            <span class="day-sub">Training</span>
+          </div>
+          <div class="day-toggle" data-day="Thu" onclick="toggleDay(this)">
+            <span class="day-name">Thu</span>
+            <span class="day-sub">Rest</span>
+          </div>
+          <div class="day-toggle active" data-day="Fri" onclick="toggleDay(this)">
+            <span class="day-name">Fri</span>
+            <span class="day-sub">Training</span>
+          </div>
+          <div class="day-toggle active" data-day="Sat" onclick="toggleDay(this)">
+            <span class="day-name">Sat</span>
+            <span class="day-sub">Training</span>
+          </div>
+          <div class="day-toggle" data-day="Sun" onclick="toggleDay(this)">
+            <span class="day-name">Sun</span>
+            <span class="day-sub">Rest</span>
+          </div>
+        </div>
+        <p style="margin-top:20px;font-size:14px;font-weight:600;color:var(--text-primary);text-align:center;" id="trainingDayCount">4 training days selected</p>
+      </div>
+
+      <!-- STEP 7: Program Preview -->
+      <div class="wizard-step" data-step="7">
+        <h3 style="font-size:20px;font-weight:700;margin-bottom:8px;">Program Preview</h3>
+        <p style="font-size:14px;color:var(--text-secondary);margin-bottom:20px;">Review and fine-tune the program parameters.</p>
+        <div class="stat-cards">
+          <div class="stat-card">
+            <span class="stat-icon">&#128197;</span>
+            <div class="stat-label">Duration</div>
+            <div class="stat-value">12 Weeks</div>
+          </div>
+          <div class="stat-card">
+            <span class="stat-icon">&#128260;</span>
+            <div class="stat-label">Frequency</div>
+            <div class="stat-value">4 Days/Week</div>
+          </div>
+          <div class="stat-card">
+            <span class="stat-icon">&#9776;</span>
+            <div class="stat-label">Volume</div>
+            <div class="stat-value">22 Exercises</div>
+          </div>
+          <div class="stat-card">
+            <span class="stat-icon">&#128295;</span>
+            <div class="stat-label">Equipment</div>
+            <div class="stat-value" id="previewEquipment">Full Gym</div>
+          </div>
+          <div class="stat-card">
+            <span class="stat-icon">&#9645;</span>
+            <div class="stat-label">Muscle Split</div>
+            <div class="stat-value">Upper/Lower</div>
+          </div>
+        </div>
+        <div class="slider-group">
+          <div style="margin-bottom:16px;">
+            <div class="slider-label">
+              <span>Intensity Level</span>
+              <span id="intensityValue" style="color:var(--primary);">75%</span>
+            </div>
+            <input type="range" min="0" max="100" value="75" id="intensitySlider" oninput="updateSlider('intensity',this.value)">
+          </div>
+          <div>
+            <div class="slider-label">
+              <span>Volume Level</span>
+              <span id="volumeValue" style="color:var(--primary);">60%</span>
+            </div>
+            <input type="range" min="0" max="100" value="60" id="volumeSlider" oninput="updateSlider('volume',this.value)">
+          </div>
+        </div>
+        <div class="phase-timeline" style="margin-top:24px;">
+          <div class="phase-timeline-label">Live Preview</div>
+          <p style="font-size:13px;color:var(--text-secondary);margin-top:8px;" id="previewText">High intensity program with moderate volume. Suitable for intermediate to advanced clients seeking strength and hypertrophy gains.</p>
+        </div>
+      </div>
+
+      <!-- STEP 8: Program Generated -->
+      <div class="wizard-step" data-step="8">
+        <div class="success-check">
+          <span class="check-icon">&#10004;</span>
+          <h3>Program Generated Successfully!</h3>
+          <p>Your custom program is ready to use.</p>
+        </div>
+        <div style="margin:24px 0;">
+          <p style="font-size:13px;font-weight:600;color:var(--text-secondary);text-align:center;margin-bottom:12px;text-transform:uppercase;letter-spacing:0.5px;">Weekly Structure</p>
+          <div class="weekly-structure" id="weeklyStructure">
+            <div class="week-day-card training">Mon</div>
+            <div class="week-day-card rest">Tue</div>
+            <div class="week-day-card training">Wed</div>
+            <div class="week-day-card rest">Thu</div>
+            <div class="week-day-card training">Fri</div>
+            <div class="week-day-card training">Sat</div>
+            <div class="week-day-card rest">Sun</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+          <button class="btn btn-secondary" onclick="showToast('Edit mode activated')">Edit Details</button>
+          <button class="btn btn-secondary" onclick="showToast('Printing program...')">Print</button>
+          <button class="btn btn-primary" onclick="showToast('Program assigned to client!')">Assign to Client</button>
+          <button class="btn btn-primary" onclick="showToast('Program saved successfully!')">Save Program</button>
+        </div>
+        <div id="confettiContainer"></div>
+      </div>
+
+    </div>
+
+    <!-- Wizard Footer -->
+    <div class="wizard-footer">
+      <button class="btn btn-secondary" id="backBtn" onclick="prevStep()" disabled>Back</button>
+      <button class="btn btn-primary" id="nextBtn" onclick="nextStep()">Next</button>
+    </div>
+  </div>
+</section>
+
+<!-- FAB -->
+<button class="fab" id="fabBtn" onclick="showToast('Training day added!')" title="Add training day">+</button>
+
+<!-- ==================== SECTION 3: COMPONENT PLAYGROUND ==================== -->
+<section id="components" class="section">
+  <div class="section-header">
+    <h2 class="section-title">Interactive Components</h2>
+    <p class="section-subtitle">Hover, click, and interact with each component. These are the building blocks of the AzFIT wizard.</p>
+  </div>
+
+  <div class="component-grid">
+
+    <!-- 1. Selection Cards -->
+    <div class="component-card">
+      <div class="component-card-title">Selection Cards</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;">
+        <div class="selectable-card" style="width:100px;height:80px;padding:12px 8px;" onclick="this.classList.toggle('selected')">
+          <span class="check-badge">&#10003;</span>
+          <span class="card-icon" style="font-size:24px;color:#F97316;">&#128293;</span>
+          <div style="font-size:12px;font-weight:600;">Goal</div>
+        </div>
+        <div class="selectable-card" style="width:100px;height:80px;padding:12px 8px;" onclick="this.classList.toggle('selected')">
+          <span class="check-badge">&#10003;</span>
+          <span class="card-icon" style="font-size:24px;color:#8B5CF6;">&#9997;</span>
+          <div style="font-size:12px;font-weight:600;">Method</div>
+        </div>
+        <div class="selectable-card" style="width:100px;height:80px;padding:12px 8px;" onclick="this.classList.toggle('selected')">
+          <span class="check-badge">&#10003;</span>
+          <span class="card-icon" style="font-size:24px;color:var(--primary);">&#128196;</span>
+          <div style="font-size:12px;font-weight:600;">Program</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Buttons -->
+    <div class="component-card">
+      <div class="component-card-title">Buttons</div>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;">
+        <button class="btn btn-primary" style="width:120px;">Primary</button>
+        <button class="btn btn-secondary" style="width:120px;">Secondary</button>
+        <button class="btn btn-ghost" style="width:120px;">Ghost</button>
+        <button class="btn btn-danger" style="width:120px;">Danger</button>
+      </div>
+    </div>
+
+    <!-- 3. Dropdown -->
+    <div class="component-card">
+      <div class="component-card-title">Dropdown</div>
+      <div class="demo-dropdown-wrap" id="playgroundDropdownWrap">
+        <button class="form-control" style="text-align:left;cursor:pointer;" onclick="toggleDropdown('playgroundDropdown')">
+          <span id="dropdownSelected">Beginner</span>
+          <span style="float:right;">&#9662;</span>
+        </button>
+        <div class="demo-dropdown-menu" id="playgroundDropdown">
+          <div class="demo-dropdown-item" onclick="selectDropdown('Beginner')">Beginner</div>
+          <div class="demo-dropdown-item" onclick="selectDropdown('Intermediate')">Intermediate</div>
+          <div class="demo-dropdown-item" onclick="selectDropdown('Advanced')">Advanced</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. FAB -->
+    <div class="component-card">
+      <div class="component-card-title">FAB (Floating Action Button)</div>
+      <div style="display:flex;justify-content:center;align-items:center;padding:10px;">
+        <button class="demo-fab" onclick="showToast('FAB clicked!')">+</button>
+      </div>
+    </div>
+
+    <!-- 5. Progress Bar -->
+    <div class="component-card">
+      <div class="component-card-title">Progress Bar</div>
+      <div style="padding:10px 0;">
+        <div class="demo-progress" style="margin-bottom:12px;">
+          <div class="demo-progress-inner" id="demoProgressBar"></div>
+        </div>
+        <div style="display:flex;gap:8px;justify-content:center;">
+          <button class="btn btn-primary" style="height:32px;padding:0 14px;font-size:12px;" onclick="animateProgress()">Animate</button>
+          <button class="btn btn-secondary" style="height:32px;padding:0 14px;font-size:12px;" onclick="resetProgress()">Reset</button>
+        </div>
+        <p style="text-align:center;font-size:12px;color:var(--text-secondary);margin-top:8px;" id="progressLabel">0%</p>
+      </div>
+    </div>
+
+    <!-- 6. Toast Notification -->
+    <div class="component-card">
+      <div class="component-card-title">Toast Notification</div>
+      <div style="display:flex;justify-content:center;align-items:center;padding:10px;">
+        <button class="btn btn-primary" onclick="showToast('Success! Program saved.')">Trigger Toast</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ==================== SECTION 4: FORM ELEMENTS ==================== -->
+<section id="forms" class="section">
+  <div class="section-header">
+    <h2 class="section-title">Form Elements</h2>
+    <p class="section-subtitle">All form inputs used throughout the wizard, fully styled and functional.</p>
+  </div>
+
+  <div class="form-grid">
+    <!-- Left Column -->
+    <div class="form-showcase">
+      <h4 style="font-size:16px;font-weight:700;margin-bottom:20px;color:var(--text-primary);">Basic Inputs</h4>
+
+      <!-- Text Input -->
+      <div class="form-group">
+        <label>Client Name</label>
+        <input type="text" class="form-control" placeholder="Enter client name...">
+      </div>
+
+      <!-- Textarea -->
+      <div class="form-group">
+        <label>Notes</label>
+        <textarea class="form-control" rows="4" placeholder="Enter notes..."></textarea>
+      </div>
+
+      <!-- Dropdown -->
+      <div class="form-group">
+        <label>Experience Level</label>
+        <div class="demo-dropdown-wrap" style="width:100%;">
+          <div class="form-control" style="cursor:pointer;" onclick="toggleDropdown('formDropdown')">
+            <span id="formDropdownSelected">Select level...</span>
+            <span style="float:right;">&#9662;</span>
+          </div>
+          <div class="demo-dropdown-menu" id="formDropdown">
+            <div class="demo-dropdown-item" onclick="selectFormDropdown('Beginner')">Beginner</div>
+            <div class="demo-dropdown-item" onclick="selectFormDropdown('Intermediate')">Intermediate</div>
+            <div class="demo-dropdown-item" onclick="selectFormDropdown('Advanced')">Advanced</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column -->
+    <div class="form-showcase">
+      <h4 style="font-size:16px;font-weight:700;margin-bottom:20px;color:var(--text-primary);">Advanced Inputs</h4>
+
+      <!-- Checkboxes -->
+      <div class="form-group">
+        <label>Options</label>
+        <div class="checkbox-group">
+          <label class="checkbox-item"><input type="checkbox"> Warm-up</label>
+          <label class="checkbox-item"><input type="checkbox"> Cool-down</label>
+          <label class="checkbox-item"><input type="checkbox"> Recovery</label>
+          <label class="checkbox-item"><input type="checkbox"> Rest Timer</label>
+        </div>
+      </div>
+
+      <!-- Radio Buttons -->
+      <div class="form-group">
+        <label>Primary Goal</label>
+        <div class="radio-group">
+          <label class="radio-item"><input type="radio" name="goalRadio"> Lose Weight</label>
+          <label class="radio-item"><input type="radio" name="goalRadio"> Build Muscle</label>
+          <label class="radio-item"><input type="radio" name="goalRadio"> Strength</label>
+        </div>
+      </div>
+
+      <!-- Slider -->
+      <div class="form-group">
+        <label>Intensity <span id="formIntensityVal" style="color:var(--primary);font-weight:700;">50%</span></label>
+        <input type="range" min="0" max="100" value="50" oninput="document.getElementById('formIntensityVal').textContent=this.value+'%'">
+      </div>
+
+      <!-- Submit Button -->
+      <button class="btn btn-primary" style="width:100%;margin-top:8px;">Generate Program</button>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SECTION 5: ANIMATION SPECIFICATIONS ==================== -->
+<section id="animations" class="section">
+  <div class="section-header">
+    <h2 class="section-title">Animation Library</h2>
+    <p class="section-subtitle">Every animation used in the AzFIT interface, with live demos and implementation specs.</p>
+  </div>
+
+  <!-- 1. Card Expand -->
+  <div class="anim-row">
+    <div class="anim-demo">
+      <p style="font-size:12px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.5px;">Card Expand</p>
+      <div class="demo-card-anim">Hover Me</div>
+      <p style="font-size:12px;color:var(--text-secondary);">Hover to see card expand animation</p>
+    </div>
+    <div class="anim-spec">
+      <p style="font-size:14px;font-weight:700;margin-bottom:12px;">Card Expand Spec</p>
+      <table class="spec-table">
+        <thead><tr><th>Property</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>transform</td><td>scale(1.0) -> scale(1.05)</td></tr>
+          <tr><td>box-shadow</td><td>var(--shadow-md) -> var(--shadow-lg)</td></tr>
+          <tr><td>Duration</td><td>0.3s</td></tr>
+          <tr><td>Easing</td><td>cubic-bezier(0.4, 0, 0.2, 1)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 2. Button Hover -->
+  <div class="anim-row">
+    <div class="anim-demo">
+      <p style="font-size:12px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.5px;">Button Hover</p>
+      <button class="demo-btn-anim">Hover Me</button>
+      <p style="font-size:12px;color:var(--text-secondary);">Color shift + subtle bounce</p>
+    </div>
+    <div class="anim-spec">
+      <p style="font-size:14px;font-weight:700;margin-bottom:12px;">Button Hover Spec</p>
+      <table class="spec-table">
+        <thead><tr><th>Property</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>background-color</td><td>#00AEEF -> #0098D1</td></tr>
+          <tr><td>transform</td><td>translateY(0) -> translateY(-2px)</td></tr>
+          <tr><td>Duration</td><td>0.2s</td></tr>
+          <tr><td>Easing</td><td>ease-out</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 3. Step Transition -->
+  <div class="anim-row">
+    <div class="anim-demo">
+      <p style="font-size:12px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.5px;">Step Transition</p>
+      <div class="demo-step-container" id="stepTransContainer">
+        <div class="demo-step-card" id="stepCard1" style="opacity:1;transform:translateX(0);">Step 1</div>
+        <div class="demo-step-card" id="stepCard2" style="opacity:0;transform:translateX(40px);">Step 2</div>
+      </div>
+      <button class="btn btn-primary" style="height:32px;padding:0 16px;font-size:12px;" onclick="toggleStepTrans()">Switch</button>
+    </div>
+    <div class="anim-spec">
+      <p style="font-size:14px;font-weight:700;margin-bottom:12px;">Step Transition Spec</p>
+      <table class="spec-table">
+        <thead><tr><th>Property</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>opacity</td><td>1 -> 0 (outgoing); 0 -> 1 (incoming)</td></tr>
+          <tr><td>transform</td><td>translateX(0) -> translateX(-20px) (out); translateX(20px) -> translateX(0) (in)</td></tr>
+          <tr><td>Duration</td><td>0.5s</td></tr>
+          <tr><td>Easing</td><td>cubic-bezier(0.4, 0, 0.2, 1)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 4. Progress Fill -->
+  <div class="anim-row">
+    <div class="anim-demo">
+      <p style="font-size:12px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.5px;">Progress Fill</p>
+      <div class="demo-progress" style="max-width:200px;">
+        <div class="demo-progress-inner" id="animProgressBar" style="width:0%"></div>
+      </div>
+      <button class="btn btn-primary" style="height:32px;padding:0 16px;font-size:12px;" onclick="animateAnimProgress()">Fill</button>
+    </div>
+    <div class="anim-spec">
+      <p style="font-size:14px;font-weight:700;margin-bottom:12px;">Progress Fill Spec</p>
+      <table class="spec-table">
+        <thead><tr><th>Property</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>width</td><td>0% -> target%</td></tr>
+          <tr><td>Duration</td><td>0.4s</td></tr>
+          <tr><td>Easing</td><td>ease-in-out</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 5. Dropdown Open -->
+  <div class="anim-row">
+    <div class="anim-demo">
+      <p style="font-size:12px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.5px;">Dropdown Open</p>
+      <div class="demo-dropdown-wrap">
+        <button class="form-control" style="text-align:left;cursor:pointer;width:180px;" onclick="toggleDropdown('animDropdown')">
+          Select... <span style="float:right;">&#9662;</span>
+        </button>
+        <div class="demo-dropdown-menu" id="animDropdown">
+          <div class="demo-dropdown-item">Option 1</div>
+          <div class="demo-dropdown-item">Option 2</div>
+          <div class="demo-dropdown-item">Option 3</div>
+        </div>
+      </div>
+    </div>
+    <div class="anim-spec">
+      <p style="font-size:14px;font-weight:700;margin-bottom:12px;">Dropdown Open Spec</p>
+      <table class="spec-table">
+        <thead><tr><th>Property</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>opacity</td><td>0 -> 1</td></tr>
+          <tr><td>transform</td><td>translateY(-8px) -> translateY(0)</td></tr>
+          <tr><td>Duration</td><td>0.25s</td></tr>
+          <tr><td>Easing</td><td>ease-out</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 6. FAB Pulse -->
+  <div class="anim-row">
+    <div class="anim-demo">
+      <p style="font-size:12px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.5px;">FAB Pulse</p>
+      <button class="demo-fab">+</button>
+      <p style="font-size:12px;color:var(--text-secondary);">Continuous glow pulse animation</p>
+    </div>
+    <div class="anim-spec">
+      <p style="font-size:14px;font-weight:700;margin-bottom:12px;">FAB Pulse Spec</p>
+      <table class="spec-table">
+        <thead><tr><th>Property</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>box-shadow</td><td>pulse between rgba(0,174,239,0.4) and rgba(0,174,239,0.7)</td></tr>
+          <tr><td>Duration</td><td>1.5s</td></tr>
+          <tr><td>Easing</td><td>ease-in-out</td></tr>
+          <tr><td>Loop</td><td>infinite</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 7. Toast Slide -->
+  <div class="anim-row">
+    <div class="anim-demo">
+      <p style="font-size:12px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.5px;">Toast Slide</p>
+      <button class="btn btn-primary" style="height:32px;padding:0 16px;font-size:12px;" onclick="showToast('Success! Program saved.')">Trigger Toast</button>
+      <p style="font-size:12px;color:var(--text-secondary);">Slides up from bottom, auto-dismiss</p>
+    </div>
+    <div class="anim-spec">
+      <p style="font-size:14px;font-weight:700;margin-bottom:12px;">Toast Slide Spec</p>
+      <table class="spec-table">
+        <thead><tr><th>Phase</th><th>Property</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Entry</td><td>transform</td><td>translateY(100%) -> translateY(0)</td></tr>
+          <tr><td>Entry</td><td>Duration</td><td>0.4s</td></tr>
+          <tr><td>Exit</td><td>opacity</td><td>1 -> 0</td></tr>
+          <tr><td>Exit</td><td>Duration</td><td>0.3s (after 2s delay)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SECTION 6: VISUAL MOCKUPS ==================== -->
+<section id="mockups" class="section">
+  <div class="section-header">
+    <h2 class="section-title">Visual Mockups</h2>
+    <p class="section-subtitle">AI-generated mockups showing the AzFIT Program Creator across devices and themes.</p>
+  </div>
+
+  <div class="mockup-grid">
+
+    <div class="mockup-card">
+      <img src="mockups/01-workflow-desktop-light.png" alt="Desktop Light Mode - Step 4 Client Profile">
+      <div class="mockup-card-body">
+        <span class="mockup-title">Desktop Light</span>
+        <span class="mockup-badge light">Light</span>
+      </div>
+    </div>
+
+    <div class="mockup-card">
+      <img src="mockups/02-workflow-desktop-dark.png" alt="Desktop Dark Mode - Step 6 Training Days">
+      <div class="mockup-card-body">
+        <span class="mockup-title">Desktop Dark</span>
+        <span class="mockup-badge dark">Dark</span>
+      </div>
+    </div>
+
+    <div class="mockup-card">
+      <img src="mockups/03-workflow-tablet-light.png" alt="Tablet Light Mode - Step 2 Method Selection">
+      <div class="mockup-card-body">
+        <span class="mockup-title">Tablet Light</span>
+        <span class="mockup-badge light">Light</span>
+      </div>
+    </div>
+
+    <div class="mockup-card">
+      <img src="mockups/04-workflow-tablet-dark.png" alt="Tablet Dark Mode - Step 5 Phase Config">
+      <div class="mockup-card-body">
+        <span class="mockup-title">Tablet Dark</span>
+        <span class="mockup-badge dark">Dark</span>
+      </div>
+    </div>
+
+    <div class="mockup-card">
+      <img src="mockups/05-workflow-mobile-light.png" alt="Mobile Light Mode - Step 7 Preview">
+      <div class="mockup-card-body">
+        <span class="mockup-title">Mobile Light</span>
+        <span class="mockup-badge light">Light</span>
+      </div>
+    </div>
+
+    <div class="mockup-card">
+      <img src="mockups/06-workflow-mobile-dark.png" alt="Mobile Dark Mode - Step 8 Success">
+      <div class="mockup-card-body">
+        <span class="mockup-title">Mobile Dark</span>
+        <span class="mockup-badge dark">Dark</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Toast Container -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- ==================== JAVASCRIPT ==================== -->
+<script>
+// ============================================
+// THEME TOGGLE
+// ============================================
+const themeToggle = document.getElementById('themeToggle');
+const themeIcon = document.getElementById('themeIcon');
+const htmlEl = document.documentElement;
+
+function loadTheme() {
+  const saved = localStorage.getItem('azfit-theme');
+  if (saved) {
+    htmlEl.setAttribute('data-theme', saved);
+    updateThemeIcon(saved);
+  }
+}
+
+function updateThemeIcon(theme) {
+  themeIcon.innerHTML = theme === 'dark' ? '&#9790;' : '&#9788;';
+}
+
+themeToggle.addEventListener('click', () => {
+  const current = htmlEl.getAttribute('data-theme');
+  const next = current === 'dark' ? 'light' : 'dark';
+  htmlEl.setAttribute('data-theme', next);
+  localStorage.setItem('azfit-theme', next);
+  updateThemeIcon(next);
+});
+
+loadTheme();
+
+// ============================================
+// NAVIGATION ACTIVE STATE
+// ============================================
+const navLinks = document.querySelectorAll('.nav-link');
+const sections = document.querySelectorAll('.section');
+
+function updateActiveNav() {
+  let current = '';
+  sections.forEach(section => {
+    const rect = section.getBoundingClientRect();
+    if (rect.top <= 100) current = section.id;
+  });
+  navLinks.forEach(link => {
+    link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+  });
+}
+window.addEventListener('scroll', updateActiveNav);
+
+// ============================================
+// WIZARD STATE MANAGEMENT
+// ============================================
+let currentStep = 1;
+const totalSteps = 8;
+const wizardState = {
+  goal: null,
+  method: null,
+  program: null,
+  phases: ['accumulation','intensification','realization'],
+  trainingDays: ['Mon','Wed','Fri','Sat']
+};
+
+function updateWizardUI() {
+  // Progress bar
+  const pct = (currentStep / totalSteps) * 100;
+  document.getElementById('wizardProgressFill').style.width = pct + '%';
+
+  // Step indicators
+  document.querySelectorAll('.step-indicator').forEach(el => {
+    const step = parseInt(el.dataset.step);
+    el.classList.remove('completed','current');
+    if (step < currentStep) el.classList.add('completed');
+    else if (step === currentStep) el.classList.add('current');
+    const circle = el.querySelector('.step-circle');
+    if (step < currentStep) circle.innerHTML = '&#10003;';
+    else circle.textContent = step;
+  });
+
+  // Show active step
+  document.querySelectorAll('.wizard-step').forEach(el => {
+    el.classList.remove('active');
+  });
+  const activeStep = document.querySelector('.wizard-step[data-step="' + currentStep + '"]');
+  if (activeStep) activeStep.classList.add('active');
+
+  // Buttons
+  document.getElementById('backBtn').disabled = currentStep === 1;
+  document.getElementById('nextBtn').textContent = currentStep === totalSteps ? 'Finish' : 'Next';
+
+  // Confetti on step 8
+  if (currentStep === 8) launchConfetti();
+}
+
+function nextStep() {
+  if (currentStep < totalSteps) {
+    currentStep++;
+    updateWizardUI();
+  } else {
+    showToast('Program creation completed!');
+  }
+}
+
+function prevStep() {
+  if (currentStep > 1) {
+    currentStep--;
+    updateWizardUI();
+  }
+}
+
+// ============================================
+// STEP 1: GOAL SELECTION
+// ============================================
+function selectGoal(el) {
+  document.querySelectorAll('[data-goal]').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  wizardState.goal = el.dataset.goal;
+}
+
+// ============================================
+// STEP 2: METHOD SELECTION
+// ============================================
+function selectMethod(el) {
+  document.querySelectorAll('[data-method]').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  wizardState.method = el.dataset.method;
+}
+
+// ============================================
+// STEP 3: PROGRAM SELECTION
+// ============================================
+function selectProgram(el) {
+  document.querySelectorAll('[data-program]').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  wizardState.program = el.dataset.program;
+}
+
+// ============================================
+// STEP 5: PHASE TOGGLE
+// ============================================
+function togglePhase(el) {
+  el.classList.toggle('selected');
+  const phase = el.dataset.phase;
+  if (wizardState.phases.includes(phase)) {
+    wizardState.phases = wizardState.phases.filter(p => p !== phase);
+  } else {
+    wizardState.phases.push(phase);
+  }
+  updatePhaseTimeline();
+}
+
+function updatePhaseTimeline() {
+  const allPhases = ['accumulation','intensification','realization'];
+  const colors = { accumulation: '#8B5CF6', intensification: '#F59E0B', realization: '#22C55E' };
+  const labels = { accumulation: 'Accumulation', intensification: 'Intensification', realization: 'Realization' };
+  const timeline = document.getElementById('phaseTimeline');
+  timeline.innerHTML = '';
+
+  if (wizardState.phases.length === 0) {
+    timeline.innerHTML = '<div class="timeline-segment" style="width:100%;background:var(--border);color:var(--text-secondary);">No phases selected</div>';
+    return;
+  }
+
+  const segWidth = 100 / wizardState.phases.length;
+  wizardState.phases.forEach(phase => {
+    const div = document.createElement('div');
+    div.className = 'timeline-segment';
+    div.style.width = segWidth + '%';
+    div.style.background = colors[phase];
+    div.textContent = labels[phase];
+    timeline.appendChild(div);
+  });
+}
+
+// ============================================
+// STEP 6: DAY TOGGLE
+// ============================================
+function toggleDay(el) {
+  el.classList.toggle('active');
+  const day = el.dataset.day;
+  const isActive = el.classList.contains('active');
+  el.querySelector('.day-sub').textContent = isActive ? 'Training' : 'Rest';
+
+  if (isActive) {
+    if (!wizardState.trainingDays.includes(day)) wizardState.trainingDays.push(day);
+  } else {
+    wizardState.trainingDays = wizardState.trainingDays.filter(d => d !== day);
+  }
+  document.getElementById('trainingDayCount').textContent = wizardState.trainingDays.length + ' training days selected';
+}
+
+// ============================================
+// STEP 7: SLIDERS
+// ============================================
+function updateSlider(type, value) {
+  document.getElementById(type + 'Value').textContent = value + '%';
+  const intensity = document.getElementById('intensitySlider').value;
+  const volume = document.getElementById('volumeSlider').value;
+  let text = '';
+  if (intensity > 80) text = 'High intensity program ';
+  else if (intensity > 50) text = 'Moderate intensity program ';
+  else text = 'Low intensity program ';
+  if (volume > 70) text += 'with high volume. Best for hypertrophy-focused clients.';
+  else if (volume > 40) text += 'with moderate volume. Balanced approach for most clients.';
+  else text += 'with low volume. Ideal for strength-focused or time-constrained clients.';
+  document.getElementById('previewText').textContent = text;
+}
+
+// ============================================
+// TOAST NOTIFICATION
+// ============================================
+function showToast(message) {
+  const container = document.getElementById('toastContainer');
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+  toast.innerHTML = '<span style="font-size:16px;">&#10004;</span> ' + message;
+  container.appendChild(toast);
+  setTimeout(() => {
+    toast.classList.add('hiding');
+    setTimeout(() => toast.remove(), 300);
+  }, 2000);
+}
+
+// ============================================
+// DROPDOWN
+// ============================================
+function toggleDropdown(id) {
+  const menu = document.getElementById(id);
+  if (!menu) return;
+  menu.classList.toggle('open');
+}
+
+function selectDropdown(val) {
+  document.getElementById('dropdownSelected').textContent = val;
+  document.getElementById('playgroundDropdown').classList.remove('open');
+}
+
+function selectFormDropdown(val) {
+  document.getElementById('formDropdownSelected').textContent = val;
+  document.getElementById('formDropdown').classList.remove('open');
+}
+
+// Close dropdowns on outside click
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.demo-dropdown-wrap')) {
+    document.querySelectorAll('.demo-dropdown-menu').forEach(m => m.classList.remove('open'));
+  }
+});
+
+// ============================================
+// PROGRESS BAR DEMO
+// ============================================
+function animateProgress() {
+  const bar = document.getElementById('demoProgressBar');
+  const label = document.getElementById('progressLabel');
+  bar.style.width = '0%';
+  setTimeout(() => { bar.style.width = '75%'; label.textContent = '75%'; }, 50);
+}
+
+function resetProgress() {
+  document.getElementById('demoProgressBar').style.width = '0%';
+  document.getElementById('progressLabel').textContent = '0%';
+}
+
+// ============================================
+// ANIMATION DEMO: Step Transition
+// ============================================
+let stepTransState = 1;
+function toggleStepTrans() {
+  const c1 = document.getElementById('stepCard1');
+  const c2 = document.getElementById('stepCard2');
+  if (stepTransState === 1) {
+    c1.style.opacity = '0'; c1.style.transform = 'translateX(-40px)';
+    c2.style.opacity = '1'; c2.style.transform = 'translateX(0)';
+    stepTransState = 2;
+  } else {
+    c1.style.opacity = '1'; c1.style.transform = 'translateX(0)';
+    c2.style.opacity = '0'; c2.style.transform = 'translateX(40px)';
+    stepTransState = 1;
+  }
+}
+
+// ============================================
+// ANIMATION DEMO: Progress
+// ============================================
+function animateAnimProgress() {
+  const bar = document.getElementById('animProgressBar');
+  bar.style.width = '0%';
+  setTimeout(() => { bar.style.width = '100%'; }, 50);
+  setTimeout(() => { bar.style.width = '0%'; }, 800);
+}
+
+// ============================================
+// CONFETTI
+// ============================================
+function launchConfetti() {
+  const container = document.getElementById('confettiContainer');
+  if (!container || container.children.length > 0) return;
+  const colors = ['#00AEEF','#22D3EE','#8B5CF6','#F59E0B','#22C55E','#F97316','#EF4444'];
+  for (let i = 0; i < 40; i++) {
+    const piece = document.createElement('div');
+    piece.className = 'confetti-piece';
+    piece.style.left = Math.random() * 100 + '%';
+    piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+    piece.style.animationDelay = Math.random() * 2 + 's';
+    piece.style.width = (6 + Math.random() * 8) + 'px';
+    piece.style.height = (6 + Math.random() * 8) + 'px';
+    piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+    container.appendChild(piece);
+  }
+  setTimeout(() => { container.innerHTML = ''; }, 3500);
+}
+
+// ============================================
+// MOBILE MENU
+// ============================================
+document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+  const links = document.querySelector('.nav-links');
+  if (links.style.display === 'flex') {
+    links.style.display = '';
+  } else {
+    links.style.display = 'flex';
+    links.style.flexDirection = 'column';
+    links.style.position = 'absolute';
+    links.style.top = '56px';
+    links.style.left = '0';
+    links.style.right = '0';
+    links.style.background = 'var(--nav-bg)';
+    links.style.padding = '16px';
+    links.style.borderBottom = '1px solid var(--border)';
+    links.style.zIndex = '999';
+  }
+});
+
+// ============================================
+// INIT
+// ============================================
+document.addEventListener('DOMContentLoaded', () => {
+  updateWizardUI();
+  updatePhaseTimeline();
+});
+</script>
+
+</body>
+</html>

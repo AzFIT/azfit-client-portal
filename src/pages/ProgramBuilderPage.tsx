@@ -16,6 +16,8 @@ import {
   Circle,
   Columns,
   Settings,
+  CheckCircle2,
+  Save,
 } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
@@ -34,7 +36,9 @@ import WorkoutSummary from '@/components/ProgramBuilder/WorkoutSummary';
 import LiftRecordModal from '@/components/ProgramBuilder/LiftRecordModal';
 import EditExerciseModal from '@/components/ProgramBuilder/EditExerciseModal';
 import { useRestTimer } from '@/hooks/useRestTimer';
-import type { Exercise, LiftRecord, SavedProgram, ProgramData, DayData, DayExercise } from '@/types';
+import { saveSession as saveSessionHistory } from '@/lib/sessions';
+import { getCurrentCoach } from '@/lib/auth';
+import type { Exercise, LiftRecord, SavedProgram, ProgramData, DayData, DayExercise, LoggedExercise, LoggedSet } from '@/types';
 
 // ── Template Icons ──────────────────────────────────────────────
 const TEMPLATE_ICONS: Record<string, React.ReactNode> = {
@@ -292,19 +296,19 @@ function DayTab({
       onClick={onClick}
       className={`relative flex-shrink-0 min-w-[140px] rounded-lg border p-3 text-left transition-all ${
         isActive
-          ? 'bg-[#1A1A1A] border-[#00AEEF]/50 ring-1 ring-[#00AEEF]/20'
-          : 'bg-[#141414] border-[#2A2A2A] hover:border-[#3A3A3A]'
+          ? 'bg-gray-100 dark:bg-[#1A1A1A] border-[#00AEEF]/50 ring-1 ring-[#00AEEF]/20'
+          : 'bg-gray-50 dark:bg-[#141414] border-gray-200 dark:border-[#2A2A2A] hover:border-[#3A3A3A]'
       }`}
     >
       <div className="flex items-center justify-between mb-1">
-        <span className={`text-xs font-semibold ${isActive ? 'text-[#00AEEF]' : 'text-[#A0A0A0]'}`}>
+        <span className={`text-xs font-semibold ${isActive ? 'text-[#00AEEF]' : 'text-gray-500 dark:text-[#A0A0A0]'}`}>
           Day {dayNumber}
         </span>
         {isCompleted && (
           <div className="w-2 h-2 rounded-full bg-[#22C55E]" />
         )}
       </div>
-      <div className="text-[#F0F0F0] text-sm font-medium truncate">{day}</div>
+      <div className="text-gray-900 dark:text-[#F0F0F0] text-sm font-medium truncate">{day}</div>
       <div className="flex items-center gap-2 mt-1">
         <span className={`text-[10px] font-medium ${methodColors[method] || 'text-[#6B7280]'}`}>
           {method}
@@ -320,34 +324,34 @@ function ClientProfileBar({ profile, template, method }: { profile?: ProgramData
   if (!profile && !template && !method) return null;
 
   return (
-    <div className="flex flex-wrap items-center gap-3 px-4 py-2.5 rounded-lg bg-[#141414] border border-[#2A2A2A]/50">
+    <div className="flex flex-wrap items-center gap-3 px-4 py-2.5 rounded-lg bg-gray-50 dark:bg-[#141414] border border-gray-200 dark:border-[#2A2A2A]/50">
       {template && (
-        <div className="flex items-center gap-1.5 text-xs text-[#A0A0A0]">
+        <div className="flex items-center gap-1.5 text-xs text-gray-500 dark:text-[#A0A0A0]">
           {TEMPLATE_ICONS[template] || <Settings size={12} />}
-          <span className="text-[#F0F0F0] font-medium">{template}</span>
+          <span className="text-gray-900 dark:text-[#F0F0F0] font-medium">{template}</span>
         </div>
       )}
       {method && (
         <>
           <div className="w-px h-3 bg-[#2A2A2A]" />
-          <div className="flex items-center gap-1.5 text-xs text-[#A0A0A0]">
+          <div className="flex items-center gap-1.5 text-xs text-gray-500 dark:text-[#A0A0A0]">
             <Layers size={12} />
-            <span className="text-[#F0F0F0] font-medium">{method}</span>
+            <span className="text-gray-900 dark:text-[#F0F0F0] font-medium">{method}</span>
           </div>
         </>
       )}
       {profile && (
         <>
           <div className="w-px h-3 bg-[#2A2A2A]" />
-          <div className="flex items-center gap-1.5 text-xs text-[#A0A0A0]">
+          <div className="flex items-center gap-1.5 text-xs text-gray-500 dark:text-[#A0A0A0]">
             <User size={12} />
             <span>{profile.experience}</span>
           </div>
-          <div className="flex items-center gap-1.5 text-xs text-[#A0A0A0]">
+          <div className="flex items-center gap-1.5 text-xs text-gray-500 dark:text-[#A0A0A0]">
             <Dumbbell size={12} />
             <span>{profile.equipment}</span>
           </div>
-          <div className="flex items-center gap-1.5 text-xs text-[#A0A0A0]">
+          <div className="flex items-center gap-1.5 text-xs text-gray-500 dark:text-[#A0A0A0]">
             <Clock size={12} />
             <span>{profile.timePerSession} min/session</span>
           </div>
@@ -365,7 +369,7 @@ function PhaseProgress({ phases }: { phases: ProgramData['phases'] }) {
   const totalWeeks = activePhases.reduce((s, p) => s + p.weeks, 0);
 
   return (
-    <div className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#141414] border border-[#2A2A2A]/50">
+    <div className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-gray-50 dark:bg-[#141414] border border-gray-200 dark:border-[#2A2A2A]/50">
       <Calendar size={14} className="text-[#6B7280]" />
       <div className="flex items-center gap-1.5 flex-wrap">
         {activePhases.map((phase, idx) => (
@@ -376,14 +380,14 @@ function PhaseProgress({ phases }: { phases: ProgramData['phases'] }) {
             >
               {phase.name}
             </span>
-            <span className="text-[#A0A0A0] text-[10px]">{phase.weeks}w</span>
+            <span className="text-gray-500 dark:text-[#A0A0A0] text-[10px]">{phase.weeks}w</span>
             {idx < activePhases.length - 1 && (
               <ChevronRight size={10} className="text-[#6B7280]" />
             )}
           </div>
         ))}
       </div>
-      <div className="ml-auto text-[10px] text-[#A0A0A0]">Total: {totalWeeks}w</div>
+      <div className="ml-auto text-[10px] text-gray-500 dark:text-[#A0A0A0]">Total: {totalWeeks}w</div>
     </div>
   );
 }
@@ -432,6 +436,16 @@ export default function ProgramBuilderPage() {
 
   // Load program data on mount
   useEffect(() => {
+    // Quick session — ad-hoc workout without a program
+    if (programId === 'quick') {
+      setWorkoutName('Quick Session');
+      setSourceLabel('Quick Session');
+      setExercises([]);
+      setHasDays(false);
+      setLoaded(true);
+      return;
+    }
+
     if (!programId) {
       setNotFound(true);
       setLoaded(true);
@@ -570,6 +584,71 @@ export default function ProgramBuilderPage() {
     }
   };
 
+  // Finish session — save to history
+  const handleFinishSession = useCallback(async () => {
+    const coach = getCurrentCoach();
+    if (!coach) return;
+
+    const loggedExercises: LoggedExercise[] = exercises.map(ex => ({
+      exerciseId: ex.id,
+      exerciseName: ex.name,
+      targetSets: ex.sets.length,
+      targetReps: ex.scheme,
+      sets: ex.sets.map((s, i): LoggedSet => ({
+        setNumber: i + 1,
+        load: parseFloat(s.load) || 0,
+        reps: parseInt(s.reps) || 0,
+        rpe: parseFloat(s.rpe) || 0,
+        completed: s.done === 'done',
+        restSeconds: parseInt(s.rest) || 0,
+        type: s.type,
+      })),
+      notes: ex.sets.map(s => s.note).filter(Boolean).join('; '),
+      completed: ex.sets.every(s => s.done === 'done'),
+    }));
+
+    const completedSets = loggedExercises.reduce((sum, ex) => sum + ex.sets.filter(s => s.completed).length, 0);
+    const totalSets = loggedExercises.reduce((sum, ex) => sum + ex.sets.length, 0);
+    const totalVolume = loggedExercises.reduce((sum, ex) =>
+      sum + ex.sets.reduce((sSum, s) => sSum + (s.load * s.reps), 0), 0);
+    const avgRpe = completedSets > 0
+      ? loggedExercises.reduce((sum, ex) =>
+          sum + ex.sets.filter(s => s.completed).reduce((sSum, s) => sSum + s.rpe, 0), 0) / completedSets
+      : 0;
+
+    const session = {
+      id: crypto.randomUUID?.() || Date.now().toString(),
+      coachId: coach.id,
+      clientId: undefined,
+      clientName: undefined,
+      programId: programId !== 'quick' ? programId : undefined,
+      programName: programId !== 'quick' ? workoutName : undefined,
+      dayName: currentDayInfo?.day,
+      dayOfWeek: undefined,
+      phaseName: currentDayInfo?.method,
+      exercises: loggedExercises,
+      startTime: new Date(Date.now() - elapsed * 1000).toISOString(),
+      endTime: new Date().toISOString(),
+      durationMinutes: Math.round(elapsed / 60),
+      totalVolume: Math.round(totalVolume),
+      totalSets,
+      completedSets,
+      avgRpe: Math.round(avgRpe * 10) / 10,
+      coachNotes: '',
+      status: 'completed' as const,
+      createdAt: new Date().toISOString(),
+    };
+
+    await saveSessionHistory(session);
+
+    // Clear in-progress session
+    if (programId && programId !== 'quick') {
+      localStorage.removeItem(SESSION_KEY(programId));
+    }
+
+    navigate('/dashboard');
+  }, [exercises, elapsed, programId, workoutName, currentDayInfo, navigate]);
+
   // Filter exercises by active day
   const visibleExercises = useMemo(() => {
     if (!hasDays) return exercises;
@@ -647,7 +726,47 @@ export default function ProgramBuilderPage() {
             className="h-9 px-4 border-[var(--gray-700)] text-[var(--gray-400)] hover:border-[var(--cyan)] hover:text-[var(--cyan)] bg-transparent text-xs"
           >
             <ArrowLeft size={14} className="mr-1.5" />
-            Back to Programs
+            Back
+          </Button>
+          <Button
+            size="sm"
+            onClick={handleFinishSession}
+            className="h-9 px-4 bg-[#22C55E] hover:bg-[#16A34A] text-white text-xs font-semibold"
+          >
+            <CheckCircle2 size={14} className="mr-1.5" />
+            Finish Session
+          </Button>
+        </div>
+      </div>
+
+      {/* Page Title */}
+      <div className="flex items-center gap-3 mb-6">
+        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[var(--cyan)] to-[var(--admin-accent)] flex items-center justify-center shadow-[0_4px_14px_rgba(0,174,239,0.3)]">
+          <Dumbbell size={20} className="text-white" />
+        </div>
+        <div className="flex-1">
+          <h1 className="text-foreground text-xl font-semibold">Program Builder</h1>
+          <p className="text-muted-foreground text-sm">
+            {sourceLabel ? (
+              <span className="flex items-center gap-2">
+                <span className="text-[var(--cyan)]">{sourceLabel}</span>
+                <span className="text-[var(--gray-600)]">|</span>
+                <span>Log your workout sets, track volume, and monitor progress</span>
+              </span>
+            ) : (
+              'Log your workout sets, track volume, and monitor progress'
+            )}
+          </p>
+        </div>
+        <div className="flex items-center gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => navigate('/programs')}
+            className="h-9 px-4 border-[var(--gray-700)] text-[var(--gray-400)] hover:border-[var(--cyan)] hover:text-[var(--cyan)] bg-transparent text-xs"
+          >
+            <ArrowLeft size={14} className="mr-1.5" />
+            Back
           </Button>
           <Button
             variant="outline"
@@ -695,16 +814,16 @@ export default function ProgramBuilderPage() {
 
       {/* Day Method Banner */}
       {currentDayInfo && (
-        <div className="flex items-center gap-3 mb-4 px-4 py-2.5 rounded-lg bg-[#141414] border border-[#2A2A2A]/50">
+        <div className="flex items-center gap-3 mb-4 px-4 py-2.5 rounded-lg bg-gray-50 dark:bg-[#141414] border border-gray-200 dark:border-[#2A2A2A]/50">
           <div className="flex items-center gap-2">
             <Calendar size={14} className="text-[#00AEEF]" />
-            <span className="text-[#F0F0F0] text-sm font-medium">
+            <span className="text-gray-900 dark:text-[#F0F0F0] text-sm font-medium">
               Day {currentDayInfo.dayNumber}: {currentDayInfo.day}
             </span>
           </div>
           <div className="w-px h-4 bg-[#2A2A2A]" />
           <MethodBadge method={currentDayInfo.method} />
-          <div className="ml-auto text-[10px] text-[#A0A0A0]">
+          <div className="ml-auto text-[10px] text-gray-500 dark:text-[#A0A0A0]">
             {currentDayInfo.exercises.length} exercises · {currentDayInfo.exercises.reduce((s, e) => s + e.sets, 0)} sets
           </div>
         </div>

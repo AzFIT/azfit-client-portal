@@ -1,27 +1,43 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { LogIn, Eye, EyeOff } from 'lucide-react'
+import { loginCoach, getAuthToken } from '@/lib/auth'
+import { toast } from 'sonner'
 
 const easeOut = [0.16, 1, 0.3, 1] as [number, number, number, number]
 
 export default function LoginPage() {
   const navigate = useNavigate()
-  const [email, setEmail] = useState('trainer@azfit.com')
-  const [password, setPassword] = useState('password')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
-  const [rememberMe, setRememberMe] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
 
-  const handleSignIn = () => {
-    setIsLoading(true)
-    setTimeout(() => {
-      setIsLoading(false)
+  useEffect(() => {
+    const token = getAuthToken()
+    if (token) {
       navigate('/dashboard')
-    }, 800)
-  }
+    }
+  }, [navigate])
 
-  const handleDemoMode = () => {
+  const handleSignIn = async () => {
+    if (!email.trim() || !password.trim()) {
+      toast.error('Please enter both email and password')
+      return
+    }
+
+    setIsLoading(true)
+
+    const coach = await loginCoach(email, password)
+    setIsLoading(false)
+
+    if (!coach) {
+      toast.error('Invalid email or password')
+      return
+    }
+
+    toast.success(`Welcome back, ${coach.fullName}!`)
     navigate('/dashboard')
   }
 
@@ -40,7 +56,7 @@ export default function LoginPage() {
       />
 
       {/* Noise texture */}
-      <div className="fixed inset-0 bg-[url('/noise.png')] opacity-[0.03] pointer-events-none mix-blend-overlay" />
+      <div className="fixed inset-0 bg-[url(\'/noise.png\')] opacity-[0.03] pointer-events-none mix-blend-overlay" />
 
       <motion.div
         initial={{ opacity: 0, y: 30 }}
@@ -62,10 +78,10 @@ export default function LoginPage() {
               className="h-10 w-auto mx-auto mb-6"
             />
           </Link>
-          <h1 className="font-playfair text-3xl font-bold text-[#F0F0F0] mb-2">
+          <h1 className="font-playfair text-3xl font-bold text-gray-900 dark:text-[#F0F0F0] mb-2">
             Welcome back
           </h1>
-          <p className="text-[#A0A0A0] text-sm">
+          <p className="text-gray-500 dark:text-[#A0A0A0] text-sm">
             Sign in to your AzFIT trainer portal
           </p>
         </motion.div>
@@ -75,36 +91,38 @@ export default function LoginPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2, ease: easeOut }}
-          className="bg-[#141414] border border-[#2A2A2A] rounded-2xl p-6 sm:p-8"
+          className="bg-gray-50 dark:bg-[#141414] border border-gray-200 dark:border-[#2A2A2A] rounded-2xl p-6 sm:p-8"
         >
           <div className="space-y-4">
             {/* Email */}
             <div>
-              <label className="block text-[#A0A0A0] text-sm mb-2">Email</label>
+              <label className="block text-gray-500 dark:text-[#A0A0A0] text-sm mb-2">Email</label>
               <input
                 type="email"
-                placeholder="trainer@azfit.com"
+                placeholder="you@example.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full bg-[#1A1A1A] border border-[#2A2A2A] rounded-xl px-4 py-3 text-sm text-[#F0F0F0] placeholder:text-[#6B6B6B] focus:outline-none focus:border-[#00AEEF] focus:ring-1 focus:ring-[rgba(0,174,239,0.15)] transition-all"
+                onKeyDown={(e) => e.key === 'Enter' && handleSignIn()}
+                className="w-full bg-gray-100 dark:bg-[#1A1A1A] border border-gray-200 dark:border-[#2A2A2A] rounded-xl px-4 py-3 text-sm text-gray-900 dark:text-[#F0F0F0] placeholder:text-gray-400 dark:placeholder:text-[#6B6B6B] focus:outline-none focus:border-[#00AEEF] focus:ring-1 focus:ring-[rgba(0,174,239,0.15)] transition-all"
               />
             </div>
 
             {/* Password */}
             <div>
-              <label className="block text-[#A0A0A0] text-sm mb-2">Password</label>
+              <label className="block text-gray-500 dark:text-[#A0A0A0] text-sm mb-2">Password</label>
               <div className="relative">
                 <input
                   type={showPassword ? 'text' : 'password'}
-                  placeholder="password"
+                  placeholder="Your password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full bg-[#1A1A1A] border border-[#2A2A2A] rounded-xl px-4 py-3 pr-11 text-sm text-[#F0F0F0] placeholder:text-[#6B6B6B] focus:outline-none focus:border-[#00AEEF] focus:ring-1 focus:ring-[rgba(0,174,239,0.15)] transition-all"
+                  onKeyDown={(e) => e.key === 'Enter' && handleSignIn()}
+                  className="w-full bg-gray-100 dark:bg-[#1A1A1A] border border-gray-200 dark:border-[#2A2A2A] rounded-xl px-4 py-3 pr-11 text-sm text-gray-900 dark:text-[#F0F0F0] placeholder:text-gray-400 dark:placeholder:text-[#6B6B6B] focus:outline-none focus:border-[#00AEEF] focus:ring-1 focus:ring-[rgba(0,174,239,0.15)] transition-all"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-[#6B6B6B] hover:text-[#A0A0A0] transition-colors p-0.5"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-[#6B6B6B] hover:text-gray-500 dark:hover:text-[#A0A0A0] transition-colors p-0.5"
                   aria-label={showPassword ? 'Hide password' : 'Show password'}
                 >
                   {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
@@ -112,34 +130,11 @@ export default function LoginPage() {
               </div>
             </div>
 
-            {/* Remember me + Forgot password */}
-            <div className="flex items-center justify-between">
-              <label className="flex items-center gap-2 cursor-pointer group">
-                <div
-                  onClick={() => setRememberMe(!rememberMe)}
-                  className={`w-4 h-4 rounded border flex items-center justify-center transition-colors ${
-                    rememberMe
-                      ? 'bg-[#00AEEF] border-[#00AEEF]'
-                      : 'border-[#4A4A4A] group-hover:border-[#6B6B6B]'
-                  }`}
-                >
-                  {rememberMe && (
-                    <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
-                      <path
-                        d="M1 4L3.5 6.5L9 1"
-                        stroke="white"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  )}
-                </div>
-                <span className="text-[#A0A0A0] text-sm">Remember me</span>
-              </label>
+            {/* Forgot password */}
+            <div className="flex items-center justify-end">
               <button
                 type="button"
-                onClick={() => alert('Password reset coming soon!')}
+                onClick={() => toast.info('Password reset coming soon!')}
                 className="text-[#00AEEF] text-sm hover:text-[#33BFF2] transition-colors"
               >
                 Forgot password?
@@ -159,29 +154,11 @@ export default function LoginPage() {
               )}
               Sign In
             </button>
-
-            {/* Divider */}
-            <div className="relative my-4">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-[#2A2A2A]" />
-              </div>
-              <div className="relative flex justify-center text-xs">
-                <span className="bg-[#141414] px-3 text-[#6B6B6B]">or</span>
-              </div>
-            </div>
-
-            {/* Demo Mode Button */}
-            <button
-              onClick={handleDemoMode}
-              className="w-full bg-transparent border border-[#2A2A2A] hover:border-[#00AEEF]/50 text-[#A0A0A0] hover:text-[#F0F0F0] font-medium py-3 rounded-xl transition-all duration-200 text-sm"
-            >
-              Demo Mode — Skip Authentication
-            </button>
           </div>
 
           {/* Sign Up Link */}
           <div className="mt-6 text-center">
-            <p className="text-[#6B6B6B] text-sm">
+            <p className="text-gray-400 dark:text-[#6B6B6B] text-sm">
               Don&apos;t have an account?{' '}
               <Link
                 to="/signup"
@@ -202,7 +179,7 @@ export default function LoginPage() {
         >
           <Link
             to="/"
-            className="text-[#6B6B6B] text-xs hover:text-[#A0A0A0] transition-colors"
+            className="text-gray-400 dark:text-[#6B6B6B] text-xs hover:text-gray-500 dark:hover:text-[#A0A0A0] transition-colors"
           >
             Back to home page
           </Link>

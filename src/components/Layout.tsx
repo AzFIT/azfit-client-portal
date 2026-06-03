@@ -5,13 +5,9 @@ import {
   LayoutDashboard,
   CalendarDays,
   Dumbbell,
-  Apple,
   Users,
-  Camera,
+  BookOpen,
   Settings,
-  Zap,
-  Search,
-  Bell,
   Menu,
   X,
   ChevronLeft,
@@ -19,29 +15,29 @@ import {
   LogOut,
   Sun,
   Moon,
-  BookOpen,
+  Shield,
 } from 'lucide-react'
-import AiChat from './AiChat'
+import { getCurrentCoach, clearAuthToken, getClientsForCoach } from '@/lib/auth'
+import { toast } from 'sonner'
 
 const navItems = [
   { label: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
-  { label: 'Calendar', path: '/calendar', icon: CalendarDays },
-  { label: 'Programs', path: '/programs', icon: Dumbbell },
-  { label: 'Program Creator', path: '/programs/create', icon: Zap },
-  { label: 'Exercises', path: '/exercises', icon: BookOpen },
-  { label: 'Nutrition', path: '/nutrition', icon: Apple },
   { label: 'Clients', path: '/clients', icon: Users },
-  { label: 'Photos', path: '/photos', icon: Camera },
+  { label: 'Programs', path: '/programs', icon: Dumbbell },
+  { label: 'Exercise Library', path: '/exercises', icon: BookOpen },
+  { label: 'Calendar', path: '/calendar', icon: CalendarDays },
   { label: 'Settings', path: '/settings', icon: Settings },
 ]
+
+const adminNavItem = { label: 'Admin', path: '/admin', icon: Shield }
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const location = useLocation()
   const navigate = useNavigate()
   const [collapsed, setCollapsed] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
-  const [searchFocused, setSearchFocused] = useState(false)
   const [isDesktop, setIsDesktop] = useState(false)
+  const [coach, setCoach] = useState(getCurrentCoach)
 
   /* Theme management */
   const [theme, setTheme] = useState<'dark' | 'light'>(() => {
@@ -65,51 +61,48 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     return () => window.removeEventListener('resize', check)
   }, [])
 
+  useEffect(() => {
+    // Re-check coach on mount and when location changes
+    setCoach(getCurrentCoach())
+  }, [location.pathname])
+
+  const handleLogout = () => {
+    clearAuthToken()
+    toast.info('You have been logged out')
+    navigate('/login')
+  }
+
   const sidebarWidthPx = isDesktop ? (collapsed ? 72 : 260) : 0
   const isActive = (path: string) => {
     if (path === '/clients') return location.pathname.startsWith('/clients')
+    if (path === '/programs') return location.pathname.startsWith('/programs')
     return location.pathname === path
   }
 
-  /* ── Theme-aware colours ────────────────────────────────── */
   const isDark = theme === 'dark'
 
-  /* Page background */
-  const pageBg       = isDark ? '#0A0A0A'                    : '#F1F5F9'
-  /* Sidebar */
-  const sidebarBg    = isDark
-    ? 'linear-gradient(180deg, rgba(0,174,239,0.06) 0%, rgba(139,92,246,0.03) 50%, transparent 100%), #141414'
-    : '#FFFFFF'
-  const sidebarBorder     = isDark ? '#2A2A2A' : '#E2E8F0'
-  const sidebarText       = isDark ? '#F0F0F0' : '#1E293B'
-  const sidebarMuted      = isDark ? '#6B6B6B' : '#94A3B8'
-  const sidebarHoverBg    = isDark ? '#242424' : '#F1F5F9'
-  const sidebarActiveBg   = isDark ? 'rgba(0,174,239,0.15)' : 'rgba(0,174,239,0.10)'
-  const tooltipBg         = isDark ? '#1A1A1A' : '#FFFFFF'
-  const tooltipBorder     = isDark ? '#2A2A2A' : '#E2E8F0'
-  /* Toolbar */
-  const toolbarBg    = isDark
-    ? 'linear-gradient(135deg, rgba(0,174,239,0.18) 0%, rgba(139,92,246,0.10) 50%, rgba(10,10,10,0.0) 100%), #141414'
-    : 'linear-gradient(135deg, rgba(0,174,239,0.08) 0%, rgba(139,92,246,0.04) 100%), #FFFFFF'
-  const toolbarBorder     = isDark ? 'rgba(0,174,239,0.15)' : '#E2E8F0'
-  const toolbarShadow     = isDark
-    ? 'inset 0 1px 0 rgba(0,174,239,0.25), 0 4px 30px rgba(0,174,239,0.10)'
-    : 'inset 0 1px 0 rgba(0,174,239,0.12), 0 4px 20px rgba(0,174,239,0.06)'
-  const titleText         = isDark ? '#FFFFFF' : '#0F172A'
-  const iconColor         = isDark ? '#A0A0A0' : '#64748B'
-  const iconHoverColor    = isDark ? '#F0F0F0' : '#0F172A'
-  const iconHoverBg       = isDark ? '#242424' : '#F1F5F9'
-  const searchBg          = isDark ? '#141414' : '#F1F5F9'
-  const searchBorder      = isDark ? '#2A2A2A' : '#E2E8F0'
-  const searchText        = isDark ? '#F0F0F0' : '#0F172A'
-  const searchIcon        = isDark ? '#6B6B6B' : '#94A3B8'
-  const avatarRing        = isDark ? '#2A2A2A' : '#E2E8F0'
-  /* Mobile overlay */
+  const pageBg       = isDark ? '#0B1120'                    : '#F1F5F9'
+  const sidebarBg    = isDark ? '#0B1120' : '#FFFFFF'
+  const sidebarBorder     = isDark ? '#2A3A50' : '#E2E8F0'
+  const sidebarText       = isDark ? '#F1F5F9' : '#1E293B'
+  const sidebarMuted      = isDark ? '#94A3B8' : '#64748B'
+  const sidebarHoverBg    = isDark ? '#151D2E' : '#F1F5F9'
+  const sidebarActiveBg   = isDark ? 'rgba(0,174,239,0.12)' : 'rgba(0,174,239,0.08)'
+  const tooltipBg         = isDark ? '#151D2E' : '#FFFFFF'
+  const tooltipBorder     = isDark ? '#2A3A50' : '#E2E8F0'
+  const toolbarBg    = isDark ? '#0F172A' : '#FFFFFF'
+  const toolbarBorder     = isDark ? '#2A3A50' : '#E2E8F0'
+  const titleText         = isDark ? '#F1F5F9' : '#0F172A'
+  const iconColor         = isDark ? '#94A3B8' : '#64748B'
+  const iconHoverColor    = isDark ? '#F1F5F9' : '#0F172A'
+  const iconHoverBg       = isDark ? '#151D2E' : '#F1F5F9'
+  const avatarRing        = isDark ? '#2A3A50' : '#E2E8F0'
   const mobileOverlay     = isDark ? 'bg-black/50' : 'bg-black/30'
 
-  /* Logo source switches with theme */
   const logoFull   = isDark ? './AzFIT_Logo_BlackBackground_Text.png' : './AzFIT_Logo_WhiteBackground_Text.png'
   const logoIcon   = isDark ? './AzFIT_Logo_BlackBackground.png'       : './AzFIT_Logo_WhiteBackground.png'
+
+  const clientCount = coach ? getClientsForCoach(coach.id).length : 0
 
   return (
     <div className="min-h-[100dvh]" style={{ backgroundColor: pageBg }}>
@@ -152,7 +145,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
         {/* Nav Items */}
         <nav className="flex-1 py-4 px-3 space-y-1 overflow-y-auto">
-          {navItems.map((item) => {
+          {[...navItems, ...(coach?.role === 'admin' ? [adminNavItem] : [])].map((item) => {
             const active = isActive(item.path)
             return (
               <Link
@@ -212,17 +205,22 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = sidebarHoverBg)}
             onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
           >
-            <img
-              src="./avatar-placeholder.png"
-              alt="User"
-              className="w-8 h-8 rounded-full object-cover flex-shrink-0"
-            />
+            <div
+              className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0"
+              style={{ background: '#00AEEF', color: '#fff' }}
+            >
+              {coach ? coach.fullName.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2) : 'CO'}
+            </div>
             <div
               className="flex-1 min-w-0 overflow-hidden transition-opacity duration-300"
               style={{ opacity: collapsed ? 0 : 1, width: collapsed ? 0 : 'auto' }}
             >
-              <p className="text-sm font-medium truncate" style={{ color: sidebarText }}>Trainer</p>
-              <p className="text-xs truncate" style={{ color: sidebarMuted }}>Pro Plan</p>
+              <p className="text-sm font-medium truncate" style={{ color: sidebarText }}>
+                {coach?.fullName || 'Coach'}
+              </p>
+              <p className="text-xs truncate" style={{ color: sidebarMuted }}>
+                {clientCount} {clientCount === 1 ? 'client' : 'clients'}
+              </p>
             </div>
             {!collapsed && (
               <button
@@ -230,6 +228,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 style={{ color: sidebarMuted }}
                 onMouseEnter={(e) => (e.currentTarget.style.color = '#EF4444')}
                 onMouseLeave={(e) => (e.currentTarget.style.color = sidebarMuted)}
+                onClick={handleLogout}
                 aria-label="Logout"
               >
                 <LogOut size={16} />
@@ -281,7 +280,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
               {/* Mobile Nav Items */}
               <nav className="flex-1 py-4 px-3 space-y-1">
-                {navItems.map((item) => {
+                {[...navItems, ...(coach?.role === 'admin' ? [adminNavItem] : [])].map((item) => {
                   const active = isActive(item.path)
                   return (
                     <Link
@@ -305,12 +304,28 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               {/* Mobile User */}
               <div className="p-4" style={{ borderTop: `1px solid ${sidebarBorder}` }}>
                 <div className="flex items-center gap-3">
-                  <img src="./avatar-placeholder.png" alt="User" className="w-9 h-9 rounded-full object-cover" />
+                  <div
+                    className="w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0"
+                    style={{ background: '#00AEEF', color: '#fff' }}
+                  >
+                    {coach ? coach.fullName.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2) : 'CO'}
+                  </div>
                   <div className="flex-1">
-                    <p className="text-sm font-medium" style={{ color: sidebarText }}>Trainer</p>
-                    <p className="text-xs" style={{ color: sidebarMuted }}>Pro Plan</p>
+                    <p className="text-sm font-medium" style={{ color: sidebarText }}>
+                      {coach?.fullName || 'Coach'}
+                    </p>
+                    <p className="text-xs" style={{ color: sidebarMuted }}>
+                      {clientCount} {clientCount === 1 ? 'client' : 'clients'}
+                    </p>
                   </div>
                 </div>
+                <button
+                  onClick={handleLogout}
+                  className="mt-3 w-full flex items-center justify-center gap-2 text-sm text-[#EF4444] py-2 rounded-lg border border-[#EF4444]/20 hover:bg-[#EF4444]/10 transition-colors"
+                >
+                  <LogOut size={14} />
+                  Log Out
+                </button>
               </div>
             </motion.aside>
           </>
@@ -324,7 +339,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           left: sidebarWidthPx,
           background: toolbarBg,
           borderBottom: `1px solid ${toolbarBorder}`,
-          boxShadow: toolbarShadow,
         }}
       >
         <div className="flex items-center justify-between w-full max-w-[1440px] mx-auto">
@@ -342,40 +356,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             </button>
             <h1
               className="font-semibold text-lg hidden sm:block"
-              style={{
-                color: titleText,
-                textShadow: isDark ? '0 0 6px rgba(0,174,239,0.3)' : 'none',
-              }}
+              style={{ color: titleText }}
             >
               {navItems.find((i) => isActive(i.path))?.label || 'Dashboard'}
             </h1>
           </div>
 
-          {/* Right: Search, Notifications, Avatar */}
+          {/* Right: Theme, Logout, Avatar */}
           <div className="flex items-center gap-2 sm:gap-3">
-            {/* Search */}
-            <div
-              className="hidden sm:flex items-center rounded-full transition-all duration-300"
-              style={{
-                backgroundColor: searchBg,
-                border: `1px solid ${searchFocused ? '#00AEEF' : searchBorder}`,
-                width: searchFocused ? '16rem' : '12rem',
-              }}
-            >
-              <Search size={16} className="ml-3 flex-shrink-0" style={{ color: searchIcon }} />
-              <input
-                type="text"
-                placeholder="Search..."
-                onFocus={() => setSearchFocused(true)}
-                onBlur={() => setSearchFocused(false)}
-                className="bg-transparent border-none outline-none text-sm px-2 py-2 w-full"
-                style={{
-                  color: searchText,
-                }}
-                /* placeholder styling via inline not possible, use CSS variable approach */
-              />
-            </div>
-
             {/* Theme Toggle */}
             <button
               onClick={() => setTheme((t) => (t === 'dark' ? 'light' : 'dark'))}
@@ -394,35 +382,36 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
             </button>
 
-            {/* Notification */}
-            <button
-              className="relative w-10 h-10 rounded-lg flex items-center justify-center transition-colors"
-              style={{ color: iconColor }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.color = iconHoverColor
-                e.currentTarget.style.backgroundColor = iconHoverBg
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.color = iconColor
-                e.currentTarget.style.backgroundColor = 'transparent'
-              }}
-              aria-label="Notifications"
-            >
-              <Bell size={18} />
-              <span className="absolute top-2 right-2 w-2 h-2 rounded-full bg-[#EF4444]" />
-            </button>
-
             {/* Avatar */}
             <button
               onClick={() => navigate('/settings')}
-              className="w-9 h-9 rounded-full overflow-hidden transition-all hover:ring-[#00AEEF]"
-              style={{ boxShadow: `0 0 0 2px ${avatarRing}` }}
+              className="w-9 h-9 rounded-full overflow-hidden transition-all hover:ring-2 hover:ring-[#00AEEF] flex items-center justify-center text-xs font-bold"
+              style={{
+                boxShadow: `0 0 0 2px ${avatarRing}`,
+                background: '#00AEEF',
+                color: '#fff',
+              }}
             >
-              <img src="./avatar-placeholder.png" alt="User" className="w-full h-full object-cover" />
+              {coach ? coach.fullName.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2) : 'CO'}
             </button>
           </div>
         </div>
       </header>
+
+      {/* Scroll to Top */}
+      <ScrollToTop />
+
+      {/* Print Styles */}
+      <style>{`
+        @media print {
+          nav, aside, header, .fixed, [class*="sidebar"], [class*="topbar"], [class*="fab"] {
+            display: none !important;
+          }
+          main { margin-left: 0 !important; padding-top: 0 !important; }
+          body { background: white !important; color: black !important; }
+          * { box-shadow: none !important; }
+        }
+      `}</style>
 
       {/* Main Content */}
       <main
@@ -433,9 +422,36 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           {children}
         </div>
       </main>
-
-      {/* AI Chat */}
-      <AiChat />
     </div>
   )
 }
+
+/* ── Scroll to Top ───────────────────────────────────── */
+function ScrollToTop() {
+  const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => setVisible(window.scrollY > 400)
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  if (!visible) return null
+
+  return (
+    <motion.button
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.8 }}
+      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+      className="fixed bottom-24 right-6 z-[200] w-10 h-10 rounded-full bg-white dark:bg-[#151D2E] border border-gray-200 dark:border-[#2A3A50] text-gray-500 dark:text-[#94A3B8] hover:text-[#00AEEF] hover:border-[#00AEEF]/50 flex items-center justify-center shadow-lg transition-colors"
+      title="Scroll to top"
+    >
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="18 15 12 9 6 15" />
+      </svg>
+    </motion.button>
+  )
+}
+
+

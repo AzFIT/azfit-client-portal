@@ -1,35 +1,104 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { UserPlus, Eye, EyeOff } from 'lucide-react'
+import { registerCoach, getAuthToken, simpleHash } from '@/lib/auth'
+import { toast } from 'sonner'
 
 const easeOut = [0.16, 1, 0.3, 1] as [number, number, number, number]
 
-type Role = 'trainer' | 'client'
+const SPECIALTIES = ['Strength', 'Hypertrophy', 'Fat Loss', 'Athletic', 'Rehab', 'General']
 
 export default function SignupPage() {
   const navigate = useNavigate()
   const [fullName, setFullName] = useState('')
   const [email, setEmail] = useState('')
-  const [phone, setPhone] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
-  const [role, setRole] = useState<Role>('trainer')
+  const [businessName, setBusinessName] = useState('')
+  const [specialty, setSpecialty] = useState('')
+  const [yearsExperience, setYearsExperience] = useState('')
   const [agreeTerms, setAgreeTerms] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
 
-  const handleCreateAccount = () => {
-    setIsLoading(true)
-    setTimeout(() => {
-      setIsLoading(false)
+  useEffect(() => {
+    const token = getAuthToken()
+    if (token) {
       navigate('/dashboard')
-    }, 800)
+    }
+  }, [navigate])
+
+  const validateForm = (): string | null => {
+    if (!fullName.trim() || fullName.trim().length < 2) {
+      return 'Full name must be at least 2 characters'
+    }
+    if (!email.trim()) {
+      return 'Email is required'
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(email)) {
+      return 'Please enter a valid email address'
+    }
+    if (!password) {
+      return 'Password is required'
+    }
+    if (password.length < 8) {
+      return 'Password must be at least 8 characters'
+    }
+    if (!/[A-Z]/.test(password)) {
+      return 'Password must contain at least 1 uppercase letter'
+    }
+    if (!/[0-9]/.test(password)) {
+      return 'Password must contain at least 1 number'
+    }
+    if (password !== confirmPassword) {
+      return 'Passwords do not match'
+    }
+    if (!agreeTerms) {
+      return 'You must agree to the Terms of Service and Privacy Policy'
+    }
+    return null
+  }
+
+  const handleCreateAccount = async () => {
+    const error = validateForm()
+    if (error) {
+      toast.error(error)
+      return
+    }
+
+    setIsLoading(true)
+
+    const coach = await registerCoach({
+      fullName: fullName.trim(),
+      email: email.trim().toLowerCase(),
+      passwordHash: simpleHash(password),
+      businessName: businessName.trim(),
+      specialty: specialty || 'General',
+      yearsExperience: yearsExperience ? parseInt(yearsExperience, 10) : 0,
+      lastLogin: new Date().toISOString(),
+      settings: {
+        theme: 'dark' as const,
+        unitSystem: 'metric' as const,
+        defaultSessionDuration: 60,
+      },
+    })
+
+    setIsLoading(false)
+
+    if (!coach) {
+      toast.error('An account with this email already exists')
+      return
+    }
+
+    toast.success(`Welcome to AzFIT, ${coach.fullName}!`)
+    navigate('/dashboard')
   }
 
   const inputClasses =
-    'w-full bg-[#1A1A1A] border border-[#2A2A2A] rounded-xl px-4 py-3 text-sm text-[#F0F0F0] placeholder:text-[#6B6B6B] focus:outline-none focus:border-[#00AEEF] focus:ring-1 focus:ring-[rgba(0,174,239,0.15)] transition-all'
+    'w-full bg-gray-100 dark:bg-[#1A1A1A] border border-gray-200 dark:border-[#2A2A2A] rounded-xl px-4 py-3 text-sm text-gray-900 dark:text-[#F0F0F0] placeholder:text-gray-400 dark:placeholder:text-[#6B6B6B] focus:outline-none focus:border-[#00AEEF] focus:ring-1 focus:ring-[rgba(0,174,239,0.15)] transition-all'
 
   return (
     <div className="min-h-[100dvh] bg-[#0A0A0A] flex items-center justify-center p-4">
@@ -59,10 +128,10 @@ export default function SignupPage() {
               className="h-10 w-auto brightness-0 invert mx-auto mb-6"
             />
           </Link>
-          <h1 className="font-playfair text-3xl font-bold text-[#F0F0F0] mb-2">
+          <h1 className="font-playfair text-3xl font-bold text-gray-900 dark:text-[#F0F0F0] mb-2">
             Create your account
           </h1>
-          <p className="text-[#A0A0A0] text-sm">
+          <p className="text-gray-500 dark:text-[#A0A0A0] text-sm">
             Join AzFIT and start training smarter
           </p>
         </motion.div>
@@ -72,38 +141,12 @@ export default function SignupPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2, ease: easeOut }}
-          className="bg-[#141414] border border-[#2A2A2A] rounded-2xl p-6 sm:p-8"
+          className="bg-gray-50 dark:bg-[#141414] border border-gray-200 dark:border-[#2A2A2A] rounded-2xl p-6 sm:p-8"
         >
           <div className="space-y-4">
-            {/* Role Selection */}
-            <div className="grid grid-cols-2 gap-3">
-              <button
-                type="button"
-                onClick={() => setRole('trainer')}
-                className={`py-2.5 px-4 rounded-xl border text-sm font-medium transition-all duration-200 ${
-                  role === 'trainer'
-                    ? 'border-[#00AEEF] bg-[rgba(0,174,239,0.15)] text-[#00AEEF]'
-                    : 'border-[#2A2A2A] text-[#A0A0A0] hover:bg-[#1A1A1A] hover:text-[#F0F0F0]'
-                }`}
-              >
-                Trainer
-              </button>
-              <button
-                type="button"
-                onClick={() => setRole('client')}
-                className={`py-2.5 px-4 rounded-xl border text-sm font-medium transition-all duration-200 ${
-                  role === 'client'
-                    ? 'border-[#00AEEF] bg-[rgba(0,174,239,0.15)] text-[#00AEEF]'
-                    : 'border-[#2A2A2A] text-[#A0A0A0] hover:bg-[#1A1A1A] hover:text-[#F0F0F0]'
-                }`}
-              >
-                Client
-              </button>
-            </div>
-
             {/* Full Name */}
             <div>
-              <label className="block text-[#A0A0A0] text-sm mb-2">Full Name</label>
+              <label className="block text-gray-500 dark:text-[#A0A0A0] text-sm mb-2">Full Name <span className="text-[#EF4444]">*</span></label>
               <input
                 type="text"
                 placeholder="Your full name"
@@ -115,7 +158,7 @@ export default function SignupPage() {
 
             {/* Email */}
             <div>
-              <label className="block text-[#A0A0A0] text-sm mb-2">Email</label>
+              <label className="block text-gray-500 dark:text-[#A0A0A0] text-sm mb-2">Email <span className="text-[#EF4444]">*</span></label>
               <input
                 type="email"
                 placeholder="you@example.com"
@@ -125,30 +168,13 @@ export default function SignupPage() {
               />
             </div>
 
-            {/* Phone */}
-            <div>
-              <label className="block text-[#A0A0A0] text-sm mb-2">Phone</label>
-              <div className="flex">
-                <div className="flex-shrink-0 flex items-center bg-[#1A1A1A] border border-r-0 border-[#2A2A2A] rounded-l-xl px-3 py-3 text-sm text-[#6B6B6B]">
-                  +852
-                </div>
-                <input
-                  type="tel"
-                  placeholder="XXXX XXXX"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  className={`${inputClasses} rounded-l-none`}
-                />
-              </div>
-            </div>
-
             {/* Password */}
             <div>
-              <label className="block text-[#A0A0A0] text-sm mb-2">Password</label>
+              <label className="block text-gray-500 dark:text-[#A0A0A0] text-sm mb-2">Password <span className="text-[#EF4444]">*</span></label>
               <div className="relative">
                 <input
                   type={showPassword ? 'text' : 'password'}
-                  placeholder="Create a password"
+                  placeholder="Min 8 chars, 1 uppercase, 1 number"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className={`${inputClasses} pr-11`}
@@ -156,7 +182,7 @@ export default function SignupPage() {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-[#6B6B6B] hover:text-[#A0A0A0] transition-colors p-0.5"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-[#6B6B6B] hover:text-gray-500 dark:hover:text-[#A0A0A0] transition-colors p-0.5"
                   aria-label={showPassword ? 'Hide password' : 'Show password'}
                 >
                   {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
@@ -166,7 +192,7 @@ export default function SignupPage() {
 
             {/* Confirm Password */}
             <div>
-              <label className="block text-[#A0A0A0] text-sm mb-2">Confirm Password</label>
+              <label className="block text-gray-500 dark:text-[#A0A0A0] text-sm mb-2">Confirm Password <span className="text-[#EF4444]">*</span></label>
               <div className="relative">
                 <input
                   type={showConfirmPassword ? 'text' : 'password'}
@@ -178,12 +204,53 @@ export default function SignupPage() {
                 <button
                   type="button"
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-[#6B6B6B] hover:text-[#A0A0A0] transition-colors p-0.5"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-[#6B6B6B] hover:text-gray-500 dark:hover:text-[#A0A0A0] transition-colors p-0.5"
                   aria-label={showConfirmPassword ? 'Hide password' : 'Show password'}
                 >
                   {showConfirmPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                 </button>
               </div>
+            </div>
+
+            {/* Business/Studio Name */}
+            <div>
+              <label className="block text-gray-500 dark:text-[#A0A0A0] text-sm mb-2">Business / Studio Name <span className="text-gray-400 dark:text-[#6B6B6B]">(optional)</span></label>
+              <input
+                type="text"
+                placeholder="Your business name"
+                value={businessName}
+                onChange={(e) => setBusinessName(e.target.value)}
+                className={inputClasses}
+              />
+            </div>
+
+            {/* Specialty */}
+            <div>
+              <label className="block text-gray-500 dark:text-[#A0A0A0] text-sm mb-2">Specialty</label>
+              <select
+                value={specialty}
+                onChange={(e) => setSpecialty(e.target.value)}
+                className={inputClasses}
+              >
+                <option value="" className="bg-gray-100 dark:bg-[#1A1A1A]">Select specialty...</option>
+                {SPECIALTIES.map(s => (
+                  <option key={s} value={s} className="bg-gray-100 dark:bg-[#1A1A1A]">{s}</option>
+                ))}
+              </select>
+            </div>
+
+            {/* Years of Experience */}
+            <div>
+              <label className="block text-gray-500 dark:text-[#A0A0A0] text-sm mb-2">Years of Experience <span className="text-gray-400 dark:text-[#6B6B6B]">(optional)</span></label>
+              <input
+                type="number"
+                min={0}
+                max={50}
+                placeholder="0"
+                value={yearsExperience}
+                onChange={(e) => setYearsExperience(e.target.value)}
+                className={inputClasses}
+              />
             </div>
 
             {/* Agree to Terms */}
@@ -208,13 +275,13 @@ export default function SignupPage() {
                   </svg>
                 )}
               </div>
-              <span className="text-[#A0A0A0] text-xs leading-relaxed">
+              <span className="text-gray-500 dark:text-[#A0A0A0] text-xs leading-relaxed">
                 I agree to the{' '}
                 <button
                   type="button"
                   onClick={(e) => {
                     e.stopPropagation()
-                    alert('Terms of Service coming soon!')
+                    toast.info('Terms of Service coming soon!')
                   }}
                   className="text-[#00AEEF] hover:text-[#33BFF2] transition-colors"
                 >
@@ -225,7 +292,7 @@ export default function SignupPage() {
                   type="button"
                   onClick={(e) => {
                     e.stopPropagation()
-                    alert('Privacy Policy coming soon!')
+                    toast.info('Privacy Policy coming soon!')
                   }}
                   className="text-[#00AEEF] hover:text-[#33BFF2] transition-colors"
                 >
@@ -237,7 +304,7 @@ export default function SignupPage() {
             {/* Create Account Button */}
             <button
               onClick={handleCreateAccount}
-              disabled={isLoading || !agreeTerms}
+              disabled={isLoading}
               className="w-full flex items-center justify-center gap-2 bg-[#00AEEF] hover:bg-[#009BD6] disabled:opacity-60 disabled:cursor-not-allowed text-white font-semibold py-3 rounded-xl transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] text-sm mt-2"
             >
               {isLoading ? (
@@ -251,7 +318,7 @@ export default function SignupPage() {
 
           {/* Sign In Link */}
           <div className="mt-6 text-center">
-            <p className="text-[#6B6B6B] text-sm">
+            <p className="text-gray-400 dark:text-[#6B6B6B] text-sm">
               Already have an account?{' '}
               <Link
                 to="/login"
@@ -272,7 +339,7 @@ export default function SignupPage() {
         >
           <Link
             to="/"
-            className="text-[#6B6B6B] text-xs hover:text-[#A0A0A0] transition-colors"
+            className="text-gray-400 dark:text-[#6B6B6B] text-xs hover:text-gray-500 dark:hover:text-[#A0A0A0] transition-colors"
           >
             Back to home page
           </Link>

@@ -26,6 +26,8 @@ import {
 import { Button } from '@/components/ui/button';
 import type { SavedProgram, ClientPreferences, MatchResult } from '@/types';
 import { findTopMatches, loadMatchingRules } from '@/lib/programMatcher';
+import { getCurrentCoach } from '@/lib/auth';
+import { saveProgram } from '@/lib/db';
 
 // ── Question Config ─────────────────────────────────────────────
 const GOAL_OPTIONS = [
@@ -87,7 +89,7 @@ function QuestionCard({
       className={`relative flex items-start gap-3 p-4 rounded-xl border text-left transition-all w-full ${
         selected
           ? 'border-[#00AEEF]/50 bg-[#00AEEF]/5 ring-1 ring-[#00AEEF]/20'
-          : 'border-[#2A2A2A] bg-[#141414] hover:border-[#3A3A3A]'
+          : 'border-gray-200 dark:border-[#2A2A2A] bg-gray-50 dark:bg-[#141414] hover:border-[#3A3A3A]'
       }`}
     >
       <div
@@ -97,7 +99,7 @@ function QuestionCard({
         <Icon size={20} style={{ color }} />
       </div>
       <div className="min-w-0">
-        <div className="text-[#F0F0F0] font-semibold text-sm">{label}</div>
+        <div className="text-gray-900 dark:text-[#F0F0F0] font-semibold text-sm">{label}</div>
         <div className="text-[#6B7280] text-xs mt-0.5">{desc}</div>
       </div>
       {selected && (
@@ -129,7 +131,7 @@ function ScoreBadge({ percentage }: { percentage: number }) {
         />
       </svg>
       <div className="absolute inset-0 flex items-center justify-center">
-        <span className="text-[#F0F0F0] font-bold text-xs">{percentage}%</span>
+        <span className="text-gray-900 dark:text-[#F0F0F0] font-bold text-xs">{percentage}%</span>
       </div>
     </div>
   );
@@ -170,7 +172,7 @@ function MatchResultCard({
       className={`rounded-xl border overflow-hidden ${
         isTop
           ? 'border-[#00AEEF]/30 bg-gradient-to-b from-[#00AEEF]/5 to-transparent'
-          : 'border-[#2A2A2A] bg-[#141414]'
+          : 'border-gray-200 dark:border-[#2A2A2A] bg-gray-50 dark:bg-[#141414]'
       }`}
     >
       <div className={`h-1 w-full bg-gradient-to-r ${gradient}`} />
@@ -183,33 +185,33 @@ function MatchResultCard({
                   BEST MATCH
                 </span>
               )}
-              <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#1A1A1A] text-[#6B7280]">
+              <span className="text-[10px] px-1.5 py-0.5 rounded bg-gray-100 dark:bg-[#1A1A1A] text-[#6B7280]">
                 {d.template || 'Custom'}
               </span>
             </div>
-            <h3 className="text-[#F0F0F0] font-semibold text-base">{d.programName}</h3>
+            <h3 className="text-gray-900 dark:text-[#F0F0F0] font-semibold text-base">{d.programName}</h3>
             <p className="text-[#6B7280] text-xs mt-0.5 line-clamp-2">{d.description}</p>
           </div>
           <ScoreBadge percentage={result.percentage} />
         </div>
 
         <div className="grid grid-cols-4 gap-2 mb-3">
-          <div className="bg-[#0A0A0A] rounded-lg p-2 text-center border border-[#1F1F1F]">
-            <div className="text-[#F0F0F0] font-mono font-bold text-sm">{totalWeeks}w</div>
+          <div className="bg-[#0A0A0A] rounded-lg p-2 text-center border border-gray-200 dark:border-[#1F1F1F]">
+            <div className="text-gray-900 dark:text-[#F0F0F0] font-mono font-bold text-sm">{totalWeeks}w</div>
             <div className="text-[#666] text-[10px]">Duration</div>
           </div>
-          <div className="bg-[#0A0A0A] rounded-lg p-2 text-center border border-[#1F1F1F]">
-            <div className={`font-mono font-bold text-sm ${result.exactDayMatch ? 'text-[#22C55E]' : 'text-[#F0F0F0]'}`}>
+          <div className="bg-[#0A0A0A] rounded-lg p-2 text-center border border-gray-200 dark:border-[#1F1F1F]">
+            <div className={`font-mono font-bold text-sm ${result.exactDayMatch ? 'text-[#22C55E]' : 'text-gray-900 dark:text-[#F0F0F0]'}`}>
               {activeDays}<span className="text-[#555] text-[10px]">/wk</span>
             </div>
             <div className="text-[#666] text-[10px]">Days</div>
           </div>
-          <div className="bg-[#0A0A0A] rounded-lg p-2 text-center border border-[#1F1F1F]">
-            <div className="text-[#F0F0F0] font-mono font-bold text-sm">{totalExercises}</div>
+          <div className="bg-[#0A0A0A] rounded-lg p-2 text-center border border-gray-200 dark:border-[#1F1F1F]">
+            <div className="text-gray-900 dark:text-[#F0F0F0] font-mono font-bold text-sm">{totalExercises}</div>
             <div className="text-[#666] text-[10px]">Exercises</div>
           </div>
-          <div className="bg-[#0A0A0A] rounded-lg p-2 text-center border border-[#1F1F1F]">
-            <div className="text-[#F0F0F0] font-mono font-bold text-sm">{d.totalSets || '—'}</div>
+          <div className="bg-[#0A0A0A] rounded-lg p-2 text-center border border-gray-200 dark:border-[#1F1F1F]">
+            <div className="text-gray-900 dark:text-[#F0F0F0] font-mono font-bold text-sm">{d.totalSets || '—'}</div>
             <div className="text-[#666] text-[10px]">Sets</div>
           </div>
         </div>
@@ -225,13 +227,13 @@ function MatchResultCard({
           ].map(item => (
             <div key={item.label} className="flex items-center gap-2">
               <span className="text-[10px] text-[#6B7280] w-20">{item.label}</span>
-              <div className="flex-1 h-1.5 bg-[#1A1A1A] rounded-full overflow-hidden">
+              <div className="flex-1 h-1.5 bg-gray-100 dark:bg-[#1A1A1A] rounded-full overflow-hidden">
                 <div
                   className="h-full rounded-full bg-[#00AEEF]/60"
                   style={{ width: `${Math.round(item.score * 100)}%` }}
                 />
               </div>
-              <span className="text-[10px] text-[#A0A0A0] w-8 text-right">{Math.round(item.score * 100)}%</span>
+              <span className="text-[10px] text-gray-500 dark:text-[#A0A0A0] w-8 text-right">{Math.round(item.score * 100)}%</span>
             </div>
           ))}
         </div>
@@ -252,7 +254,7 @@ function MatchResultCard({
         )}
 
         {/* Actions */}
-        <div className="flex items-center gap-2 pt-3 border-t border-[#1F1F1F]">
+        <div className="flex items-center gap-2 pt-3 border-t border-gray-200 dark:border-[#1F1F1F]">
           <Button
             onClick={onAssign}
             size="sm"
@@ -265,7 +267,7 @@ function MatchResultCard({
             onClick={onPreview}
             variant="outline"
             size="sm"
-            className="h-9 px-3 border-[#2A2A2A] text-[#A0A0A0] hover:text-[#00AEEF] hover:border-[#00AEEF]/30 bg-transparent text-xs"
+            className="h-9 px-3 border-gray-200 dark:border-[#2A2A2A] text-gray-500 dark:text-[#A0A0A0] hover:text-[#00AEEF] hover:border-[#00AEEF]/30 bg-transparent text-xs"
           >
             <Eye size={13} className="mr-1.5" />
             Preview
@@ -317,16 +319,14 @@ export default function ProgramMatcherPage() {
     setLoading(false);
   }, [prefs, programs]);
 
-  const handleAssign = useCallback((program: SavedProgram) => {
-    const existing = JSON.parse(localStorage.getItem('azfit-programs') || '[]') as SavedProgram[];
-    const toSave: SavedProgram = {
-      ...program,
-      id: `prog_${Date.now()}`,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
+  const handleAssign = useCallback(async (program: SavedProgram) => {
+    await saveProgram({
+      coachId: getCurrentCoach()?.id || '',
+      clientId: null,
+      name: program.data?.programName || 'Untitled Program',
+      description: '',
       data: { ...program.data, assignedClient: 'Client' },
-    };
-    localStorage.setItem('azfit-programs', JSON.stringify([...existing, toSave]));
+    });
     navigate('/programs');
   }, [navigate]);
 
@@ -344,7 +344,7 @@ export default function ProgramMatcherPage() {
         <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#00AEEF] to-[#A855F7] flex items-center justify-center mx-auto mb-4 shadow-[0_4px_20px_rgba(0,174,239,0.3)]">
           <Sparkles size={28} className="text-white" />
         </div>
-        <h1 className="text-[#F0F0F0] text-2xl font-bold">Smart Program Matcher</h1>
+        <h1 className="text-gray-900 dark:text-[#F0F0F0] text-2xl font-bold">Smart Program Matcher</h1>
         <p className="text-[#6B7280] text-sm mt-1">
           Answer 4 questions and we'll find the perfect program from our library of 84 pre-built programs.
         </p>
@@ -361,7 +361,7 @@ export default function ProgramMatcherPage() {
                     ? 'bg-[#00AEEF]/10 text-[#00AEEF] border border-[#00AEEF]/30'
                     : i < step
                     ? 'bg-[#22C55E]/10 text-[#22C55E]'
-                    : 'bg-[#1A1A1A] text-[#6B7280]'
+                    : 'bg-gray-100 dark:bg-[#1A1A1A] text-[#6B7280]'
                 }`}
               >
                 <s.icon size={12} />
@@ -384,7 +384,7 @@ export default function ProgramMatcherPage() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
           >
-            <h2 className="text-[#F0F0F0] text-lg font-semibold mb-1">What is your primary goal?</h2>
+            <h2 className="text-gray-900 dark:text-[#F0F0F0] text-lg font-semibold mb-1">What is your primary goal?</h2>
             <p className="text-[#6B7280] text-sm mb-4">Select the outcome you want to achieve.</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {GOAL_OPTIONS.map(opt => (
@@ -409,7 +409,7 @@ export default function ProgramMatcherPage() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
           >
-            <h2 className="text-[#F0F0F0] text-lg font-semibold mb-1">What is your experience level?</h2>
+            <h2 className="text-gray-900 dark:text-[#F0F0F0] text-lg font-semibold mb-1">What is your experience level?</h2>
             <p className="text-[#6B7280] text-sm mb-4">This helps us match the right intensity and complexity.</p>
             <div className="grid grid-cols-1 gap-3">
               {EXPERIENCE_OPTIONS.map(opt => (
@@ -434,7 +434,7 @@ export default function ProgramMatcherPage() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
           >
-            <h2 className="text-[#F0F0F0] text-lg font-semibold mb-1">What equipment do you have access to?</h2>
+            <h2 className="text-gray-900 dark:text-[#F0F0F0] text-lg font-semibold mb-1">What equipment do you have access to?</h2>
             <p className="text-[#6B7280] text-sm mb-4">We'll match programs that fit your setup.</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {EQUIPMENT_OPTIONS.map(opt => (
@@ -459,12 +459,12 @@ export default function ProgramMatcherPage() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
           >
-            <h2 className="text-[#F0F0F0] text-lg font-semibold mb-1">How often and for how long can you train?</h2>
+            <h2 className="text-gray-900 dark:text-[#F0F0F0] text-lg font-semibold mb-1">How often and for how long can you train?</h2>
             <p className="text-[#6B7280] text-sm mb-4">We'll find programs that fit your schedule exactly.</p>
 
             {/* Days per week */}
             <div className="mb-6">
-              <label className="text-[#A0A0A0] text-sm font-medium mb-2 block">Days per week</label>
+              <label className="text-gray-500 dark:text-[#A0A0A0] text-sm font-medium mb-2 block">Days per week</label>
               <div className="flex gap-2">
                 {DAYS_OPTIONS.map(d => (
                   <button
@@ -473,7 +473,7 @@ export default function ProgramMatcherPage() {
                     className={`flex-1 h-12 rounded-xl border text-sm font-semibold transition-all ${
                       prefs.daysPerWeek === d
                         ? 'border-[#00AEEF] bg-[#00AEEF]/10 text-[#00AEEF]'
-                        : 'border-[#2A2A2A] bg-[#141414] text-[#6B7280] hover:border-[#3A3A3A]'
+                        : 'border-gray-200 dark:border-[#2A2A2A] bg-gray-50 dark:bg-[#141414] text-[#6B7280] hover:border-[#3A3A3A]'
                     }`}
                   >
                     {d}
@@ -484,7 +484,7 @@ export default function ProgramMatcherPage() {
 
             {/* Time per session */}
             <div className="mb-6">
-              <label className="text-[#A0A0A0] text-sm font-medium mb-2 block">Time per session</label>
+              <label className="text-gray-500 dark:text-[#A0A0A0] text-sm font-medium mb-2 block">Time per session</label>
               <div className="flex gap-2 flex-wrap">
                 {TIME_OPTIONS.map(t => (
                   <button
@@ -493,7 +493,7 @@ export default function ProgramMatcherPage() {
                     className={`h-10 px-4 rounded-xl border text-sm font-semibold transition-all ${
                       prefs.timePerSession === t
                         ? 'border-[#00AEEF] bg-[#00AEEF]/10 text-[#00AEEF]'
-                        : 'border-[#2A2A2A] bg-[#141414] text-[#6B7280] hover:border-[#3A3A3A]'
+                        : 'border-gray-200 dark:border-[#2A2A2A] bg-gray-50 dark:bg-[#141414] text-[#6B7280] hover:border-[#3A3A3A]'
                     }`}
                   >
                     {t} min
@@ -503,8 +503,8 @@ export default function ProgramMatcherPage() {
             </div>
 
             {/* Summary */}
-            <div className="p-4 rounded-xl bg-[#141414] border border-[#2A2A2A]">
-              <div className="text-[#A0A0A0] text-xs font-semibold uppercase tracking-wider mb-2">Your Preferences</div>
+            <div className="p-4 rounded-xl bg-gray-50 dark:bg-[#141414] border border-gray-200 dark:border-[#2A2A2A]">
+              <div className="text-gray-500 dark:text-[#A0A0A0] text-xs font-semibold uppercase tracking-wider mb-2">Your Preferences</div>
               <div className="flex flex-wrap gap-2">
                 <span className="text-xs px-2 py-1 rounded bg-[#00AEEF]/10 text-[#00AEEF] font-medium">{prefs.goal}</span>
                 <span className="text-xs px-2 py-1 rounded bg-[#8B5CF6]/10 text-[#8B5CF6] font-medium">{prefs.experience}</span>
@@ -535,14 +535,14 @@ export default function ProgramMatcherPage() {
               <>
                 <div className="flex items-center justify-between mb-6">
                   <div>
-                    <h2 className="text-[#F0F0F0] text-lg font-semibold">Top Matches</h2>
+                    <h2 className="text-gray-900 dark:text-[#F0F0F0] text-lg font-semibold">Top Matches</h2>
                     <p className="text-[#6B7280] text-sm">
                       Found {results.filter(r => r.exactDayMatch).length} programs with exactly {prefs.daysPerWeek} days/week
                     </p>
                   </div>
                   <button
                     onClick={() => { setStep(0); setResults([]); }}
-                    className="text-xs text-[#6B7280] hover:text-[#F0F0F0] flex items-center gap-1 transition-colors"
+                    className="text-xs text-[#6B7280] hover:text-gray-900 dark:text-[#F0F0F0] flex items-center gap-1 transition-colors"
                   >
                     <RotateCcw size={12} />
                     Start Over
@@ -564,9 +564,9 @@ export default function ProgramMatcherPage() {
             ) : (
               <div className="text-center py-20">
                 <AlertTriangle size={40} className="text-[#F59E0B] mx-auto mb-4" />
-                <h3 className="text-[#F0F0F0] font-semibold mb-1">No Matches Found</h3>
+                <h3 className="text-gray-900 dark:text-[#F0F0F0] font-semibold mb-1">No Matches Found</h3>
                 <p className="text-[#6B7280] text-sm mb-4">Try adjusting your preferences for better results.</p>
-                <Button onClick={() => setStep(0)} variant="outline" className="border-[#2A2A2A]">
+                <Button onClick={() => setStep(0)} variant="outline" className="border-gray-200 dark:border-[#2A2A2A]">
                   <RotateCcw size={14} className="mr-2" />
                   Try Again
                 </Button>
@@ -583,7 +583,7 @@ export default function ProgramMatcherPage() {
             variant="outline"
             onClick={() => setStep(s => Math.max(0, s - 1))}
             disabled={step === 0}
-            className="h-10 px-5 border-[#2A2A2A] text-[#A0A0A0] hover:text-[#F0F0F0] bg-transparent"
+            className="h-10 px-5 border-gray-200 dark:border-[#2A2A2A] text-gray-500 dark:text-[#A0A0A0] hover:text-gray-900 dark:hover:text-[#F0F0F0] bg-transparent"
           >
             <ArrowLeft size={14} className="mr-2" />
             Back

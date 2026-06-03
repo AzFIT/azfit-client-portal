@@ -213,7 +213,7 @@ function StepHeader({
   return (
     <button
       onClick={onToggle}
-      className="flex items-center justify-between w-full py-4 px-5 bg-[#141414] border border-[#2A2A2A] rounded-xl hover:border-[#3A3A3A] transition-colors"
+      className="flex items-center justify-between w-full py-4 px-5 bg-gray-50 dark:bg-[#141414] border border-gray-200 dark:border-[#2A2A2A] rounded-xl hover:border-[#3A3A3A] transition-colors"
     >
       <div className="flex items-center gap-3">
         <div
@@ -221,15 +221,15 @@ function StepHeader({
             'w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold font-mono',
             isComplete
               ? 'bg-[#22C55E]/20 text-[#22C55E] border border-[#22C55E]/40'
-              : 'bg-[#1A1A1A] text-[#A0A0A0] border border-[#2A2A2A]'
+              : 'bg-gray-100 dark:bg-[#1A1A1A] text-gray-500 dark:text-[#A0A0A0] border border-gray-200 dark:border-[#2A2A2A]'
           )}
         >
           {isComplete ? <Check className="w-4 h-4" /> : step}
         </div>
-        <span className="text-[#F0F0F0] font-semibold text-base">{title}</span>
+        <span className="text-gray-900 dark:text-[#F0F0F0] font-semibold text-base">{title}</span>
         {isComplete && <CheckCircle2 className="w-4 h-4 text-[#22C55E]" />}
       </div>
-      {isOpen ? <ChevronUp className="w-5 h-5 text-[#A0A0A0]" /> : <ChevronDown className="w-5 h-5 text-[#A0A0A0]" />}
+      {isOpen ? <ChevronUp className="w-5 h-5 text-gray-500 dark:text-[#A0A0A0]" /> : <ChevronDown className="w-5 h-5 text-gray-500 dark:text-[#A0A0A0]" />}
     </button>
   )
 }
@@ -269,7 +269,7 @@ function Step1Goal({ data, updateData }: StepProps) {
                 'relative flex flex-col items-start p-4 rounded-xl border-2 transition-all text-left',
                 isSelected
                   ? 'border-[#00AEEF] bg-[#00AEEF]/5 shadow-lg shadow-[#00AEEF]/10'
-                  : 'border-[#2A2A2A] bg-[#141414] hover:border-[#3A3A3A] hover:bg-[#1A1A1A]'
+                  : 'border-gray-200 dark:border-[#2A2A2A] bg-gray-50 dark:bg-[#141414] hover:border-[#3A3A3A] hover:bg-gray-100 dark:bg-[#1A1A1A] dark:hover:bg-[#242424]'
               )}
             >
               <div className="flex items-center justify-between w-full mb-2">
@@ -282,14 +282,14 @@ function Step1Goal({ data, updateData }: StepProps) {
                 <div
                   className={cn(
                     'w-5 h-5 rounded border flex items-center justify-center transition-colors',
-                    isSelected ? 'bg-[#00AEEF] border-[#00AEEF]' : 'border-[#2A2A2A] bg-[#0A0A0A]'
+                    isSelected ? 'bg-[#00AEEF] border-[#00AEEF]' : 'border-gray-200 dark:border-[#2A2A2A] bg-[#0A0A0A]'
                   )}
                 >
                   {isSelected && <Check className="w-3 h-3 text-white" />}
                 </div>
               </div>
-              <h4 className="text-[#F0F0F0] font-semibold text-sm mb-1">{goal.name}</h4>
-              <p className="text-[#A0A0A0] text-xs leading-relaxed">{goal.desc}</p>
+              <h4 className="text-gray-900 dark:text-[#F0F0F0] font-semibold text-sm mb-1">{goal.name}</h4>
+              <p className="text-gray-500 dark:text-[#A0A0A0] text-xs leading-relaxed">{goal.desc}</p>
             </motion.button>
           )
         })}
@@ -298,14 +298,14 @@ function Step1Goal({ data, updateData }: StepProps) {
       {/* Dropdown fallback */}
       <div className="flex items-center gap-3">
         <div className="flex items-center gap-2">
-          <span className="text-[#A0A0A0] text-sm">Or select from dropdown:</span>
+          <span className="text-gray-500 dark:text-[#A0A0A0] text-sm">Or select from dropdown:</span>
           <select
             value={dropdownGoal}
             onChange={(e) => {
               setDropdownGoal(e.target.value)
               if (e.target.value) selectGoal(e.target.value)
             }}
-            className="bg-[#141414] border border-[#2A2A2A] text-[#F0F0F0] text-sm rounded-lg px-3 py-2 focus:outline-none focus:border-[#00AEEF]"
+            className="bg-gray-50 dark:bg-[#141414] border border-gray-200 dark:border-[#2A2A2A] text-gray-900 dark:text-[#F0F0F0] text-sm rounded-lg px-3 py-2 focus:outline-none focus:border-[#00AEEF]"
           >
             <option value="">— Select Goal —</option>
             {GOALS.map((g) => (
@@ -366,11 +366,11 @@ function Step2Method({ data, updateData }: StepProps) {
       {/* Filters */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
         <div>
-          <label className="text-[#A0A0A0] text-xs font-medium mb-1.5 block">Experience Level</label>
+          <label className="text-gray-500 dark:text-[#A0A0A0] text-xs font-medium mb-1.5 block">Experience Level</label>
           <select
             value={experience}
             onChange={(e) => setExperience(e.target.value)}
-            className="w-full bg-[#141414] border border-[#2A2A2A] text-[#F0F0F0] text-sm rounded-lg px-3 py-2 focus:outline-none focus:border-[#00AEEF]"
+            className="w-full bg-gray-50 dark:bg-[#141414] border border-gray-200 dark:border-[#2A2A2A] text-gray-900 dark:text-[#F0F0F0] text-sm rounded-lg px-3 py-2 focus:outline-none focus:border-[#00AEEF]"
           >
             {['Beginner', 'Intermediate', 'Advanced', 'Elite'].map((o) => (
               <option key={o}>{o}</option>
@@ -378,11 +378,11 @@ function Step2Method({ data, updateData }: StepProps) {
           </select>
         </div>
         <div>
-          <label className="text-[#A0A0A0] text-xs font-medium mb-1.5 block">Equipment</label>
+          <label className="text-gray-500 dark:text-[#A0A0A0] text-xs font-medium mb-1.5 block">Equipment</label>
           <select
             value={equipment}
             onChange={(e) => setEquipment(e.target.value)}
-            className="w-full bg-[#141414] border border-[#2A2A2A] text-[#F0F0F0] text-sm rounded-lg px-3 py-2 focus:outline-none focus:border-[#00AEEF]"
+            className="w-full bg-gray-50 dark:bg-[#141414] border border-gray-200 dark:border-[#2A2A2A] text-gray-900 dark:text-[#F0F0F0] text-sm rounded-lg px-3 py-2 focus:outline-none focus:border-[#00AEEF]"
           >
             {['Full Gym', 'Dumbbells Only', 'Bodyweight', 'Minimal'].map((o) => (
               <option key={o}>{o}</option>
@@ -390,11 +390,11 @@ function Step2Method({ data, updateData }: StepProps) {
           </select>
         </div>
         <div>
-          <label className="text-[#A0A0A0] text-xs font-medium mb-1.5 block">Budget</label>
+          <label className="text-gray-500 dark:text-[#A0A0A0] text-xs font-medium mb-1.5 block">Budget</label>
           <select
             value={budget}
             onChange={(e) => setBudget(e.target.value)}
-            className="w-full bg-[#141414] border border-[#2A2A2A] text-[#F0F0F0] text-sm rounded-lg px-3 py-2 focus:outline-none focus:border-[#00AEEF]"
+            className="w-full bg-gray-50 dark:bg-[#141414] border border-gray-200 dark:border-[#2A2A2A] text-gray-900 dark:text-[#F0F0F0] text-sm rounded-lg px-3 py-2 focus:outline-none focus:border-[#00AEEF]"
           >
             {['Premium', 'Mid-range', 'Budget-friendly'].map((o) => (
               <option key={o}>{o}</option>
@@ -408,7 +408,7 @@ function Step2Method({ data, updateData }: StepProps) {
         <Award className="w-5 h-5 text-[#22C55E]" />
         <div>
           <span className="text-[#22C55E] text-xs font-semibold">Best Match</span>
-          <span className="text-[#F0F0F0] text-sm ml-2">
+          <span className="text-gray-900 dark:text-[#F0F0F0] text-sm ml-2">
             {filteredMethods[0]?.name} ({filteredMethods[0]?.score}%)
           </span>
         </div>
@@ -428,29 +428,29 @@ function Step2Method({ data, updateData }: StepProps) {
                 'flex flex-col items-start p-4 rounded-xl border-2 transition-all text-left',
                 isSelected
                   ? 'border-[#8B5CF6] bg-[#8B5CF6]/5 shadow-lg shadow-[#8B5CF6]/10'
-                  : 'border-[#2A2A2A] bg-[#141414] hover:border-[#3A3A3A]'
+                  : 'border-gray-200 dark:border-[#2A2A2A] bg-gray-50 dark:bg-[#141414] hover:border-[#3A3A3A]'
               )}
             >
               <div className="flex items-center justify-between w-full mb-2">
                 <Badge
                   variant="outline"
-                  className="text-[10px] border-[#2A2A2A] text-[#A0A0A0]"
+                  className="text-[10px] border-gray-200 dark:border-[#2A2A2A] text-gray-500 dark:text-[#A0A0A0]"
                 >
                   {method.category}
                 </Badge>
                 <div
                   className={cn(
                     'w-5 h-5 rounded border flex items-center justify-center transition-colors',
-                    isSelected ? 'bg-[#8B5CF6] border-[#8B5CF6]' : 'border-[#2A2A2A] bg-[#0A0A0A]'
+                    isSelected ? 'bg-[#8B5CF6] border-[#8B5CF6]' : 'border-gray-200 dark:border-[#2A2A2A] bg-[#0A0A0A]'
                   )}
                 >
                   {isSelected && <Check className="w-3 h-3 text-white" />}
                 </div>
               </div>
-              <h4 className="text-[#F0F0F0] font-semibold text-sm mb-1">{method.name}</h4>
-              <p className="text-[#A0A0A0] text-xs mb-3">{method.desc}</p>
+              <h4 className="text-gray-900 dark:text-[#F0F0F0] font-semibold text-sm mb-1">{method.name}</h4>
+              <p className="text-gray-500 dark:text-[#A0A0A0] text-xs mb-3">{method.desc}</p>
               {/* Score bar */}
-              <div className="w-full bg-[#1A1A1A] rounded-full h-2 mt-auto">
+              <div className="w-full bg-gray-100 dark:bg-[#1A1A1A] rounded-full h-2 mt-auto">
                 <motion.div
                   initial={{ width: 0 }}
                   animate={{ width: `${method.score}%` }}
@@ -461,7 +461,7 @@ function Step2Method({ data, updateData }: StepProps) {
                   }}
                 />
               </div>
-              <span className="text-[10px] text-[#A0A0A0] mt-1">{method.score}% match</span>
+              <span className="text-[10px] text-gray-500 dark:text-[#A0A0A0] mt-1">{method.score}% match</span>
             </motion.button>
           )
         })}
@@ -535,11 +535,11 @@ function Step3Context({ data, updateData }: StepProps) {
       {/* Dropdowns 2x2 */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="text-[#A0A0A0] text-xs font-medium mb-1.5 block">Age Range</label>
+          <label className="text-gray-500 dark:text-[#A0A0A0] text-xs font-medium mb-1.5 block">Age Range</label>
           <select
             value={data.clientContext.ageRange}
             onChange={(e) => updateContextField('ageRange', e.target.value)}
-            className="w-full bg-[#141414] border border-[#2A2A2A] text-[#F0F0F0] text-sm rounded-lg px-3 py-2 focus:outline-none focus:border-[#00AEEF]"
+            className="w-full bg-gray-50 dark:bg-[#141414] border border-gray-200 dark:border-[#2A2A2A] text-gray-900 dark:text-[#F0F0F0] text-sm rounded-lg px-3 py-2 focus:outline-none focus:border-[#00AEEF]"
           >
             {['', '18-25', '26-35', '36-45', '46-55', '55+'].map((o) => (
               <option key={o} value={o}>{o || '— Select —'}</option>
@@ -547,11 +547,11 @@ function Step3Context({ data, updateData }: StepProps) {
           </select>
         </div>
         <div>
-          <label className="text-[#A0A0A0] text-xs font-medium mb-1.5 block">Training Experience</label>
+          <label className="text-gray-500 dark:text-[#A0A0A0] text-xs font-medium mb-1.5 block">Training Experience</label>
           <select
             value={data.clientContext.experience}
             onChange={(e) => updateContextField('experience', e.target.value)}
-            className="w-full bg-[#141414] border border-[#2A2A2A] text-[#F0F0F0] text-sm rounded-lg px-3 py-2 focus:outline-none focus:border-[#00AEEF]"
+            className="w-full bg-gray-50 dark:bg-[#141414] border border-gray-200 dark:border-[#2A2A2A] text-gray-900 dark:text-[#F0F0F0] text-sm rounded-lg px-3 py-2 focus:outline-none focus:border-[#00AEEF]"
           >
             {['', '<1 year', '1-3 years', '3-5 years', '5-10 years', '10+ years'].map((o) => (
               <option key={o} value={o}>{o || '— Select —'}</option>
@@ -559,11 +559,11 @@ function Step3Context({ data, updateData }: StepProps) {
           </select>
         </div>
         <div>
-          <label className="text-[#A0A0A0] text-xs font-medium mb-1.5 block">Body Type</label>
+          <label className="text-gray-500 dark:text-[#A0A0A0] text-xs font-medium mb-1.5 block">Body Type</label>
           <select
             value={data.clientContext.bodyType}
             onChange={(e) => updateContextField('bodyType', e.target.value)}
-            className="w-full bg-[#141414] border border-[#2A2A2A] text-[#F0F0F0] text-sm rounded-lg px-3 py-2 focus:outline-none focus:border-[#00AEEF]"
+            className="w-full bg-gray-50 dark:bg-[#141414] border border-gray-200 dark:border-[#2A2A2A] text-gray-900 dark:text-[#F0F0F0] text-sm rounded-lg px-3 py-2 focus:outline-none focus:border-[#00AEEF]"
           >
             {['', 'Ectomorph', 'Mesomorph', 'Endomorph', 'Mixed'].map((o) => (
               <option key={o} value={o}>{o || '— Select —'}</option>
@@ -571,11 +571,11 @@ function Step3Context({ data, updateData }: StepProps) {
           </select>
         </div>
         <div>
-          <label className="text-[#A0A0A0] text-xs font-medium mb-1.5 block">Weekly Availability</label>
+          <label className="text-gray-500 dark:text-[#A0A0A0] text-xs font-medium mb-1.5 block">Weekly Availability</label>
           <select
             value={data.clientContext.availability}
             onChange={(e) => updateContextField('availability', e.target.value)}
-            className="w-full bg-[#141414] border border-[#2A2A2A] text-[#F0F0F0] text-sm rounded-lg px-3 py-2 focus:outline-none focus:border-[#00AEEF]"
+            className="w-full bg-gray-50 dark:bg-[#141414] border border-gray-200 dark:border-[#2A2A2A] text-gray-900 dark:text-[#F0F0F0] text-sm rounded-lg px-3 py-2 focus:outline-none focus:border-[#00AEEF]"
           >
             {['', '2 days', '3 days', '4 days', '5 days', '6 days'].map((o) => (
               <option key={o} value={o}>{o || '— Select —'}</option>
@@ -586,20 +586,20 @@ function Step3Context({ data, updateData }: StepProps) {
 
       {/* Limitations */}
       <div>
-        <label className="text-[#A0A0A0] text-xs font-medium mb-2 block">Limitations & Considerations</label>
+        <label className="text-gray-500 dark:text-[#A0A0A0] text-xs font-medium mb-2 block">Limitations & Considerations</label>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
           {LIMITATIONS.map((limitation) => (
             <label
               key={limitation}
-              className="flex items-center gap-2 p-2.5 rounded-lg border border-[#2A2A2A] bg-[#141414] cursor-pointer hover:border-[#3A3A3A] transition-colors"
+              className="flex items-center gap-2 p-2.5 rounded-lg border border-gray-200 dark:border-[#2A2A2A] bg-gray-50 dark:bg-[#141414] cursor-pointer hover:border-[#3A3A3A] transition-colors"
             >
               <input
                 type="checkbox"
                 checked={data.clientContext.limitations.includes(limitation)}
                 onChange={() => toggleLimitation(limitation)}
-                className="w-4 h-4 rounded border-[#2A2A2A] accent-[#00AEEF]"
+                className="w-4 h-4 rounded border-gray-200 dark:border-[#2A2A2A] accent-[#00AEEF]"
               />
-              <span className="text-[#F0F0F0] text-xs">{limitation}</span>
+              <span className="text-gray-900 dark:text-[#F0F0F0] text-xs">{limitation}</span>
             </label>
           ))}
         </div>
@@ -613,34 +613,34 @@ function Step3Context({ data, updateData }: StepProps) {
               placeholder="Describe other limitation..."
               value={data.clientContext.otherLimitation}
               onChange={(e) => updateContextField('otherLimitation', e.target.value)}
-              className="bg-[#141414] border-[#2A2A2A] text-[#F0F0F0] text-sm"
+              className="bg-gray-50 dark:bg-[#141414] border-gray-200 dark:border-[#2A2A2A] text-gray-900 dark:text-[#F0F0F0] text-sm"
             />
           </motion.div>
         )}
       </div>
 
       {/* Context summary + AI Risk Score */}
-      <div className="bg-[#141414] border border-[#2A2A2A] rounded-xl p-4 space-y-3">
-        <h4 className="text-[#F0F0F0] text-sm font-semibold">Context Summary</h4>
+      <div className="bg-gray-50 dark:bg-[#141414] border border-gray-200 dark:border-[#2A2A2A] rounded-xl p-4 space-y-3">
+        <h4 className="text-gray-900 dark:text-[#F0F0F0] text-sm font-semibold">Context Summary</h4>
         <div className="grid grid-cols-2 gap-2 text-xs">
-          <div className="text-[#A0A0A0]">
-            Age: <span className="text-[#F0F0F0]">{data.clientContext.ageRange || '—'}</span>
+          <div className="text-gray-500 dark:text-[#A0A0A0]">
+            Age: <span className="text-gray-900 dark:text-[#F0F0F0]">{data.clientContext.ageRange || '—'}</span>
           </div>
-          <div className="text-[#A0A0A0]">
-            Experience: <span className="text-[#F0F0F0]">{data.clientContext.experience || '—'}</span>
+          <div className="text-gray-500 dark:text-[#A0A0A0]">
+            Experience: <span className="text-gray-900 dark:text-[#F0F0F0]">{data.clientContext.experience || '—'}</span>
           </div>
-          <div className="text-[#A0A0A0]">
-            Body Type: <span className="text-[#F0F0F0]">{data.clientContext.bodyType || '—'}</span>
+          <div className="text-gray-500 dark:text-[#A0A0A0]">
+            Body Type: <span className="text-gray-900 dark:text-[#F0F0F0]">{data.clientContext.bodyType || '—'}</span>
           </div>
-          <div className="text-[#A0A0A0]">
-            Availability: <span className="text-[#F0F0F0]">{data.clientContext.availability || '—'}</span>
+          <div className="text-gray-500 dark:text-[#A0A0A0]">
+            Availability: <span className="text-gray-900 dark:text-[#F0F0F0]">{data.clientContext.availability || '—'}</span>
           </div>
         </div>
         {/* AI Risk Score */}
-        <div className="flex items-center gap-3 pt-2 border-t border-[#2A2A2A]">
+        <div className="flex items-center gap-3 pt-2 border-t border-gray-200 dark:border-[#2A2A2A]">
           <AlertTriangle className={cn('w-4 h-4', aiRiskScore > 50 ? 'text-[#EF4444]' : 'text-[#22C55E]')} />
-          <span className="text-[#A0A0A0] text-xs">AI Risk Score:</span>
-          <div className="flex-1 bg-[#1A1A1A] rounded-full h-2">
+          <span className="text-gray-500 dark:text-[#A0A0A0] text-xs">AI Risk Score:</span>
+          <div className="flex-1 bg-gray-100 dark:bg-[#1A1A1A] rounded-full h-2">
             <motion.div
               initial={{ width: 0 }}
               animate={{ width: `${aiRiskScore}%` }}
@@ -729,7 +729,7 @@ function Step4Phases({ data, updateData }: StepProps) {
           <motion.div
             key={phase.id}
             layout
-            className="bg-[#141414] border border-[#2A2A2A] rounded-xl p-4"
+            className="bg-gray-50 dark:bg-[#141414] border border-gray-200 dark:border-[#2A2A2A] rounded-xl p-4"
           >
             <div className="flex items-center gap-3">
               <input
@@ -744,18 +744,18 @@ function Step4Phases({ data, updateData }: StepProps) {
               />
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2">
-                  <h4 className={cn('text-sm font-semibold', phase.active ? 'text-[#F0F0F0]' : 'text-[#A0A0A0] line-through')}>
+                  <h4 className={cn('text-sm font-semibold', phase.active ? 'text-gray-900 dark:text-[#F0F0F0]' : 'text-gray-500 dark:text-[#A0A0A0] line-through')}>
                     {phase.name}
                   </h4>
-                  <Badge variant="outline" className="text-[10px] border-[#2A2A2A] text-[#A0A0A0]">
+                  <Badge variant="outline" className="text-[10px] border-gray-200 dark:border-[#2A2A2A] text-gray-500 dark:text-[#A0A0A0]">
                     {phase.weeks} weeks
                   </Badge>
                 </div>
-                <p className={cn('text-xs mt-0.5', phase.active ? 'text-[#A0A0A0]' : 'text-[#666]')}>{phase.focus}</p>
+                <p className={cn('text-xs mt-0.5', phase.active ? 'text-gray-500 dark:text-[#A0A0A0]' : 'text-[#666]')}>{phase.focus}</p>
               </div>
               <button
                 onClick={() => removePhase(phase.id)}
-                className="p-1.5 rounded-lg hover:bg-[#EF4444]/10 text-[#A0A0A0] hover:text-[#EF4444] transition-colors"
+                className="p-1.5 rounded-lg hover:bg-[#EF4444]/10 text-gray-500 dark:text-[#A0A0A0] hover:text-[#EF4444] transition-colors"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -765,9 +765,9 @@ function Step4Phases({ data, updateData }: StepProps) {
       </div>
 
       {/* Weekly hours slider */}
-      <div className="bg-[#141414] border border-[#2A2A2A] rounded-xl p-4">
+      <div className="bg-gray-50 dark:bg-[#141414] border border-gray-200 dark:border-[#2A2A2A] rounded-xl p-4">
         <div className="flex items-center justify-between mb-3">
-          <label className="text-[#F0F0F0] text-sm font-semibold">Weekly Training Hours</label>
+          <label className="text-gray-900 dark:text-[#F0F0F0] text-sm font-semibold">Weekly Training Hours</label>
           <span className="text-[#00AEEF] font-mono text-sm font-bold">{data.weeklyHours}h</span>
         </div>
         <Slider
@@ -778,7 +778,7 @@ function Step4Phases({ data, updateData }: StepProps) {
           step={0.5}
           className="w-full"
         />
-        <div className="flex justify-between text-[10px] text-[#A0A0A0] mt-1">
+        <div className="flex justify-between text-[10px] text-gray-500 dark:text-[#A0A0A0] mt-1">
           <span>2h</span>
           <span>10h</span>
         </div>
@@ -786,8 +786,8 @@ function Step4Phases({ data, updateData }: StepProps) {
 
       {/* Visual timeline */}
       <div>
-        <label className="text-[#A0A0A0] text-xs font-medium mb-2 block">Phase Timeline ({totalWeeks} weeks)</label>
-        <div className="flex h-8 rounded-xl overflow-hidden bg-[#1A1A1A] border border-[#2A2A2A]">
+        <label className="text-gray-500 dark:text-[#A0A0A0] text-xs font-medium mb-2 block">Phase Timeline ({totalWeeks} weeks)</label>
+        <div className="flex h-8 rounded-xl overflow-hidden bg-gray-100 dark:bg-[#1A1A1A] border border-gray-200 dark:border-[#2A2A2A]">
           {data.phases
             .filter((p) => p.active)
             .map((phase) => (
@@ -808,7 +808,7 @@ function Step4Phases({ data, updateData }: StepProps) {
       </div>
 
       <div className="flex gap-2">
-        <Button variant="outline" size="sm" onClick={addPhase} className="border-[#2A2A2A] text-[#F0F0F0] hover:bg-[#1A1A1A] text-xs">
+        <Button variant="outline" size="sm" onClick={addPhase} className="border-gray-200 dark:border-[#2A2A2A] text-gray-900 dark:text-[#F0F0F0] hover:bg-gray-100 dark:bg-[#1A1A1A] dark:hover:bg-[#242424] text-xs">
           <Plus className="w-3.5 h-3.5 mr-1" />
           Add Phase
         </Button>
@@ -882,11 +882,11 @@ function Step5Split({ data, updateData }: StepProps) {
     <div className="space-y-5">
       {/* Split type dropdown */}
       <div>
-        <label className="text-[#A0A0A0] text-xs font-medium mb-1.5 block">Split Type</label>
+        <label className="text-gray-500 dark:text-[#A0A0A0] text-xs font-medium mb-1.5 block">Split Type</label>
         <select
           value={splitType}
           onChange={(e) => applySplit(e.target.value)}
-          className="bg-[#141414] border border-[#2A2A2A] text-[#F0F0F0] text-sm rounded-lg px-3 py-2 focus:outline-none focus:border-[#00AEEF]"
+          className="bg-gray-50 dark:bg-[#141414] border border-gray-200 dark:border-[#2A2A2A] text-gray-900 dark:text-[#F0F0F0] text-sm rounded-lg px-3 py-2 focus:outline-none focus:border-[#00AEEF]"
         >
           {Object.keys(SPLIT_DEFAULTS).map((type) => (
             <option key={type}>{type}</option>
@@ -904,10 +904,10 @@ function Step5Split({ data, updateData }: StepProps) {
               layout
               className={cn(
                 'rounded-xl border overflow-hidden transition-all',
-                day.active ? 'border-[#2A2A2A] bg-[#141414]' : 'border-[#1A1A1A] bg-[#0A0A0A] opacity-50'
+                day.active ? 'border-gray-200 dark:border-[#2A2A2A] bg-gray-50 dark:bg-[#141414]' : 'border-[#1A1A1A] bg-[#0A0A0A] opacity-50'
               )}
             >
-              <div className="p-2 text-center border-b border-[#2A2A2A]">
+              <div className="p-2 text-center border-b border-gray-200 dark:border-[#2A2A2A]">
                 <div className="flex items-center justify-center gap-1">
                   <GripVertical className="w-3 h-3 text-[#555]" />
                   <input
@@ -930,7 +930,7 @@ function Step5Split({ data, updateData }: StepProps) {
                   onChange={(e) => updateDayWorkout(idx, e.target.value)}
                   className={cn(
                     'w-full text-[10px] text-center bg-transparent border-none outline-none resize-none',
-                    day.active ? 'text-[#F0F0F0]' : 'text-[#555]'
+                    day.active ? 'text-gray-900 dark:text-[#F0F0F0]' : 'text-[#555]'
                   )}
                   rows={2}
                   disabled={!day.active}
@@ -943,17 +943,17 @@ function Step5Split({ data, updateData }: StepProps) {
 
       {/* Summary stats */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        <div className="bg-[#141414] border border-[#2A2A2A] rounded-xl p-3">
-          <span className="text-[#A0A0A0] text-xs">Training Frequency</span>
-          <div className="text-[#F0F0F0] text-lg font-bold font-mono">
-            {activeDays} <span className="text-sm text-[#A0A0A0] font-normal">days/week</span>
+        <div className="bg-gray-50 dark:bg-[#141414] border border-gray-200 dark:border-[#2A2A2A] rounded-xl p-3">
+          <span className="text-gray-500 dark:text-[#A0A0A0] text-xs">Training Frequency</span>
+          <div className="text-gray-900 dark:text-[#F0F0F0] text-lg font-bold font-mono">
+            {activeDays} <span className="text-sm text-gray-500 dark:text-[#A0A0A0] font-normal">days/week</span>
           </div>
         </div>
-        <div className="bg-[#141414] border border-[#2A2A2A] rounded-xl p-3">
-          <span className="text-[#A0A0A0] text-xs">Volume Distribution</span>
+        <div className="bg-gray-50 dark:bg-[#141414] border border-gray-200 dark:border-[#2A2A2A] rounded-xl p-3">
+          <span className="text-gray-500 dark:text-[#A0A0A0] text-xs">Volume Distribution</span>
           <div className="flex flex-wrap gap-1 mt-1">
             {Object.entries(volumeDist).map(([k, v]) => (
-              <Badge key={k} variant="outline" className="text-[10px] border-[#2A2A2A] text-[#A0A0A0]">
+              <Badge key={k} variant="outline" className="text-[10px] border-gray-200 dark:border-[#2A2A2A] text-gray-500 dark:text-[#A0A0A0]">
                 {k}: {v}
               </Badge>
             ))}
@@ -1033,7 +1033,7 @@ function Step6Exercises({ data, updateData }: StepProps) {
           variant="outline"
           size="sm"
           onClick={addExercise}
-          className="border-[#2A2A2A] text-[#F0F0F0] hover:bg-[#1A1A1A] text-xs"
+          className="border-gray-200 dark:border-[#2A2A2A] text-gray-900 dark:text-[#F0F0F0] hover:bg-gray-100 dark:bg-[#1A1A1A] dark:hover:bg-[#242424] text-xs"
         >
           <Plus className="w-3.5 h-3.5 mr-1" />
           Add Exercise
@@ -1041,7 +1041,7 @@ function Step6Exercises({ data, updateData }: StepProps) {
         <Button
           variant="outline"
           size="sm"
-          className="border-[#2A2A2A] text-[#F0F0F0] hover:bg-[#1A1A1A] text-xs"
+          className="border-gray-200 dark:border-[#2A2A2A] text-gray-900 dark:text-[#F0F0F0] hover:bg-gray-100 dark:bg-[#1A1A1A] dark:hover:bg-[#242424] text-xs"
         >
           <Search className="w-3.5 h-3.5 mr-1" />
           Load from Library
@@ -1049,9 +1049,9 @@ function Step6Exercises({ data, updateData }: StepProps) {
       </div>
 
       {/* Exercise table */}
-      <div className="bg-[#141414] border border-[#2A2A2A] rounded-xl overflow-hidden">
+      <div className="bg-gray-50 dark:bg-[#141414] border border-gray-200 dark:border-[#2A2A2A] rounded-xl overflow-hidden">
         {/* Table header */}
-        <div className="grid grid-cols-9 gap-1 px-3 py-2 bg-[#0A0A0A] border-b border-[#2A2A2A] text-[10px] text-[#A0A0A0] font-semibold uppercase tracking-wider">
+        <div className="grid grid-cols-9 gap-1 px-3 py-2 bg-[#0A0A0A] border-b border-gray-200 dark:border-[#2A2A2A] text-[10px] text-gray-500 dark:text-[#A0A0A0] font-semibold uppercase tracking-wider">
           <span>Code</span>
           <span className="col-span-2">Exercise</span>
           <span>Sets</span>
@@ -1070,26 +1070,26 @@ function Step6Exercises({ data, updateData }: StepProps) {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="border-b border-[#2A2A2A] last:border-b-0"
+              className="border-b border-gray-200 dark:border-[#2A2A2A] last:border-b-0"
             >
               <div className="grid grid-cols-9 gap-1 px-3 py-2 items-center text-xs">
                 <span className="text-[#00AEEF] font-mono font-bold">{exercise.code}</span>
-                <span className="col-span-2 text-[#F0F0F0] font-medium truncate">{exercise.name}</span>
-                <span className="text-[#A0A0A0]">{exercise.sets}</span>
-                <span className="text-[#A0A0A0]">{exercise.reps}</span>
-                <span className="text-[#A0A0A0] font-mono">{exercise.pct1RM}</span>
+                <span className="col-span-2 text-gray-900 dark:text-[#F0F0F0] font-medium truncate">{exercise.name}</span>
+                <span className="text-gray-500 dark:text-[#A0A0A0]">{exercise.sets}</span>
+                <span className="text-gray-500 dark:text-[#A0A0A0]">{exercise.reps}</span>
+                <span className="text-gray-500 dark:text-[#A0A0A0] font-mono">{exercise.pct1RM}</span>
                 <span className="text-[#8B5CF6] font-mono">{exercise.tempo}</span>
                 <span className="text-[#F59E0B] font-mono">{exercise.rest}</span>
                 <div className="flex justify-end gap-1">
                   <button
                     onClick={() => toggleRow(idx)}
-                    className="p-1 rounded hover:bg-[#2A2A2A] text-[#A0A0A0] hover:text-[#F0F0F0] transition-colors"
+                    className="p-1 rounded hover:bg-[#2A2A2A] text-gray-500 dark:text-[#A0A0A0] hover:text-gray-900 dark:hover:text-[#F0F0F0] transition-colors"
                   >
                     <Pencil className="w-3 h-3" />
                   </button>
                   <button
                     onClick={() => deleteExercise(idx)}
-                    className="p-1 rounded hover:bg-[#EF4444]/10 text-[#A0A0A0] hover:text-[#EF4444] transition-colors"
+                    className="p-1 rounded hover:bg-[#EF4444]/10 text-gray-500 dark:text-[#A0A0A0] hover:text-[#EF4444] transition-colors"
                   >
                     <Trash2 className="w-3 h-3" />
                   </button>
@@ -1107,36 +1107,36 @@ function Step6Exercises({ data, updateData }: StepProps) {
                   >
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 px-3 pb-3 bg-[#0A0A0A]">
                       <div>
-                        <label className="text-[10px] text-[#A0A0A0]">Sets</label>
+                        <label className="text-[10px] text-gray-500 dark:text-[#A0A0A0]">Sets</label>
                         <Input
                           type="number"
                           value={exercise.sets}
                           onChange={(e) => updateExercise(idx, 'sets', parseInt(e.target.value) || 0)}
-                          className="h-7 text-xs bg-[#141414] border-[#2A2A2A] text-[#F0F0F0]"
+                          className="h-7 text-xs bg-gray-50 dark:bg-[#141414] border-gray-200 dark:border-[#2A2A2A] text-gray-900 dark:text-[#F0F0F0]"
                         />
                       </div>
                       <div>
-                        <label className="text-[10px] text-[#A0A0A0]">Reps</label>
+                        <label className="text-[10px] text-gray-500 dark:text-[#A0A0A0]">Reps</label>
                         <Input
                           value={exercise.reps}
                           onChange={(e) => updateExercise(idx, 'reps', e.target.value)}
-                          className="h-7 text-xs bg-[#141414] border-[#2A2A2A] text-[#F0F0F0]"
+                          className="h-7 text-xs bg-gray-50 dark:bg-[#141414] border-gray-200 dark:border-[#2A2A2A] text-gray-900 dark:text-[#F0F0F0]"
                         />
                       </div>
                       <div>
-                        <label className="text-[10px] text-[#A0A0A0]">%1RM</label>
+                        <label className="text-[10px] text-gray-500 dark:text-[#A0A0A0]">%1RM</label>
                         <Input
                           value={exercise.pct1RM}
                           onChange={(e) => updateExercise(idx, 'pct1RM', e.target.value)}
-                          className="h-7 text-xs bg-[#141414] border-[#2A2A2A] text-[#F0F0F0]"
+                          className="h-7 text-xs bg-gray-50 dark:bg-[#141414] border-gray-200 dark:border-[#2A2A2A] text-gray-900 dark:text-[#F0F0F0]"
                         />
                       </div>
                       <div>
-                        <label className="text-[10px] text-[#A0A0A0]">Tempo</label>
+                        <label className="text-[10px] text-gray-500 dark:text-[#A0A0A0]">Tempo</label>
                         <Input
                           value={exercise.tempo}
                           onChange={(e) => updateExercise(idx, 'tempo', e.target.value)}
-                          className="h-7 text-xs bg-[#141414] border-[#2A2A2A] text-[#F0F0F0]"
+                          className="h-7 text-xs bg-gray-50 dark:bg-[#141414] border-gray-200 dark:border-[#2A2A2A] text-gray-900 dark:text-[#F0F0F0]"
                         />
                       </div>
                     </div>
@@ -1149,19 +1149,19 @@ function Step6Exercises({ data, updateData }: StepProps) {
       </div>
 
       {/* Tempo legend */}
-      <div className="bg-[#141414] border border-[#2A2A2A] rounded-xl p-3">
-        <h5 className="text-[#F0F0F0] text-xs font-semibold mb-1.5">Tempo Legend (Poliquin Notation)</h5>
+      <div className="bg-gray-50 dark:bg-[#141414] border border-gray-200 dark:border-[#2A2A2A] rounded-xl p-3">
+        <h5 className="text-gray-900 dark:text-[#F0F0F0] text-xs font-semibold mb-1.5">Tempo Legend (Poliquin Notation)</h5>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-[10px]">
-          <div className="text-[#A0A0A0]">
+          <div className="text-gray-500 dark:text-[#A0A0A0]">
             <span className="text-[#8B5CF6] font-mono font-bold">Eccentric</span> — Lowering
           </div>
-          <div className="text-[#A0A0A0]">
+          <div className="text-gray-500 dark:text-[#A0A0A0]">
             <span className="text-[#8B5CF6] font-mono font-bold">Pause Bottom</span> — Hold
           </div>
-          <div className="text-[#A0A0A0]">
+          <div className="text-gray-500 dark:text-[#A0A0A0]">
             <span className="text-[#8B5CF6] font-mono font-bold">Concentric</span> — Lifting
           </div>
-          <div className="text-[#A0A0A0]">
+          <div className="text-gray-500 dark:text-[#A0A0A0]">
             <span className="text-[#8B5CF6] font-mono font-bold">Pause Top</span> — Squeeze
           </div>
         </div>
@@ -1217,18 +1217,18 @@ function Step7Preview({ data }: StepProps) {
   return (
     <div className="space-y-5">
       {/* ══════ OVERVIEW CARD ══════ */}
-      <Card className="bg-[#141414] border-[#2A2A2A] p-5">
+      <Card className="bg-gray-50 dark:bg-[#141414] border-gray-200 dark:border-[#2A2A2A] p-5">
         <div className="flex items-start justify-between mb-4">
           <div>
-            <h3 className="text-[#F0F0F0] text-xl font-bold">
+            <h3 className="text-gray-900 dark:text-[#F0F0F0] text-xl font-bold">
               {data.programName || 'Untitled Program'}
             </h3>
-            <p className="text-[#A0A0A0] text-sm mt-1">
+            <p className="text-gray-500 dark:text-[#A0A0A0] text-sm mt-1">
               {goalName} — {methodName} — {totalWeeks} weeks — {activeDays} days/week
             </p>
           </div>
           <div className="text-right">
-            <div className="text-[#A0A0A0] text-[10px]">AI Confidence</div>
+            <div className="text-gray-500 dark:text-[#A0A0A0] text-[10px]">AI Confidence</div>
             <div
               className="text-lg font-bold font-mono"
               style={{ color: aiConfidence > 85 ? '#22C55E' : aiConfidence > 60 ? '#F59E0B' : '#EF4444' }}
@@ -1240,34 +1240,34 @@ function Step7Preview({ data }: StepProps) {
 
         {/* Key stat badges */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">
-          <div className="bg-[#0A0A0A] border border-[#2A2A2A] rounded-lg p-3 text-center">
+          <div className="bg-[#0A0A0A] border border-gray-200 dark:border-[#2A2A2A] rounded-lg p-3 text-center">
             <div className="text-[#EF4444] text-lg font-bold font-mono">{intensity}%</div>
-            <div className="text-[#A0A0A0] text-[10px]">Avg Intensity</div>
+            <div className="text-gray-500 dark:text-[#A0A0A0] text-[10px]">Avg Intensity</div>
           </div>
-          <div className="bg-[#0A0A0A] border border-[#2A2A2A] rounded-lg p-3 text-center">
+          <div className="bg-[#0A0A0A] border border-gray-200 dark:border-[#2A2A2A] rounded-lg p-3 text-center">
             <div className="text-[#00AEEF] text-lg font-bold font-mono">{totalSets}</div>
-            <div className="text-[#A0A0A0] text-[10px]">Total Sets / Week</div>
+            <div className="text-gray-500 dark:text-[#A0A0A0] text-[10px]">Total Sets / Week</div>
           </div>
-          <div className="bg-[#0A0A0A] border border-[#2A2A2A] rounded-lg p-3 text-center">
+          <div className="bg-[#0A0A0A] border border-gray-200 dark:border-[#2A2A2A] rounded-lg p-3 text-center">
             <div className="text-[#F59E0B] text-lg font-bold font-mono">{totalExercises}</div>
-            <div className="text-[#A0A0A0] text-[10px]">Exercises</div>
+            <div className="text-gray-500 dark:text-[#A0A0A0] text-[10px]">Exercises</div>
           </div>
-          <div className="bg-[#0A0A0A] border border-[#2A2A2A] rounded-lg p-3 text-center">
+          <div className="bg-[#0A0A0A] border border-gray-200 dark:border-[#2A2A2A] rounded-lg p-3 text-center">
             <div className="text-[#8B5CF6] text-lg font-bold font-mono">{data.weeklyHours}h</div>
-            <div className="text-[#A0A0A0] text-[10px]">Weekly Time</div>
+            <div className="text-gray-500 dark:text-[#A0A0A0] text-[10px]">Weekly Time</div>
           </div>
         </div>
 
         {/* Description */}
         {data.description && (
-          <p className="text-[#A0A0A0] text-sm mb-4 leading-relaxed">{data.description}</p>
+          <p className="text-gray-500 dark:text-[#A0A0A0] text-sm mb-4 leading-relaxed">{data.description}</p>
         )}
 
         {/* Tags */}
         {data.tags.length > 0 && (
           <div className="flex flex-wrap gap-2 mb-4">
             {data.tags.map((tag) => (
-              <span key={tag} className="text-[10px] px-2 py-0.5 rounded-full bg-[#1A1A1A] border border-[#2A2A2A] text-[#F0F0F0]">
+              <span key={tag} className="text-[10px] px-2 py-0.5 rounded-full bg-gray-100 dark:bg-[#1A1A1A] border border-gray-200 dark:border-[#2A2A2A] text-gray-900 dark:text-[#F0F0F0]">
                 {tag}
               </span>
             ))}
@@ -1276,11 +1276,11 @@ function Step7Preview({ data }: StepProps) {
 
         {/* Program Timeline */}
         <div className="mb-4">
-          <div className="text-[#A0A0A0] text-xs mb-2 flex items-center gap-2">
+          <div className="text-gray-500 dark:text-[#A0A0A0] text-xs mb-2 flex items-center gap-2">
             <Calendar className="w-3.5 h-3.5" />
             Program Timeline — {totalWeeks} Weeks
           </div>
-          <div className="flex h-8 rounded-lg overflow-hidden bg-[#1A1A1A] border border-[#2A2A2A]">
+          <div className="flex h-8 rounded-lg overflow-hidden bg-gray-100 dark:bg-[#1A1A1A] border border-gray-200 dark:border-[#2A2A2A]">
             {data.phases
               .filter((p) => p.active)
               .map((phase) => (
@@ -1293,11 +1293,11 @@ function Step7Preview({ data }: StepProps) {
                   style={{ backgroundColor: phase.color + '30', borderRight: `2px solid ${phase.color}` }}
                   title={`${phase.name}: ${phase.weeks} weeks — ${phase.focus}`}
                 >
-                  <span className="text-[10px] font-semibold text-[#F0F0F0] truncate px-1">{phase.name}</span>
+                  <span className="text-[10px] font-semibold text-gray-900 dark:text-[#F0F0F0] truncate px-1">{phase.name}</span>
                 </motion.div>
               ))}
           </div>
-          <div className="flex justify-between text-[10px] text-[#A0A0A0] mt-1">
+          <div className="flex justify-between text-[10px] text-gray-500 dark:text-[#A0A0A0] mt-1">
             <span>Week 1</span>
             <span>Week {totalWeeks}</span>
           </div>
@@ -1305,15 +1305,15 @@ function Step7Preview({ data }: StepProps) {
 
         {/* Action buttons */}
         <div className="flex flex-wrap gap-2">
-          <Button variant="outline" size="sm" className="border-[#2A2A2A] text-[#F0F0F0] hover:bg-[#1A1A1A] text-xs">
+          <Button variant="outline" size="sm" className="border-gray-200 dark:border-[#2A2A2A] text-gray-900 dark:text-[#F0F0F0] hover:bg-gray-100 dark:bg-[#1A1A1A] dark:hover:bg-[#242424] text-xs">
             <Eye className="w-3.5 h-3.5 mr-1" />
             Preview Workout
           </Button>
-          <Button variant="outline" size="sm" className="border-[#2A2A2A] text-[#F0F0F0] hover:bg-[#1A1A1A] text-xs">
+          <Button variant="outline" size="sm" className="border-gray-200 dark:border-[#2A2A2A] text-gray-900 dark:text-[#F0F0F0] hover:bg-gray-100 dark:bg-[#1A1A1A] dark:hover:bg-[#242424] text-xs">
             <BarChart3 className="w-3.5 h-3.5 mr-1" />
             Analytics
           </Button>
-          <Button variant="outline" size="sm" className="border-[#2A2A2A] text-[#F0F0F0] hover:bg-[#1A1A1A] text-xs">
+          <Button variant="outline" size="sm" className="border-gray-200 dark:border-[#2A2A2A] text-gray-900 dark:text-[#F0F0F0] hover:bg-gray-100 dark:bg-[#1A1A1A] dark:hover:bg-[#242424] text-xs">
             <Download className="w-3.5 h-3.5 mr-1" />
             Export PDF
           </Button>
@@ -1323,61 +1323,61 @@ function Step7Preview({ data }: StepProps) {
       {/* ══════ PROGRAM DETAILS ══════ */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
         {/* Method Details */}
-        <Card className="bg-[#141414] border-[#2A2A2A] p-5">
-          <h4 className="text-[#F0F0F0] text-sm font-bold mb-3 flex items-center gap-2">
+        <Card className="bg-gray-50 dark:bg-[#141414] border-gray-200 dark:border-[#2A2A2A] p-5">
+          <h4 className="text-gray-900 dark:text-[#F0F0F0] text-sm font-bold mb-3 flex items-center gap-2">
             <Target className="w-4 h-4 text-[#00AEEF]" />
             Training Method
           </h4>
           <div className="space-y-2 text-sm">
             <div className="flex justify-between">
-              <span className="text-[#A0A0A0]">Method</span>
-              <span className="text-[#F0F0F0] font-medium">{methodName}</span>
+              <span className="text-gray-500 dark:text-[#A0A0A0]">Method</span>
+              <span className="text-gray-900 dark:text-[#F0F0F0] font-medium">{methodName}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-[#A0A0A0]">Goal</span>
-              <span className="text-[#F0F0F0]">{goalName}</span>
+              <span className="text-gray-500 dark:text-[#A0A0A0]">Goal</span>
+              <span className="text-gray-900 dark:text-[#F0F0F0]">{goalName}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-[#A0A0A0]">Structure</span>
-              <span className="text-[#F0F0F0]">{methodData?.structure || '—'}</span>
+              <span className="text-gray-500 dark:text-[#A0A0A0]">Structure</span>
+              <span className="text-gray-900 dark:text-[#F0F0F0]">{methodData?.structure || '—'}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-[#A0A0A0]">Progression</span>
-              <span className="text-[#F0F0F0]">{methodData?.progression || '—'}</span>
+              <span className="text-gray-500 dark:text-[#A0A0A0]">Progression</span>
+              <span className="text-gray-900 dark:text-[#F0F0F0]">{methodData?.progression || '—'}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-[#A0A0A0]">Target Audience</span>
-              <span className="text-[#F0F0F0]">{methodData?.targetAudience || '—'}</span>
+              <span className="text-gray-500 dark:text-[#A0A0A0]">Target Audience</span>
+              <span className="text-gray-900 dark:text-[#F0F0F0]">{methodData?.targetAudience || '—'}</span>
             </div>
           </div>
         </Card>
 
         {/* Client Context Summary */}
-        <Card className="bg-[#141414] border-[#2A2A2A] p-5">
-          <h4 className="text-[#F0F0F0] text-sm font-bold mb-3 flex items-center gap-2">
+        <Card className="bg-gray-50 dark:bg-[#141414] border-gray-200 dark:border-[#2A2A2A] p-5">
+          <h4 className="text-gray-900 dark:text-[#F0F0F0] text-sm font-bold mb-3 flex items-center gap-2">
             <Users className="w-4 h-4 text-[#22C55E]" />
             Client Context
           </h4>
           <div className="space-y-2 text-sm">
             <div className="flex justify-between">
-              <span className="text-[#A0A0A0]">Age Range</span>
-              <span className="text-[#F0F0F0]">{data.clientContext.ageRange || '—'}</span>
+              <span className="text-gray-500 dark:text-[#A0A0A0]">Age Range</span>
+              <span className="text-gray-900 dark:text-[#F0F0F0]">{data.clientContext.ageRange || '—'}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-[#A0A0A0]">Experience</span>
-              <span className="text-[#F0F0F0]">{data.clientContext.experience || '—'}</span>
+              <span className="text-gray-500 dark:text-[#A0A0A0]">Experience</span>
+              <span className="text-gray-900 dark:text-[#F0F0F0]">{data.clientContext.experience || '—'}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-[#A0A0A0]">Body Type</span>
-              <span className="text-[#F0F0F0]">{data.clientContext.bodyType || '—'}</span>
+              <span className="text-gray-500 dark:text-[#A0A0A0]">Body Type</span>
+              <span className="text-gray-900 dark:text-[#F0F0F0]">{data.clientContext.bodyType || '—'}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-[#A0A0A0]">Availability</span>
-              <span className="text-[#F0F0F0]">{data.clientContext.availability || '—'}</span>
+              <span className="text-gray-500 dark:text-[#A0A0A0]">Availability</span>
+              <span className="text-gray-900 dark:text-[#F0F0F0]">{data.clientContext.availability || '—'}</span>
             </div>
             {data.clientContext.limitations.length > 0 && (
               <div className="pt-1">
-                <span className="text-[#A0A0A0] text-xs">Limitations:</span>
+                <span className="text-gray-500 dark:text-[#A0A0A0] text-xs">Limitations:</span>
                 <div className="flex flex-wrap gap-1 mt-1">
                   {data.clientContext.limitations.map((lim) => (
                     <span key={lim} className="text-[10px] px-1.5 py-0.5 rounded bg-[#EF4444]/10 text-[#EF4444]">{lim}</span>
@@ -1390,8 +1390,8 @@ function Step7Preview({ data }: StepProps) {
       </div>
 
       {/* ══════ WEEKLY SPLIT ══════ */}
-      <Card className="bg-[#141414] border-[#2A2A2A] p-5">
-        <h4 className="text-[#F0F0F0] text-sm font-bold mb-3 flex items-center gap-2">
+      <Card className="bg-gray-50 dark:bg-[#141414] border-gray-200 dark:border-[#2A2A2A] p-5">
+        <h4 className="text-gray-900 dark:text-[#F0F0F0] text-sm font-bold mb-3 flex items-center gap-2">
           <Calendar className="w-4 h-4 text-[#F59E0B]" />
           Weekly Split — {splitName}
         </h4>
@@ -1399,9 +1399,9 @@ function Step7Preview({ data }: StepProps) {
           {data.split.map((day) => (
             <div
               key={day.day}
-              className={`rounded-lg p-2.5 text-center border ${day.active ? 'bg-[#0A0A0A] border-[#2A2A2A]' : 'bg-[#0A0A0A]/50 border-[#1F1F1F]'}`}
+              className={`rounded-lg p-2.5 text-center border ${day.active ? 'bg-[#0A0A0A] border-gray-200 dark:border-[#2A2A2A]' : 'bg-[#0A0A0A]/50 border-gray-200 dark:border-[#1F1F1F]'}`}
             >
-              <div className={`text-[10px] font-bold ${day.active ? 'text-[#F0F0F0]' : 'text-[#555]'}`}>{day.day}</div>
+              <div className={`text-[10px] font-bold ${day.active ? 'text-gray-900 dark:text-[#F0F0F0]' : 'text-[#555]'}`}>{day.day}</div>
               <div className={`text-[10px] mt-1 ${day.active ? 'text-[#00AEEF]' : 'text-[#555]'}`}>
                 {day.active ? (day.workout || 'Workout') : 'Rest'}
               </div>
@@ -1409,7 +1409,7 @@ function Step7Preview({ data }: StepProps) {
             </div>
           ))}
         </div>
-        <div className="flex gap-4 mt-3 text-xs text-[#A0A0A0]">
+        <div className="flex gap-4 mt-3 text-xs text-gray-500 dark:text-[#A0A0A0]">
           <span>{activeDays} training days</span>
           <span>{restDays} rest days</span>
           <span>{data.weeklyHours}h/week</span>
@@ -1418,13 +1418,13 @@ function Step7Preview({ data }: StepProps) {
       </Card>
 
       {/* ══════ EXERCISE BREAKDOWN ══════ */}
-      <Card className="bg-[#141414] border-[#2A2A2A] p-5">
-        <h4 className="text-[#F0F0F0] text-sm font-bold mb-3 flex items-center gap-2">
+      <Card className="bg-gray-50 dark:bg-[#141414] border-gray-200 dark:border-[#2A2A2A] p-5">
+        <h4 className="text-gray-900 dark:text-[#F0F0F0] text-sm font-bold mb-3 flex items-center gap-2">
           <Dumbbell className="w-4 h-4 text-[#8B5CF6]" />
           Exercise Breakdown — {totalExercises} exercises, {totalSets} sets/week
         </h4>
         {/* Header */}
-        <div className="grid grid-cols-12 gap-2 text-[10px] text-[#A0A0A0] font-semibold border-b border-[#2A2A2A] pb-2 mb-2">
+        <div className="grid grid-cols-12 gap-2 text-[10px] text-gray-500 dark:text-[#A0A0A0] font-semibold border-b border-gray-200 dark:border-[#2A2A2A] pb-2 mb-2">
           <div className="col-span-1">Code</div>
           <div className="col-span-4">Exercise</div>
           <div className="col-span-1 text-center">Sets</div>
@@ -1437,14 +1437,14 @@ function Step7Preview({ data }: StepProps) {
         {/* Rows */}
         <div className="space-y-1.5">
           {data.exercises.map((ex) => (
-            <div key={ex.code} className="grid grid-cols-12 gap-2 text-xs items-center py-1.5 border-b border-[#1F1F1F] last:border-0">
-              <div className="col-span-1 text-[#F0F0F0] font-mono font-bold">{ex.code}</div>
-              <div className="col-span-4 text-[#F0F0F0]">{ex.name}</div>
-              <div className="col-span-1 text-center text-[#A0A0A0]">{ex.sets}</div>
-              <div className="col-span-1 text-center text-[#A0A0A0]">{ex.reps}</div>
+            <div key={ex.code} className="grid grid-cols-12 gap-2 text-xs items-center py-1.5 border-b border-gray-200 dark:border-[#1F1F1F] last:border-0">
+              <div className="col-span-1 text-gray-900 dark:text-[#F0F0F0] font-mono font-bold">{ex.code}</div>
+              <div className="col-span-4 text-gray-900 dark:text-[#F0F0F0]">{ex.name}</div>
+              <div className="col-span-1 text-center text-gray-500 dark:text-[#A0A0A0]">{ex.sets}</div>
+              <div className="col-span-1 text-center text-gray-500 dark:text-[#A0A0A0]">{ex.reps}</div>
               <div className="col-span-2 text-center text-[#EF4444] font-mono">{ex.pct1RM}</div>
               <div className="col-span-1 text-center text-[#8B5CF6] font-mono text-[10px]">{ex.tempo}</div>
-              <div className="col-span-1 text-center text-[#A0A0A0]">{ex.rest}s</div>
+              <div className="col-span-1 text-center text-gray-500 dark:text-[#A0A0A0]">{ex.rest}s</div>
               <div className="col-span-1 text-center text-[#00AEEF] font-mono">{ex.sets * activeDays}</div>
             </div>
           ))}
@@ -1452,8 +1452,8 @@ function Step7Preview({ data }: StepProps) {
       </Card>
 
       {/* ══════ PHASE BREAKDOWN ══════ */}
-      <Card className="bg-[#141414] border-[#2A2A2A] p-5">
-        <h4 className="text-[#F0F0F0] text-sm font-bold mb-3 flex items-center gap-2">
+      <Card className="bg-gray-50 dark:bg-[#141414] border-gray-200 dark:border-[#2A2A2A] p-5">
+        <h4 className="text-gray-900 dark:text-[#F0F0F0] text-sm font-bold mb-3 flex items-center gap-2">
           <Layers className="w-4 h-4 text-[#EF4444]" />
           Phase Breakdown
         </h4>
@@ -1461,17 +1461,17 @@ function Step7Preview({ data }: StepProps) {
           {data.phases
             .filter((p) => p.active)
             .map((phase, i) => (
-              <div key={phase.id} className="flex items-center gap-3 p-3 rounded-lg bg-[#0A0A0A] border border-[#2A2A2A]">
+              <div key={phase.id} className="flex items-center gap-3 p-3 rounded-lg bg-[#0A0A0A] border border-gray-200 dark:border-[#2A2A2A]">
                 <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold text-sm" style={{ backgroundColor: phase.color }}>
                   {i + 1}
                 </div>
                 <div className="flex-1">
-                  <div className="text-[#F0F0F0] text-sm font-semibold">{phase.name}</div>
-                  <div className="text-[#A0A0A0] text-xs">{phase.focus}</div>
+                  <div className="text-gray-900 dark:text-[#F0F0F0] text-sm font-semibold">{phase.name}</div>
+                  <div className="text-gray-500 dark:text-[#A0A0A0] text-xs">{phase.focus}</div>
                 </div>
                 <div className="text-right">
-                  <div className="text-[#F0F0F0] font-mono font-bold text-sm">{phase.weeks}w</div>
-                  <div className="text-[#A0A0A0] text-[10px]">{Math.round((phase.weeks / totalWeeks) * 100)}% of program</div>
+                  <div className="text-gray-900 dark:text-[#F0F0F0] font-mono font-bold text-sm">{phase.weeks}w</div>
+                  <div className="text-gray-500 dark:text-[#A0A0A0] text-[10px]">{Math.round((phase.weeks / totalWeeks) * 100)}% of program</div>
                 </div>
               </div>
             ))}
@@ -1479,30 +1479,30 @@ function Step7Preview({ data }: StepProps) {
       </Card>
 
       {/* ══════ SUMMARY STATS ══════ */}
-      <Card className="bg-[#141414] border-[#2A2A2A] p-5">
-        <h4 className="text-[#F0F0F0] text-sm font-bold mb-3 flex items-center gap-2">
+      <Card className="bg-gray-50 dark:bg-[#141414] border-gray-200 dark:border-[#2A2A2A] p-5">
+        <h4 className="text-gray-900 dark:text-[#F0F0F0] text-sm font-bold mb-3 flex items-center gap-2">
           <BarChart3 className="w-4 h-4 text-[#00AEEF]" />
           Summary Statistics
         </h4>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-          <div className="bg-[#0A0A0A] rounded-lg p-3 border border-[#2A2A2A]">
-            <div className="text-[#A0A0A0] text-[10px]">Total Weeks</div>
-            <div className="text-[#F0F0F0] font-mono font-bold text-lg">{totalWeeks}</div>
+          <div className="bg-[#0A0A0A] rounded-lg p-3 border border-gray-200 dark:border-[#2A2A2A]">
+            <div className="text-gray-500 dark:text-[#A0A0A0] text-[10px]">Total Weeks</div>
+            <div className="text-gray-900 dark:text-[#F0F0F0] font-mono font-bold text-lg">{totalWeeks}</div>
           </div>
-          <div className="bg-[#0A0A0A] rounded-lg p-3 border border-[#2A2A2A]">
-            <div className="text-[#A0A0A0] text-[10px]">Training Days</div>
-            <div className="text-[#F0F0F0] font-mono font-bold text-lg">{activeDays}<span className="text-[#555] text-xs">/wk</span></div>
+          <div className="bg-[#0A0A0A] rounded-lg p-3 border border-gray-200 dark:border-[#2A2A2A]">
+            <div className="text-gray-500 dark:text-[#A0A0A0] text-[10px]">Training Days</div>
+            <div className="text-gray-900 dark:text-[#F0F0F0] font-mono font-bold text-lg">{activeDays}<span className="text-[#555] text-xs">/wk</span></div>
           </div>
-          <div className="bg-[#0A0A0A] rounded-lg p-3 border border-[#2A2A2A]">
-            <div className="text-[#A0A0A0] text-[10px]">Total Sets</div>
+          <div className="bg-[#0A0A0A] rounded-lg p-3 border border-gray-200 dark:border-[#2A2A2A]">
+            <div className="text-gray-500 dark:text-[#A0A0A0] text-[10px]">Total Sets</div>
             <div className="text-[#00AEEF] font-mono font-bold text-lg">{totalSets * activeDays}<span className="text-[#555] text-xs">/wk</span></div>
           </div>
-          <div className="bg-[#0A0A0A] rounded-lg p-3 border border-[#2A2A2A]">
-            <div className="text-[#A0A0A0] text-[10px]">Avg Rest</div>
+          <div className="bg-[#0A0A0A] rounded-lg p-3 border border-gray-200 dark:border-[#2A2A2A]">
+            <div className="text-gray-500 dark:text-[#A0A0A0] text-[10px]">Avg Rest</div>
             <div className="text-[#F59E0B] font-mono font-bold text-lg">{avgRest}s</div>
           </div>
-          <div className="bg-[#0A0A0A] rounded-lg p-3 border border-[#2A2A2A]">
-            <div className="text-[#A0A0A0] text-[10px]">Est. Duration</div>
+          <div className="bg-[#0A0A0A] rounded-lg p-3 border border-gray-200 dark:border-[#2A2A2A]">
+            <div className="text-gray-500 dark:text-[#A0A0A0] text-[10px]">Est. Duration</div>
             <div className="text-[#8B5CF6] font-mono font-bold text-lg">~{Math.round(totalWeeks * activeDays * (data.weeklyHours / activeDays))}h</div>
           </div>
         </div>
@@ -1540,23 +1540,23 @@ function Step8Save({ data, updateData, onSave, onSaveAndAssign }: StepProps) {
     <div className="space-y-5">
       {/* Program name */}
       <div>
-        <label className="text-[#F0F0F0] text-sm font-semibold mb-1.5 block">Program Name</label>
+        <label className="text-gray-900 dark:text-[#F0F0F0] text-sm font-semibold mb-1.5 block">Program Name</label>
         <Input
           value={data.programName}
           onChange={(e) => updateData({ programName: e.target.value })}
           placeholder="e.g., 12-Week Hypertrophy Block"
-          className="bg-[#141414] border-[#2A2A2A] text-[#F0F0F0]"
+          className="bg-gray-50 dark:bg-[#141414] border-gray-200 dark:border-[#2A2A2A] text-gray-900 dark:text-[#F0F0F0]"
         />
       </div>
 
       {/* Description */}
       <div>
-        <label className="text-[#F0F0F0] text-sm font-semibold mb-1.5 block">Description</label>
+        <label className="text-gray-900 dark:text-[#F0F0F0] text-sm font-semibold mb-1.5 block">Description</label>
         <Textarea
           value={data.description}
           onChange={(e) => updateData({ description: e.target.value })}
           placeholder="Describe the program goals, target audience, and expected outcomes..."
-          className="bg-[#141414] border-[#2A2A2A] text-[#F0F0F0] min-h-[80px]"
+          className="bg-gray-50 dark:bg-[#141414] border-gray-200 dark:border-[#2A2A2A] text-gray-900 dark:text-[#F0F0F0] min-h-[80px]"
         />
       </div>
 
@@ -1574,7 +1574,7 @@ function Step8Save({ data, updateData, onSave, onSaveAndAssign }: StepProps) {
                   'px-3 py-1.5 rounded-full text-xs font-medium border transition-all',
                   isSelected
                     ? 'bg-[#00AEEF]/10 border-[#00AEEF] text-[#00AEEF]'
-                    : 'bg-[#141414] border-[#2A2A2A] text-[#A0A0A0] hover:border-[#3A3A3A]'
+                    : 'bg-gray-50 dark:bg-[#141414] border-gray-200 dark:border-[#2A2A2A] text-gray-500 dark:text-[#A0A0A0] hover:border-[#3A3A3A]'
                 )}
               >
                 {isSelected && <Check className="w-3 h-3 inline mr-1" />}
@@ -1586,7 +1586,7 @@ function Step8Save({ data, updateData, onSave, onSaveAndAssign }: StepProps) {
       </div>
 
       {/* Public template checkbox */}
-      <label className="flex items-center gap-3 p-3 rounded-xl border border-[#2A2A2A] bg-[#141414] cursor-pointer hover:border-[#3A3A3A] transition-colors">
+      <label className="flex items-center gap-3 p-3 rounded-xl border border-gray-200 dark:border-[#2A2A2A] bg-gray-50 dark:bg-[#141414] cursor-pointer hover:border-[#3A3A3A] transition-colors">
         <input
           type="checkbox"
           checked={data.isPublic}
@@ -1594,18 +1594,18 @@ function Step8Save({ data, updateData, onSave, onSaveAndAssign }: StepProps) {
           className="w-5 h-5 rounded accent-[#00AEEF]"
         />
         <div>
-          <span className="text-[#F0F0F0] text-sm font-medium">Make public template</span>
-          <p className="text-[#A0A0A0] text-xs">Other trainers can view and use this program</p>
+          <span className="text-gray-900 dark:text-[#F0F0F0] text-sm font-medium">Make public template</span>
+          <p className="text-gray-500 dark:text-[#A0A0A0] text-xs">Other trainers can view and use this program</p>
         </div>
       </label>
 
       {/* Client dropdown */}
       <div>
-        <label className="text-[#F0F0F0] text-sm font-semibold mb-1.5 block">Assign to Client</label>
+        <label className="text-gray-900 dark:text-[#F0F0F0] text-sm font-semibold mb-1.5 block">Assign to Client</label>
         <select
           value={data.assignedClient}
           onChange={(e) => updateData({ assignedClient: e.target.value })}
-          className="w-full bg-[#141414] border border-[#2A2A2A] text-[#F0F0F0] text-sm rounded-lg px-3 py-2.5 focus:outline-none focus:border-[#00AEEF]"
+          className="w-full bg-gray-50 dark:bg-[#141414] border border-gray-200 dark:border-[#2A2A2A] text-gray-900 dark:text-[#F0F0F0] text-sm rounded-lg px-3 py-2.5 focus:outline-none focus:border-[#00AEEF]"
         >
           {CLIENTS.map((c) => (
             <option key={c} value={c === '— Unassigned —' ? '' : c}>
@@ -1662,41 +1662,41 @@ function FloatingSummary({ data }: { data: ProgramData }) {
     <motion.div
       initial={{ opacity: 0, x: 20 }}
       animate={{ opacity: 1, x: 0 }}
-      className="bg-[#141414] border border-[#2A2A2A] rounded-xl p-4 space-y-3 sticky top-4"
+      className="bg-gray-50 dark:bg-[#141414] border border-gray-200 dark:border-[#2A2A2A] rounded-xl p-4 space-y-3 sticky top-4"
     >
-      <h4 className="text-[#F0F0F0] text-sm font-bold flex items-center gap-2">
+      <h4 className="text-gray-900 dark:text-[#F0F0F0] text-sm font-bold flex items-center gap-2">
         <Target className="w-4 h-4 text-[#00AEEF]" />
         Current Selections
       </h4>
       <div className="space-y-2 text-xs">
         <div className="flex justify-between">
-          <span className="text-[#A0A0A0]">Goal</span>
-          <span className="text-[#F0F0F0] font-medium">{goalName}</span>
+          <span className="text-gray-500 dark:text-[#A0A0A0]">Goal</span>
+          <span className="text-gray-900 dark:text-[#F0F0F0] font-medium">{goalName}</span>
         </div>
         <div className="flex justify-between">
-          <span className="text-[#A0A0A0]">Method</span>
-          <span className="text-[#F0F0F0] font-medium">{methodName}</span>
+          <span className="text-gray-500 dark:text-[#A0A0A0]">Method</span>
+          <span className="text-gray-900 dark:text-[#F0F0F0] font-medium">{methodName}</span>
         </div>
         <div className="flex justify-between">
-          <span className="text-[#A0A0A0]">Duration</span>
-          <span className="text-[#F0F0F0] font-medium">{totalWeeks} weeks</span>
+          <span className="text-gray-500 dark:text-[#A0A0A0]">Duration</span>
+          <span className="text-gray-900 dark:text-[#F0F0F0] font-medium">{totalWeeks} weeks</span>
         </div>
         <div className="flex justify-between">
-          <span className="text-[#A0A0A0]">Frequency</span>
-          <span className="text-[#F0F0F0] font-medium">{activeDays} days/wk</span>
+          <span className="text-gray-500 dark:text-[#A0A0A0]">Frequency</span>
+          <span className="text-gray-900 dark:text-[#F0F0F0] font-medium">{activeDays} days/wk</span>
         </div>
         <div className="flex justify-between">
-          <span className="text-[#A0A0A0]">Exercises</span>
-          <span className="text-[#F0F0F0] font-medium">{data.exercises.length}</span>
+          <span className="text-gray-500 dark:text-[#A0A0A0]">Exercises</span>
+          <span className="text-gray-900 dark:text-[#F0F0F0] font-medium">{data.exercises.length}</span>
         </div>
         <div className="flex justify-between">
-          <span className="text-[#A0A0A0]">Weekly Hours</span>
-          <span className="text-[#F0F0F0] font-medium">{data.weeklyHours}h</span>
+          <span className="text-gray-500 dark:text-[#A0A0A0]">Weekly Hours</span>
+          <span className="text-gray-900 dark:text-[#F0F0F0] font-medium">{data.weeklyHours}h</span>
         </div>
         {data.clientContext.ageRange && (
           <div className="flex justify-between">
-            <span className="text-[#A0A0A0]">Client</span>
-            <span className="text-[#F0F0F0] font-medium">{data.clientContext.ageRange}</span>
+            <span className="text-gray-500 dark:text-[#A0A0A0]">Client</span>
+            <span className="text-gray-900 dark:text-[#F0F0F0] font-medium">{data.clientContext.ageRange}</span>
           </div>
         )}
       </div>
@@ -1826,9 +1826,9 @@ export default function AllInOneProgramPage() {
   )
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A] text-[#F0F0F0]">
+    <div className="min-h-screen bg-[#0A0A0A] text-gray-900 dark:text-[#F0F0F0]">
       {/* ── Header Bar ─────────────────────────────── */}
-      <div className="border-b border-[#2A2A2A] bg-[#0A0A0A] sticky top-0 z-50">
+      <div className="border-b border-gray-200 dark:border-[#2A2A2A] bg-[#0A0A0A] sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
@@ -1836,9 +1836,9 @@ export default function AllInOneProgramPage() {
                 <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#8B5CF6] to-[#00AEEF] flex items-center justify-center">
                   <Zap className="w-4 h-4 text-white" />
                 </div>
-                <h1 className="text-xl font-bold text-[#F0F0F0]">All-in-One Program Creator</h1>
+                <h1 className="text-xl font-bold text-gray-900 dark:text-[#F0F0F0]">All-in-One Program Creator</h1>
               </div>
-              <p className="text-[#A0A0A0] text-sm">Design complete training programs with AI-powered recommendations</p>
+              <p className="text-gray-500 dark:text-[#A0A0A0] text-sm">Design complete training programs with AI-powered recommendations</p>
             </div>
             <div className="flex flex-wrap gap-2">
               <Button
@@ -1857,7 +1857,7 @@ export default function AllInOneProgramPage() {
                   setSaveFlash(true)
                   setTimeout(() => setSaveFlash(false), 1200)
                 }}
-                className={`border-[#2A2A2A] text-[#F0F0F0] hover:bg-[#1A1A1A] text-xs transition-all ${saveFlash ? 'border-[#22C55E] text-[#22C55E]' : ''}`}
+                className={`border-gray-200 dark:border-[#2A2A2A] text-gray-900 dark:text-[#F0F0F0] hover:bg-gray-100 dark:bg-[#1A1A1A] dark:hover:bg-[#242424] text-xs transition-all ${saveFlash ? 'border-[#22C55E] text-[#22C55E]' : ''}`}
               >
                 <Save className="w-3.5 h-3.5 mr-1" />
                 {saveFlash ? 'Saved!' : 'Save Program'}
@@ -1869,7 +1869,7 @@ export default function AllInOneProgramPage() {
                     const saved = savedList.find(p => p.id === e.target.value)
                     if (saved) loadSavedProgram(saved)
                   }}
-                  className="h-9 bg-[#141414] border border-[#2A2A2A] text-[#F0F0F0] text-xs rounded-lg px-3 focus:outline-none focus:border-[#00AEEF]"
+                  className="h-9 bg-gray-50 dark:bg-[#141414] border border-gray-200 dark:border-[#2A2A2A] text-gray-900 dark:text-[#F0F0F0] text-xs rounded-lg px-3 focus:outline-none focus:border-[#00AEEF]"
                 >
                   <option value="">Load Saved...</option>
                   {savedList.map((p) => (
@@ -1881,7 +1881,7 @@ export default function AllInOneProgramPage() {
                 variant="ghost"
                 size="sm"
                 onClick={handleReset}
-                className="text-[#A0A0A0] hover:text-[#EF4444] hover:bg-[#EF4444]/10 text-xs"
+                className="text-gray-500 dark:text-[#A0A0A0] hover:text-[#EF4444] hover:bg-[#EF4444]/10 text-xs"
               >
                 <RotateCcw className="w-3.5 h-3.5 mr-1" />
                 Reset
@@ -1892,18 +1892,18 @@ export default function AllInOneProgramPage() {
       </div>
 
       {/* ── AI Master Bar ──────────────────────────── */}
-      <div className="border-b border-[#2A2A2A] bg-[#141414]">
+      <div className="border-b border-gray-200 dark:border-[#2A2A2A] bg-gray-50 dark:bg-[#141414]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
           <div className="flex items-center gap-2 overflow-x-auto pb-1">
             <Sparkles className="w-4 h-4 text-[#8B5CF6] shrink-0" />
-            <span className="text-[#A0A0A0] text-xs font-medium mr-2 shrink-0">AI Quick Actions:</span>
+            <span className="text-gray-500 dark:text-[#A0A0A0] text-xs font-medium mr-2 shrink-0">AI Quick Actions:</span>
             {STEPS.map((step, idx) => (
               <button
                 key={idx}
                 onClick={() => {
                   setOpenSteps({ [idx]: true })
                 }}
-                className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#0A0A0A] border border-[#2A2A2A] hover:border-[#8B5CF6] hover:text-[#8B5CF6] transition-colors text-[#A0A0A0] text-[10px] whitespace-nowrap"
+                className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#0A0A0A] border border-gray-200 dark:border-[#2A2A2A] hover:border-[#8B5CF6] hover:text-[#8B5CF6] transition-colors text-gray-500 dark:text-[#A0A0A0] text-[10px] whitespace-nowrap"
               >
                 <Bot className="w-3 h-3" />
                 {step.title.split(' ')[0]}
@@ -1914,13 +1914,13 @@ export default function AllInOneProgramPage() {
       </div>
 
       {/* ── Progress Bar ───────────────────────────── */}
-      <div className="border-b border-[#2A2A2A] bg-[#0A0A0A]">
+      <div className="border-b border-gray-200 dark:border-[#2A2A2A] bg-[#0A0A0A]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
           <div className="flex items-center gap-3">
-            <span className="text-[#A0A0A0] text-xs font-medium whitespace-nowrap">
-              Completion: <span className="text-[#F0F0F0] font-mono font-bold">{completionPercent}%</span>
+            <span className="text-gray-500 dark:text-[#A0A0A0] text-xs font-medium whitespace-nowrap">
+              Completion: <span className="text-gray-900 dark:text-[#F0F0F0] font-mono font-bold">{completionPercent}%</span>
             </span>
-            <div className="flex-1 bg-[#1A1A1A] rounded-full h-2.5 border border-[#2A2A2A]">
+            <div className="flex-1 bg-gray-100 dark:bg-[#1A1A1A] rounded-full h-2.5 border border-gray-200 dark:border-[#2A2A2A]">
               <motion.div
                 initial={{ width: 0 }}
                 animate={{ width: `${completionPercent}%` }}
@@ -1928,7 +1928,7 @@ export default function AllInOneProgramPage() {
                 className="h-full rounded-full bg-gradient-to-r from-[#00AEEF] via-[#8B5CF6] to-[#22C55E]"
               />
             </div>
-            <span className="text-[#A0A0A0] text-[10px] font-mono">
+            <span className="text-gray-500 dark:text-[#A0A0A0] text-[10px] font-mono">
               {stepComplete.filter(Boolean).length}/{stepComplete.length}
             </span>
           </div>
@@ -1962,7 +1962,7 @@ export default function AllInOneProgramPage() {
                         transition={{ duration: 0.25 }}
                         className="overflow-hidden"
                       >
-                        <div className="bg-[#141414] border border-t-0 border-[#2A2A2A] rounded-b-xl p-4 sm:p-5">
+                        <div className="bg-gray-50 dark:bg-[#141414] border border-t-0 border-gray-200 dark:border-[#2A2A2A] rounded-b-xl p-4 sm:p-5">
                           <Component
                         data={data}
                         updateData={updateData}
