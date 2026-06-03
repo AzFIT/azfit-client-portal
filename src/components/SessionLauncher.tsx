@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Play, X, Calendar, User, Dumbbell, ChevronRight, Clock } from 'lucide-react'
+import { Play, X, User, Dumbbell, ChevronRight, Clock } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { getProgramsForCoach } from '@/lib/db'
 import { getCurrentCoach } from '@/lib/auth'

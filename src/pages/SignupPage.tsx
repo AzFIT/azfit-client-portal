@@ -78,6 +78,7 @@ export default function SignupPage() {
       businessName: businessName.trim(),
       specialty: specialty || 'General',
       yearsExperience: yearsExperience ? parseInt(yearsExperience, 10) : 0,
+      role: 'coach',
       lastLogin: new Date().toISOString(),
       settings: {
         theme: 'dark' as const,

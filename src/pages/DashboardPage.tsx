@@ -12,7 +12,6 @@ import {
   BarChart3,
   Eye,
   EyeOff,
-  Play,
   Zap,
 } from 'lucide-react'
 import { Link } from 'react-router-dom'

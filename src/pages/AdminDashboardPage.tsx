@@ -2,12 +2,11 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import {
-  Shield, Users, Dumbbell, Calendar, TrendingUp,
+  Shield, Users, Dumbbell,
   Award, ChevronRight, Mail, Clock, BarChart3
 } from 'lucide-react'
 import { getCurrentCoach } from '@/lib/auth'
 import { supabase, setCoachContext } from '@/lib/supabase'
-import type { Coach } from '@/types/auth'
 
 interface AdminStats {
   totalCoaches: number
@@ -34,7 +33,6 @@ interface CoachSummary {
 
 export default function AdminDashboardPage() {
   const navigate = useNavigate()
-  const [coach, setCoach] = useState<Coach | null>(null)
   const [stats, setStats] = useState<AdminStats | null>(null)
   const [coaches, setCoaches] = useState<CoachSummary[]>([])
   const [loading, setLoading] = useState(true)
@@ -45,7 +43,6 @@ export default function AdminDashboardPage() {
       navigate('/dashboard')
       return
     }
-    setCoach(c)
     loadAdminData()
   }, [navigate])
 

@@ -470,7 +470,6 @@ export default function ProgramsPage() {
   const [programs, setPrograms] = useState<SavedProgram[]>([]);
   const [dbPrograms, setDbPrograms] = useState<SavedProgram[]>([]);
   const [launcherOpen, setLauncherOpen] = useState(false);
-  const [launcherProgramId, setLauncherProgramId] = useState<string>('');
   const [search, setSearch] = useState('');
   const [goalFilter, setGoalFilter] = useState('all');
   const [templateFilter, setTemplateFilter] = useState<string | null>(null);
@@ -526,7 +525,6 @@ export default function ProgramsPage() {
         }
       }
     }
-    setLauncherProgramId(id);
     setLauncherOpen(true);
   }, [dbPrograms]);
 

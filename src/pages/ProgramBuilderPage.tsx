@@ -17,7 +17,6 @@ import {
   Columns,
   Settings,
   CheckCircle2,
-  Save,
 } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
@@ -584,6 +583,18 @@ export default function ProgramBuilderPage() {
     }
   };
 
+  // Filter exercises by active day
+  const visibleExercises = useMemo(() => {
+    if (!hasDays) return exercises;
+    return exercises.filter(ex => ex._dayIndex === activeDay);
+  }, [exercises, activeDay, hasDays]);
+
+  // Get current day's info
+  const currentDayInfo = useMemo(() => {
+    if (!programData?.days || !hasDays) return null;
+    return programData.days[activeDay] || null;
+  }, [programData, activeDay, hasDays]);
+
   // Finish session — save to history
   const handleFinishSession = useCallback(async () => {
     const coach = getCurrentCoach();
@@ -648,18 +659,6 @@ export default function ProgramBuilderPage() {
 
     navigate('/dashboard');
   }, [exercises, elapsed, programId, workoutName, currentDayInfo, navigate]);
-
-  // Filter exercises by active day
-  const visibleExercises = useMemo(() => {
-    if (!hasDays) return exercises;
-    return exercises.filter(ex => ex._dayIndex === activeDay);
-  }, [exercises, activeDay, hasDays]);
-
-  // Get current day's info
-  const currentDayInfo = useMemo(() => {
-    if (!programData?.days || !hasDays) return null;
-    return programData.days[activeDay] || null;
-  }, [programData, activeDay, hasDays]);
 
   // Check if a day is completed
   const isDayCompleted = useCallback((dayIndex: number) => {
